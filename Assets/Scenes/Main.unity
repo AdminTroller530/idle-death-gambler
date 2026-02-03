@@ -392,6 +392,7 @@ GameObject:
   - component: {fileID: 1180599055}
   - component: {fileID: 1180599056}
   - component: {fileID: 1180599057}
+  - component: {fileID: 1180599058}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -446,7 +447,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: -1995923054530578039, guid: bb96151285378a9439fcea0abe932b74, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -656,6 +657,18 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1180599058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180599051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cfad7f10fe2f584c8b241959dbf2f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &1862829194
 GameObject:
   m_ObjectHideFlags: 0
@@ -721,7 +734,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_MaskInteraction: 0
   m_Sprite: {fileID: -1995923054530578039, guid: 2de189eb0e0714943af091060ead26dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
