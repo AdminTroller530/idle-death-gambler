@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     Vector2 move;
-    float speed = 12f;
+    float speed = 10f;
     Rigidbody2D rb;
 
     void Awake()

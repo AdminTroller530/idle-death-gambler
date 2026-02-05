@@ -119,6 +119,20 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &97786310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: Player/Move
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: c028e7977cb8242409dadf89e69e6953, type: 3}
+  m_ActionId: 82f312df-37b4-4129-8ccd-a24ce62287f8
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +620,19 @@ MonoBehaviour:
     m_ActionId: 67001395-68a4-470d-8bf5-83781908bdb6
     m_ActionName: 'Player/Look[/Mouse/delta,/Pen/delta]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1180599058}
+        m_TargetAssemblyTypeName: PlayerShoot, Assembly-CSharp
+        m_MethodName: Shoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: a8b1f7db-bade-4420-9170-ef1b89cc7c0a
     m_ActionName: 'Player/Fire[/Mouse/leftButton,/Shaul Eizikovich vJoy - Virtual
       Joystick/trigger]'
@@ -654,7 +680,7 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &1180599058
@@ -669,6 +695,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cfad7f10fe2f584c8b241959dbf2f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  bPrefab: {fileID: 662707161594838226, guid: 95cab95a8f2451a48a11ff82666102af, type: 3}
+  shootActionReference: {fileID: 97786310}
 --- !u!1 &1862829194
 GameObject:
   m_ObjectHideFlags: 0
