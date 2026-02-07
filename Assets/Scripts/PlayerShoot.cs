@@ -12,11 +12,6 @@ public class PlayerShoot : MonoBehaviour
     public void Shoot(InputAction.CallbackContext context)
     {
         shootHeld = context.ReadValueAsButton();
-
-        // if (context.started)
-        // {
-            
-        // }
     }
 
     void Update()
