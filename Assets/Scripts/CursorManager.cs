@@ -19,9 +19,9 @@ public class CursorManager : MonoBehaviour
     void Update()
     {
         pointerPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        Vector2 relPos = pointerPos - new Vector2(player.position.x, player.position.y);
+        Vector2 relPos = pointerPos - (Vector2)player.position;
         if (relPos.magnitude < deadzone) relPos *= relPos.magnitude / deadzone;
 
-        pointer.position = relPos + new Vector2(player.position.x, player.position.y);
+        pointer.position = relPos + (Vector2)player.position;
     }
 }

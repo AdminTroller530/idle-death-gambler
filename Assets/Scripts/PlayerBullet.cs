@@ -4,11 +4,12 @@ public class PlayerBullet : MonoBehaviour
 {
     float speed = 16f;
     float lifetime = 3f;
+    float damage = 5f;
     BoxCollider2D col;
 
     void Awake()
     {
-        col = gameObject.GetComponent<BoxCollider2D>();
+        col = GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -21,9 +22,15 @@ public class PlayerBullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.tag == "Enemy")
+        {
+            Destroy(other.gameObject); // temporary enemy kill
+            Destroy(gameObject);
+        }
         if (other.gameObject.tag == "Wall")
         {
             Destroy(gameObject);
         }
+        
     }
 }

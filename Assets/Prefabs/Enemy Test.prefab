@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 384280418038718693}
   - component: {fileID: -5399909951234745360}
   - component: {fileID: -2666489067101606874}
+  - component: {fileID: -3291396095038716698}
   m_Layer: 0
   m_Name: Enemy Test
   m_TagString: Enemy
@@ -102,7 +103,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3876923123970243237}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -165,7 +166,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.3, y: 2}
+  m_Size: {x: 1.25, y: 2}
   m_EdgeRadius: 0
 --- !u!114 &-2666489067101606874
 MonoBehaviour:
@@ -177,6 +178,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba9b5e8ada70d734ab12c264867c6eb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  stats: {fileID: 11400000, guid: fbf1ac92b36114748a07e19e35378652, type: 2}
+--- !u!114 &-3291396095038716698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3876923123970243237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55f817404cf1f94db981ca18a158d2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
   stats: {fileID: 11400000, guid: fbf1ac92b36114748a07e19e35378652, type: 2}
