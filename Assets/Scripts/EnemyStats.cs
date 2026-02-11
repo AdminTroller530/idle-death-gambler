@@ -6,6 +6,7 @@ public class EnemyStats : ScriptableObject
     [Header("Identification")]
     public int id;
     public string idName;
+    public string type;
 
     [Header("Base Stats")]
     public float maxHealth;
@@ -14,5 +15,5 @@ public class EnemyStats : ScriptableObject
     public float bulletSpeed;
     public float bulletDamage;
     public float shootCooldown;
-    
+    public float shootInaccuracy;
 }

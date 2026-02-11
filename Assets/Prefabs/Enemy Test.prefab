@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -2666489067101606874}
   - component: {fileID: -3291396095038716698}
   - component: {fileID: -2479307462933710974}
+  - component: {fileID: 8294209839109686167}
   m_Layer: 6
   m_Name: Enemy Test
   m_TagString: Enemy
@@ -206,3 +207,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stats: {fileID: 11400000, guid: fbf1ac92b36114748a07e19e35378652, type: 2}
+--- !u!114 &8294209839109686167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3876923123970243237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f332e9dc1ebfb74fad33fda9982c3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyShoot
+  enemyBullet: {fileID: 2095855100018656374, guid: 91f39dfd3a5648145bdcd08b9fe05ed5, type: 3}

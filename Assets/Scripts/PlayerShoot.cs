@@ -33,7 +33,7 @@ public class PlayerShoot : MonoBehaviour
         angle += Random.Range(-shootInaccuracy, shootInaccuracy);
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
         
-        Instantiate(bPrefab, transform.position, rotation);
+        Instantiate(bPrefab, transform.position, rotation, transform);
     }
 
 }

@@ -11,7 +11,7 @@ public class EnemyMove : MonoBehaviour
 
     void Awake()
     {
-        p = GameObject.Find("Player");
+        p = GetComponent<EnemyBase>().p;
         rb = gameObject.GetComponent<Rigidbody2D>();
         stats = GetComponent<EnemyBase>().stats;
     }
