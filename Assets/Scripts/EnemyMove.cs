@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
-    [SerializeField] public EnemyStats stats;
+    EnemyStats stats;
     Rigidbody2D rb;
     GameObject p;
     float pDist;
@@ -13,6 +13,7 @@ public class EnemyMove : MonoBehaviour
     {
         p = GameObject.Find("Player");
         rb = gameObject.GetComponent<Rigidbody2D>();
+        stats = GetComponent<EnemyBase>().stats;
     }
 
     void Update()

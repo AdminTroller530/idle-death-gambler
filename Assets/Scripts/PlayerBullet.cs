@@ -24,7 +24,7 @@ public class PlayerBullet : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            Destroy(other.gameObject); // temporary enemy kill
+            other.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
             Destroy(gameObject);
         }
         if (other.gameObject.tag == "Wall")

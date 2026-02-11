@@ -2,12 +2,18 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] EnemyStats stats; // IMPLEMENT AN ENEMY MANAGER SCRIPT TO STORE STATS PUBLICLY
+    EnemyStats stats;
     float health;
 
     void Awake()
     {
-        health = stats.health;
-        // health = GetComponent<EnemyMove>().stats.health; 
+        stats = GetComponent<EnemyBase>().stats;
+        health = stats.maxHealth;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if (health <= 0) Destroy(gameObject);
     }
 }
