@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemyAttacks : MonoBehaviour
 {
     [SerializeField] GameObject enemyBullet;
+    GameObject enemyBullets;
     GameObject p;
     EnemyStats stats;
 
@@ -10,6 +11,7 @@ public class EnemyAttacks : MonoBehaviour
     {
         p = GetComponent<EnemyBase>().p;
         stats = GetComponent<EnemyBase>().stats;
+        enemyBullets = GameObject.Find("EnemyBullets");
     }
 
     void Shoot(float damage, float speed)
@@ -18,7 +20,7 @@ public class EnemyAttacks : MonoBehaviour
         angle += Random.Range(-stats.shootInaccuracy, stats.shootInaccuracy);
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
         
-        Instantiate(enemyBullet, transform.position, rotation); // position doesnt work when i set parent
+        Instantiate(enemyBullet, transform.position, rotation, enemyBullets.transform);
     }
     
     // temporary debug enemy shooting test
