@@ -6,7 +6,7 @@ public class EnemyMove : MonoBehaviour
     Rigidbody2D rb;
     GameObject p;
     float pDist;
-    float pDistThreshold = 12f;
+    float pDistThreshold = 10f;
     Vector2 pMove;
 
     void Awake()

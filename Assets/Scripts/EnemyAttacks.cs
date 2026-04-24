@@ -20,7 +20,9 @@ public class EnemyAttacks : MonoBehaviour
         angle += Random.Range(-stats.shootInaccuracy, stats.shootInaccuracy);
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
         
-        Instantiate(enemyBullet, transform.position, rotation, enemyBullets.transform);
+        GameObject bulletObject = Instantiate(enemyBullet, transform.position, rotation, enemyBullets.transform);
+        bulletObject.GetComponent<EnemyBullet>().playerHealth = p.GetComponent<PlayerHealth>();
+
     }
     
     // temporary debug enemy shooting test

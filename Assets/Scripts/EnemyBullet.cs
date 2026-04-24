@@ -6,12 +6,11 @@ public class EnemyBullet : MonoBehaviour
     float lifetime = 3f;
     float damage = 5f;
     BoxCollider2D col;
-    PlayerHealth playerHealth;
+    public PlayerHealth playerHealth;
 
     void Awake()
     {
         col = GetComponent<BoxCollider2D>();
-        playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
     }
 
     void Update()
