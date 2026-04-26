@@ -24,12 +24,13 @@ public class EnemyAttacks : MonoBehaviour
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
         
         GameObject bulletObject = Instantiate(enemyBullet, transform.position, rotation, enemyBullets.transform);
-        bulletObject.GetComponent<EnemyBullet>().playerHealth = p.GetComponent<PlayerHealth>();
+        EnemyBullet bullet = bulletObject.GetComponent<EnemyBullet>();
+        bullet.damage = damage;
+        bullet.speed = speed;
+        bullet.playerHealth = p.GetComponent<PlayerHealth>();
 
     }
     
-    // temporary debug enemy shooting test
-    float temp = 0;
     void Update()
     {
         if (shootCooldown > 0) shootCooldown -= Time.deltaTime;

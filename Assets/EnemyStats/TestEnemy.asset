@@ -16,7 +16,7 @@ MonoBehaviour:
   idName: Test Enemy
   type: 
   maxHealth: 20
-  moveSpeed: 3
+  moveSpeed: 4
   collisionDamage: 0
   bulletSpeed: 10
   bulletDamage: 4

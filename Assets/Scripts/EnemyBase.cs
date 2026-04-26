@@ -21,7 +21,7 @@ public class EnemyBase : MonoBehaviour
     void CheckSeePlayer()
     {
         Debug.DrawRay(transform.position, p.transform.position-transform.position, Color.red);
-        ray = Physics2D.Raycast(transform.position, p.transform.position-transform.position, Vector2.Distance(transform.position, p.transform.position), wallMask);
+        ray = Physics2D.CircleCast(transform.position, 0.3f, p.transform.position-transform.position, Vector2.Distance(transform.position, p.transform.position), wallMask);
         seePlayer = !ray.collider;
     }
 }
