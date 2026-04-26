@@ -39,7 +39,7 @@ public class EnemyAttacks : MonoBehaviour
         if (shootCooldown == 0 && enemyBase.seePlayer)
         {
             Shoot(stats.bulletDamage, stats.bulletSpeed);
-            shootCooldown = stats.shootCooldown;
+            shootCooldown = stats.shootCooldown + Random.Range(-stats.shootCooldownOffsetMax, stats.shootCooldownOffsetMax);
         }
     }
 }

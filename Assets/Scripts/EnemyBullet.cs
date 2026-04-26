@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    public float speed = 10f;
+    public float speed = 0f;
+    public float damage = 0f;
     float lifetime = 3f;
-    public float damage = 5f;
     BoxCollider2D col;
     public PlayerHealth playerHealth;
 

@@ -21,4 +21,5 @@ MonoBehaviour:
   bulletSpeed: 10
   bulletDamage: 4
   shootCooldown: 0.8
-  shootInaccuracy: 0
+  shootCooldownOffsetMax: 0.2
+  shootInaccuracy: 3
