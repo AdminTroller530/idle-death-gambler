@@ -29,6 +29,7 @@ public class EnemyMove : MonoBehaviour
         // }
         // else pMove = Vector2.zero;
 
+        path.maxSpeed = stats.moveSpeed;
         path.destination = p.transform.position;
     }
 

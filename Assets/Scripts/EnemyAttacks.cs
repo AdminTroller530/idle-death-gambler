@@ -6,6 +6,10 @@ public class EnemyAttacks : MonoBehaviour
     GameObject enemyBullets;
     GameObject p;
     EnemyStats stats;
+    bool seePlayer = false;
+    RaycastHit2D ray;
+    [SerializeField] LayerMask wallMask;
+    float shootCooldown = 0.5f;
 
     void Awake()
     {
@@ -29,11 +33,21 @@ public class EnemyAttacks : MonoBehaviour
     float temp = 0;
     void Update()
     {
-        temp++;
-        if (temp >= 60)
+        CheckSeePlayer();
+        if (shootCooldown > 0) shootCooldown -= Time.deltaTime;
+        else shootCooldown = 0;
+
+        if (shootCooldown == 0 && seePlayer)
         {
             Shoot(stats.bulletDamage, stats.bulletSpeed);
-            temp = 0;
+            shootCooldown = stats.shootCooldown;
         }
+    }
+
+    void CheckSeePlayer()
+    {
+        Debug.DrawRay(transform.position, p.transform.position-transform.position, Color.red);
+        ray = Physics2D.Raycast(transform.position, p.transform.position-transform.position, Vector2.Distance(transform.position, p.transform.position), wallMask);
+        seePlayer = !ray.collider;
     }
 }
