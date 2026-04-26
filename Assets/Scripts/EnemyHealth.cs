@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    EnemyBase enemyBase;
     EnemyStats stats;
     float health;
 
     void Awake()
     {
-        stats = GetComponent<EnemyBase>().stats;
+        enemyBase = GetComponent<EnemyBase>();
+        stats = enemyBase.stats;
         health = stats.maxHealth;
     }
 

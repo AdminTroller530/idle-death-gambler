@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class EnemyMove : MonoBehaviour
 {
+    EnemyBase enemyBase;
     EnemyStats stats;
     Rigidbody2D rb;
     GameObject p;
@@ -14,9 +15,10 @@ public class EnemyMove : MonoBehaviour
 
     void Awake()
     {
-        p = GetComponent<EnemyBase>().p;
+        enemyBase = GetComponent<EnemyBase>();
+        p = enemyBase.p;
         rb = gameObject.GetComponent<Rigidbody2D>();
-        stats = GetComponent<EnemyBase>().stats;
+        stats = enemyBase.stats;
         path = GetComponent<AIPath>();
     }
 
@@ -31,6 +33,8 @@ public class EnemyMove : MonoBehaviour
 
         path.maxSpeed = stats.moveSpeed;
         path.destination = p.transform.position;
+        if (enemyBase.seePlayer) path.endReachedDistance = 10;
+        else path.endReachedDistance = 0;
     }
 
     void FixedUpdate()

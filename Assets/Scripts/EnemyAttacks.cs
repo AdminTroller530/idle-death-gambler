@@ -3,18 +3,17 @@ using UnityEngine;
 public class EnemyAttacks : MonoBehaviour
 {
     [SerializeField] GameObject enemyBullet;
+    EnemyBase enemyBase;
     GameObject enemyBullets;
     GameObject p;
     EnemyStats stats;
-    bool seePlayer = false;
-    RaycastHit2D ray;
-    [SerializeField] LayerMask wallMask;
     float shootCooldown = 0.5f;
 
     void Awake()
     {
-        p = GetComponent<EnemyBase>().p;
-        stats = GetComponent<EnemyBase>().stats;
+        enemyBase = GetComponent<EnemyBase>();
+        p = enemyBase.p;
+        stats = enemyBase.stats;
         enemyBullets = GameObject.Find("EnemyBullets");
     }
 
@@ -33,21 +32,13 @@ public class EnemyAttacks : MonoBehaviour
     float temp = 0;
     void Update()
     {
-        CheckSeePlayer();
         if (shootCooldown > 0) shootCooldown -= Time.deltaTime;
         else shootCooldown = 0;
 
-        if (shootCooldown == 0 && seePlayer)
+        if (shootCooldown == 0 && enemyBase.seePlayer)
         {
             Shoot(stats.bulletDamage, stats.bulletSpeed);
             shootCooldown = stats.shootCooldown;
         }
-    }
-
-    void CheckSeePlayer()
-    {
-        Debug.DrawRay(transform.position, p.transform.position-transform.position, Color.red);
-        ray = Physics2D.Raycast(transform.position, p.transform.position-transform.position, Vector2.Distance(transform.position, p.transform.position), wallMask);
-        seePlayer = !ray.collider;
     }
 }

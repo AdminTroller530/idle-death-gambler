@@ -211,6 +211,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stats: {fileID: 11400000, guid: fbf1ac92b36114748a07e19e35378652, type: 2}
   p: {fileID: 0}
+  seePlayer: 0
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &8294209839109686167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,9 +228,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyShoot
   enemyBullet: {fileID: 2095855100018656374, guid: 91f39dfd3a5648145bdcd08b9fe05ed5, type: 3}
-  wallMask:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!114 &-2379335362000332420
 MonoBehaviour:
   m_ObjectHideFlags: 0
