@@ -12,9 +12,16 @@ public class EnemyStats : ScriptableObject
     public float maxHealth;
     public float moveSpeed;
     public float collisionDamage;
+
+    [Header("Shooting Stats")]
     public float bulletSpeed;
     public float bulletDamage;
+    public float bulletLifetime;
     public float shootCooldown;
     public float shootCooldownOffsetMax;
     public float shootInaccuracy;
+
+    [Header("Sprites")]
+    public Sprite enemySprites;
+    public Sprite[] bulletSprites;
 }

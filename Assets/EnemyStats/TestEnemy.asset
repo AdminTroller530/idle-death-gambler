@@ -17,9 +17,14 @@ MonoBehaviour:
   type: 
   maxHealth: 20
   moveSpeed: 4
-  collisionDamage: 0
+  collisionDamage: 2
   bulletSpeed: 10
   bulletDamage: 4
+  bulletLifetime: 3
   shootCooldown: 0.8
   shootCooldownOffsetMax: 0.2
   shootInaccuracy: 3
+  enemySprites: {fileID: 21300000, guid: e162e8bc6a1d2524f8269667501f7d74, type: 3}
+  bulletSprites:
+  - {fileID: 21300000, guid: 6aa11ec261f7f6649a7e9f53aa1d7e91, type: 3}
+  - {fileID: 21300000, guid: e7100b3d78513fe489e7e35347c2e4f8, type: 3}

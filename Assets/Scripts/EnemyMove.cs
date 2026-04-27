@@ -8,9 +8,9 @@ public class EnemyMove : MonoBehaviour
     EnemyStats stats;
     Rigidbody2D rb;
     GameObject p;
-    float pDist;
-    float pDistThreshold = 10f;
-    Vector2 pMove;
+    // float pDist;
+    // float pDistThreshold = 10f;
+    // Vector2 pMove;
     AIPath path;
 
     void Awake()

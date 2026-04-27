@@ -17,7 +17,7 @@ public class EnemyAttacks : MonoBehaviour
         enemyBullets = GameObject.Find("EnemyBullets");
     }
 
-    void Shoot(float damage, float speed)
+    void Shoot(float damage, float speed, float lifetime)
     {
         float angle = Mathf.Atan2(p.transform.position.y - transform.position.y, p.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
         angle += Random.Range(-stats.shootInaccuracy, stats.shootInaccuracy);
@@ -27,9 +27,10 @@ public class EnemyAttacks : MonoBehaviour
         EnemyBullet bullet = bulletObject.GetComponent<EnemyBullet>();
         bullet.damage = damage;
         bullet.speed = speed;
-        bullet.parent = gameObject;
+        bullet.maxLifetime = lifetime;
+        bullet.enemyHealth = GetComponent<EnemyHealth>();
         bullet.playerHealth = p.GetComponent<PlayerHealth>();
-
+        bullet.sprites = stats.bulletSprites;
     }
     
     void Update()
@@ -39,7 +40,7 @@ public class EnemyAttacks : MonoBehaviour
 
         if (shootCooldown == 0 && enemyBase.seePlayer)
         {
-            Shoot(stats.bulletDamage, stats.bulletSpeed);
+            Shoot(stats.bulletDamage, stats.bulletSpeed, stats.bulletLifetime);
             shootCooldown = stats.shootCooldown + Random.Range(-stats.shootCooldownOffsetMax, stats.shootCooldownOffsetMax);
         }
     }
