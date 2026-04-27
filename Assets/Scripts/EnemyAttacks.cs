@@ -27,6 +27,7 @@ public class EnemyAttacks : MonoBehaviour
         EnemyBullet bullet = bulletObject.GetComponent<EnemyBullet>();
         bullet.damage = damage;
         bullet.speed = speed;
+        bullet.parent = gameObject;
         bullet.playerHealth = p.GetComponent<PlayerHealth>();
 
     }

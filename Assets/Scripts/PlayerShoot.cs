@@ -19,7 +19,7 @@ public class PlayerShoot : MonoBehaviour
     void Update()
     {
         if (shootCooldown > 0) shootCooldown -= Time.deltaTime;
-        if (shootHeld && shootCooldown <= 0)
+        if (shootHeld && shootCooldown <= 0 && !PlayerParry.isParrying)
         {
             ShootBullet();
             shootCooldown = shootCooldownMax;

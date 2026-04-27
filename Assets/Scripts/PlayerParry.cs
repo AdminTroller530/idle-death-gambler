@@ -6,8 +6,9 @@ public class PlayerParry : MonoBehaviour
     [SerializeField] Sprite[] sprites;
     SpriteRenderer s;
     public static bool isParrying = false;
+    public static bool parrySuccess = false; //successful parry = can parry immediately again
     float parryTimerMax = 0.25f, parryTimer = 0;
-    float parryCooldownMax = 0.3f, parryCooldown = 0;
+    float parryCooldownMax = 0.2f, parryCooldown = 0;
 
     void Awake()
     {
@@ -34,9 +35,10 @@ public class PlayerParry : MonoBehaviour
 
     public void Parry(InputAction.CallbackContext context)
     {
-        if (context.started && parryCooldown <= 0 && !isParrying)
+        if (context.started && ((parryCooldown <= 0 && !isParrying) || parrySuccess))
         {
             isParrying = true;
+            parrySuccess = false;
             parryTimer = parryTimerMax;
             parryCooldown = parryCooldownMax;
         }
