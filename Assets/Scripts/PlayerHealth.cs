@@ -1,9 +1,16 @@
 using UnityEngine;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
     float maxHealth = 40f;
     float health = 40f;
+    [SerializeField] TextMeshProUGUI healthText; // temp
+
+    void Update()
+    {
+        healthText.text = ((int)health).ToString();
+    }
 
     public void Heal(float heal)
     {
