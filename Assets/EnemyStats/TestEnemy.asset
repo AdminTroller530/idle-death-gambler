@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   id: -1
   idName: Test Enemy
-  type: 
+  type: shoot_single
   maxHealth: 20
   moveSpeed: 4
   collisionDamage: 2

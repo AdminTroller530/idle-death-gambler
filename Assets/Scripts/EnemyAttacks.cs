@@ -7,7 +7,7 @@ public class EnemyAttacks : MonoBehaviour
     GameObject enemyBullets;
     GameObject p;
     EnemyStats stats;
-    float shootCooldown = 0.5f;
+    float shootCooldown = 0.7f;
 
     void Awake()
     {
@@ -17,10 +17,10 @@ public class EnemyAttacks : MonoBehaviour
         enemyBullets = GameObject.Find("EnemyBullets");
     }
 
-    void Shoot(float damage, float speed, float lifetime)
+    void Shoot(float damage, float speed, float lifetime, float angleOffset)
     {
         float angle = Mathf.Atan2(p.transform.position.y - transform.position.y, p.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
-        angle += Random.Range(-stats.shootInaccuracy, stats.shootInaccuracy);
+        angle += angleOffset + Random.Range(-stats.shootInaccuracy, stats.shootInaccuracy);
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
         
         GameObject bulletObject = Instantiate(enemyBullet, transform.position, rotation, enemyBullets.transform);
@@ -40,7 +40,17 @@ public class EnemyAttacks : MonoBehaviour
 
         if (shootCooldown == 0 && enemyBase.seePlayer)
         {
-            Shoot(stats.bulletDamage, stats.bulletSpeed, stats.bulletLifetime);
+            if (stats.type != "melee")
+            {
+                Shoot(stats.bulletDamage, stats.bulletSpeed, stats.bulletLifetime, 0);
+                if (stats.type == "shoot_triple")
+                {
+                    Shoot(stats.bulletDamage, stats.bulletSpeed, stats.bulletLifetime, -20);
+                    Shoot(stats.bulletDamage, stats.bulletSpeed, stats.bulletLifetime, 20);
+                }
+            
+            }
+            
             shootCooldown = stats.shootCooldown + Random.Range(-stats.shootCooldownOffsetMax, stats.shootCooldownOffsetMax);
         }
     }

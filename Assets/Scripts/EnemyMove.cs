@@ -8,6 +8,7 @@ public class EnemyMove : MonoBehaviour
     EnemyStats stats;
     Rigidbody2D rb;
     GameObject p;
+    bool hasSeenPlayer = false;
     // float pDist;
     // float pDistThreshold = 10f;
     // Vector2 pMove;
@@ -31,7 +32,11 @@ public class EnemyMove : MonoBehaviour
         // }
         // else pMove = Vector2.zero;
 
+
         path.maxSpeed = stats.moveSpeed;
+        if (!hasSeenPlayer && enemyBase.seePlayer) hasSeenPlayer = true;
+        if (!hasSeenPlayer) path.maxSpeed /= 2; // moves slower if hasn't seen player yet
+
         path.destination = p.transform.position;
         if (enemyBase.seePlayer) path.endReachedDistance = 10;
         else path.endReachedDistance = 0;

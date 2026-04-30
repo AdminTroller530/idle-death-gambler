@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   id: -2
   idName: Test Enemy 2
-  type: 
+  type: shoot_triple
   maxHealth: 36
   moveSpeed: 10
   collisionDamage: 2
-  bulletSpeed: 15
+  bulletSpeed: 11
   bulletDamage: 6
   bulletLifetime: 3
-  shootCooldown: 0.7
-  shootCooldownOffsetMax: 0.2
+  shootCooldown: 0.9
+  shootCooldownOffsetMax: 0
   shootInaccuracy: 0
   enemySprites: {fileID: 21300000, guid: e162e8bc6a1d2524f8269667501f7d74, type: 3}
   bulletSprites:

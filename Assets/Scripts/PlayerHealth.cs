@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
-        healthText.text = ((int)health).ToString();
+        healthText.text = $"{(int)health}/{(int)maxHealth}";
     }
 
     public void Heal(float heal)
