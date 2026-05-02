@@ -3,34 +3,40 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    struct Wave
-    {
-        GameObject[] enemies;
-        Vector2[] positions;
-        float betweenCooldown;
-    }
-    
     [SerializeField] GameObject[] enemyPrefabs;
     List<GameObject> currentEnemies = new List<GameObject>();
+    [SerializeField] List<EnemyWave> waves;
+    [SerializeField] float timeBetweenSpawns, timeBetweenWaves;
+    bool waveSpawnDone = false;
+    int currentWave = 0;
 
     void SpawnEnemy(int id, Vector2 pos)
     {
         currentEnemies.Add(Instantiate(enemyPrefabs[id], pos, transform.rotation, transform));
     }
 
+    void SpawnWave(EnemyWave wave)
+    {
+        List<EnemySpawn> spawns = wave.spawns;
+        for (int i=0; i<spawns.Count; i++)
+        {
+            SpawnEnemy(spawns[i].id, spawns[i].pos);
+        }
+        waveSpawnDone = true;
+    }
+
     void Start()
     {
-        SpawnEnemy(0, new Vector2(17,0));
-        SpawnEnemy(0, new Vector2(-13,5));
-        SpawnEnemy(0, new Vector2(-18,-10));
-        SpawnEnemy(1, new Vector2(6,-10));
+        SpawnWave(waves[currentWave]);
     }
 
     void Update()
     {
-        if (currentEnemies.TrueForAll(e => !e))
+        if (currentWave < waves.Count - 1 && waveSpawnDone && currentEnemies.TrueForAll(e => !e))
         {
-            Debug.Log("all dead");
+            currentWave++;
+            waveSpawnDone = false;
+            SpawnWave(waves[currentWave]);
         }
         
     }

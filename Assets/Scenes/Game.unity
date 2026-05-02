@@ -930,6 +930,19 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 3876923123970243237, guid: 46afcfbbc11b8b24a9f5bade6cb70239, type: 3}
   - {fileID: 3876923123970243237, guid: 63aa98da40abcf945981f0b3f73ea969, type: 3}
+  waves:
+  - spawns:
+    - id: 0
+      pos: {x: 17, y: 0}
+    - id: 0
+      pos: {x: -13, y: 5}
+  - spawns:
+    - id: 0
+      pos: {x: -18, y: -10}
+    - id: 1
+      pos: {x: 6, y: -10}
+  timeBetweenSpawns: 0.3
+  timeBetweenWaves: 1
 --- !u!1001 &1167391137
 PrefabInstance:
   m_ObjectHideFlags: 0
