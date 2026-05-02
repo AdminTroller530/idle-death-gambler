@@ -35,7 +35,7 @@ public class EnemyMove : MonoBehaviour
 
         path.maxSpeed = stats.moveSpeed;
         if (!hasSeenPlayer && enemyBase.seePlayer) hasSeenPlayer = true;
-        if (!hasSeenPlayer) path.maxSpeed /= 2; // moves slower if hasn't seen player yet
+        if (!hasSeenPlayer) path.maxSpeed *= 0.75f; // moves slower if hasn't seen player yet
 
         path.destination = p.transform.position;
         if (enemyBase.seePlayer) path.endReachedDistance = 10;

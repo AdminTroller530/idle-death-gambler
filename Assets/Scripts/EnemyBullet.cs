@@ -7,7 +7,6 @@ public class EnemyBullet : MonoBehaviour
     public float speed = 0f;
     public float damage = 0f;
     public float maxLifetime = 0f, lifetime = 0f;
-    public EnemyHealth enemyHealth;
     public Sprite[] sprites;
 
     BoxCollider2D col;
@@ -57,7 +56,7 @@ public class EnemyBullet : MonoBehaviour
         }
         if (parried && other.gameObject.tag == "Enemy")
         {
-            enemyHealth.TakeDamage(damage);
+            other.GetComponent<EnemyHealth>().TakeDamage(damage);
             Destroy(gameObject);
         }
         if (other.gameObject.tag == "Wall")

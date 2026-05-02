@@ -28,7 +28,6 @@ public class EnemyAttacks : MonoBehaviour
         bullet.damage = damage;
         bullet.speed = speed;
         bullet.maxLifetime = lifetime;
-        bullet.enemyHealth = GetComponent<EnemyHealth>();
         bullet.playerHealth = p.GetComponent<PlayerHealth>();
         bullet.sprites = stats.bulletSprites;
     }
