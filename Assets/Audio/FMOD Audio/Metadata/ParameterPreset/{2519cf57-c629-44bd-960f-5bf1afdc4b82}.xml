@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{2519cf57-c629-44bd-960f-5bf1afdc4b82}">
+		<property name="name">
+			<value>Low Pass</value>
+		</property>
+		<relationship name="folder">
+			<destination>{93af0ba4-7785-49e4-b1b4-563eab267380}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{7390c6dd-1357-4f77-af76-c0a46151bb9b}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{7390c6dd-1357-4f77-af76-c0a46151bb9b}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{c29afd94-158f-41e2-b54a-093741ef7ec9}</destination>
+		</relationship>
+	</object>
+	<object class="SeekModulator" id="{c29afd94-158f-41e2-b54a-093741ef7ec9}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>cursorPosition</value>
+		</property>
+		<property name="speedAscending">
+			<value>2</value>
+		</property>
+	</object>
+</objects>
