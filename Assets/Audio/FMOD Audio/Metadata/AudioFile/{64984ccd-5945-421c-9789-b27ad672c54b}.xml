@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{64984ccd-5945-421c-9789-b27ad672c54b}">
+		<property name="assetPath">
+			<value>going down main.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>89.599999999999994</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{60deeb7f-8722-40e8-a4e9-09c34795c686}</destination>
+		</relationship>
+	</object>
+</objects>
