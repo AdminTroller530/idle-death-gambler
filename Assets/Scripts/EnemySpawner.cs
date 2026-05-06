@@ -32,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
     void StartWaves()
     {
         waveTimer = timeBetweenWaves;
-        AudioController.UpdateLowPass(1);
+        // AudioController.UpdateLowPass(1);
         StartCoroutine(SpawnWave(waves[currentWave]));
     }
 
@@ -58,7 +58,7 @@ public class EnemySpawner : MonoBehaviour
             else // all waves defeated
             {
                 Debug.Log("waves defeated");
-                AudioController.UpdateLowPass(0);
+                // AudioController.UpdateLowPass(0);
                 Destroy(gameObject);
             }
 

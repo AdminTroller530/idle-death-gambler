@@ -37,7 +37,7 @@ public class PlayerHealth : MonoBehaviour
         if (invincibleTimer > 0) return;
 
         health -= damage;
-        Debug.Log("Took " + damage + " damage! Health Left: " + health);
+        // Debug.Log("Took " + damage + " damage! Health Left: " + health);
         if (health <= 0)
         {
             Death();
@@ -47,7 +47,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Death()
     {
-        Debug.Log("You died!");
+        // Debug.Log("You died!");
         // Destroy(gameObject);
     }
 }
