@@ -37,9 +37,10 @@ public class EnemySpawner : MonoBehaviour
 
     void StartWaves()
     {
-        if (waves.Count == 0) return;
+        started = true;
+        PlayerMovement.inCombat = true;
         waveTimer = timeBetweenWaves;
-        // AudioController.UpdateLowPass(1);
+        AudioController.UpdateLowPass(1);
         doors.SetActive(true);
         AstarPath.active.data.gridGraph.center = transform.position;
         AstarPath.active.Scan();
@@ -53,11 +54,10 @@ public class EnemySpawner : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (!started && other.gameObject.tag == "Player")
+        if (!started && waves.Count > 0 && other.gameObject.tag == "Player")
         {
             if (enterTrigger.bounds.Contains(other.bounds.min) && enterTrigger.bounds.Contains(other.bounds.max))
             {
-                started = true;
                 StartWaves();
             }
         }
@@ -80,9 +80,10 @@ public class EnemySpawner : MonoBehaviour
             else // all waves defeated
             {
                 // Debug.Log("waves defeated");
-                // AudioController.UpdateLowPass(0);
+                AudioController.UpdateLowPass(0);
                 doors.SetActive(false);
                 waveSpawnDone = false;
+                PlayerMovement.inCombat = false;
             }
 
         }

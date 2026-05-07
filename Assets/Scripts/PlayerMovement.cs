@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     // float speed = 16f;
     float speed = 8f;
     Rigidbody2D rb;
+    public static bool inCombat = false;
 
     void Awake()
     {
@@ -21,5 +22,10 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         rb.linearVelocity = move * speed;
+    }
+
+    void Update()
+    {
+        speed = inCombat ? 8f : 13f;
     }
 }
