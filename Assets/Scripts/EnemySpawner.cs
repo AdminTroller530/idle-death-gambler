@@ -13,9 +13,8 @@ public class EnemySpawner : MonoBehaviour
     int currentWave = 0;
 
     [SerializeField] BoxCollider2D enterTrigger;
+    [SerializeField] GameObject doors;
     bool started = false;
-
-
 
     void SpawnEnemy(int id, Vector2 pos)
     {
@@ -38,11 +37,13 @@ public class EnemySpawner : MonoBehaviour
 
     void StartWaves()
     {
+        if (waves.Count == 0) return;
         waveTimer = timeBetweenWaves;
         // AudioController.UpdateLowPass(1);
+        doors.SetActive(true);
         AstarPath.active.data.gridGraph.center = transform.position;
         AstarPath.active.Scan();
-        if (waves.Count > 0) StartCoroutine(SpawnWave(waves[currentWave]));
+        StartCoroutine(SpawnWave(waves[currentWave]));
     }
 
     void Start()
@@ -80,6 +81,8 @@ public class EnemySpawner : MonoBehaviour
             {
                 // Debug.Log("waves defeated");
                 // AudioController.UpdateLowPass(0);
+                doors.SetActive(false);
+                waveSpawnDone = false;
             }
 
         }

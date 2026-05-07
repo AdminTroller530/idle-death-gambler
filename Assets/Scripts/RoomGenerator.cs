@@ -10,6 +10,7 @@ public class RoomGenerator : MonoBehaviour
     GameObject[][] rooms;
     [SerializeField] GameObject[] hallsUD, hallsLR;
 
+    public static int roomsSpawned = 0;
 
     int previousExit = 2; // up: 0, down: 1, right: 2
     int[][] exitMapping = { // up, down, right - previous exit can lead to what rooms?
@@ -26,6 +27,9 @@ public class RoomGenerator : MonoBehaviour
     {
         rooms = new GameObject[][]{UD, UL, UR, DL, DR, LR};
 
+        // spawning a few rooms for debug
+        SpawnNextRoom();
+        SpawnNextRoom();
         SpawnNextRoom();
         SpawnNextRoom();
         SpawnNextRoom();
@@ -58,6 +62,8 @@ public class RoomGenerator : MonoBehaviour
         // set new previousExit for next iteration
         if (type == 0) previousExit = previousExit == 0 ? 0 : 1;
         else previousExit = roomExits[type];
+
+        roomsSpawned++;
 
         // Debug.Log("Type: " + type);
         // Debug.Log("Exit: " + previousExit);
