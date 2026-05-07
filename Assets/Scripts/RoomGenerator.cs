@@ -29,6 +29,8 @@ public class RoomGenerator : MonoBehaviour
         SpawnNextRoom();
         SpawnNextRoom();
         SpawnNextRoom();
+        SpawnNextRoom();
+        SpawnNextRoom();
     }
 
     public void SpawnNextRoom()

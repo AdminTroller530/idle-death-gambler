@@ -12,9 +12,16 @@ public class EnemySpawner : MonoBehaviour
     bool waveSpawnDone = false;
     int currentWave = 0;
 
+    [SerializeField] BoxCollider2D enterTrigger;
+    bool started = false;
+
+
+
     void SpawnEnemy(int id, Vector2 pos)
     {
-        currentEnemies.Add(Instantiate(enemyPrefabs[id], pos, transform.rotation, transform));
+        GameObject enemy = Instantiate(enemyPrefabs[id], transform);
+        enemy.transform.localPosition = pos;
+        currentEnemies.Add(enemy);
     }
 
     IEnumerator SpawnWave(EnemyWave wave)
@@ -33,12 +40,26 @@ public class EnemySpawner : MonoBehaviour
     {
         waveTimer = timeBetweenWaves;
         // AudioController.UpdateLowPass(1);
-        StartCoroutine(SpawnWave(waves[currentWave]));
+        AstarPath.active.data.gridGraph.center = transform.position;
+        AstarPath.active.Scan();
+        if (waves.Count > 0) StartCoroutine(SpawnWave(waves[currentWave]));
     }
 
     void Start()
     {
-        StartWaves();
+        // StartWaves();
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (!started && other.gameObject.tag == "Player")
+        {
+            if (enterTrigger.bounds.Contains(other.bounds.min) && enterTrigger.bounds.Contains(other.bounds.max))
+            {
+                started = true;
+                StartWaves();
+            }
+        }
     }
 
     void Update()
@@ -57,9 +78,8 @@ public class EnemySpawner : MonoBehaviour
             }
             else // all waves defeated
             {
-                Debug.Log("waves defeated");
+                // Debug.Log("waves defeated");
                 // AudioController.UpdateLowPass(0);
-                Destroy(gameObject);
             }
 
         }
