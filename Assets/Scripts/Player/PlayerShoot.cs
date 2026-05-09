@@ -29,13 +29,12 @@ public class PlayerShoot : MonoBehaviour
     void ShootBullet()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        Vector2 dir = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
         angle += Random.Range(-shootInaccuracy, shootInaccuracy);
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
         
         GameObject bullet = Instantiate(bPrefab, transform.position, rotation);
-        bullet.GetComponent<PlayerBullet>().dir = dir;
+        bullet.GetComponent<PlayerBullet>().dir = rotation * Vector2.right;
     }
 
 }

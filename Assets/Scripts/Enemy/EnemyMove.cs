@@ -57,10 +57,8 @@ public class EnemyMove : MonoBehaviour
         rb.linearVelocity = knockback;
     }
 
-    // NEED TO FIX: DIRECTION DOES NOT ACCOUNT FOR PLAYER SHOOTING INACCURACY
     public void TakeKnockback(Vector2 dir, float magnitude)
     {
-        // Debug.Log("dir: " + dir + " magnitude: " + magnitude);
         knockback = dir.normalized * magnitude;
         knockbackStunTimer = knockbackStunTimerMax;
         path.canMove = false;
