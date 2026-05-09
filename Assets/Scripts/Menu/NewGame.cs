@@ -11,7 +11,7 @@ public class NewGame : MonoBehaviour
 
     IEnumerator LoadGameScene()
     {
-        yield return new WaitForSeconds(3);
+        // yield return new WaitForSeconds(3);
 
         AsyncOperation operation = SceneManager.LoadSceneAsync("Game");
         while (!operation.isDone)

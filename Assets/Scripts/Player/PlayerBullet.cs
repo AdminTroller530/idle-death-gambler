@@ -4,8 +4,11 @@ public class PlayerBullet : MonoBehaviour
 {
     float speed = 16f;
     float lifetime = 3f;
+    float knockback = 6f;
     float damage = 5f;
     BoxCollider2D col;
+
+    public Vector2 dir;
 
     void Awake()
     {
@@ -25,6 +28,7 @@ public class PlayerBullet : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             other.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
+            other.gameObject.GetComponent<EnemyMove>().TakeKnockback(dir, knockback);
             Destroy(gameObject);
         }
         if (other.gameObject.tag == "Wall")

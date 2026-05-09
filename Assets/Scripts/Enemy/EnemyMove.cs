@@ -12,6 +12,10 @@ public class EnemyMove : MonoBehaviour
     // float pDist;
     // float pDistThreshold = 10f;
     // Vector2 pMove;
+
+    Vector2 knockback;
+    float knockbackStunTimer = 0, knockbackStunTimerMax = 0.6f;
+
     AIPath path;
 
     void Awake()
@@ -32,7 +36,6 @@ public class EnemyMove : MonoBehaviour
         // }
         // else pMove = Vector2.zero;
 
-
         path.maxSpeed = stats.moveSpeed;
         if (!hasSeenPlayer && enemyBase.seePlayer) hasSeenPlayer = true;
         if (!hasSeenPlayer) path.maxSpeed *= 0.75f; // moves slower if hasn't seen player yet
@@ -40,10 +43,26 @@ public class EnemyMove : MonoBehaviour
         path.destination = p.transform.position;
         if (enemyBase.seePlayer) path.endReachedDistance = 10;
         else path.endReachedDistance = 0;
+
+        // damp knockback velocity over time
+        if (knockback.magnitude > 0.1f) knockback *= 0.97f;
+        else knockback = Vector2.zero;
+
+        if (knockbackStunTimer > 0) knockbackStunTimer -= Time.deltaTime;
+        else path.canMove = true; // allow pathfinding to continue once knockback stun done
     }
 
     void FixedUpdate()
     {
-        // rb.linearVelocity = pMove * stats.moveSpeed;
+        rb.linearVelocity = knockback;
+    }
+
+    // NEED TO FIX: DIRECTION DOES NOT ACCOUNT FOR PLAYER SHOOTING INACCURACY
+    public void TakeKnockback(Vector2 dir, float magnitude)
+    {
+        // Debug.Log("dir: " + dir + " magnitude: " + magnitude);
+        knockback = dir.normalized * magnitude;
+        knockbackStunTimer = knockbackStunTimerMax;
+        path.canMove = false;
     }
 }
