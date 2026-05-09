@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement; // TEMP DEBUG
 
 public class PlayerParry : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class PlayerParry : MonoBehaviour
     {
         if (context.started && ((parryCooldown <= 0 && !isParrying) || parrySuccess))
         {
+            SceneManager.LoadScene("Main Menu"); // TEMP DEBUG
             isParrying = true;
             parrySuccess = false;
             parryTimer = parryTimerMax;
