@@ -14,7 +14,7 @@ public class EnemyAttacks : MonoBehaviour
         enemyBase = GetComponent<EnemyBase>();
         p = enemyBase.p;
         stats = enemyBase.stats;
-        enemyBullets = GameObject.Find("EnemyBullets");
+        enemyBullets = GameObject.Find("Enemy Bullets");
     }
 
     void Shoot(float damage, float speed, float lifetime, float angleOffset)

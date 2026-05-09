@@ -310,7 +310,7 @@ GameObject:
   m_Component:
   - component: {fileID: 481864280}
   m_Layer: 0
-  m_Name: EnemyBullets
+  m_Name: Enemy Bullets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 518546074}
   - component: {fileID: 518546073}
   m_Layer: 0
-  m_Name: AudioController
+  m_Name: Audio Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -529,7 +529,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 11.5
+  orthographic size: 11.25
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1998,7 +1998,7 @@ GameObject:
   - component: {fileID: 1822837303}
   - component: {fileID: 1822837304}
   m_Layer: 0
-  m_Name: RoomGenerator
+  m_Name: Room Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2138,7 +2138,7 @@ GameObject:
   - component: {fileID: 1976239383}
   - component: {fileID: 1976239382}
   m_Layer: 0
-  m_Name: RNGController
+  m_Name: RNG Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
