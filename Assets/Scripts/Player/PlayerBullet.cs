@@ -6,13 +6,13 @@ public class PlayerBullet : MonoBehaviour
     float lifetime = 3f;
     float knockback = 4f;
     float damage = 5f;
+    float startOffset = 1.3f;
     BoxCollider2D col;
 
-    public Vector2 dir;
-
-    void Awake()
+    void Start()
     {
         col = GetComponent<BoxCollider2D>();
+        transform.Translate(Vector2.right * startOffset);
     }
 
     void Update()
@@ -28,7 +28,7 @@ public class PlayerBullet : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             other.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
-            other.gameObject.GetComponent<EnemyMove>().TakeKnockback(dir, knockback);
+            other.gameObject.GetComponent<EnemyMove>().TakeKnockback(transform.rotation * Vector2.right, knockback);
             Destroy(gameObject);
         }
         if (other.gameObject.tag == "Wall")

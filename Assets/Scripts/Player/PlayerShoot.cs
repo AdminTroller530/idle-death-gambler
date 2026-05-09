@@ -33,8 +33,7 @@ public class PlayerShoot : MonoBehaviour
         angle += Random.Range(-shootInaccuracy, shootInaccuracy);
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
         
-        GameObject bullet = Instantiate(bPrefab, transform.position, rotation);
-        bullet.GetComponent<PlayerBullet>().dir = rotation * Vector2.right;
+        Instantiate(bPrefab, transform.position, rotation);
     }
 
 }
