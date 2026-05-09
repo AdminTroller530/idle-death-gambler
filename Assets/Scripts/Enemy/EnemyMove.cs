@@ -44,16 +44,16 @@ public class EnemyMove : MonoBehaviour
         if (enemyBase.seePlayer) path.endReachedDistance = 10;
         else path.endReachedDistance = 0;
 
-        // damp knockback velocity over time
-        if (knockback.magnitude > 0.1f) knockback *= 0.97f;
-        else knockback = Vector2.zero;
-
         if (knockbackStunTimer > 0) knockbackStunTimer -= Time.deltaTime;
         else path.canMove = true; // allow pathfinding to continue once knockback stun done
     }
 
     void FixedUpdate()
     {
+        // damp knockback velocity over time
+        if (knockback.magnitude > 0.1f) knockback *= 0.85f;
+        else knockback = Vector2.zero;
+        
         rb.linearVelocity = knockback;
     }
 

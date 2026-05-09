@@ -4,7 +4,7 @@ public class PlayerBullet : MonoBehaviour
 {
     float speed = 16f;
     float lifetime = 3f;
-    float knockback = 5f;
+    float knockback = 4f;
     float damage = 5f;
     BoxCollider2D col;
 
