@@ -17,6 +17,7 @@ public class EnemyStats : ScriptableObject
     public float bulletSpeed;
     public float bulletDamage;
     public float bulletLifetime;
+    public float bulletStartOffset;
     public float shootCooldown;
     public float shootCooldownOffsetMax;
     public float shootInaccuracy;

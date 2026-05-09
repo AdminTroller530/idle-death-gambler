@@ -8,6 +8,7 @@ public class EnemyBullet : MonoBehaviour
     public float damage = 0f;
     public float maxLifetime = 0f, lifetime = 0f;
     public Sprite[] sprites;
+    public float startOffset;
 
     BoxCollider2D col;
     SpriteRenderer s;
@@ -21,6 +22,7 @@ public class EnemyBullet : MonoBehaviour
         s = GetComponent<SpriteRenderer>();
         s.sprite = sprites[0];
         lifetime = maxLifetime;
+        transform.Translate(Vector2.right * startOffset);
     }
 
     void Update()

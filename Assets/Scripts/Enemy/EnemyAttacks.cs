@@ -17,7 +17,7 @@ public class EnemyAttacks : MonoBehaviour
         enemyBullets = GameObject.Find("Enemy Bullets");
     }
 
-    void Shoot(float damage, float speed, float lifetime, float angleOffset)
+    void Shoot(float angleOffset)
     {
         float angle = Mathf.Atan2(p.transform.position.y - transform.position.y, p.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
         angle += angleOffset + Random.Range(-stats.shootInaccuracy, stats.shootInaccuracy);
@@ -25,11 +25,12 @@ public class EnemyAttacks : MonoBehaviour
         
         GameObject bulletObject = Instantiate(enemyBullet, transform.position, rotation, enemyBullets.transform);
         EnemyBullet bullet = bulletObject.GetComponent<EnemyBullet>();
-        bullet.damage = damage;
-        bullet.speed = speed;
-        bullet.maxLifetime = lifetime;
+        bullet.damage = stats.bulletDamage;
+        bullet.speed = stats.bulletSpeed;
+        bullet.maxLifetime = stats.bulletLifetime;
         bullet.playerHealth = p.GetComponent<PlayerHealth>();
         bullet.sprites = stats.bulletSprites;
+        bullet.startOffset = stats.bulletStartOffset;
     }
     
     void Update()
@@ -41,11 +42,11 @@ public class EnemyAttacks : MonoBehaviour
         {
             if (stats.type != "melee")
             {
-                Shoot(stats.bulletDamage, stats.bulletSpeed, stats.bulletLifetime, 0);
+                Shoot(0);
                 if (stats.type == "shoot_triple")
                 {
-                    Shoot(stats.bulletDamage, stats.bulletSpeed, stats.bulletLifetime, -20);
-                    Shoot(stats.bulletDamage, stats.bulletSpeed, stats.bulletLifetime, 20);
+                    Shoot(-20);
+                    Shoot(20);
                 }
             
             }
