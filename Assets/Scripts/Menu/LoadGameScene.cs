@@ -6,26 +6,22 @@ public class LoadGameScene : MonoBehaviour
 {
     [SerializeField] BlackScreen blackScreen;
 
-    void Start()
+    public void Load()
     {
-        StartCoroutine(Load());
+        StartCoroutine(LoadGame());
     }
 
-    public IEnumerator Load()
+    IEnumerator LoadGame()
     {
-        yield return new WaitForSeconds(3f);
         AsyncOperation operation = SceneManager.LoadSceneAsync("Game");
         operation.allowSceneActivation = false;
         
         yield return StartCoroutine(blackScreen.FadeIn());
         yield return new WaitForSeconds(0.5f);
 
-        while (operation.progress < 0.9f)
-        {
-            // Debug.Log(operation.progress);
-            yield return null;
-        }
-        blackScreen.StartFadeOut();
+        while (operation.progress < 0.9f) yield return null;
         operation.allowSceneActivation = true;
+        while (!operation.isDone) yield return null;
+        blackScreen.StartFadeOut();
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class BlackScreen : MonoBehaviour
 {
     Image blackScreen;
-    const float fadeSpeed = 1.4f;
+    const float fadeSpeed = 1.6f;
 
     void Awake()
     {
@@ -23,7 +23,7 @@ public class BlackScreen : MonoBehaviour
 
     public void StartFadeOut() {StartCoroutine(FadeOut());}
 
-    IEnumerator FadeOut()
+    public IEnumerator FadeOut()
     {
         while (blackScreen.color.a > 0)
         {

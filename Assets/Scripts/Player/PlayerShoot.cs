@@ -6,6 +6,7 @@ public class PlayerShoot : MonoBehaviour
     Vector2 mousePos;
     [SerializeField] GameObject bPrefab;
     bool shootHeld;
+    [SerializeField] Transform playerBullets;
 
     float shootCooldownMax = 0.35f;
     float shootCooldown = 0;
@@ -33,7 +34,7 @@ public class PlayerShoot : MonoBehaviour
         angle += Random.Range(-shootInaccuracy, shootInaccuracy);
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
         
-        Instantiate(bPrefab, transform.position, rotation);
+        Instantiate(bPrefab, transform.position, rotation, playerBullets);
     }
 
 }
