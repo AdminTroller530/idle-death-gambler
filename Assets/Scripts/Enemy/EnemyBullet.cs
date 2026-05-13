@@ -21,6 +21,7 @@ public class EnemyBullet : MonoBehaviour
         this.speed = speed;
         this.damage = damage;
         maxLifetime = lifetime;
+        this.lifetime = maxLifetime;
         this.sprites = sprites;
         this.startOffset = startOffset;
         this.playerHealth = playerHealth;
@@ -38,8 +39,8 @@ public class EnemyBullet : MonoBehaviour
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
 
-        lifetime += Time.deltaTime;
-        if (lifetime > maxLifetime) Destroy(gameObject);
+        lifetime -= Time.deltaTime;
+        if (lifetime < 0) Destroy(gameObject);
 
         if (parried) s.sprite = sprites[1];
         else s.sprite = sprites[0];
@@ -57,6 +58,8 @@ public class EnemyBullet : MonoBehaviour
                 transform.rotation = rotation;
 
                 lifetime = maxLifetime;
+                speed *= 1.5f;
+                damage *= 1.5f;
                 PlayerParry.parrySuccess = true;
                 parried = true;
             }
