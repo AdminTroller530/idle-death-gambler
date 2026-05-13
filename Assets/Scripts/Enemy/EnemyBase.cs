@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyBase : MonoBehaviour // maybe could make this parent class of other enemy scripts?
 {
     [SerializeField] public EnemyStats stats;
-    public GameObject p;
+    public static GameObject p;
     public bool seePlayer = false;
     RaycastHit2D ray;
     [SerializeField] LayerMask wallMask;

@@ -12,7 +12,7 @@ public class EnemyAttacks : MonoBehaviour
     void Awake()
     {
         enemyBase = GetComponent<EnemyBase>();
-        p = enemyBase.p;
+        p = EnemyBase.p;
         stats = enemyBase.stats;
         enemyBullets = GameObject.Find("Enemy Bullets");
     }
