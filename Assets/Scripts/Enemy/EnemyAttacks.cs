@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyAttacks : MonoBehaviour
 {
-    [SerializeField] GameObject enemyBullet;
+    [SerializeField] EnemyBullet enemyBullet;
     EnemyBase enemyBase;
     GameObject enemyBullets;
     GameObject p;
@@ -23,14 +23,8 @@ public class EnemyAttacks : MonoBehaviour
         angle += angleOffset + Random.Range(-stats.shootInaccuracy, stats.shootInaccuracy);
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
         
-        GameObject bulletObject = Instantiate(enemyBullet, transform.position, rotation, enemyBullets.transform);
-        EnemyBullet bullet = bulletObject.GetComponent<EnemyBullet>();
-        bullet.damage = stats.bulletDamage;
-        bullet.speed = stats.bulletSpeed;
-        bullet.maxLifetime = stats.bulletLifetime;
-        bullet.playerHealth = p.GetComponent<PlayerHealth>();
-        bullet.sprites = stats.bulletSprites;
-        bullet.startOffset = stats.bulletStartOffset;
+        EnemyBullet bullet = Instantiate(enemyBullet, transform.position, rotation, enemyBullets.transform);
+        bullet.Initialize(stats.bulletSpeed, stats.bulletDamage, stats.bulletLifetime, stats.bulletSprites, stats.bulletStartOffset, p.GetComponent<PlayerHealth>());
     }
     
     void Update()

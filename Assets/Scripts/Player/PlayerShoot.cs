@@ -15,7 +15,7 @@ public class PlayerShoot : MonoBehaviour
     float shootCooldown = 0;
     // shootInaccuracy: maximum inaccuracy in DEGREES
     float shootCooldownMax, shootInaccuracy, reloadTime;
-    int magSize;
+    int magSize; // IMPLEMENT AMMO AND RELOAD SYSTEM
     int[] ammo = new int[3];
     float bSpeed, bLifetime, bKnockback, bDamage;
 

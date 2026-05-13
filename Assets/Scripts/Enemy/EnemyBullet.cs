@@ -16,12 +16,21 @@ public class EnemyBullet : MonoBehaviour
     Vector2 mousePos;
     bool parried = false;
 
+    public void Initialize(float speed, float damage, float lifetime, Sprite[] sprites, float startOffset, PlayerHealth playerHealth)
+    {
+        this.speed = speed;
+        this.damage = damage;
+        maxLifetime = lifetime;
+        this.sprites = sprites;
+        this.startOffset = startOffset;
+        this.playerHealth = playerHealth;
+    }
+
     void Start()
     {
         col = GetComponent<BoxCollider2D>();
         s = GetComponent<SpriteRenderer>();
         s.sprite = sprites[0];
-        lifetime = maxLifetime;
         transform.Translate(Vector2.right * startOffset);
     }
 
@@ -29,8 +38,8 @@ public class EnemyBullet : MonoBehaviour
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
 
-        lifetime -= Time.deltaTime;
-        if (lifetime <= 0) Destroy(gameObject);
+        lifetime += Time.deltaTime;
+        if (lifetime > maxLifetime) Destroy(gameObject);
 
         if (parried) s.sprite = sprites[1];
         else s.sprite = sprites[0];
