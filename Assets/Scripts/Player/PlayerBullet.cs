@@ -2,16 +2,24 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
-    float speed = 16f;
-    float lifetime = 3f;
-    float knockback = 4f;
-    float damage = 5f;
-    float startOffset = 1.3f;
-    BoxCollider2D col;
+    float speed;
+    float lifetime;
+    float knockback;
+    float damage;
+    float startOffset;
+    // BoxCollider2D col;
+
+    public void Initialize(float speed, float lifetime, float knockback, float damage)
+    {
+        this.speed = speed;
+        this.lifetime = lifetime;
+        this.knockback = knockback;
+        this.damage = damage;
+    }
 
     void Start()
     {
-        col = GetComponent<BoxCollider2D>();
+        // col = GetComponent<BoxCollider2D>();
         transform.Translate(Vector2.right * startOffset);
     }
 

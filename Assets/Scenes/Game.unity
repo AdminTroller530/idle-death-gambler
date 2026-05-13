@@ -1107,8 +1107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cfad7f10fe2f584c8b241959dbf2f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  bPrefab: {fileID: 662707161594838226, guid: 95cab95a8f2451a48a11ff82666102af, type: 3}
   playerBullets: {fileID: 845268363}
+  guns:
+  - {fileID: 11400000, guid: fa0836f5d5e67bc43bb66c51cafb45ab, type: 2}
 --- !u!61 &1180599059
 BoxCollider2D:
   m_ObjectHideFlags: 0
