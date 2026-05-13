@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerShoot : MonoBehaviour
 {
@@ -14,15 +15,25 @@ public class PlayerShoot : MonoBehaviour
 
     float shootCooldown = 0;
     // shootInaccuracy: maximum inaccuracy in DEGREES
-    float shootCooldownMax, shootInaccuracy, reloadTime;
-    int magSize; // IMPLEMENT AMMO AND RELOAD SYSTEM
-    int[] ammo = new int[3];
+    float shootCooldownMax, shootInaccuracy;
     float bSpeed, bLifetime, bKnockback, bDamage;
+
+    int magSize;
+    int[] ammo = new int[3];
+    bool isReloading = false;
+    float reloadTime, reloadTimer = 0;
+    [SerializeField] TextMeshProUGUI ammoText;
 
     void Start()
     {
         EquipGun(0);
         ammo[0] = magSize;
+        UpdateAmmoText();
+    }
+
+    void UpdateAmmoText()
+    {
+        ammoText.text = $"{ammo[gunSlot]}/{magSize}";
     }
 
     void EquipGun(int slot)
@@ -42,6 +53,7 @@ public class PlayerShoot : MonoBehaviour
 
         reloadTime = gun.reloadTime;
         magSize = gun.magSize;
+        UpdateAmmoText();
 
         bPrefab = gun.bulletPrefab;
     }
@@ -51,13 +63,30 @@ public class PlayerShoot : MonoBehaviour
         shootHeld = context.ReadValueAsButton();
     }
 
+    public void Reload(InputAction.CallbackContext context)
+    {
+        if (context.started && reloadTimer <= 0 && ammo[gunSlot] < magSize)
+        {
+            isReloading = true;
+            reloadTimer = reloadTime;
+        }
+    }
+
     void Update()
     {
         if (shootCooldown > 0) shootCooldown -= Time.deltaTime;
-        if (gun && shootHeld && shootCooldown <= 0 && !PlayerParry.isParrying)
+        if (gun && ammo[gunSlot] > 0 && shootHeld && shootCooldown <= 0 && !isReloading && !PlayerParry.isParrying)
         {
             ShootBullet();
             shootCooldown = shootCooldownMax;
+        }
+
+        if (reloadTimer > 0) reloadTimer -= Time.deltaTime;
+        else if (isReloading)
+        {
+            isReloading = false;
+            ammo[gunSlot] = magSize;
+            UpdateAmmoText();
         }
     }
 
@@ -70,6 +99,9 @@ public class PlayerShoot : MonoBehaviour
         
         PlayerBullet bullet = Instantiate(bPrefab, transform.position, rotation, playerBullets);
         bullet.Initialize(bSpeed, bLifetime, bKnockback, bDamage);
+
+        ammo[gunSlot] -= 1;
+        UpdateAmmoText();
     }
 
 }

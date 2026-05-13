@@ -1090,6 +1090,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 37e55048-5620-4683-a47b-b50ee76f84bc
     m_ActionName: 'Player/Parry[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1180599058}
+        m_TargetAssemblyTypeName: PlayerShoot, Assembly-CSharp
+        m_MethodName: Reload
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: bdf2043b-99ca-42a6-8bbf-f670f9595230
+    m_ActionName: 'Player/Reload[/Keyboard/r]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
@@ -1110,6 +1126,7 @@ MonoBehaviour:
   playerBullets: {fileID: 845268363}
   guns:
   - {fileID: 11400000, guid: fa0836f5d5e67bc43bb66c51cafb45ab, type: 2}
+  ammoText: {fileID: 1851021000}
 --- !u!61 &1180599059
 BoxCollider2D:
   m_ObjectHideFlags: 0

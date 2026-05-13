@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class BlackScreen : MonoBehaviour
 {
     Image blackScreen;
-    const float fadeSpeed = 1.6f;
+    const float fadeSpeed = 1.8f;
 
     void Awake()
     {
