@@ -42,14 +42,7 @@ public class EnemySpawner : MonoBehaviour
         waveTimer = timeBetweenWaves;
         AudioController.UpdateLowPass(1);
         doors.SetActive(true);
-        AstarPath.active.data.gridGraph.center = transform.position;
-        AstarPath.active.Scan();
         StartCoroutine(SpawnWave(waves[currentWave]));
-    }
-
-    void Start()
-    {
-        // StartWaves();
     }
 
     void OnTriggerStay2D(Collider2D other)
