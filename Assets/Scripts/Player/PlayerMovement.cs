@@ -9,9 +9,14 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     public static bool inCombat = false;
 
+    Animator anim;
+    SpriteRenderer sr;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -22,6 +27,9 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         rb.linearVelocity = move * speed;
+        sr.flipX = move.x < 0;
+        anim.SetFloat("MoveX", move.x);
+        anim.SetFloat("MoveY", move.y);
     }
 
     void Update()
