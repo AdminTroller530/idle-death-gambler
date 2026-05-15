@@ -1,3 +1,4 @@
+using Pathfinding;
 using UnityEngine;
 
 public class RoomGenerator : MonoBehaviour
@@ -19,13 +20,18 @@ public class RoomGenerator : MonoBehaviour
         new int[]{1, 3, 5}
     };
 
-    Vector2 roomDims = new Vector2(20, 20); // dimensions of rooms (width, height)
+    Vector2Int roomDims = new Vector2Int(20, 20); // dimensions of rooms (width, height)
     int hallLength = 10;
-    Vector2 currentPos = new Vector2(0, 0); // position of current room
+    Vector2Int currentPos = new Vector2Int(0, 0); // position of current room
 
-    void Start()
+    [SerializeField] LayerMask wallMask;
+
+    void Awake()
     {
         rooms = new GameObject[][]{UD, UL, UR, DL, DR, LR};
+
+        // test create new gridgraph in pathfinder graphs
+        // AddRoomGraph(new Vector2Int(5, 0), 50, 50);
 
         // spawning a few rooms for debug
         SpawnNextRoom();
@@ -40,6 +46,19 @@ public class RoomGenerator : MonoBehaviour
         SpawnNextRoom();
         SpawnNextRoom();
         SpawnNextRoom();
+        AstarPath.active.Scan();
+    }
+
+    void AddRoomGraph(Vector2 center, int width, int depth)
+    {
+        GridGraph graph = AstarPath.active.data.AddGraph(typeof(GridGraph)) as GridGraph;
+
+        graph.is2D = true;
+        graph.collision.use2D = true;
+        graph.collision.diameter = 3.5f;
+        graph.collision.mask = wallMask;
+        graph.center = center;
+        graph.SetDimensions(width * 2, depth * 2, 0.5f);
     }
 
     public void SpawnNextRoom()
@@ -48,21 +67,24 @@ public class RoomGenerator : MonoBehaviour
         // spawn hallway + update currentPos
         if (previousExit == 0) { // up
             Instantiate(hallsUD[0], currentPos + (roomDims.y + hallLength)*0.5f * Vector2.up, transform.rotation, tileGrid);
-            currentPos += Vector2.up * (roomDims.y + hallLength);
+            currentPos += Vector2Int.up * (roomDims.y + hallLength);
         }
         else if (previousExit == 1) { // down
             Instantiate(hallsUD[0], currentPos - (roomDims.y + hallLength)*0.5f * Vector2.up, transform.rotation, tileGrid);
-            currentPos -= Vector2.up * (roomDims.y + hallLength);
+            currentPos -= Vector2Int.up * (roomDims.y + hallLength);
         }
         else { // right
             Instantiate(hallsLR[0], currentPos + (roomDims.x + hallLength)*0.5f * Vector2.right, transform.rotation, tileGrid);
-            currentPos += Vector2.right * (roomDims.x + hallLength);
+            currentPos += Vector2Int.right * (roomDims.x + hallLength);
         }
         
-        // select room type randomly from all possible continuations
+        // spawn room of a randome type from all possible continuations
         int type = exitMapping[previousExit][RNGController.MapRNG(0, exitMapping[previousExit].Length)];
         GameObject room = rooms[type][RNGController.MapRNG(0, rooms[type].Length)];
-        Instantiate(room, currentPos, transform.rotation, tileGrid);
+        Instantiate(room, (Vector2)currentPos, transform.rotation, tileGrid);
+
+        // add new A* pathfinding graph at new room
+        AddRoomGraph(currentPos, roomDims.x, roomDims.y);
 
         // set new previousExit for next iteration
         if (type == 0) previousExit = previousExit == 0 ? 0 : 1;
