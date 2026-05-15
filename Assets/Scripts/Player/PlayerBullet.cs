@@ -6,7 +6,7 @@ public class PlayerBullet : MonoBehaviour
     float lifetime;
     float knockback;
     float damage;
-    float startOffset;
+    float startOffset = 1.3f;
     // BoxCollider2D col;
 
     public void Initialize(float speed, float lifetime, float knockback, float damage)
