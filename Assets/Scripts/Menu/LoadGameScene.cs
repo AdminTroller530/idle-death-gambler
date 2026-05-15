@@ -22,6 +22,7 @@ public class LoadGameScene : MonoBehaviour
         while (operation.progress < 0.9f) yield return null;
         operation.allowSceneActivation = true;
         while (!operation.isDone) yield return null;
+        AstarPath.active.Scan();
         blackScreen.StartFadeOut();
     }
 }

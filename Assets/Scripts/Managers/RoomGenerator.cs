@@ -46,7 +46,6 @@ public class RoomGenerator : MonoBehaviour
         SpawnNextRoom();
         SpawnNextRoom();
         SpawnNextRoom();
-        AstarPath.active.Scan();
     }
 
     void AddRoomGraph(Vector2 center, int width, int depth)
