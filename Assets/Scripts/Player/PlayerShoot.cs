@@ -43,19 +43,19 @@ public class PlayerShoot : MonoBehaviour
         gun = guns[slot];
         gunSlot = slot;
 
-        shootCooldownMax = gun.shootCooldown;
-        shootInaccuracy = gun.shootInaccuracy;
+        shootCooldownMax = gun.ShootCooldown;
+        shootInaccuracy = gun.ShootInaccuracy;
         
-        bSpeed = gun.bulletSpeed;
-        bLifetime = gun.bulletLifetime;
-        bKnockback = gun.bulletKnockback;
-        bDamage = gun.bulletDamage;
+        bSpeed = gun.BulletSpeed;
+        bLifetime = gun.BulletLifetime;
+        bKnockback = gun.BulletKnockback;
+        bDamage = gun.BulletDamage;
 
-        reloadTime = gun.reloadTime;
-        magSize = gun.magSize;
+        reloadTime = gun.ReloadTime;
+        magSize = gun.MagSize;
         UpdateAmmoText();
 
-        bPrefab = gun.bulletPrefab;
+        bPrefab = gun.BulletPrefab;
     }
     
     public void Shoot(InputAction.CallbackContext context)
@@ -75,7 +75,7 @@ public class PlayerShoot : MonoBehaviour
     void Update()
     {
         if (shootCooldown > 0) shootCooldown -= Time.deltaTime;
-        if (gun && ammo[gunSlot] > 0 && shootHeld && shootCooldown <= 0 && !isReloading && !PlayerParry.isParrying)
+        if (gun && ammo[gunSlot] > 0 && shootHeld && shootCooldown <= 0 && !isReloading && !PlayerParry.IsParrying)
         {
             ShootBullet();
             shootCooldown = shootCooldownMax;

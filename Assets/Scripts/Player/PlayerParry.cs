@@ -3,44 +3,48 @@ using UnityEngine.InputSystem;
 
 public class PlayerParry : MonoBehaviour
 {
-    [SerializeField] Sprite[] sprites;
-    SpriteRenderer s;
-    public static bool isParrying = false;
-    public static bool parrySuccess = false; //successful parry = can parry immediately again
-    float parryTimerMax = 0.25f, parryTimer = 0;
-    float parryCooldownMax = 0.2f, parryCooldown = 0;
+    [SerializeField] private Sprite[] _sprites;
+    private SpriteRenderer _spriteRenderer;
+    
+    private float _parryTimerMax = 0.25f;
+    private float _parryTimer = 0;
+    private float _parryCooldownMax = 0.2f;
+    private float _parryCooldown = 0;
+
+    public static bool IsParrying = false;
+    public static bool WasParrySuccessful = false; //successful parry = can parry again immediately
 
     void Awake()
     {
-        s = GetComponent<SpriteRenderer>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        if (parryTimer > 0)
+        if (_parryTimer > 0)
         {
-            parryTimer -= Time.deltaTime;
+            _parryTimer -= Time.deltaTime;
         }
         else
         {
-            if (parryCooldown > 0) parryCooldown -= Time.deltaTime;
-            else parryCooldown = 0;
-            parryTimer = 0;
-            isParrying = false;
+            if (_parryCooldown > 0) _parryCooldown -= Time.deltaTime;
+            else _parryCooldown = 0;
+            _parryTimer = 0;
+            IsParrying = false;
         }
 
-        if (isParrying) s.sprite = sprites[1];
-        else s.sprite = sprites[0];
+        if (IsParrying) _spriteRenderer.sprite = _sprites[1];
+        else _spriteRenderer.sprite = _sprites[0];
     }
 
     public void Parry(InputAction.CallbackContext context)
     {
-        if (context.started && ((parryCooldown <= 0 && !isParrying) || parrySuccess))
+        if (context.started && ((_parryCooldown <= 0 && !IsParrying) || WasParrySuccessful))
         {
-            isParrying = true;
-            parrySuccess = false;
-            parryTimer = parryTimerMax;
-            parryCooldown = parryCooldownMax;
+            IsParrying = true;
+            WasParrySuccessful = false;
+            _parryTimer = _parryTimerMax;
+            _parryCooldown = _parryCooldownMax;
         }
     }
 }

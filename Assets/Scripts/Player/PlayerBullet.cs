@@ -2,41 +2,39 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
-    float speed;
-    float lifetime;
-    float knockback;
-    float damage;
-    float startOffset = 1.3f;
-    // BoxCollider2D col;
+    private float _speed;
+    private float _lifetime;
+    private float _knockback;
+    private float _damage;
+    private float _startOffset = 1.3f;
 
     public void Initialize(float speed, float lifetime, float knockback, float damage)
     {
-        this.speed = speed;
-        this.lifetime = lifetime;
-        this.knockback = knockback;
-        this.damage = damage;
+        _speed = speed;
+        _lifetime = lifetime;
+        _knockback = knockback;
+        _damage = damage;
     }
 
     void Start()
     {
-        // col = GetComponent<BoxCollider2D>();
-        transform.Translate(Vector2.right * startOffset);
+        transform.Translate(Vector2.right * _startOffset);
     }
 
     void Update()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        transform.Translate(Vector2.right * _speed * Time.deltaTime);
 
-        lifetime -= Time.deltaTime;
-        if (lifetime <= 0) Destroy(gameObject);
+        _lifetime -= Time.deltaTime;
+        if (_lifetime <= 0) Destroy(gameObject);
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
-            other.gameObject.GetComponent<EnemyMove>().TakeKnockback(transform.rotation * Vector2.right, knockback);
+            other.gameObject.GetComponent<EnemyHealth>().TakeDamage(_damage);
+            other.gameObject.GetComponent<EnemyMove>().TakeKnockback(transform.rotation * Vector2.right, _knockback);
             Destroy(gameObject);
         }
         if (other.gameObject.tag == "Wall")

@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962fc92d152fcd049818a0e8db2feadf, type: 3}
   m_Name: Pistol Test
   m_EditorClassIdentifier: Assembly-CSharp::GunStats
-  id: 0
-  idName: Pistol Test
-  type: single
-  bulletSpeed: 16
-  bulletDamage: 5
-  bulletLifetime: 3
-  bulletKnockback: 4
-  shootCooldown: 0.35
-  shootInaccuracy: 5
-  magSize: 8
-  reloadTime: 1
-  gunSprites: []
-  bulletPrefab: {fileID: -6980191489351024642, guid: 95cab95a8f2451a48a11ff82666102af, type: 3}
+  Id: -1
+  Name: Pistol Test
+  Type: single
+  BulletSpeed: 16
+  BulletDamage: 5
+  BulletLifetime: 3
+  BulletKnockback: 4
+  ShootCooldown: 0.35
+  ShootInaccuracy: 5
+  MagSize: 8
+  ReloadTime: 1
+  GunSprites: []
+  BulletPrefab: {fileID: -6980191489351024642, guid: 95cab95a8f2451a48a11ff82666102af, type: 3}

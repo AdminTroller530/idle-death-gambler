@@ -50,7 +50,7 @@ public class EnemyBullet : MonoBehaviour
     {
         if (!parried && other.gameObject.tag == "Player")
         {
-            if (PlayerParry.isParrying)
+            if (PlayerParry.IsParrying)
             {
                 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
                 float angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
@@ -60,7 +60,7 @@ public class EnemyBullet : MonoBehaviour
                 lifetime = maxLifetime;
                 speed *= 1.5f;
                 damage *= 1.5f;
-                PlayerParry.parrySuccess = true;
+                PlayerParry.WasParrySuccessful = true;
                 parried = true;
             }
             else {
