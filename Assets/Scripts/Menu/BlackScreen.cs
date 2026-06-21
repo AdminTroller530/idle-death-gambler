@@ -7,7 +7,8 @@ public class BlackScreen : MonoBehaviour
     public static BlackScreen Instance {get; private set;}
 
     private Image _blackScreen;
-    private float _fadeSpeed = 1.8f;
+    private float _fadeSpeed = 15f;
+    private float _fadeValue = 1f; // from 1 - 10
 
     private void Awake()
     {
@@ -19,21 +20,25 @@ public class BlackScreen : MonoBehaviour
 
     public IEnumerator FadeIn()
     {
-        while (_blackScreen.color.a < 1)
+        while (_fadeValue < 10)
         {
-            _blackScreen.color += new Color(0, 0, 0, _fadeSpeed * Time.deltaTime);
+            _fadeValue += _fadeSpeed * Time.deltaTime;
+            _blackScreen.color = new Color(0, 0, 0, Mathf.Log10(_fadeValue));
             yield return null;
         }
+        _fadeValue = 10;
     }
 
     public void StartFadeOut() => StartCoroutine(FadeOut());
 
     public IEnumerator FadeOut()
     {
-        while (_blackScreen.color.a > 0)
+        while (_fadeValue > 1)
         {
-            _blackScreen.color -= new Color(0, 0, 0, _fadeSpeed * Time.deltaTime);
+            _fadeValue -= _fadeSpeed * Time.deltaTime;
+            _blackScreen.color = new Color(0, 0, 0, Mathf.Log10(_fadeValue));
             yield return null;
         }
+        _fadeValue = 1;
     }
 }
