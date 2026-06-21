@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
     void StartWaves()
     {
         started = true;
-        PlayerMovement.inCombat = true;
+        PlayerMovement.InCombat = true;
         waveTimer = timeBetweenWaves;
         AudioController.UpdateLowPass(1);
         doors.SetActive(true);
@@ -76,7 +76,7 @@ public class EnemySpawner : MonoBehaviour
                 AudioController.UpdateLowPass(0);
                 doors.SetActive(false);
                 waveSpawnDone = false;
-                PlayerMovement.inCombat = false;
+                PlayerMovement.InCombat = false;
             }
 
         }

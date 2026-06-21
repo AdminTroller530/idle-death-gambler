@@ -3,49 +3,49 @@ using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
-    float maxHealth = 40f;
-    float health = 40f;
-    [SerializeField] TextMeshProUGUI healthText; // temp
-    SpriteRenderer spriteRenderer;
+    private float _maxHealth = 40f;
+    private float _health = 40f;
+    [SerializeField] private TextMeshProUGUI healthText; // temp
+    private SpriteRenderer _spriteRenderer;
 
-    float maxInvincibleTimer = 1.1f, invincibleTimer = 0; // I-frames
+    private float _maxInvincibleTimer = 1.1f, _invincibleTimer = 0; // I-frames
 
-    void Start()
+    private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void Update()
+    private void Update()
     {
-        healthText.text = $"{(int)health}/{(int)maxHealth}";
+        healthText.text = $"{(int)_health}/{(int)_maxHealth}";
 
-        if (invincibleTimer > 0) {
-            invincibleTimer -= Time.deltaTime;
-            spriteRenderer.color = new Color(1,1,1,0.6f);
+        if (_invincibleTimer > 0) {
+            _invincibleTimer -= Time.deltaTime;
+            _spriteRenderer.color = new Color(1,1,1,0.6f);
         }
-        else spriteRenderer.color = new Color(1,1,1,1);
+        else _spriteRenderer.color = new Color(1,1,1,1);
     }
 
     public void Heal(float heal)
     {
-        health += heal;
-        health = Mathf.Min(health, maxHealth);
+        _health += heal;
+        _health = Mathf.Min(_health, _maxHealth);
     }
 
     public void TakeDamage(float damage)
     {
-        if (invincibleTimer > 0) return;
+        if (_invincibleTimer > 0) return;
 
-        health -= damage;
+        _health -= damage;
         // Debug.Log("Took " + damage + " damage! Health Left: " + health);
-        if (health <= 0)
+        if (_health <= 0)
         {
             Death();
         }
-        invincibleTimer = maxInvincibleTimer;
+        _invincibleTimer = _maxInvincibleTimer;
     }
 
-    void Death()
+    private void Death()
     {
         // Debug.Log("You died!");
         // Destroy(gameObject);

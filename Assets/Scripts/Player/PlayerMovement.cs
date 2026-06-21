@@ -3,57 +3,56 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Vector2 move, moveAnim;
-    string dirPriority = "hor";
-    Vector2 dir = Vector2.right;
-    // float speed = 16f;
-    float speed = 8f;
-    Rigidbody2D rb;
-    public static bool inCombat = false;
+    private Vector2 _move, _moveAnim;
+    private string _dirPriority = "hor";
+    private Vector2 _dir = Vector2.right;
+    private float _speed = 8f;
+    private Rigidbody2D _rb;
+    public static bool InCombat = false;
 
-    Animator anim;
-    SpriteRenderer sr;
+    private Animator _anim;
+    private SpriteRenderer _sr;
 
-    void Awake()
+    private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        sr = GetComponent<SpriteRenderer>();
+        _rb = GetComponent<Rigidbody2D>();
+        _anim = GetComponent<Animator>();
+        _sr = GetComponent<SpriteRenderer>();
     }
 
     public void Move(InputAction.CallbackContext context)
     {
-        move = context.ReadValue<Vector2>().normalized;
+        _move = context.ReadValue<Vector2>().normalized;
     }
 
-    void Animate()
+    private void Animate()
     {
-        moveAnim = move;
-        if (moveAnim == Vector2.right || moveAnim == Vector2.left) dirPriority = "hor";
-        else if (moveAnim == Vector2.up || moveAnim == Vector2.down) dirPriority = "ver";
+        _moveAnim = _move;
+        if (_moveAnim == Vector2.right || _moveAnim == Vector2.left) _dirPriority = "hor";
+        else if (_moveAnim == Vector2.up || _moveAnim == Vector2.down) _dirPriority = "ver";
 
-        if (dirPriority == "hor") moveAnim.y = 0;
-        else if (dirPriority == "ver") moveAnim.x = 0;
+        if (_dirPriority == "hor") _moveAnim.y = 0;
+        else if (_dirPriority == "ver") _moveAnim.x = 0;
 
-        if (moveAnim != Vector2.zero) dir = moveAnim;
-        sr.flipX = dir.x < 0;
+        if (_moveAnim != Vector2.zero) _dir = _moveAnim;
+        _sr.flipX = _dir.x < 0;
 
-        anim.SetFloat("MoveX", moveAnim.x);
-        anim.SetFloat("MoveY", moveAnim.y);
-        anim.SetFloat("IdleX", dir.x);
-        anim.SetFloat("IdleY", dir.y);
-        anim.SetFloat("Velocity", move.magnitude);
+        _anim.SetFloat("MoveX", _moveAnim.x);
+        _anim.SetFloat("MoveY", _moveAnim.y);
+        _anim.SetFloat("IdleX", _dir.x);
+        _anim.SetFloat("IdleY", _dir.y);
+        _anim.SetFloat("Velocity", _move.magnitude);
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        rb.linearVelocity = move * speed;
+        _rb.linearVelocity = _move * _speed;
 
         Animate();
     }
 
-    void Update()
+    private void Update()
     {
-        speed = inCombat ? 8f : 13f;
+        _speed = InCombat ? 8f : 13f;
     }
 }
