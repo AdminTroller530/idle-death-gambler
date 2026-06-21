@@ -4,25 +4,27 @@ using UnityEngine.SceneManagement;
 
 public class LoadGameScene : MonoBehaviour
 {
-    [SerializeField] BlackScreen blackScreen;
+    private BlackScreen _blackScreen;
 
-    public void Load()
+    private void Start()
     {
-        StartCoroutine(LoadGame());
+        _blackScreen = BlackScreen.Instance;
     }
 
-    IEnumerator LoadGame()
+    public void Load() => StartCoroutine(LoadGame());
+
+    private IEnumerator LoadGame()
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync("Game");
         operation.allowSceneActivation = false;
         
-        yield return StartCoroutine(blackScreen.FadeIn());
+        yield return StartCoroutine(_blackScreen.FadeIn());
         yield return new WaitForSeconds(0.5f);
 
         while (operation.progress < 0.9f) yield return null;
         operation.allowSceneActivation = true;
         while (!operation.isDone) yield return null;
         AstarPath.active.Scan();
-        blackScreen.StartFadeOut();
+        _blackScreen.StartFadeOut();
     }
 }

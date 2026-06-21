@@ -300,10 +300,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b564fcf400ad0a7488a131f797c80da5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  loadGameScene: {fileID: 769815414}
-  newGameButton: {fileID: 1851020048}
-  continueButton: {fileID: 289362252}
-  quitButton: {fileID: 1269619997}
+  _loadGameScene: {fileID: 769815414}
+  _newGameButton: {fileID: 1851020048}
+  _continueButton: {fileID: 289362252}
+  _quitButton: {fileID: 1269619997}
 --- !u!1 &280538000
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,7 +720,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd9309f9468f8f74fb3750db6f81c65d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadGameScene
-  blackScreen: {fileID: 1969148887}
 --- !u!1 &817583830
 GameObject:
   m_ObjectHideFlags: 0

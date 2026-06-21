@@ -4,26 +4,26 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] LoadGameScene loadGameScene;
-    [SerializeField] Button newGameButton, continueButton, quitButton;
+    [SerializeField] private LoadGameScene _loadGameScene;
+    [SerializeField] private Button _newGameButton, _continueButton, _quitButton;
 
-    void DisableButtons()
+    private void DisableButtons()
     {
-        newGameButton.interactable = false;
-        continueButton.interactable = false;
-        quitButton.interactable = false;
+        _newGameButton.interactable = false;
+        _continueButton.interactable = false;
+        _quitButton.interactable = false;
     }
 
     public void NewGame()
     {
         DisableButtons();
-        loadGameScene.Load();
+        _loadGameScene.Load();
     }
 
     public void Continue() // NO FUNCTIONALITY YET
     {
         DisableButtons();
-        loadGameScene.Load();
+        _loadGameScene.Load();
     }
 
     public void Quit()

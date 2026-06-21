@@ -4,30 +4,35 @@ using UnityEngine.UI;
 
 public class BlackScreen : MonoBehaviour
 {
-    Image blackScreen;
-    const float fadeSpeed = 1.8f;
+    public static BlackScreen Instance {get; private set;}
 
-    void Awake()
+    private Image _blackScreen;
+    private float _fadeSpeed = 1.8f;
+
+    private void Awake()
     {
-        blackScreen = GetComponent<Image>();
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+
+        _blackScreen = GetComponent<Image>();
     }
 
     public IEnumerator FadeIn()
     {
-        while (blackScreen.color.a < 1)
+        while (_blackScreen.color.a < 1)
         {
-            blackScreen.color += new Color(0, 0, 0, fadeSpeed * Time.deltaTime);
+            _blackScreen.color += new Color(0, 0, 0, _fadeSpeed * Time.deltaTime);
             yield return null;
         }
     }
 
-    public void StartFadeOut() {StartCoroutine(FadeOut());}
+    public void StartFadeOut() => StartCoroutine(FadeOut());
 
     public IEnumerator FadeOut()
     {
-        while (blackScreen.color.a > 0)
+        while (_blackScreen.color.a > 0)
         {
-            blackScreen.color -= new Color(0, 0, 0, fadeSpeed * Time.deltaTime);
+            _blackScreen.color -= new Color(0, 0, 0, _fadeSpeed * Time.deltaTime);
             yield return null;
         }
     }
