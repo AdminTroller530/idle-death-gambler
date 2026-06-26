@@ -4,103 +4,108 @@ using TMPro;
 
 public class PlayerShoot : MonoBehaviour
 {
-    Vector2 mousePos;
-    PlayerBullet bPrefab;
-    bool shootHeld;
-    [SerializeField] Transform playerBullets;
+    [SerializeField] private Transform _playerBullets;
+    private Vector2 _mousePos;
+    private PlayerBullet _bulletPrefab;
+    private bool _isHoldingShoot;
 
-    [SerializeField] GunStats[] guns;
-    GunStats gun; // current gun
-    int gunSlot; // current gun slot selected (1-3)
+    [SerializeField] private GunStats[] _guns;
+    private GunStats _currentGun; // current gun
+    private int _gunSlot; // current gun slot selected (1-3)
 
-    float shootCooldown = 0;
-    // shootInaccuracy: maximum inaccuracy in DEGREES
-    float shootCooldownMax, shootInaccuracy;
-    float bSpeed, bLifetime, bKnockback, bDamage;
+    private float _shootCooldown = 0;
+    private float _shootCooldownMax;
+    private float _shootInaccuracy; // maximum inaccuracy in DEGREES
 
-    int magSize;
-    int[] ammo = new int[3];
-    bool isReloading = false;
-    float reloadTime, reloadTimer = 0;
-    [SerializeField] TextMeshProUGUI ammoText;
+    private float _bulletSpeed;
+    private float _bulletLifetime;
+    private float _bulletKnockback;
+    private float _bulletDamage;
+
+    private int _magSize;
+    private int[] _gunsAmmo = new int[3];
+    private bool _isReloading = false;
+    private float _gunReloadTime;
+    private float _reloadTimer = 0;
+    [SerializeField] private TextMeshProUGUI _ammoText;
 
     void Start()
     {
         EquipGun(0);
-        ammo[0] = magSize;
+        _gunsAmmo[0] = _magSize;
         UpdateAmmoText();
     }
 
     void UpdateAmmoText()
     {
-        ammoText.text = $"{ammo[gunSlot]}/{magSize}";
+        _ammoText.text = $"{_gunsAmmo[_gunSlot]}/{_magSize}";
     }
 
     void EquipGun(int slot)
     {
-        if (!guns[slot]) return;
+        if (!_guns[slot]) return;
         
-        gun = guns[slot];
-        gunSlot = slot;
+        _currentGun = _guns[slot];
+        _gunSlot = slot;
 
-        shootCooldownMax = gun.ShootCooldown;
-        shootInaccuracy = gun.ShootInaccuracy;
+        _shootCooldownMax = _currentGun.ShootCooldown;
+        _shootInaccuracy = _currentGun.ShootInaccuracy;
         
-        bSpeed = gun.BulletSpeed;
-        bLifetime = gun.BulletLifetime;
-        bKnockback = gun.BulletKnockback;
-        bDamage = gun.BulletDamage;
+        _bulletSpeed = _currentGun.BulletSpeed;
+        _bulletLifetime = _currentGun.BulletLifetime;
+        _bulletKnockback = _currentGun.BulletKnockback;
+        _bulletDamage = _currentGun.BulletDamage;
 
-        reloadTime = gun.ReloadTime;
-        magSize = gun.MagSize;
+        _gunReloadTime = _currentGun.ReloadTime;
+        _magSize = _currentGun.MagSize;
         UpdateAmmoText();
 
-        bPrefab = gun.BulletPrefab;
+        _bulletPrefab = _currentGun.BulletPrefab;
     }
     
     public void Shoot(InputAction.CallbackContext context)
     {
-        shootHeld = context.ReadValueAsButton();
+        _isHoldingShoot = context.ReadValueAsButton();
     }
 
     public void Reload(InputAction.CallbackContext context)
     {
-        if (context.started && reloadTimer <= 0 && ammo[gunSlot] < magSize)
+        if (context.started && _reloadTimer <= 0 && _gunsAmmo[_gunSlot] < _magSize)
         {
-            isReloading = true;
-            reloadTimer = reloadTime;
+            _isReloading = true;
+            _reloadTimer = _gunReloadTime;
         }
     }
 
     void Update()
     {
-        if (shootCooldown > 0) shootCooldown -= Time.deltaTime;
-        if (gun && ammo[gunSlot] > 0 && shootHeld && shootCooldown <= 0 && !isReloading && !PlayerParry.IsParrying)
+        if (_shootCooldown > 0) _shootCooldown -= Time.deltaTime;
+        if (_currentGun && _gunsAmmo[_gunSlot] > 0 && _isHoldingShoot && _shootCooldown <= 0 && !_isReloading && !PlayerParry.IsParrying)
         {
             ShootBullet();
-            shootCooldown = shootCooldownMax;
+            _shootCooldown = _shootCooldownMax;
         }
 
-        if (reloadTimer > 0) reloadTimer -= Time.deltaTime;
-        else if (isReloading)
+        if (_reloadTimer > 0) _reloadTimer -= Time.deltaTime;
+        else if (_isReloading)
         {
-            isReloading = false;
-            ammo[gunSlot] = magSize;
+            _isReloading = false;
+            _gunsAmmo[_gunSlot] = _magSize;
             UpdateAmmoText();
         }
     }
 
     void ShootBullet()
     {
-        mousePos = CursorTracker.Pos;
-        float angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
-        angle += Random.Range(-shootInaccuracy, shootInaccuracy);
+        _mousePos = CursorTracker.Pos;
+        float angle = Mathf.Atan2(_mousePos.y - transform.position.y, _mousePos.x - transform.position.x) * Mathf.Rad2Deg;
+        angle += Random.Range(-_shootInaccuracy, _shootInaccuracy);
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
         
-        PlayerBullet bullet = Instantiate(bPrefab, transform.position, rotation, playerBullets);
-        bullet.Initialize(bSpeed, bLifetime, bKnockback, bDamage);
+        PlayerBullet bullet = Instantiate(_bulletPrefab, transform.position, rotation, _playerBullets);
+        bullet.Initialize(_bulletSpeed, _bulletLifetime, _bulletKnockback, _bulletDamage);
 
-        ammo[gunSlot] -= 1;
+        _gunsAmmo[_gunSlot] -= 1;
         UpdateAmmoText();
     }
 

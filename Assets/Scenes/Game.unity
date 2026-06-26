@@ -1125,10 +1125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cfad7f10fe2f584c8b241959dbf2f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  playerBullets: {fileID: 845268363}
-  guns:
+  _playerBullets: {fileID: 845268363}
+  _guns:
   - {fileID: 11400000, guid: fa0836f5d5e67bc43bb66c51cafb45ab, type: 2}
-  ammoText: {fileID: 1851021000}
+  _ammoText: {fileID: 1851021000}
 --- !u!61 &1180599059
 BoxCollider2D:
   m_ObjectHideFlags: 0
