@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class PlayerBullet : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class PlayerBullet : MonoBehaviour
     private float _damage;
     private float _startOffset = 1.3f;
 
+    private ObjectPool<PlayerBullet> _bulletPool;
+
     public void Initialize(float speed, float lifetime, float knockback, float damage)
     {
         _speed = speed;
@@ -16,12 +19,17 @@ public class PlayerBullet : MonoBehaviour
         _damage = damage;
     }
 
-    void Start()
+    public void SetPool(ObjectPool<PlayerBullet> bulletPool)
+    {
+        _bulletPool = bulletPool;
+    }
+
+    private void Start()
     {
         transform.Translate(Vector2.right * _startOffset);
     }
 
-    void Update()
+    private void Update()
     {
         transform.Translate(Vector2.right * _speed * Time.deltaTime);
 

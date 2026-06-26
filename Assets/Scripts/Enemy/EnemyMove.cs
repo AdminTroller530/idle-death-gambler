@@ -7,9 +7,9 @@ public class EnemyMove : MonoBehaviour
     EnemyBase enemyBase;
     EnemyStats stats;
     Rigidbody2D rb;
-    GameObject p;
     bool hasSeenPlayer = false;
 
+    private Transform playerTransform;
     private EnemyVision _enemyVision;
 
     Vector2 knockback;
@@ -21,6 +21,7 @@ public class EnemyMove : MonoBehaviour
     {
         enemyBase = GetComponent<EnemyBase>();
         _enemyVision = GetComponent<EnemyVision>();
+        playerTransform = PlayerManager.Instance.Transform;
         rb = gameObject.GetComponent<Rigidbody2D>();
         path = GetComponent<AIPath>();
     }
@@ -36,7 +37,7 @@ public class EnemyMove : MonoBehaviour
         if (!hasSeenPlayer && _enemyVision.CanSeePlayer) hasSeenPlayer = true;
         if (!hasSeenPlayer) path.maxSpeed *= 0.75f; // moves slower if hasn't seen player yet
 
-        path.destination = p.transform.position;
+        path.destination = playerTransform.position;
         if (_enemyVision.CanSeePlayer) path.endReachedDistance = 10;
         else path.endReachedDistance = 0;
 

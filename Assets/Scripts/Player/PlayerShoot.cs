@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Pool;
 using TMPro;
 
 public class PlayerShoot : MonoBehaviour
@@ -29,11 +30,15 @@ public class PlayerShoot : MonoBehaviour
     private float _reloadTimer = 0;
     [SerializeField] private TextMeshProUGUI _ammoText;
 
-    void Start()
+    private ObjectPool<PlayerBullet> _bulletPool;
+
+    private void Start()
     {
         EquipGun(0);
         _gunsAmmo[0] = _magSize;
         UpdateAmmoText();
+
+        // _bulletPool = new ObjectPool<PlayerBullet>();
     }
 
     void UpdateAmmoText()
@@ -82,7 +87,7 @@ public class PlayerShoot : MonoBehaviour
         if (_shootCooldown > 0) _shootCooldown -= Time.deltaTime;
         if (_currentGun && _gunsAmmo[_gunSlot] > 0 && _isHoldingShoot && _shootCooldown <= 0 && !_isReloading && !PlayerParry.IsParrying)
         {
-            ShootBullet();
+            CreateBullet();
             _shootCooldown = _shootCooldownMax;
         }
 
@@ -95,18 +100,23 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
-    void ShootBullet()
+    private Quaternion GetShootAngle()
     {
         _mousePos = CursorTracker.Pos;
         float angle = Mathf.Atan2(_mousePos.y - transform.position.y, _mousePos.x - transform.position.x) * Mathf.Rad2Deg;
         angle += Random.Range(-_shootInaccuracy, _shootInaccuracy);
-        Quaternion rotation = Quaternion.Euler(0, 0, angle);
-        
-        PlayerBullet bullet = Instantiate(_bulletPrefab, transform.position, rotation, _playerBullets);
+        return Quaternion.Euler(0, 0, angle);
+    }
+
+    private PlayerBullet CreateBullet()
+    {
+        PlayerBullet bullet = Instantiate(_bulletPrefab, transform.position, GetShootAngle(), _playerBullets);
         bullet.Initialize(_bulletSpeed, _bulletLifetime, _bulletKnockback, _bulletDamage);
 
         _gunsAmmo[_gunSlot] -= 1;
         UpdateAmmoText();
+
+        return bullet;
     }
 
 }
