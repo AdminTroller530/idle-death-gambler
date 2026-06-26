@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class Persistent : MonoBehaviour
 {
-    static Persistent instance;
+    private static Persistent _instance;
 
     void Awake()
     {
-        if (instance == null)
+        if (_instance == null)
         {
-            instance = this;
+            _instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);

@@ -12,9 +12,13 @@ public class EnemyAttacks : MonoBehaviour
     void Awake()
     {
         enemyBase = GetComponent<EnemyBase>();
+        enemyBullets = GameObject.Find("Enemy Bullets");
+    }
+
+    private void Start()
+    {
         p = EnemyBase.p;
         stats = enemyBase.stats;
-        enemyBullets = GameObject.Find("Enemy Bullets");
     }
 
     void Shoot(float angleOffset)

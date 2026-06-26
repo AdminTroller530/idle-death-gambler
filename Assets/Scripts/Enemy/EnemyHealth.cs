@@ -11,6 +11,10 @@ public class EnemyHealth : MonoBehaviour
     void Awake()
     {
         enemyBase = GetComponent<EnemyBase>();
+    }
+
+    private void Start()
+    {
         stats = enemyBase.stats;
         health = stats.maxHealth;
     }
