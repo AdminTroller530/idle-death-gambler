@@ -9,9 +9,8 @@ public class EnemyMove : MonoBehaviour
     Rigidbody2D rb;
     GameObject p;
     bool hasSeenPlayer = false;
-    // float pDist;
-    // float pDistThreshold = 10f;
-    // Vector2 pMove;
+
+    private EnemyVision _enemyVision;
 
     Vector2 knockback;
     float knockbackStunTimer = 0, knockbackStunTimerMax = 0.6f;
@@ -21,31 +20,24 @@ public class EnemyMove : MonoBehaviour
     void Awake()
     {
         enemyBase = GetComponent<EnemyBase>();
+        _enemyVision = GetComponent<EnemyVision>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         path = GetComponent<AIPath>();
     }
 
     private void Start()
     {
-        p = EnemyBase.p;
         stats = enemyBase.stats;
     }
 
     void Update()
     {
-        // pDist = Vector2.Distance(transform.position, p.transform.position);
-        // if (pDist > pDistThreshold)
-        // {
-        //     pMove = (p.transform.position - transform.position).normalized;
-        // }
-        // else pMove = Vector2.zero;
-
         path.maxSpeed = stats.moveSpeed;
-        if (!hasSeenPlayer && enemyBase.seePlayer) hasSeenPlayer = true;
+        if (!hasSeenPlayer && _enemyVision.CanSeePlayer) hasSeenPlayer = true;
         if (!hasSeenPlayer) path.maxSpeed *= 0.75f; // moves slower if hasn't seen player yet
 
         path.destination = p.transform.position;
-        if (enemyBase.seePlayer) path.endReachedDistance = 10;
+        if (_enemyVision.CanSeePlayer) path.endReachedDistance = 10;
         else path.endReachedDistance = 0;
 
         if (knockbackStunTimer > 0) knockbackStunTimer -= Time.deltaTime;

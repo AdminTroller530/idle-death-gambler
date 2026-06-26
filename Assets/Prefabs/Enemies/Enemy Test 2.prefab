@@ -258,6 +258,7 @@ GameObject:
   - component: {fileID: -2379335362000332420}
   - component: {fileID: -7305677407636948494}
   - component: {fileID: 5027385336591915418}
+  - component: {fileID: -2256426855277301286}
   m_Layer: 6
   m_Name: Enemy Test 2
   m_TagString: Enemy
@@ -451,11 +452,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stats: {fileID: 11400000, guid: 2e8d84d812200b84e9fa435c55a23069, type: 2}
-  p: {fileID: 0}
-  seePlayer: 0
-  wallMask:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!114 &8294209839109686167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,3 +550,18 @@ MonoBehaviour:
   version: 1
   unwrap: 1
   splitAtEveryPortal: 0
+--- !u!114 &-2256426855277301286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3876923123970243237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31bb78b96a98e08418c30b971cbb834b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyVision
+  _wallMask:
+    serializedVersion: 2
+    m_Bits: 128

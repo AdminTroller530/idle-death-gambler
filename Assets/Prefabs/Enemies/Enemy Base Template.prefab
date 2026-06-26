@@ -255,12 +255,12 @@ GameObject:
   - component: {fileID: -3291396095038716698}
   - component: {fileID: -2479307462933710974}
   - component: {fileID: 8294209839109686167}
+  - component: {fileID: -537347571265845924}
   - component: {fileID: -2379335362000332420}
   - component: {fileID: -7305677407636948494}
   - component: {fileID: 5027385336591915418}
-  - component: {fileID: -537347571265845924}
   m_Layer: 6
-  m_Name: Enemy Test
+  m_Name: Enemy Base Template
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -331,7 +331,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: e162e8bc6a1d2524f8269667501f7d74, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9a14505efe2685149abea86328eb4346, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -465,6 +465,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyShoot
   enemyBullet: {fileID: -7099866472933620258, guid: 91f39dfd3a5648145bdcd08b9fe05ed5, type: 3}
+--- !u!114 &-537347571265845924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3876923123970243237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31bb78b96a98e08418c30b971cbb834b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  _wallMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &-2379335362000332420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,18 +565,3 @@ MonoBehaviour:
   version: 1
   unwrap: 1
   splitAtEveryPortal: 0
---- !u!114 &-537347571265845924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3876923123970243237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31bb78b96a98e08418c30b971cbb834b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  _wallMask:
-    serializedVersion: 2
-    m_Bits: 128
