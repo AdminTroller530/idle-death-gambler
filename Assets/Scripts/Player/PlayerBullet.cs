@@ -24,7 +24,7 @@ public class PlayerBullet : MonoBehaviour
         _bulletPool = bulletPool;
     }
 
-    private void Start()
+    private void OnEnable()
     {
         transform.Translate(Vector2.right * _startOffset);
     }
@@ -34,7 +34,7 @@ public class PlayerBullet : MonoBehaviour
         transform.Translate(Vector2.right * _speed * Time.deltaTime);
 
         _lifetime -= Time.deltaTime;
-        if (_lifetime <= 0) Destroy(gameObject);
+        if (_lifetime <= 0) _bulletPool.Release(this);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -43,11 +43,11 @@ public class PlayerBullet : MonoBehaviour
         {
             other.gameObject.GetComponent<EnemyHealth>().TakeDamage(_damage);
             other.gameObject.GetComponent<EnemyMove>().TakeKnockback(transform.rotation * Vector2.right, _knockback);
-            Destroy(gameObject);
+            _bulletPool.Release(this);
         }
         if (other.gameObject.tag == "Wall")
         {
-            Destroy(gameObject);
+            _bulletPool.Release(this);
         }
         
     }

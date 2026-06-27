@@ -19,12 +19,15 @@ public class LoadGameScene : MonoBehaviour
         operation.allowSceneActivation = false;
         
         yield return StartCoroutine(_blackScreen.FadeIn());
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         while (operation.progress < 0.9f) yield return null;
         operation.allowSceneActivation = true;
         while (!operation.isDone) yield return null;
+
         AstarPath.active.Scan();
+
+        yield return null;
         _blackScreen.StartFadeOut();
     }
 }

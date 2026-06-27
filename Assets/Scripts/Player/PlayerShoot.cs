@@ -30,7 +30,15 @@ public class PlayerShoot : MonoBehaviour
     private float _reloadTimer = 0;
     [SerializeField] private TextMeshProUGUI _ammoText;
 
+    private const int BULLET_POOL_SIZE = 20;
     private ObjectPool<PlayerBullet> _bulletPool;
+
+    private void InitializeBulletPool()
+    {
+        PlayerBullet[] initializedBullets = new PlayerBullet[BULLET_POOL_SIZE];
+        for (int i = 0; i < BULLET_POOL_SIZE; i++) initializedBullets[i] = _bulletPool.Get();
+        for (int i = 0; i < BULLET_POOL_SIZE; i++) _bulletPool.Release(initializedBullets[i]);
+    }
 
     private void Start()
     {
@@ -38,7 +46,8 @@ public class PlayerShoot : MonoBehaviour
         _gunsAmmo[0] = _magSize;
         UpdateAmmoText();
 
-        // _bulletPool = new ObjectPool<PlayerBullet>();
+        _bulletPool = new ObjectPool<PlayerBullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, true, BULLET_POOL_SIZE, BULLET_POOL_SIZE*2);
+        InitializeBulletPool();
     }
 
     void UpdateAmmoText()
@@ -87,8 +96,11 @@ public class PlayerShoot : MonoBehaviour
         if (_shootCooldown > 0) _shootCooldown -= Time.deltaTime;
         if (_currentGun && _gunsAmmo[_gunSlot] > 0 && _isHoldingShoot && _shootCooldown <= 0 && !_isReloading && !PlayerParry.IsParrying)
         {
-            CreateBullet();
+            // CreateBullet();
+            _bulletPool.Get();
             _shootCooldown = _shootCooldownMax;
+            _gunsAmmo[_gunSlot] -= 1;
+            UpdateAmmoText();
         }
 
         if (_reloadTimer > 0) _reloadTimer -= Time.deltaTime;
@@ -113,10 +125,27 @@ public class PlayerShoot : MonoBehaviour
         PlayerBullet bullet = Instantiate(_bulletPrefab, transform.position, GetShootAngle(), _playerBullets);
         bullet.Initialize(_bulletSpeed, _bulletLifetime, _bulletKnockback, _bulletDamage);
 
-        _gunsAmmo[_gunSlot] -= 1;
-        UpdateAmmoText();
-
+        bullet.SetPool(_bulletPool);
         return bullet;
+    }
+
+    private void OnGetBullet(PlayerBullet bullet)
+    {
+        bullet.Initialize(_bulletSpeed, _bulletLifetime, _bulletKnockback, _bulletDamage);
+        bullet.transform.position = transform.position;
+        bullet.transform.rotation = GetShootAngle();
+
+        bullet.gameObject.SetActive(true);
+    }
+
+    private void OnReleaseBullet(PlayerBullet bullet)
+    {
+        bullet.gameObject.SetActive(false);
+    }
+
+    private  void OnDestroyBullet(PlayerBullet bullet)
+    {
+        Destroy(bullet.gameObject);
     }
 
 }
