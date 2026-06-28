@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Pool;
 
 public class EnemyBullet : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class EnemyBullet : MonoBehaviour
     Vector2 mousePos;
     bool parried = false;
 
+    private ObjectPool<EnemyBullet> _bulletPool;
+
     public void Initialize(float speed, float damage, float lifetime, Sprite[] sprites, float startOffset, PlayerHealth playerHealth)
     {
         this.speed = speed;
@@ -27,12 +30,18 @@ public class EnemyBullet : MonoBehaviour
         this.playerHealth = playerHealth;
     }
 
-    void Start()
+    private void Start()
     {
         col = GetComponent<BoxCollider2D>();
         s = GetComponent<SpriteRenderer>();
         s.sprite = sprites[0];
+        _bulletPool = EnemyBulletPool.Instance.BulletPool;
+    }
+
+    private void OnEnable()
+    {
         transform.Translate(Vector2.right * startOffset);
+        parried = false;
     }
 
     void Update()
@@ -40,7 +49,7 @@ public class EnemyBullet : MonoBehaviour
         transform.Translate(Vector2.right * speed * Time.deltaTime);
 
         lifetime -= Time.deltaTime;
-        if (lifetime < 0) Destroy(gameObject);
+        if (lifetime < 0) _bulletPool.Release(this);
 
         if (parried) s.sprite = sprites[1];
         else s.sprite = sprites[0];
@@ -65,17 +74,17 @@ public class EnemyBullet : MonoBehaviour
             }
             else {
                 playerHealth.TakeDamage(damage);
-                Destroy(gameObject);
+                _bulletPool.Release(this);
             }
         }
         if (parried && other.gameObject.tag == "Enemy")
         {
             other.GetComponent<EnemyHealth>().TakeDamage(damage);
-            Destroy(gameObject);
+            _bulletPool.Release(this);
         }
         if (other.gameObject.tag == "Wall")
         {
-            Destroy(gameObject);
+            _bulletPool.Release(this);
         }
         
     }

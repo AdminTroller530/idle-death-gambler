@@ -309,6 +309,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 481864280}
+  - component: {fileID: 481864281}
   m_Layer: 0
   m_Name: Enemy Bullets
   m_TagString: Untagged
@@ -331,6 +332,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &481864281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481864279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad6bc23d9eedcf843acdfb26812b12de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  _enemyBulletPrefab: {fileID: -7099866472933620258, guid: 91f39dfd3a5648145bdcd08b9fe05ed5, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

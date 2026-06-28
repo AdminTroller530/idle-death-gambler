@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class EnemyAttacks : MonoBehaviour
 {
     [SerializeField] EnemyBullet enemyBullet;
     EnemyBase enemyBase;
-    GameObject enemyBullets;
+    // GameObject enemyBullets;
     EnemyStats stats;
     float shootCooldown = 0.7f;
 
@@ -16,7 +17,7 @@ public class EnemyAttacks : MonoBehaviour
     void Awake()
     {
         enemyBase = GetComponent<EnemyBase>();
-        enemyBullets = GameObject.Find("Enemy Bullets");
+        // enemyBullets = GameObject.Find("Enemy Bullets");
         _enemyVision = GetComponent<EnemyVision>();
     }
 
@@ -32,8 +33,10 @@ public class EnemyAttacks : MonoBehaviour
         float angle = Mathf.Atan2(_playerTransform.position.y - transform.position.y, _playerTransform.position.x - transform.position.x) * Mathf.Rad2Deg;
         angle += angleOffset + Random.Range(-stats.shootInaccuracy, stats.shootInaccuracy);
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
-        
-        EnemyBullet bullet = Instantiate(enemyBullet, transform.position, rotation, enemyBullets.transform);
+
+        EnemyBullet bullet = EnemyBulletPool.Instance.BulletPool.Get();
+        bullet.transform.position = transform.position;
+        bullet.transform.rotation = rotation;
         bullet.Initialize(stats.bulletSpeed, stats.bulletDamage, stats.bulletLifetime, stats.bulletSprites, stats.bulletStartOffset, _playerHealth);
     }
     
