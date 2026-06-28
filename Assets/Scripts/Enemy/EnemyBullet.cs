@@ -30,6 +30,7 @@ public class EnemyBullet : MonoBehaviour
         this.sprites = sprites;
         this.startOffset = startOffset;
         this.playerHealth = playerHealth;
+        transform.Translate(Vector2.right * startOffset);
     }
 
     private void Start()
@@ -42,7 +43,6 @@ public class EnemyBullet : MonoBehaviour
 
     private void OnEnable()
     {
-        transform.Translate(Vector2.right * startOffset);
         maxLifetime = lifetime;
         parried = false;
         _isReturned = false;
