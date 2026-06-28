@@ -9,6 +9,7 @@ public class PlayerBullet : MonoBehaviour
     private float _damage;
     private float _startOffset = 1.3f;
 
+    private bool _isReturned = false;
     private ObjectPool<PlayerBullet> _bulletPool;
 
     public void Initialize(float speed, float lifetime, float knockback, float damage)
@@ -27,6 +28,15 @@ public class PlayerBullet : MonoBehaviour
     private void OnEnable()
     {
         transform.Translate(Vector2.right * _startOffset);
+        _isReturned = false;
+    }
+
+    private void TryReturnToPool()
+    {
+        if (!_isReturned) {
+            _isReturned = true;
+            _bulletPool.Release(this);
+        }
     }
 
     private void Update()
@@ -34,7 +44,7 @@ public class PlayerBullet : MonoBehaviour
         transform.Translate(Vector2.right * _speed * Time.deltaTime);
 
         _lifetime -= Time.deltaTime;
-        if (_lifetime <= 0) _bulletPool.Release(this);
+        if (_lifetime <= 0) TryReturnToPool();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -43,11 +53,11 @@ public class PlayerBullet : MonoBehaviour
         {
             other.gameObject.GetComponent<EnemyHealth>().TakeDamage(_damage);
             other.gameObject.GetComponent<EnemyMove>().TakeKnockback(transform.rotation * Vector2.right, _knockback);
-            _bulletPool.Release(this);
+            TryReturnToPool();
         }
         if (other.gameObject.tag == "Wall")
         {
-            _bulletPool.Release(this);
+            TryReturnToPool();
         }
         
     }

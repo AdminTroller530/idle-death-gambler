@@ -11,6 +11,8 @@ public class EnemyBullet : MonoBehaviour
     public Sprite[] sprites;
     public float startOffset;
 
+    private bool _isReturned = false;
+
     BoxCollider2D col;
     SpriteRenderer s;
 
@@ -41,7 +43,17 @@ public class EnemyBullet : MonoBehaviour
     private void OnEnable()
     {
         transform.Translate(Vector2.right * startOffset);
+        maxLifetime = lifetime;
         parried = false;
+        _isReturned = false;
+    }
+
+    private void TryReturnToPool()
+    {
+        if (!_isReturned) {
+            _isReturned = true;
+            _bulletPool.Release(this);
+        }
     }
 
     void Update()
@@ -49,13 +61,13 @@ public class EnemyBullet : MonoBehaviour
         transform.Translate(Vector2.right * speed * Time.deltaTime);
 
         lifetime -= Time.deltaTime;
-        if (lifetime < 0) _bulletPool.Release(this);
+        if (lifetime < 0) TryReturnToPool();
 
         if (parried) s.sprite = sprites[1];
         else s.sprite = sprites[0];
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (!parried && other.gameObject.tag == "Player")
         {
@@ -74,17 +86,17 @@ public class EnemyBullet : MonoBehaviour
             }
             else {
                 playerHealth.TakeDamage(damage);
-                _bulletPool.Release(this);
+                TryReturnToPool();
             }
         }
         if (parried && other.gameObject.tag == "Enemy")
         {
             other.GetComponent<EnemyHealth>().TakeDamage(damage);
-            _bulletPool.Release(this);
+            TryReturnToPool();
         }
-        if (other.gameObject.tag == "Wall")
+        else if (other.gameObject.tag == "Wall")
         {
-            _bulletPool.Release(this);
+            TryReturnToPool();
         }
         
     }
