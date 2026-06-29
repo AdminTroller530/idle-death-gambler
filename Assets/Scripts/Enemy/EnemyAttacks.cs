@@ -1,11 +1,9 @@
 using UnityEngine;
-using UnityEngine.Pool;
 
 public class EnemyAttacks : MonoBehaviour
 {
     [SerializeField] EnemyBullet enemyBullet;
     EnemyBase enemyBase;
-    // GameObject enemyBullets;
     EnemyStats stats;
     float shootCooldown = 0.7f;
 
@@ -14,10 +12,10 @@ public class EnemyAttacks : MonoBehaviour
     private Transform _playerTransform;
     private PlayerHealth _playerHealth;
 
-    void Awake()
+    private void Awake()
     {
         enemyBase = GetComponent<EnemyBase>();
-        // enemyBullets = GameObject.Find("Enemy Bullets");
+
         _enemyVision = GetComponent<EnemyVision>();
     }
 
@@ -28,7 +26,7 @@ public class EnemyAttacks : MonoBehaviour
         stats = enemyBase.stats;
     }
 
-    void Shoot(float angleOffset)
+    private void ShootBullet(float angleOffset)
     {
         float angle = Mathf.Atan2(_playerTransform.position.y - transform.position.y, _playerTransform.position.x - transform.position.x) * Mathf.Rad2Deg;
         angle += angleOffset + Random.Range(-stats.shootInaccuracy, stats.shootInaccuracy);
@@ -40,20 +38,20 @@ public class EnemyAttacks : MonoBehaviour
         bullet.Initialize(stats.bulletSpeed, stats.bulletDamage, stats.bulletLifetime, stats.bulletSprites, stats.bulletStartOffset, _playerHealth);
     }
     
-    void Update()
+    private void Update()
     {
         if (shootCooldown > 0) shootCooldown -= Time.deltaTime;
         else shootCooldown = 0;
 
         if (shootCooldown == 0 && _enemyVision.CanSeePlayer)
         {
-            if (stats.type != "melee")
+            if (stats.type != "melee") // VERY TEMPORARY SYSTEM
             {
-                Shoot(0);
+                ShootBullet(0);
                 if (stats.type == "shoot_triple")
                 {
-                    Shoot(-20);
-                    Shoot(20);
+                    ShootBullet(-20);
+                    ShootBullet(20);
                 }
             
             }

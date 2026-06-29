@@ -18,16 +18,16 @@ public class PlayerBullet : MonoBehaviour
         _lifetime = lifetime;
         _knockback = knockback;
         _damage = damage;
+        transform.Translate(Vector2.right * _startOffset);
     }
 
-    public void SetPool(ObjectPool<PlayerBullet> bulletPool)
+    private void Start()
     {
-        _bulletPool = bulletPool;
+        _bulletPool = PlayerBulletPool.Instance.BulletPool;
     }
 
     private void OnEnable()
     {
-        transform.Translate(Vector2.right * _startOffset);
         _isReturned = false;
     }
 

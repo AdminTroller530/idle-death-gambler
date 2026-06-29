@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Pool;
 using TMPro;
 
 public class PlayerShoot : MonoBehaviour
@@ -30,24 +29,11 @@ public class PlayerShoot : MonoBehaviour
     private float _reloadTimer = 0;
     [SerializeField] private TextMeshProUGUI _ammoText;
 
-    private const int BULLET_POOL_SIZE = 20;
-    private ObjectPool<PlayerBullet> _bulletPool;
-
-    private void InitializeBulletPool()
-    {
-        PlayerBullet[] initializedBullets = new PlayerBullet[BULLET_POOL_SIZE];
-        for (int i = 0; i < BULLET_POOL_SIZE; i++) initializedBullets[i] = _bulletPool.Get();
-        for (int i = 0; i < BULLET_POOL_SIZE; i++) _bulletPool.Release(initializedBullets[i]);
-    }
-
     private void Start()
     {
         EquipGun(0);
         _gunsAmmo[0] = _magSize;
         UpdateAmmoText();
-
-        _bulletPool = new ObjectPool<PlayerBullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, true, BULLET_POOL_SIZE, BULLET_POOL_SIZE*2);
-        InitializeBulletPool();
     }
 
     void UpdateAmmoText()
@@ -91,13 +77,29 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
+    private Quaternion GetShootAngle()
+    {
+        _mousePos = CursorTracker.Pos;
+        float angle = Mathf.Atan2(_mousePos.y - transform.position.y, _mousePos.x - transform.position.x) * Mathf.Rad2Deg;
+        angle += Random.Range(-_shootInaccuracy, _shootInaccuracy);
+        return Quaternion.Euler(0, 0, angle);
+    }
+
+    private void ShootBullet()
+    {
+        PlayerBullet bullet = PlayerBulletPool.Instance.BulletPool.Get();
+        bullet.transform.position = transform.position;
+        bullet.transform.rotation = GetShootAngle();
+        bullet.Initialize(_bulletSpeed, _bulletLifetime, _bulletKnockback, _bulletDamage);
+    }
+
     void Update()
     {
         if (_shootCooldown > 0) _shootCooldown -= Time.deltaTime;
         if (_currentGun && _gunsAmmo[_gunSlot] > 0 && _isHoldingShoot && _shootCooldown <= 0 && !_isReloading && !PlayerParry.IsParrying)
         {
-            // CreateBullet();
-            _bulletPool.Get();
+            ShootBullet();
+            
             _shootCooldown = _shootCooldownMax;
             _gunsAmmo[_gunSlot] -= 1;
             UpdateAmmoText();
@@ -111,41 +113,4 @@ public class PlayerShoot : MonoBehaviour
             UpdateAmmoText();
         }
     }
-
-    private Quaternion GetShootAngle()
-    {
-        _mousePos = CursorTracker.Pos;
-        float angle = Mathf.Atan2(_mousePos.y - transform.position.y, _mousePos.x - transform.position.x) * Mathf.Rad2Deg;
-        angle += Random.Range(-_shootInaccuracy, _shootInaccuracy);
-        return Quaternion.Euler(0, 0, angle);
-    }
-
-    private PlayerBullet CreateBullet()
-    {
-        PlayerBullet bullet = Instantiate(_bulletPrefab, transform.position, GetShootAngle(), _playerBullets);
-        bullet.Initialize(_bulletSpeed, _bulletLifetime, _bulletKnockback, _bulletDamage);
-
-        bullet.SetPool(_bulletPool);
-        return bullet;
-    }
-
-    private void OnGetBullet(PlayerBullet bullet)
-    {
-        bullet.Initialize(_bulletSpeed, _bulletLifetime, _bulletKnockback, _bulletDamage);
-        bullet.transform.position = transform.position;
-        bullet.transform.rotation = GetShootAngle();
-
-        bullet.gameObject.SetActive(true);
-    }
-
-    private void OnReleaseBullet(PlayerBullet bullet)
-    {
-        bullet.gameObject.SetActive(false);
-    }
-
-    private  void OnDestroyBullet(PlayerBullet bullet)
-    {
-        Destroy(bullet.gameObject);
-    }
-
 }
