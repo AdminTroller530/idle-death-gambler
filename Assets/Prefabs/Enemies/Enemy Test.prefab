@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f332e9dc1ebfb74fad33fda9982c3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyShoot
-  enemyBullet: {fileID: -7099866472933620258, guid: 91f39dfd3a5648145bdcd08b9fe05ed5, type: 3}
+  _enemyBullet: {fileID: -7099866472933620258, guid: 91f39dfd3a5648145bdcd08b9fe05ed5, type: 3}
 --- !u!114 &-2379335362000332420
 MonoBehaviour:
   m_ObjectHideFlags: 0

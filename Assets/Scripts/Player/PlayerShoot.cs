@@ -4,7 +4,6 @@ using TMPro;
 
 public class PlayerShoot : MonoBehaviour
 {
-    [SerializeField] private Transform _playerBullets;
     private Vector2 _mousePos;
     private PlayerBullet _bulletPrefab;
     private bool _isHoldingShoot;
@@ -88,9 +87,10 @@ public class PlayerShoot : MonoBehaviour
     private void ShootBullet()
     {
         PlayerBullet bullet = PlayerBulletPool.Instance.BulletPool.Get();
+
         bullet.transform.position = transform.position;
         bullet.transform.rotation = GetShootAngle();
-        bullet.Initialize(_bulletSpeed, _bulletLifetime, _bulletKnockback, _bulletDamage);
+        bullet.Initialize(_bulletSpeed, _bulletLifetime, _bulletKnockback, _bulletDamage, 1.3f);
     }
 
     void Update()

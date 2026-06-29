@@ -4,47 +4,47 @@ using UnityEngine.Pool;
 
 public class EnemyBullet : MonoBehaviour
 {
-    public PlayerHealth playerHealth;
-    public float speed = 0f;
-    public float damage = 0f;
-    public float maxLifetime = 0f, lifetime = 0f;
-    public Sprite[] sprites;
-    public float startOffset;
+    private PlayerHealth _playerHealth;
 
-    private bool _isReturned = false;
+    private float _speed;
+    private float _damage;
+    private float _lifetime;
+    private float _maxLifetime;
+    private Sprite[] _sprites;
 
-    BoxCollider2D col;
-    SpriteRenderer s;
+    private BoxCollider2D _collider;
+    private SpriteRenderer _spriteRenderer;
 
-    Vector2 mousePos;
-    bool parried = false;
+    private Vector2 _mousePos;
+    private bool _isParried = false;
 
     private ObjectPool<EnemyBullet> _bulletPool;
+    private bool _isReturned = false;
 
     public void Initialize(float speed, float damage, float lifetime, Sprite[] sprites, float startOffset, PlayerHealth playerHealth)
     {
-        this.speed = speed;
-        this.damage = damage;
-        maxLifetime = lifetime;
-        this.lifetime = maxLifetime;
-        this.sprites = sprites;
-        this.startOffset = startOffset;
-        this.playerHealth = playerHealth;
+        _speed = speed;
+        _damage = damage;
+        _lifetime = lifetime;
+        _maxLifetime = lifetime;
+        _sprites = sprites;
+        _playerHealth = playerHealth;
+
         transform.Translate(Vector2.right * startOffset);
     }
 
     private void Start()
     {
-        col = GetComponent<BoxCollider2D>();
-        s = GetComponent<SpriteRenderer>();
-        s.sprite = sprites[0];
+        _collider = GetComponent<BoxCollider2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer.sprite = _sprites[0];
         _bulletPool = EnemyBulletPool.Instance.BulletPool;
+        _playerHealth = PlayerManager.Instance.Health;
     }
 
     private void OnEnable()
     {
-        maxLifetime = lifetime;
-        parried = false;
+        _isParried = false;
         _isReturned = false;
     }
 
@@ -56,48 +56,46 @@ public class EnemyBullet : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        transform.Translate(Vector2.right * _speed * Time.deltaTime);
 
-        lifetime -= Time.deltaTime;
-        if (lifetime < 0) TryReturnToPool();
+        _lifetime -= Time.deltaTime;
+        if (_lifetime < 0) TryReturnToPool();
 
-        if (parried) s.sprite = sprites[1];
-        else s.sprite = sprites[0];
+        if (_isParried) _spriteRenderer.sprite = _sprites[1];
+        else _spriteRenderer.sprite = _sprites[0];
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!parried && other.gameObject.tag == "Player")
+        if (!_isParried && other.gameObject.tag == "Player")
         {
             if (PlayerParry.IsParrying)
             {
-                mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-                float angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
-                Quaternion rotation = Quaternion.Euler(0, 0, angle);
-                transform.rotation = rotation;
+                _mousePos = CursorTracker.Pos;
+                float angle = Mathf.Atan2(_mousePos.y - transform.position.y, _mousePos.x - transform.position.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(0, 0, angle);
 
-                lifetime = maxLifetime;
-                speed *= 1.5f;
-                damage *= 1.5f;
+                _lifetime = _maxLifetime;
+                _speed *= 1.5f;
+                _damage *= 1.5f;
                 PlayerParry.WasParrySuccessful = true;
-                parried = true;
+                _isParried = true;
             }
             else {
-                playerHealth.TakeDamage(damage);
+                _playerHealth.TakeDamage(_damage);
                 TryReturnToPool();
             }
         }
-        if (parried && other.gameObject.tag == "Enemy")
+        if (_isParried && other.gameObject.tag == "Enemy")
         {
-            other.GetComponent<EnemyHealth>().TakeDamage(damage);
+            other.GetComponent<EnemyHealth>().TakeDamage(_damage);
             TryReturnToPool();
         }
         else if (other.gameObject.tag == "Wall")
         {
             TryReturnToPool();
         }
-        
     }
 }

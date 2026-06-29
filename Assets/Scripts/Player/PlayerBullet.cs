@@ -5,20 +5,21 @@ public class PlayerBullet : MonoBehaviour
 {
     private float _speed;
     private float _lifetime;
+    private float _maxLifetime;
     private float _knockback;
     private float _damage;
-    private float _startOffset = 1.3f;
 
     private bool _isReturned = false;
     private ObjectPool<PlayerBullet> _bulletPool;
 
-    public void Initialize(float speed, float lifetime, float knockback, float damage)
+    public void Initialize(float speed, float lifetime, float knockback, float damage, float startOffset)
     {
         _speed = speed;
         _lifetime = lifetime;
+        _maxLifetime = lifetime;
         _knockback = knockback;
         _damage = damage;
-        transform.Translate(Vector2.right * _startOffset);
+        transform.Translate(Vector2.right * startOffset);
     }
 
     private void Start()
@@ -47,7 +48,7 @@ public class PlayerBullet : MonoBehaviour
         if (_lifetime <= 0) TryReturnToPool();
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Enemy")
         {
