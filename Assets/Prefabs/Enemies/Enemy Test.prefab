@@ -438,7 +438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f55f817404cf1f94db981ca18a158d2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  healthText: {fileID: 7770595380947407706}
+  _healthText: {fileID: 7770595380947407706}
 --- !u!114 &-2479307462933710974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,7 +451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e669447229d92747b8b2d8972de1ab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  stats: {fileID: 11400000, guid: fbf1ac92b36114748a07e19e35378652, type: 2}
+  Stats: {fileID: 11400000, guid: fbf1ac92b36114748a07e19e35378652, type: 2}
 --- !u!114 &8294209839109686167
 MonoBehaviour:
   m_ObjectHideFlags: 0

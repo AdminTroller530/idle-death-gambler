@@ -3,34 +3,35 @@ using TMPro;
 
 public class EnemyHealth : MonoBehaviour
 {
-    EnemyBase enemyBase;
-    EnemyStats stats;
-    float health;
-    [SerializeField] TextMeshProUGUI healthText; //temp
+    private EnemyBase _enemyBase;
+    private EnemyStats _stats;
 
-    void Awake()
+    private float _health;
+    [SerializeField] private TextMeshProUGUI _healthText; //temp
+
+    private void Awake()
     {
-        enemyBase = GetComponent<EnemyBase>();
+        _enemyBase = GetComponent<EnemyBase>();
     }
 
     private void Start()
     {
-        stats = enemyBase.stats;
-        health = stats.maxHealth;
+        _stats = _enemyBase.Stats;
+        _health = _stats.maxHealth;
     }
 
-    void Update()
+    private void Update()
     {
-        healthText.text = ((int)health).ToString();
+        _healthText.text = ((int)_health).ToString();
     }
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
-        if (health <= 0) Death();
+        _health -= damage;
+        if (_health <= 0) Death();
     }
 
-    void Death()
+    private void Death()
     {
         Destroy(gameObject);
     }

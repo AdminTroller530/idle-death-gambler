@@ -23,7 +23,7 @@ public class EnemyAttacks : MonoBehaviour
     {
         _playerTransform = PlayerManager.Instance.Transform;
         _playerHealth = PlayerManager.Instance.Health;
-        _stats = _enemyBase.stats;
+        _stats = _enemyBase.Stats;
     }
 
     private void ShootBullet(float angleOffset)

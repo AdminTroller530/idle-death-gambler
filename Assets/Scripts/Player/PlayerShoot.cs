@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 
+// using UnityEngine.SceneManagement; // DEBUG
+
 public class PlayerShoot : MonoBehaviour
 {
     private Vector2 _mousePos;
@@ -73,6 +75,8 @@ public class PlayerShoot : MonoBehaviour
         {
             _isReloading = true;
             _reloadTimer = _gunReloadTime;
+
+            // SceneManager.LoadScene(0); // DEBUG
         }
     }
 

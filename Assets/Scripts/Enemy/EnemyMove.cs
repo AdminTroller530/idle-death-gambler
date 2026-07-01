@@ -1,63 +1,63 @@
 using UnityEngine;
 using Pathfinding;
-using UnityEngine.InputSystem;
 
 public class EnemyMove : MonoBehaviour
 {
-    EnemyBase enemyBase;
-    EnemyStats stats;
-    Rigidbody2D rb;
-    bool hasSeenPlayer = false;
+    private EnemyBase _enemyBase;
+    private EnemyStats _stats;
+    private Rigidbody2D _rb;
+    private bool _hasSeenPlayer = false;
 
-    private Transform playerTransform;
+    private Transform _playerTransform;
     private EnemyVision _enemyVision;
 
-    Vector2 knockback;
-    float knockbackStunTimer = 0, knockbackStunTimerMax = 0.6f;
+    private Vector2 _knockback;
+    private float _knockbackStunTimer = 0;
+    private float _knockbackStunTimerMax = 0.6f;
 
-    AIPath path;
+    private AIPath _path;
 
-    void Awake()
+    private void Awake()
     {
-        enemyBase = GetComponent<EnemyBase>();
+        _enemyBase = GetComponent<EnemyBase>();
         _enemyVision = GetComponent<EnemyVision>();
-        playerTransform = PlayerManager.Instance.Transform;
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        path = GetComponent<AIPath>();
+        _playerTransform = PlayerManager.Instance.Transform;
+        _rb = gameObject.GetComponent<Rigidbody2D>();
+        _path = GetComponent<AIPath>();
     }
 
     private void Start()
     {
-        stats = enemyBase.stats;
+        _stats = _enemyBase.Stats;
     }
 
-    void Update()
+    private void Update()
     {
-        path.maxSpeed = stats.moveSpeed;
-        if (!hasSeenPlayer && _enemyVision.CanSeePlayer) hasSeenPlayer = true;
-        if (!hasSeenPlayer) path.maxSpeed *= 0.75f; // moves slower if hasn't seen player yet
+        _path.maxSpeed = _stats.moveSpeed;
+        if (!_hasSeenPlayer && _enemyVision.CanSeePlayer) _hasSeenPlayer = true;
+        if (!_hasSeenPlayer) _path.maxSpeed *= 0.75f; // moves slower if hasn't seen player yet
 
-        path.destination = playerTransform.position;
-        if (_enemyVision.CanSeePlayer) path.endReachedDistance = 10;
-        else path.endReachedDistance = 0;
+        _path.destination = _playerTransform.position;
+        if (_enemyVision.CanSeePlayer) _path.endReachedDistance = 10;
+        else _path.endReachedDistance = 0;
 
-        if (knockbackStunTimer > 0) knockbackStunTimer -= Time.deltaTime;
-        else path.canMove = true; // allow pathfinding to continue once knockback stun done
+        if (_knockbackStunTimer > 0) _knockbackStunTimer -= Time.deltaTime;
+        else _path.canMove = true; // allow pathfinding to continue once knockback stun done
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         // damp knockback velocity over time
-        if (knockback.magnitude > 0.1f) knockback *= 0.85f;
-        else knockback = Vector2.zero;
+        if (_knockback.magnitude > 0.1f) _knockback *= 0.85f;
+        else _knockback = Vector2.zero;
         
-        rb.linearVelocity = knockback;
+        _rb.linearVelocity = _knockback;
     }
 
     public void TakeKnockback(Vector2 dir, float magnitude)
     {
-        knockback = dir.normalized * magnitude;
-        knockbackStunTimer = knockbackStunTimerMax;
-        path.canMove = false;
+        _knockback = dir.normalized * magnitude;
+        _knockbackStunTimer = _knockbackStunTimerMax;
+        _path.canMove = false;
     }
 }
