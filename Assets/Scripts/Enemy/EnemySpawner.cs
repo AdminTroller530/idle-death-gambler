@@ -26,11 +26,11 @@ public class EnemySpawner : MonoBehaviour
     IEnumerator SpawnWave(EnemyWave wave)
     {
         waveSpawnDone = false;
-        List<EnemySpawn> spawns = wave.spawns;
+        List<EnemySpawn> spawns = wave.Spawns;
         for (int i=0; i<spawns.Count; i++)
         {
             yield return new WaitForSeconds(timeBetweenSpawns);
-            SpawnEnemy(spawns[i].id, spawns[i].pos);
+            SpawnEnemy(spawns[i].Id, spawns[i].Pos);
         }
         waveSpawnDone = true;
     }

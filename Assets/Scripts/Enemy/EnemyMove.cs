@@ -33,7 +33,7 @@ public class EnemyMove : MonoBehaviour
 
     private void Update()
     {
-        _path.maxSpeed = _stats.moveSpeed;
+        _path.maxSpeed = _stats.MoveSpeed;
         if (!_hasSeenPlayer && _enemyVision.CanSeePlayer) _hasSeenPlayer = true;
         if (!_hasSeenPlayer) _path.maxSpeed *= 0.75f; // moves slower if hasn't seen player yet
 

@@ -17,7 +17,7 @@ public class EnemyHealth : MonoBehaviour
     private void Start()
     {
         _stats = _enemyBase.Stats;
-        _health = _stats.maxHealth;
+        _health = _stats.MaxHealth;
     }
 
     private void Update()

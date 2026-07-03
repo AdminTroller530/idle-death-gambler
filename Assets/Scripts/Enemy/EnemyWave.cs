@@ -4,12 +4,12 @@ using UnityEngine;
 [System.Serializable]
 public class EnemySpawn
 {
-    public int id;
-    public Vector2 pos;
+    public int Id;
+    public Vector2 Pos;
 }
 
 [System.Serializable]
 public class EnemyWave
 {
-    public List<EnemySpawn> spawns;
+    public List<EnemySpawn> Spawns;
 }

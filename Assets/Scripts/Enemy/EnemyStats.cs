@@ -4,25 +4,25 @@ using UnityEngine;
 public class EnemyStats : ScriptableObject
 {
     [Header("Identification")]
-    public int id;
-    public string idName;
-    public string type;
+    public int Id;
+    public string Name;
+    public string Type;
 
     [Header("Base Stats")]
-    public float maxHealth;
-    public float moveSpeed;
-    public float collisionDamage;
+    public float MaxHealth;
+    public float MoveSpeed;
+    public float CollisionDamage;
 
     [Header("Shooting Stats")]
-    public float bulletSpeed;
-    public float bulletDamage;
-    public float bulletLifetime;
-    public float bulletStartOffset;
-    public float shootCooldown;
-    public float shootCooldownOffsetMax;
-    public float shootInaccuracy;
+    public float BulletSpeed;
+    public float BulletDamage;
+    public float BulletLifetime;
+    public float BulletStartOffset;
+    public float ShootCooldown;
+    public float ShootCooldownOffsetMax;
+    public float ShootInaccuracy;
 
     [Header("Sprites")]
-    public Sprite enemySprites;
-    public Sprite[] bulletSprites;
+    public Sprite EnemySprites;
+    public Sprite[] BulletSprites;
 }

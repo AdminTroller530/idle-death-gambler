@@ -29,13 +29,13 @@ public class EnemyAttacks : MonoBehaviour
     private void ShootBullet(float angleOffset)
     {
         float angle = Mathf.Atan2(_playerTransform.position.y - transform.position.y, _playerTransform.position.x - transform.position.x) * Mathf.Rad2Deg;
-        angle += angleOffset + Random.Range(-_stats.shootInaccuracy, _stats.shootInaccuracy);
+        angle += angleOffset + Random.Range(-_stats.ShootInaccuracy, _stats.ShootInaccuracy);
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
 
         EnemyBullet bullet = EnemyBulletPool.Instance.BulletPool.Get();
         bullet.transform.position = transform.position;
         bullet.transform.rotation = rotation;
-        bullet.Initialize(_stats.bulletSpeed, _stats.bulletDamage, _stats.bulletLifetime, _stats.bulletSprites, _stats.bulletStartOffset, _playerHealth);
+        bullet.Initialize(_stats.BulletSpeed, _stats.BulletDamage, _stats.BulletLifetime, _stats.BulletSprites, _stats.BulletStartOffset, _playerHealth);
     }
     
     private void Update()
@@ -45,10 +45,10 @@ public class EnemyAttacks : MonoBehaviour
 
         if (_shootCooldown == 0 && _enemyVision.CanSeePlayer)
         {
-            if (_stats.type != "melee") // VERY TEMPORARY SYSTEM
+            if (_stats.Type != "melee") // VERY TEMPORARY SYSTEM
             {
                 ShootBullet(0);
-                if (_stats.type == "shoot_triple")
+                if (_stats.Type == "shoot_triple")
                 {
                     ShootBullet(-20);
                     ShootBullet(20);
@@ -56,7 +56,7 @@ public class EnemyAttacks : MonoBehaviour
             
             }
             
-            _shootCooldown = _stats.shootCooldown + Random.Range(-_stats.shootCooldownOffsetMax, _stats.shootCooldownOffsetMax);
+            _shootCooldown = _stats.ShootCooldown + Random.Range(-_stats.ShootCooldownOffsetMax, _stats.ShootCooldownOffsetMax);
         }
     }
 }

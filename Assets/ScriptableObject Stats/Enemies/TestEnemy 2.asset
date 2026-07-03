@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9eef55e8fd538a4f85a164100e54ab3, type: 3}
   m_Name: TestEnemy 2
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
-  id: -2
-  idName: Test Enemy 2
-  type: shoot_triple
-  maxHealth: 36
-  moveSpeed: 10
-  collisionDamage: 2
-  bulletSpeed: 11
-  bulletDamage: 6
-  bulletLifetime: 3
-  bulletStartOffset: 1
-  shootCooldown: 0.9
-  shootCooldownOffsetMax: 0
-  shootInaccuracy: 0
-  enemySprites: {fileID: 21300000, guid: e162e8bc6a1d2524f8269667501f7d74, type: 3}
-  bulletSprites:
+  Id: -2
+  Name: Test Enemy 2
+  Type: shoot_triple
+  MaxHealth: 36
+  MoveSpeed: 10
+  CollisionDamage: 2
+  BulletSpeed: 11
+  BulletDamage: 6
+  BulletLifetime: 3
+  BulletStartOffset: 1
+  ShootCooldown: 0.9
+  ShootCooldownOffsetMax: 0
+  ShootInaccuracy: 0
+  EnemySprites: {fileID: 21300000, guid: a8552e4e76e06ce42ad0f90ff32adf36, type: 3}
+  BulletSprites:
   - {fileID: 21300000, guid: 6aa11ec261f7f6649a7e9f53aa1d7e91, type: 3}
   - {fileID: 21300000, guid: e7100b3d78513fe489e7e35347c2e4f8, type: 3}
