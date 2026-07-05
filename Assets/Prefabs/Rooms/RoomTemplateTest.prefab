@@ -6006,11 +6006,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2024f8fb90a600c44889994305be4e9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  enemyPrefabs:
+  _enemyPrefabs:
   - {fileID: 3876923123970243237, guid: 46afcfbbc11b8b24a9f5bade6cb70239, type: 3}
   - {fileID: 3876923123970243237, guid: 63aa98da40abcf945981f0b3f73ea969, type: 3}
   waves: []
-  timeBetweenSpawns: 0.4
-  timeBetweenWaves: 1.5
-  enterTrigger: {fileID: 2718981161802395062}
-  doors: {fileID: 444625963527866310}
+  _timeBetweenSpawns: 0.4
+  _timeBetweenWaves: 1.5
+  _enterTrigger: {fileID: 2718981161802395062}
+  _doors: {fileID: 444625963527866310}

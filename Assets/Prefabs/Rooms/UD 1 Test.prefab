@@ -841,6 +841,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8085946379406432888, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
+      propertyPath: _waves.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085946379406432888, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: waves.Array.data[0].Spawns.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -854,6 +858,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8085946379406432888, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: waves.Array.data[1].spawns.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085946379406432888, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
+      propertyPath: _waves.Array.data[0].Spawns.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085946379406432888, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
+      propertyPath: _waves.Array.data[1].Spawns.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8085946379406432888, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
@@ -874,6 +886,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8085946379406432888, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: waves.Array.data[1].spawns.Array.data[1].id
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085946379406432888, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
+      propertyPath: _waves.Array.data[1].Spawns.Array.data[0].Id
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085946379406432888, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
+      propertyPath: _waves.Array.data[1].Spawns.Array.data[1].Id
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8085946379406432888, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
@@ -931,6 +951,38 @@ PrefabInstance:
     - target: {fileID: 8085946379406432888, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: waves.Array.data[1].spawns.Array.data[1].pos.y
       value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085946379406432888, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
+      propertyPath: _waves.Array.data[0].Spawns.Array.data[0].Pos.x
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085946379406432888, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
+      propertyPath: _waves.Array.data[0].Spawns.Array.data[0].Pos.y
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085946379406432888, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
+      propertyPath: _waves.Array.data[0].Spawns.Array.data[1].Pos.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085946379406432888, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
+      propertyPath: _waves.Array.data[0].Spawns.Array.data[1].Pos.y
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085946379406432888, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
+      propertyPath: _waves.Array.data[1].Spawns.Array.data[0].Pos.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085946379406432888, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
+      propertyPath: _waves.Array.data[1].Spawns.Array.data[0].Pos.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085946379406432888, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
+      propertyPath: _waves.Array.data[1].Spawns.Array.data[1].Pos.x
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085946379406432888, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
+      propertyPath: _waves.Array.data[1].Spawns.Array.data[1].Pos.y
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8320922964425232203, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_IsActive

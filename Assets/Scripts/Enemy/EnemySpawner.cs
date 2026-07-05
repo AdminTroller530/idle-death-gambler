@@ -4,78 +4,79 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] GameObject[] enemyPrefabs;
-    List<GameObject> currentEnemies = new List<GameObject>();
-    [SerializeField] List<EnemyWave> waves;
-    [SerializeField] float timeBetweenSpawns, timeBetweenWaves;
-    float waveTimer;
-    bool waveSpawnDone = false;
-    int currentWave = 0;
+    [SerializeField] private GameObject[] _enemyPrefabs;
+    private List<GameObject> _currentEnemies = new List<GameObject>();
+    [SerializeField] private List<EnemyWave> _waves;
+    [SerializeField] private float _timeBetweenSpawns;
+    [SerializeField] private float _timeBetweenWaves;
+    private float _waveTimer;
+    private bool _waveSpawnDone = false;
+    private int _currentWave = 0;
 
-    [SerializeField] BoxCollider2D enterTrigger;
-    [SerializeField] GameObject doors;
-    bool started = false;
+    [SerializeField] private BoxCollider2D _enterTrigger;
+    [SerializeField] private GameObject _doors;
+    private bool _wavesStarted = false;
 
-    void SpawnEnemy(int id, Vector2 pos)
+    private void SpawnEnemy(int id, Vector2 pos)
     {
-        GameObject enemy = Instantiate(enemyPrefabs[id], transform);
+        GameObject enemy = Instantiate(_enemyPrefabs[id], transform);
         enemy.transform.localPosition = pos;
-        currentEnemies.Add(enemy);
+        _currentEnemies.Add(enemy);
     }
 
-    IEnumerator SpawnWave(EnemyWave wave)
+    private IEnumerator SpawnWave(EnemyWave wave)
     {
-        waveSpawnDone = false;
+        _waveSpawnDone = false;
         List<EnemySpawn> spawns = wave.Spawns;
         for (int i=0; i<spawns.Count; i++)
         {
-            yield return new WaitForSeconds(timeBetweenSpawns);
+            yield return new WaitForSeconds(_timeBetweenSpawns);
             SpawnEnemy(spawns[i].Id, spawns[i].Pos);
         }
-        waveSpawnDone = true;
+        _waveSpawnDone = true;
     }
 
-    void StartWaves()
+    private void StartWaves()
     {
-        started = true;
+        _wavesStarted = true;
         PlayerMovement.InCombat = true;
-        waveTimer = timeBetweenWaves;
+        _waveTimer = _timeBetweenWaves;
         AudioController.UpdateLowPass(1);
-        doors.SetActive(true);
-        StartCoroutine(SpawnWave(waves[currentWave]));
+        _doors.SetActive(true);
+        StartCoroutine(SpawnWave(_waves[_currentWave]));
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
-        if (!started && waves.Count > 0 && other.gameObject.tag == "Player")
+        if (!_wavesStarted && _waves.Count > 0 && other.gameObject.tag == "Player")
         {
-            if (enterTrigger.bounds.Contains(other.bounds.min) && enterTrigger.bounds.Contains(other.bounds.max))
+            if (_enterTrigger.bounds.Contains(other.bounds.min) && _enterTrigger.bounds.Contains(other.bounds.max))
             {
                 StartWaves();
             }
         }
     }
 
-    void Update()
+    private void Update()
     {
-        if (waveSpawnDone && currentEnemies.TrueForAll(e => !e))
+        if (_waveSpawnDone && _currentEnemies.TrueForAll(e => !e))
         {
 
-            if (currentWave < waves.Count - 1) // prepare to spawn next wave
+            if (_currentWave < _waves.Count - 1) // prepare to spawn next wave
             {
-                if (waveTimer > 0) waveTimer -= Time.deltaTime;
+                if (_waveTimer > 0) _waveTimer -= Time.deltaTime;
                 else {
-                    currentWave++;
-                    waveTimer = timeBetweenWaves;
-                    StartCoroutine(SpawnWave(waves[currentWave]));
+                    _currentWave++;
+                    _waveTimer = _timeBetweenWaves;
+                    StartCoroutine(SpawnWave(_waves[_currentWave]));
                 }
             }
             else // all waves defeated
             {
                 // Debug.Log("waves defeated");
                 AudioController.UpdateLowPass(0);
-                doors.SetActive(false);
-                waveSpawnDone = false;
+                _doors.SetActive(false);
+                _waveSpawnDone = false;
                 PlayerMovement.InCombat = false;
             }
 
