@@ -41,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
         _wavesStarted = true;
         PlayerMovement.InCombat = true;
         _waveTimer = _timeBetweenWaves;
-        AudioController.UpdateLowPass(1);
+        AudioController.Instance.UpdateLowPass(1);
         _doors.SetActive(true);
         StartCoroutine(SpawnWave(_waves[_currentWave]));
     }
@@ -74,7 +74,7 @@ public class EnemySpawner : MonoBehaviour
             else // all waves defeated
             {
                 // Debug.Log("waves defeated");
-                AudioController.UpdateLowPass(0);
+                AudioController.Instance.UpdateLowPass(0);
                 _doors.SetActive(false);
                 _waveSpawnDone = false;
                 PlayerMovement.InCombat = false;

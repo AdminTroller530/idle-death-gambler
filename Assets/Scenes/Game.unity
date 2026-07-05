@@ -1153,7 +1153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cfad7f10fe2f584c8b241959dbf2f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _playerBullets: {fileID: 845268363}
   _guns:
   - {fileID: 11400000, guid: fa0836f5d5e67bc43bb66c51cafb45ab, type: 2}
   _ammoText: {fileID: 1851021000}
@@ -1431,9 +1430,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac3db7b6507e6246957699992b113de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CursorManager
-  texture: {fileID: 2800000, guid: dc23fda49ec4a0f40a1fffd52dd738c4, type: 3}
-  pointer: {fileID: 422858807}
-  player: {fileID: 1180599053}
+  _cursorTexture: {fileID: 2800000, guid: dc23fda49ec4a0f40a1fffd52dd738c4, type: 3}
+  _followPointer: {fileID: 422858807}
 --- !u!4 &1235469596
 Transform:
   m_ObjectHideFlags: 0

@@ -4,30 +4,32 @@ using Random = System.Random;
 
 public class RNGController : MonoBehaviour
 {
-    static string seedString;
-    static bool useRandomSeed = true;
-    static Random mapRNG, itemRNG;
-    static int mapRNGCount, itemRNGcount;
+    private static string _seedString;
+    private static bool _useRandomSeed = true;
+    private static Random _mapRNG;
+    private static Random _itemRNG;
+    private static int _mapRNGCount;
+    private static int _itemRNGcount;
 
-    void Awake()
+    private void Awake()
     {
-        int seed = useRandomSeed ? DateTime.Now.ToString().GetHashCode() : seedString.GetHashCode();
+        int seed = _useRandomSeed ? DateTime.Now.ToString().GetHashCode() : _seedString.GetHashCode();
         
-        mapRNG = new Random(seed);
-        itemRNG = new Random(seed + 1);
+        _mapRNG = new Random(seed);
+        _itemRNG = new Random(seed + 1);
     }
 
-    public static int MapRNG(int min, int max) // min inclusive, max exclusive
+    public static int GetMapRNG(int min, int max) // min inclusive, max exclusive
     {
-        mapRNGCount++;
-        return mapRNG.Next(min, max);
+        _mapRNGCount++;
+        return _mapRNG.Next(min, max);
     }
 
-    void LoadState() // implemented with file i/o in the future
+    private void LoadState() // implement with file i/o in the future
     {
-        for (int i=0; i<mapRNGCount; i++)
+        for (int i=0; i<_mapRNGCount; i++)
         {
-            mapRNG.Next();
+            _mapRNG.Next();
         }
     }
 

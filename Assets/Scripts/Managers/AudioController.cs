@@ -1,24 +1,31 @@
 using UnityEngine;
 using FMODUnity;
-using FMOD.Studio;
 
 public class AudioController : MonoBehaviour
 {
-    static StudioEventEmitter emitter;
+    public static AudioController Instance {get; private set;}
+
+    public StudioEventEmitter _emitter;
     // public static float targetLowPass = 1f;
 
-    void Start()
+    private void Awake()
     {
-        emitter = GetComponent<StudioEventEmitter>();
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
-    public static void UpdateLowPass(float target)
+    private void Start()
     {
-        emitter.SetParameter("Low Pass", target);
+        _emitter = GetComponent<StudioEventEmitter>();
     }
 
-    // void Update()
+    public void UpdateLowPass(float target)
+    {
+        _emitter.SetParameter("Low Pass", target);
+    }
+
+    // private void Update()
     // {
-    //     emitter.SetParameter("Low Pass", targetLowPass);
+    //     _emitter.SetParameter("Low Pass", targetLowPass);
     // }
 }

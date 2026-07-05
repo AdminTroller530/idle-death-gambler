@@ -78,8 +78,8 @@ public class RoomGenerator : MonoBehaviour
         }
         
         // spawn room of a randome type from all possible continuations
-        int type = exitMapping[previousExit][RNGController.MapRNG(0, exitMapping[previousExit].Length)];
-        GameObject room = rooms[type][RNGController.MapRNG(0, rooms[type].Length)];
+        int type = exitMapping[previousExit][RNGController.GetMapRNG(0, exitMapping[previousExit].Length)];
+        GameObject room = rooms[type][RNGController.GetMapRNG(0, rooms[type].Length)];
         Instantiate(room, (Vector2)currentPos, transform.rotation, tileGrid);
 
         // add new A* pathfinding graph at new room
