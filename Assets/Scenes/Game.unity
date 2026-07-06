@@ -1980,24 +1980,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4650986b104826344a14ac54574dfad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  tileGrid: {fileID: 821963701}
-  UD:
-  - {fileID: 7258101672076318361, guid: a36adb8a6528b8b4e8f61dbb8acc1164, type: 3}
-  UL:
-  - {fileID: 7258101672076318361, guid: 9bf66bec122ae47429a20d0301ff16fa, type: 3}
-  UR:
-  - {fileID: 7258101672076318361, guid: 95e8f9a7105bfd4499d4fb1f52875493, type: 3}
-  DL:
-  - {fileID: 7258101672076318361, guid: df3693240d6ade84f9e2798d72e46f75, type: 3}
-  DR:
-  - {fileID: 7258101672076318361, guid: 558f78132cab561438473411af57b090, type: 3}
-  LR:
-  - {fileID: 7258101672076318361, guid: c441298871048334eaf8fe16f66a8bd2, type: 3}
-  hallsUD:
+  _tileGrid: {fileID: 821963701}
+  _hallsUpDown:
   - {fileID: 7258101672076318361, guid: 213e6a3956c031e4f8d49b7033898dc9, type: 3}
-  hallsLR:
+  _hallsLeftRight:
   - {fileID: 7258101672076318361, guid: e5105e83dc8b13e44b44b54951f478a5, type: 3}
-  wallMask:
+  _roomsUpDown:
+  - {fileID: 7258101672076318361, guid: a36adb8a6528b8b4e8f61dbb8acc1164, type: 3}
+  _roomsUpLeft:
+  - {fileID: 7258101672076318361, guid: 9bf66bec122ae47429a20d0301ff16fa, type: 3}
+  _roomsUpRight:
+  - {fileID: 7258101672076318361, guid: 95e8f9a7105bfd4499d4fb1f52875493, type: 3}
+  _roomsDownLeft:
+  - {fileID: 7258101672076318361, guid: df3693240d6ade84f9e2798d72e46f75, type: 3}
+  _roomsDownRight:
+  - {fileID: 7258101672076318361, guid: 558f78132cab561438473411af57b090, type: 3}
+  _roomsLeftRight:
+  - {fileID: 7258101672076318361, guid: c441298871048334eaf8fe16f66a8bd2, type: 3}
+  _wallMask:
     serializedVersion: 2
     m_Bits: 128
 --- !u!1 &1851020998
