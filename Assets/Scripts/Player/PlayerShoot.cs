@@ -30,6 +30,13 @@ public class PlayerShoot : MonoBehaviour
     private float _reloadTimer = 0;
     [SerializeField] private TextMeshProUGUI _ammoText;
 
+    private PlayerGunVisual _playerGunVisual;
+
+    private void Awake()
+    {
+        _playerGunVisual = GetComponentInChildren<PlayerGunVisual>();
+    }
+
     private void Start()
     {
         EquipGun(0);
@@ -80,10 +87,16 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
-    private Quaternion GetShootAngle()
+    public float GetShootAngle()
     {
         _mousePos = CursorTracker.Pos;
         float angle = Mathf.Atan2(_mousePos.y - transform.position.y, _mousePos.x - transform.position.x) * Mathf.Rad2Deg;
+        return angle;
+    }
+
+    private Quaternion GetFinalShootAngle()
+    {
+        float angle = GetShootAngle();
         angle += Random.Range(-_shootInaccuracy, _shootInaccuracy);
         return Quaternion.Euler(0, 0, angle);
     }
@@ -93,7 +106,7 @@ public class PlayerShoot : MonoBehaviour
         PlayerBullet bullet = PlayerBulletPool.Instance.BulletPool.Get();
 
         bullet.transform.position = transform.position;
-        bullet.transform.rotation = GetShootAngle();
+        bullet.transform.rotation = GetFinalShootAngle();
         bullet.Initialize(_bulletSpeed, _bulletLifetime, _bulletKnockback, _bulletDamage, 1.3f);
     }
 
