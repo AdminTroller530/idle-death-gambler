@@ -31,6 +31,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _ammoText;
 
     private PlayerGunVisual _playerGunVisual;
+    [SerializeField] private Transform _shootPoint;
 
     private void Awake()
     {
@@ -39,8 +40,8 @@ public class PlayerShoot : MonoBehaviour
 
     private void Start()
     {
-        EquipGun(0);
-        _gunsAmmo[0] = _magSize;
+        EquipGun(1);
+        _gunsAmmo[1] = _magSize;
         UpdateAmmoText();
     }
 
@@ -69,6 +70,8 @@ public class PlayerShoot : MonoBehaviour
         UpdateAmmoText();
 
         _bulletPrefab = _currentGun.BulletPrefab;
+
+        _playerGunVisual.SetSprite(_currentGun.GunSprites[0]);
     }
     
     public void Shoot(InputAction.CallbackContext context)
@@ -90,7 +93,7 @@ public class PlayerShoot : MonoBehaviour
     public float GetShootAngle()
     {
         _mousePos = CursorTracker.Pos;
-        float angle = Mathf.Atan2(_mousePos.y - transform.position.y, _mousePos.x - transform.position.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(_mousePos.y - _shootPoint.position.y, _mousePos.x - _shootPoint.position.x) * Mathf.Rad2Deg;
         return angle;
     }
 
@@ -105,9 +108,9 @@ public class PlayerShoot : MonoBehaviour
     {
         PlayerBullet bullet = PlayerBulletPool.Instance.BulletPool.Get();
 
-        bullet.transform.position = transform.position;
+        bullet.transform.position = _shootPoint.position;
         bullet.transform.rotation = GetFinalShootAngle();
-        bullet.Initialize(_bulletSpeed, _bulletLifetime, _bulletKnockback, _bulletDamage, 1.3f);
+        bullet.Initialize(_bulletSpeed, _bulletLifetime, _bulletKnockback, _bulletDamage, 0f);
     }
 
     void Update()

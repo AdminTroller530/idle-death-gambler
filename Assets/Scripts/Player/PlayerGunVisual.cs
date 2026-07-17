@@ -28,4 +28,9 @@ public class PlayerGunVisual : MonoBehaviour
         }
         transform.rotation = Quaternion.Euler(0, 0, _shootAngle);
     }
+
+    public void SetSprite(Sprite gunSprite)
+    {
+        _spriteRenderer.sprite = gunSprite;
+    }
 }

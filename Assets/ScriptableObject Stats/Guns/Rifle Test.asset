@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 962fc92d152fcd049818a0e8db2feadf, type: 3}
-  m_Name: Pistol Test
+  m_Name: Rifle Test
   m_EditorClassIdentifier: Assembly-CSharp::GunStats
-  Id: -1
-  Name: Pistol Test
+  Id: -2
+  Name: Rifle Test
   Type: single
-  BulletSpeed: 16
-  BulletDamage: 5
+  BulletSpeed: 14
+  BulletDamage: 3
   BulletLifetime: 3
   BulletKnockback: 4
-  ShootCooldown: 0.35
-  ShootInaccuracy: 5
-  MagSize: 8
-  ReloadTime: 1
+  ShootCooldown: 0.2
+  ShootInaccuracy: 6
+  MagSize: 24
+  ReloadTime: 1.5
   GunSprites:
-  - {fileID: 21300000, guid: 6c65bd173baddaf43beb1a1f1b386a7c, type: 3}
+  - {fileID: 21300000, guid: e85454bbf2e61d246b279acf50989e36, type: 3}
   BulletPrefab: {fileID: -6980191489351024642, guid: 95cab95a8f2451a48a11ff82666102af, type: 3}
