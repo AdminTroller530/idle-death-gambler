@@ -2,7 +2,12 @@ fileFormatVersion: 2
 guid: e14fd9c3f926a65408cf3714c515aecf
 ScriptedImporter:
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Flip
+    second: {fileID: 7400000, guid: d93ccff55f9c4c44bb86c46c019e4839, type: 2}
   serializedVersion: 2
   userData: 
   assetBundleName: 
@@ -102,7 +107,7 @@ ScriptedImporter:
     generateIndividualEvents: 1
     generateSpriteAtlas: 1
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639199904679710373
+  platformSettingsDirtyTick: 639205357091055358
   textureAssetName: 
   singleSpriteImportData:
   - name: 

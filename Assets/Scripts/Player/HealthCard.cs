@@ -9,6 +9,8 @@ public class HealthCard : MonoBehaviour
     private bool _isActive = true;
     private const float START_Y = 150;
 
+    private Animator _animator;
+
     public void Initialize(int id)
     {
         _id = id;
@@ -17,6 +19,7 @@ public class HealthCard : MonoBehaviour
 
     private void Awake()
     {
+        _animator = GetComponent<Animator>();
         _bobStartOffset = Random.Range(0, 2*Mathf.PI);
     }
 
@@ -34,12 +37,12 @@ public class HealthCard : MonoBehaviour
     {
         if (_isActive && health <= _id) {
             _isActive = false;
-            GetComponent<SpriteRenderer>().enabled = false; // TEMP
+            _animator.SetTrigger("FlipToInactive");
         }
         else if (!_isActive && health > _id)
         {
             _isActive = true;
-            GetComponent<SpriteRenderer>().enabled = true; // TEMP
+            _animator.SetTrigger("FlipToActive");
         }
     }
 
