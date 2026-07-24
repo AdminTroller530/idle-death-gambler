@@ -1,11 +1,12 @@
 using UnityEngine;
 using TMPro;
 using System;
+using Unity.Cinemachine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private int _maxHealth = 5;
-    private int _health = 5;
+    private int _maxHealth = 6;
+    private int _health = 6;
     private float _maxInvincibleTimer = 1.1f, _invincibleTimer = 0; // I-frames
 
     private SpriteRenderer _spriteRenderer;
@@ -13,9 +14,12 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private Transform _healthCardsTransform;
     public static event Action<int> OnPlayerChangeHealth;
 
+    private CinemachineImpulseSource _screenshake;
+
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _screenshake = GetComponent<CinemachineImpulseSource>();
     }
 
     private void Start()
@@ -59,6 +63,7 @@ public class PlayerHealth : MonoBehaviour
         }
         _invincibleTimer = _maxInvincibleTimer;
         OnPlayerChangeHealth?.Invoke(_health);
+        _screenshake?.GenerateImpulse();
     }
 
     private void Death()
