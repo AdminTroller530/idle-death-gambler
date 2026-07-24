@@ -19,7 +19,7 @@ MonoBehaviour:
   MoveSpeed: 10
   CollisionDamage: 2
   BulletSpeed: 11
-  BulletDamage: 6
+  BulletDamage: 2
   BulletLifetime: 3
   BulletStartOffset: 1
   ShootCooldown: 0.9
