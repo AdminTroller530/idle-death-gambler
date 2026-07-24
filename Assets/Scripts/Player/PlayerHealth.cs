@@ -1,17 +1,17 @@
 using UnityEngine;
 using TMPro;
-using System.Collections.Generic;
+using System;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private float _maxHealth = 5f;
-    private float _health = 5f;
+    private int _maxHealth = 5;
+    private int _health = 5;
     private float _maxInvincibleTimer = 1.1f, _invincibleTimer = 0; // I-frames
 
     private SpriteRenderer _spriteRenderer;
-    // ADD event action for take damage to broadcast to healthcards
     [SerializeField] private HealthCard _healthCardPrefab;
     [SerializeField] private Transform _healthCardsTransform;
+    public static event Action<int> OnPlayerChangeHealth;
 
     private void Awake()
     {
@@ -41,13 +41,13 @@ public class PlayerHealth : MonoBehaviour
         else _spriteRenderer.color = new Color(1,1,1,1);
     }
 
-    public void Heal(float heal)
+    public void Heal(int heal)
     {
         _health += heal;
         _health = Mathf.Min(_health, _maxHealth);
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
         if (_invincibleTimer > 0) return;
 
@@ -58,6 +58,7 @@ public class PlayerHealth : MonoBehaviour
             Death();
         }
         _invincibleTimer = _maxInvincibleTimer;
+        OnPlayerChangeHealth?.Invoke(_health);
     }
 
     private void Death()

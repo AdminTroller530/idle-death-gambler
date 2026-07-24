@@ -6,17 +6,41 @@ public class HealthCard : MonoBehaviour
     private float _bobSpeed = 3f;
     private float _bobAmplitude = 2f;
     private float _bobStartOffset;
+    private bool _isActive = true;
     private const float START_Y = 150;
 
     public void Initialize(int id)
     {
         _id = id;
-        transform.localPosition = new Vector2(-290 + _id*30, START_Y);
+        transform.localPosition = new Vector2(-290 + _id * 30, START_Y);
     }
 
     private void Awake()
     {
         _bobStartOffset = Random.Range(0, 2*Mathf.PI);
+    }
+
+    private void OnEnable()
+    {
+        PlayerHealth.OnPlayerChangeHealth += PlayerChangeHealth;
+    }
+
+    private void OnDisable()
+    {
+        PlayerHealth.OnPlayerChangeHealth -= PlayerChangeHealth;
+    }
+
+    private void PlayerChangeHealth(int health)
+    {
+        if (_isActive && health <= _id) {
+            _isActive = false;
+            GetComponent<SpriteRenderer>().enabled = false; // TEMP
+        }
+        else if (!_isActive && health > _id)
+        {
+            _isActive = true;
+            GetComponent<SpriteRenderer>().enabled = true; // TEMP
+        }
     }
 
     private void Update()

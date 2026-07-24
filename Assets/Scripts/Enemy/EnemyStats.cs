@@ -15,7 +15,7 @@ public class EnemyStats : ScriptableObject
 
     [Header("Shooting Stats")]
     public float BulletSpeed;
-    public float BulletDamage;
+    public int BulletDamage;
     public float BulletLifetime;
     public float BulletStartOffset;
     public float ShootCooldown;

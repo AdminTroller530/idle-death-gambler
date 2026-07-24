@@ -7,7 +7,7 @@ public class EnemyBullet : MonoBehaviour
     private PlayerHealth _playerHealth;
 
     private float _speed;
-    private float _damage;
+    private int _damage;
     private float _lifetime;
     private float _maxLifetime;
     private Sprite[] _sprites;
@@ -21,7 +21,7 @@ public class EnemyBullet : MonoBehaviour
     private ObjectPool<EnemyBullet> _bulletPool;
     private bool _isReturned = false;
 
-    public void Initialize(float speed, float damage, float lifetime, Sprite[] sprites, float startOffset, PlayerHealth playerHealth)
+    public void Initialize(float speed, int damage, float lifetime, Sprite[] sprites, float startOffset, PlayerHealth playerHealth)
     {
         _speed = speed;
         _damage = damage;
@@ -79,12 +79,12 @@ public class EnemyBullet : MonoBehaviour
 
                 _lifetime = _maxLifetime;
                 _speed *= 1.5f;
-                _damage *= 1.5f;
+                _damage *= 2;
                 PlayerParry.WasParrySuccessful = true;
                 _isParried = true;
             }
             else {
-                _playerHealth.TakeDamage(_damage);
+                _playerHealth.TakeDamage((int)_damage);
                 TryReturnToPool();
             }
         }
