@@ -84,7 +84,7 @@ public class EnemyBullet : MonoBehaviour
                 _isParried = true;
             }
             else {
-                _playerHealth.TakeDamage((int)_damage);
+                _playerHealth.TakeEnemyDamage(gameObject, (int)_damage);
                 TryReturnToPool();
             }
         }

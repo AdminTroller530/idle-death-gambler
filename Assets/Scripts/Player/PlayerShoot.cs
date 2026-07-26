@@ -90,6 +90,12 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
+    public void InstantReload(float percentOfMag)
+    {
+        _gunsAmmo[_gunSlot] = Mathf.Min(_gunsAmmo[_gunSlot] + (int)(_magSize * percentOfMag), _magSize);
+        UpdateAmmoText();
+    }
+
     public float GetShootAngle()
     {
         _mousePos = CursorTracker.Pos;

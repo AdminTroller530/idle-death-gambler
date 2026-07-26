@@ -5,6 +5,7 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager Instance {get; private set;}
 
     public PlayerHealth Health {get; private set;}
+    public PlayerShoot Shoot {get; private set;}
     public Transform Transform {get; private set;}
 
     private void Awake()
@@ -13,6 +14,7 @@ public class PlayerManager : MonoBehaviour
         {
             Instance = this;
             Health = GetComponent<PlayerHealth>();
+            Shoot = GetComponent<PlayerShoot>();
             Transform = transform;
         }
         else Destroy(gameObject);

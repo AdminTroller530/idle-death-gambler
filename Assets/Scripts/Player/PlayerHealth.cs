@@ -13,13 +13,17 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private HealthCard _healthCardPrefab;
     [SerializeField] private Transform _healthCardsTransform;
     public static event Action<int> OnPlayerChangeHealth;
+    public static event Action<GameObject> OnPlayerTakeEnemyDamage;
 
     private CinemachineImpulseSource _screenshake;
 
+    private PlayerVows _playerVows;
+
     private void Awake()
-    {
+    {    
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _screenshake = GetComponent<CinemachineImpulseSource>();
+        _playerVows = GetComponent<PlayerVows>();
     }
 
     private void Start()
@@ -51,19 +55,23 @@ public class PlayerHealth : MonoBehaviour
         _health = Mathf.Min(_health, _maxHealth);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeEnemyDamage(GameObject enemy, int damage)
     {
         if (_invincibleTimer > 0) return;
 
-        _health -= damage;
         // Debug.Log("Took " + damage + " damage! Health Left: " + health);
+        _health -= damage;
+        _invincibleTimer = _maxInvincibleTimer;
+        
+        OnPlayerTakeEnemyDamage?.Invoke(enemy);
+        OnPlayerChangeHealth?.Invoke(_health);
+        
+        _screenshake?.GenerateImpulse();
+
         if (_health <= 0)
         {
             Death();
         }
-        _invincibleTimer = _maxInvincibleTimer;
-        OnPlayerChangeHealth?.Invoke(_health);
-        _screenshake?.GenerateImpulse();
     }
 
     private void Death()
