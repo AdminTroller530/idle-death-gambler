@@ -40,8 +40,8 @@ public class PlayerShoot : MonoBehaviour
 
     private void Start()
     {
-        EquipGun(1);
-        _gunsAmmo[1] = _magSize;
+        EquipGun(0);
+        _gunsAmmo[0] = _magSize;
         UpdateAmmoText();
     }
 
