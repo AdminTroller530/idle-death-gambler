@@ -7,9 +7,11 @@ public class PlayerGunVisual : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private float _shootAngle;
     private Direction _gunOrientation = Right;
-    private const float GUN_ORIENTATION_DEADZONE = 10f;
 
-    private const float SPRITE_OFFSET = 0.5f;
+    [SerializeField] private SpriteRenderer _spriteRendererUI;
+    
+    private const float GUN_ORIENTATION_DEADZONE = 10f;
+    private const float SPRITE_OFFSET = 0.6f;
 
     private void Awake()
     {
@@ -37,5 +39,6 @@ public class PlayerGunVisual : MonoBehaviour
     public void SetSprite(Sprite gunSprite)
     {
         _spriteRenderer.sprite = gunSprite;
+        _spriteRendererUI.sprite = gunSprite;
     }
 }

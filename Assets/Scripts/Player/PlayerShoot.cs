@@ -10,9 +10,9 @@ public class PlayerShoot : MonoBehaviour
     private PlayerBullet _bulletPrefab;
     private bool _isHoldingShoot;
 
-    [SerializeField] private GunStats[] _guns;
+    [SerializeField] private GunStats[] _guns = new GunStats[3];
     private GunStats _currentGun; // current gun
-    private int _gunSlot; // current gun slot selected (1-3)
+    private int _gunSlot; // current gun slot selected (0-2, index 0)
 
     private float _shootCooldown = 0;
     private float _shootCooldownMax;
@@ -38,11 +38,21 @@ public class PlayerShoot : MonoBehaviour
         _playerGunVisual = GetComponentInChildren<PlayerGunVisual>();
     }
 
+    private void TempStart() // debug starting guns
+    {
+        for (int i = 0; i < _guns.Length; i++)
+        {
+            if (!_guns[i]) continue;
+            _gunsAmmo[i] = _guns[i].MagSize;
+        }
+    }
+
     private void Start()
     {
+        TempStart();
         EquipGun(0);
-        _gunsAmmo[0] = _magSize;
-        UpdateAmmoText();
+        // _gunsAmmo[0] = _magSize;
+        // UpdateAmmoText();
     }
 
     void UpdateAmmoText()
@@ -89,6 +99,18 @@ public class PlayerShoot : MonoBehaviour
             // SceneManager.LoadScene(0); // DEBUG
         }
     }
+
+    private void SwitchToWeaponSlot(int slot)
+    {
+        EquipGun(slot);
+        _isReloading = false;
+        _reloadTimer = 0;
+        // play sound or whatever else
+    }
+
+    public void WeaponSlot1(InputAction.CallbackContext context) {if (context.started) SwitchToWeaponSlot(0);}
+    public void WeaponSlot2(InputAction.CallbackContext context) {if (context.started) SwitchToWeaponSlot(1);}
+    public void WeaponSlot3(InputAction.CallbackContext context) {if (context.started) SwitchToWeaponSlot(2);}
 
     public void InstantReload(float percentOfMag)
     {
