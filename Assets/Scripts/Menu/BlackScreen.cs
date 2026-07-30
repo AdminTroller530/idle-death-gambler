@@ -2,18 +2,15 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BlackScreen : MonoBehaviour
+public class BlackScreen : Singleton<BlackScreen>
 {
-    public static BlackScreen Instance {get; private set;}
-
     private Image _blackScreen;
     private float _fadeSpeed = 15f;
     private float _fadeValue = 1f; // from 1 - 10
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        base.Awake();
 
         _blackScreen = GetComponent<Image>();
     }

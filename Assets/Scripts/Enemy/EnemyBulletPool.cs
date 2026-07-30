@@ -1,19 +1,16 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class EnemyBulletPool : MonoBehaviour
+public class EnemyBulletPool : Singleton<EnemyBulletPool>
 {
-    public static EnemyBulletPool Instance {get; private set;}
-
     private const int BULLET_POOL_SIZE = 25;
     public ObjectPool<EnemyBullet> BulletPool;
 
     [SerializeField] private EnemyBullet _enemyBulletPrefab;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        base.Awake();
     }
 
     private void InitializeBulletPool()

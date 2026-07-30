@@ -1,17 +1,14 @@
 using UnityEngine;
 using FMODUnity;
 
-public class AudioController : MonoBehaviour
+public class AudioController : Singleton<AudioController>
 {
-    public static AudioController Instance {get; private set;}
-
     public StudioEventEmitter _emitter;
     // public static float targetLowPass = 1f;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        base.Awake();
     }
 
     private void Start()
