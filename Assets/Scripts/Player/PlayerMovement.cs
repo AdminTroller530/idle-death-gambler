@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private string _dirPriority = "hor";
     private Vector2 _dir = Vector2.right;
     private float _speed = 8f;
-    private Rigidbody2D _rb;
+    private Rigidbody2D _rigidbody;
     public static bool InCombat = false;
 
     private Animator _anim;
@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _sr = GetComponent<SpriteRenderer>();
     }
@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb.linearVelocity = _move * _speed;
+        _rigidbody.linearVelocity = _move * _speed;
 
         Animate();
     }

@@ -1,32 +1,28 @@
 using UnityEngine;
 
-public class EnemyAttacks : MonoBehaviour
+public abstract class EnemyAttack : MonoBehaviour
 {
-    [SerializeField] private EnemyBullet _enemyBullet;
-    private EnemyBase _enemyBase;
-    private EnemyStats _stats;
-    private float _shootCooldown = 0.7f;
+    protected EnemyStats _stats;
+    protected float _shootCooldown = 0.7f; // initial value = how long it takes before firing first shot
 
-    private EnemyVision _enemyVision;
+    protected EnemyVision _enemyVision;
 
-    private Transform _playerTransform;
-    private PlayerHealth _playerHealth;
+    protected Transform _playerTransform;
+    protected PlayerHealth _playerHealth;
 
-    private void Awake()
+    protected virtual void Awake()
     {
-        _enemyBase = GetComponent<EnemyBase>();
-
         _enemyVision = GetComponent<EnemyVision>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         _playerTransform = PlayerManager.Instance.Transform;
         _playerHealth = PlayerManager.Instance.Health;
-        _stats = _enemyBase.Stats;
+        _stats = GetComponent<EnemyBase>().Stats;
     }
 
-    private void ShootBullet(float angleOffset)
+    protected virtual void CreateBullet(float angleOffset)
     {
         float angle = Mathf.Atan2(_playerTransform.position.y - transform.position.y, _playerTransform.position.x - transform.position.x) * Mathf.Rad2Deg;
         angle += angleOffset + Random.Range(-_stats.ShootInaccuracy, _stats.ShootInaccuracy);
@@ -37,25 +33,24 @@ public class EnemyAttacks : MonoBehaviour
         bullet.transform.rotation = rotation;
         bullet.Initialize(_stats.BulletSpeed, _stats.BulletDamage, _stats.BulletLifetime, _stats.BulletSprites, _stats.BulletStartOffset, _playerHealth);
     }
+
+    protected abstract void ShootBulletPattern();
     
-    private void Update()
+    protected virtual void Update()
     {
         if (_shootCooldown > 0) _shootCooldown -= Time.deltaTime;
         else _shootCooldown = 0;
 
         if (_shootCooldown == 0 && _enemyVision.CanSeePlayer)
         {
-            if (_stats.Type != "melee") // VERY TEMPORARY SYSTEM
-            {
-                ShootBullet(0);
-                if (_stats.Type == "shoot_triple")
-                {
-                    ShootBullet(-20);
-                    ShootBullet(20);
-                }
-            
-            }
-            
+            ShootBulletPattern();
+            // CreateBullet(0);
+            // if (_stats.Type == "shoot_triple")
+            // {
+            //     CreateBullet(-20);
+            //     CreateBullet(20);
+            // }
+
             _shootCooldown = _stats.ShootCooldown + Random.Range(-_stats.ShootCooldownOffsetMax, _stats.ShootCooldownOffsetMax);
         }
     }

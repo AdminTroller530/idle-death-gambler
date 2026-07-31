@@ -251,10 +251,7 @@ GameObject:
   - component: {fileID: 1248589758936042008}
   - component: {fileID: 384280418038718693}
   - component: {fileID: -5399909951234745360}
-  - component: {fileID: -2666489067101606874}
-  - component: {fileID: -3291396095038716698}
   - component: {fileID: -2479307462933710974}
-  - component: {fileID: 8294209839109686167}
   - component: {fileID: -537347571265845924}
   - component: {fileID: -2379335362000332420}
   - component: {fileID: -7305677407636948494}
@@ -414,31 +411,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.25, y: 1.25}
   m_EdgeRadius: 0
---- !u!114 &-2666489067101606874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3876923123970243237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba9b5e8ada70d734ab12c264867c6eb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
---- !u!114 &-3291396095038716698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3876923123970243237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f55f817404cf1f94db981ca18a158d2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  _healthText: {fileID: 7770595380947407706}
 --- !u!114 &-2479307462933710974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,19 +424,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   Stats: {fileID: 11400000, guid: fbf1ac92b36114748a07e19e35378652, type: 2}
---- !u!114 &8294209839109686167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3876923123970243237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f332e9dc1ebfb74fad33fda9982c3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyShoot
-  _enemyBullet: {fileID: -7099866472933620258, guid: 91f39dfd3a5648145bdcd08b9fe05ed5, type: 3}
+  DefaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  DamageFlashMaterial: {fileID: 2100000, guid: 9fe79f6f704da9f4c963f519ebe7588b, type: 2}
 --- !u!114 &-537347571265845924
 MonoBehaviour:
   m_ObjectHideFlags: 0

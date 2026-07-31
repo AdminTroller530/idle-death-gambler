@@ -1,37 +1,52 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
-public class EnemyHealth : MonoBehaviour
+public abstract class EnemyHealth : MonoBehaviour
 {
-    private EnemyBase _enemyBase;
-    private EnemyStats _stats;
+    protected EnemyStats _stats;
 
-    private float _health;
-    [SerializeField] private TextMeshProUGUI _healthText; //temp
+    protected float _health;
+    [SerializeField] protected TextMeshProUGUI _healthText; //temp
 
-    private void Awake()
+    private SpriteRenderer _spriteRenderer;
+    private Material _defaultMaterial;
+    private Material _damageFlashMaterial;
+    private const float DAMAGE_FLASH_TIME = 0.075f;
+
+    protected virtual void Awake()
     {
-        _enemyBase = GetComponent<EnemyBase>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
-        _stats = _enemyBase.Stats;
+        _stats = GetComponent<EnemyBase>().Stats;
+        _defaultMaterial = GetComponent<EnemyBase>().DefaultMaterial;
+        _damageFlashMaterial = GetComponent<EnemyBase>().DamageFlashMaterial;
         _health = _stats.MaxHealth;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         _healthText.text = ((int)_health).ToString();
     }
 
-    public void TakeDamage(float damage)
+    protected virtual IEnumerator DamageFlash()
+    {
+        _spriteRenderer.material = _damageFlashMaterial;
+        yield return new WaitForSeconds(DAMAGE_FLASH_TIME);
+        _spriteRenderer.material = _defaultMaterial;
+    }
+
+    public virtual void TakeDamage(float damage)
     {
         _health -= damage;
+        StartCoroutine(DamageFlash());
         if (_health <= 0) Death();
     }
 
-    private void Death()
+    protected virtual void Death()
     {
         Destroy(gameObject);
     }

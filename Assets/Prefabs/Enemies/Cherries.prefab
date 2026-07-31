@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8536063675904570776
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1248589758936042008, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 36f1bb578386ff94ea8aa19e3ec88731, type: 3}
+    - target: {fileID: 1248589758936042008, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248589758936042008, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248589758936042008, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248589758936042008, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248589758936042008, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 3876923123970243237, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      propertyPath: m_Name
+      value: Cherries
+      objectReference: {fileID: 0}
+    - target: {fileID: 8290024457231082519, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8290024457231082519, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8290024457231082519, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8290024457231082519, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8290024457231082519, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8290024457231082519, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8290024457231082519, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8290024457231082519, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8290024457231082519, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8290024457231082519, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -3291396095038716698, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3876923123970243237, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5802540134546762729}
+    - targetCorrespondingSourceObject: {fileID: 3876923123970243237, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8801277769053805880}
+    - targetCorrespondingSourceObject: {fileID: 3876923123970243237, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1846284619149231069}
+  m_SourcePrefab: {fileID: 100100000, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+--- !u!114 &2134851341472851650 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7770595380947407706, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+  m_PrefabInstance: {fileID: 8536063675904570776}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &4880681150405037885 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3876923123970243237, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+  m_PrefabInstance: {fileID: 8536063675904570776}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-5802540134546762729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4880681150405037885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32315491d1a5e96449cde41f22144ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CherriesAttack
+--- !u!114 &8801277769053805880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4880681150405037885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45febf5addf4f394d8fb998842d8134e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CherriesEnemyHealth
+  _healthText: {fileID: 2134851341472851650}
+--- !u!114 &-1846284619149231069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4880681150405037885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26863268dcad324419dcd547f823257c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CherriesEnemyMove
