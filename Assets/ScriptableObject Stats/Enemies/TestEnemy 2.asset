@@ -22,6 +22,8 @@ MonoBehaviour:
   BulletDamage: 2
   BulletLifetime: 3
   BulletStartOffset: 1
+  BulletHitboxOffset: {x: 0, y: 0}
+  BulletHitboxSize: {x: 0.8, y: 0.25}
   ShootCooldown: 0.9
   ShootCooldownOffsetMax: 0
   ShootInaccuracy: 0

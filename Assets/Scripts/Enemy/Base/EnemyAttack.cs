@@ -31,7 +31,7 @@ public abstract class EnemyAttack : MonoBehaviour
         EnemyBullet bullet = EnemyBulletPool.Instance.BulletPool.Get();
         bullet.transform.position = transform.position;
         bullet.transform.rotation = rotation;
-        bullet.Initialize(_stats.BulletSpeed, _stats.BulletDamage, _stats.BulletLifetime, _stats.BulletSprites, _stats.BulletStartOffset, _playerHealth);
+        bullet.Initialize(_stats);
     }
 
     protected abstract void ShootBulletPattern();

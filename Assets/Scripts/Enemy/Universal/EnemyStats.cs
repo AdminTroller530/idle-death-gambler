@@ -18,6 +18,8 @@ public class EnemyStats : ScriptableObject
     public int BulletDamage;
     public float BulletLifetime;
     public float BulletStartOffset;
+    public Vector2 BulletHitboxOffset;
+    public Vector2 BulletHitboxSize;
     public float ShootCooldown;
     public float ShootCooldownOffsetMax;
     public float ShootInaccuracy;

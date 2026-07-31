@@ -6007,9 +6007,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   _enemyPrefabs:
-  - {fileID: 3876923123970243237, guid: 46afcfbbc11b8b24a9f5bade6cb70239, type: 3}
-  - {fileID: 3876923123970243237, guid: 63aa98da40abcf945981f0b3f73ea969, type: 3}
-  waves: []
+  - {fileID: 4880681150405037885, guid: 8b17aa8639ee8bf43bebdc68917609e4, type: 3}
+  - {fileID: 4880681150405037885, guid: 8b17aa8639ee8bf43bebdc68917609e4, type: 3}
+  _waves: []
   _timeBetweenSpawns: 0.4
   _timeBetweenWaves: 1.5
   _enterTrigger: {fileID: 2718981161802395062}

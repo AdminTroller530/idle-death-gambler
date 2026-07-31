@@ -21,25 +21,30 @@ public class EnemyBullet : MonoBehaviour
     private ObjectPool<EnemyBullet> _bulletPool;
     private bool _isReturned = false;
 
-    public void Initialize(float speed, int damage, float lifetime, Sprite[] sprites, float startOffset, PlayerHealth playerHealth)
+    public void Initialize(EnemyStats stats)
     {
-        _speed = speed;
-        _damage = damage;
-        _lifetime = lifetime;
-        _maxLifetime = lifetime;
-        _sprites = sprites;
-        _playerHealth = playerHealth;
+        _speed = stats.BulletSpeed;
+        _damage = stats.BulletDamage;
+        _lifetime = stats.BulletLifetime;
+        _maxLifetime = stats.BulletLifetime;
+        _sprites = stats.BulletSprites;
+        _collider.offset = stats.BulletHitboxOffset;
+        _collider.size = stats.BulletHitboxSize;
+        _playerHealth = PlayerManager.Instance.Health;
 
-        transform.Translate(Vector2.right * startOffset);
+        transform.Translate(Vector2.right * stats.BulletStartOffset);
+    }
+
+    private void Awake()
+    {
+        _collider = GetComponent<BoxCollider2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
     {
-        _collider = GetComponent<BoxCollider2D>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = _sprites[0];
         _bulletPool = EnemyBulletPool.Instance.BulletPool;
-        _playerHealth = PlayerManager.Instance.Health;
     }
 
     private void OnEnable()
