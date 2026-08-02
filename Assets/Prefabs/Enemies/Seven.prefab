@@ -9,21 +9,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -5399909951234745360, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
-      propertyPath: m_Size.x
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: -5399909951234745360, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
       propertyPath: m_Size.y
-      value: 1.2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -2479307462933710974, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
       propertyPath: Stats
       value: 
-      objectReference: {fileID: 11400000, guid: 5bc9d24db77fb1d4988bb23e45bb891c, type: 2}
+      objectReference: {fileID: 11400000, guid: a9dafdb89a4036a4780f9f4626ba09eb, type: 2}
     - target: {fileID: 1248589758936042008, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 36f1bb578386ff94ea8aa19e3ec88731, type: 3}
+      objectReference: {fileID: 21300000, guid: 491577c536ba0294482e5b4eb1074da0, type: 3}
     - target: {fileID: 1248589758936042008, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
       propertyPath: m_Color.a
       value: 1
@@ -46,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 3876923123970243237, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
       propertyPath: m_Name
-      value: Cherries
+      value: Seven
       objectReference: {fileID: 0}
     - target: {fileID: 8290024457231082519, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -95,13 +91,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3876923123970243237, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -5802540134546762729}
+      addedObject: {fileID: 5503959820688497478}
     - targetCorrespondingSourceObject: {fileID: 3876923123970243237, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8801277769053805880}
+      addedObject: {fileID: 6628248898754367752}
     - targetCorrespondingSourceObject: {fileID: 3876923123970243237, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -1846284619149231069}
+      addedObject: {fileID: 8863497833756682059}
   m_SourcePrefab: {fileID: 100100000, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
 --- !u!114 &2134851341472851650 stripped
 MonoBehaviour:
@@ -119,7 +115,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3876923123970243237, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
   m_PrefabInstance: {fileID: 8536063675904570776}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-5802540134546762729
+--- !u!114 &5503959820688497478
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,11 +124,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4880681150405037885}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32315491d1a5e96449cde41f22144ede, type: 3}
+  m_Script: {fileID: 11500000, guid: f03ebb903d0102d4f941d45d3e87e341, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CherriesAttack
-  _splitBulletStats: {fileID: 11400000, guid: fecd4357c8710d74392be64584cccca4, type: 2}
---- !u!114 &8801277769053805880
+  m_EditorClassIdentifier: Assembly-CSharp::SevenEnemyAttack
+--- !u!114 &6628248898754367752
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,11 +136,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4880681150405037885}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45febf5addf4f394d8fb998842d8134e, type: 3}
+  m_Script: {fileID: 11500000, guid: 714616d8e6d140244b798fd40d475c5b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CherriesEnemyHealth
+  m_EditorClassIdentifier: Assembly-CSharp::SevenEnemyHealth
   _healthText: {fileID: 2134851341472851650}
---- !u!114 &-1846284619149231069
+--- !u!114 &8863497833756682059
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,6 +149,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4880681150405037885}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26863268dcad324419dcd547f823257c, type: 3}
+  m_Script: {fileID: 11500000, guid: f8eeb0447c0d9a44b900f239bf5535ee, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CherriesEnemyMove
+  m_EditorClassIdentifier: Assembly-CSharp::SevenEnemyMove

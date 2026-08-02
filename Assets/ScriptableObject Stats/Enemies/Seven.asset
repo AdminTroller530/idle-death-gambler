@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9eef55e8fd538a4f85a164100e54ab3, type: 3}
+  m_Name: Seven
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
+  Id: 7
+  Name: Seven
+  MaxHealth: 7
+  MoveSpeed: 7
+  BulletSpeed: 7
+  BulletDamage: 1
+  BulletLifetime: 7
+  BulletStartOffset: 1
+  BulletHitboxOffset: {x: 0, y: 0}
+  BulletHitboxSize: {x: 0.4, y: 0.4}
+  ShootCooldown: 2
+  ShootCooldownOffsetMax: 0.2
+  ShootInaccuracy: 0
+  EnemySprites: {fileID: 21300000, guid: 491577c536ba0294482e5b4eb1074da0, type: 3}
+  BulletSprites:
+  - {fileID: 21300000, guid: 269d103d92f1dff47a592b1c114bfbd5, type: 3}
+  - {fileID: 21300000, guid: 269d103d92f1dff47a592b1c114bfbd5, type: 3}
