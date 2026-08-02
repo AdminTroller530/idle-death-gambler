@@ -22,19 +22,27 @@ public abstract class EnemyAttack : MonoBehaviour
         _stats = GetComponent<EnemyBase>().Stats;
     }
 
-    protected virtual void CreateBullet(float angleOffset)
+    protected float GetAngleToPlayer() => Mathf.Atan2(_playerTransform.position.y - transform.position.y, _playerTransform.position.x - transform.position.x) * Mathf.Rad2Deg;
+
+    protected virtual EnemyBullet CreateBullet(Vector2 position, float angle, float angleOffset, EnemyStats overrideStats = null)
     {
-        float angle = Mathf.Atan2(_playerTransform.position.y - transform.position.y, _playerTransform.position.x - transform.position.x) * Mathf.Rad2Deg;
-        angle += angleOffset + Random.Range(-_stats.ShootInaccuracy, _stats.ShootInaccuracy);
+        EnemyStats stats = _stats;
+        if (overrideStats) stats = overrideStats;
+
+        angle += angleOffset + Random.Range(-stats.ShootInaccuracy, stats.ShootInaccuracy);
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
 
         EnemyBullet bullet = EnemyBulletPool.Instance.BulletPool.Get();
-        bullet.transform.position = transform.position;
+        bullet.transform.position = position;
         bullet.transform.rotation = rotation;
-        bullet.Initialize(_stats);
+        bullet.Initialize(stats);
+
+        return bullet;
     }
 
     protected abstract void ShootBulletPattern();
+
+    protected virtual void OnBulletTouchWall(RaycastHit2D raycastHit, float angle) {}
     
     protected virtual void Update()
     {
@@ -44,13 +52,6 @@ public abstract class EnemyAttack : MonoBehaviour
         if (_shootCooldown == 0 && _enemyVision.CanSeePlayer)
         {
             ShootBulletPattern();
-            // CreateBullet(0);
-            // if (_stats.Type == "shoot_triple")
-            // {
-            //     CreateBullet(-20);
-            //     CreateBullet(20);
-            // }
-
             _shootCooldown = _stats.ShootCooldown + Random.Range(-_stats.ShootCooldownOffsetMax, _stats.ShootCooldownOffsetMax);
         }
     }

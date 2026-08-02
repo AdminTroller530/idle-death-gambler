@@ -6,7 +6,6 @@ public class EnemyStats : ScriptableObject
     [Header("Identification")]
     public int Id;
     public string Name;
-    public string Type;
 
     [Header("Base Stats")]
     public float MaxHealth;

@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32315491d1a5e96449cde41f22144ede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CherriesAttack
+  _splitBulletStats: {fileID: 11400000, guid: fecd4357c8710d74392be64584cccca4, type: 2}
 --- !u!114 &8801277769053805880
 MonoBehaviour:
   m_ObjectHideFlags: 0

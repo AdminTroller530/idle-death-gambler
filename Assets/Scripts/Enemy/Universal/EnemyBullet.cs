@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Pool;
@@ -20,6 +21,11 @@ public class EnemyBullet : MonoBehaviour
 
     private ObjectPool<EnemyBullet> _bulletPool;
     private bool _isReturned = false;
+
+    private const float WALL_COLLISION_COOLDOWN = 0.04f;
+    [SerializeField] private LayerMask _wallMask;
+
+    public event Action<RaycastHit2D, float> OnTouchWall; // <RaycastHit, angle>
 
     public void Initialize(EnemyStats stats)
     {
@@ -53,12 +59,11 @@ public class EnemyBullet : MonoBehaviour
         _isReturned = false;
     }
 
-    private void TryReturnToPool()
+    private void ReturnToPool()
     {
-        if (!_isReturned) {
-            _isReturned = true;
-            _bulletPool.Release(this);
-        }
+        _isReturned = true;
+        OnTouchWall = null;
+        _bulletPool.Release(this);
     }
 
     private void Update()
@@ -66,7 +71,7 @@ public class EnemyBullet : MonoBehaviour
         transform.Translate(Vector2.right * _speed * Time.deltaTime);
 
         _lifetime -= Time.deltaTime;
-        if (_lifetime < 0) TryReturnToPool();
+        if (_lifetime < 0) ReturnToPool();
 
         if (_isParried) _spriteRenderer.sprite = _sprites[1];
         else _spriteRenderer.sprite = _sprites[0];
@@ -74,6 +79,8 @@ public class EnemyBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (_isReturned) return;
+
         if (!_isParried && other.gameObject.tag == "Player")
         {
             if (PlayerParry.IsParrying)
@@ -82,6 +89,7 @@ public class EnemyBullet : MonoBehaviour
                 float angle = Mathf.Atan2(_mousePos.y - transform.position.y, _mousePos.x - transform.position.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(0, 0, angle);
 
+                _maxLifetime *= 3;
                 _lifetime = _maxLifetime;
                 _speed *= 1.5f;
                 _damage *= 2;
@@ -90,17 +98,19 @@ public class EnemyBullet : MonoBehaviour
             }
             else {
                 _playerHealth.TakeEnemyDamage(gameObject, (int)_damage);
-                TryReturnToPool();
+                ReturnToPool();
             }
         }
         if (_isParried && other.gameObject.tag == "Enemy")
         {
             other.GetComponent<EnemyHealth>().TakeDamage(_damage);
-            TryReturnToPool();
+            ReturnToPool();
         }
-        else if (other.gameObject.tag == "Wall")
+        else if (other.gameObject.tag == "Wall" && _maxLifetime - _lifetime > WALL_COLLISION_COOLDOWN)
         {
-            TryReturnToPool();
+            RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, transform.rotation * Vector2.right, 1f, _wallMask);
+            OnTouchWall?.Invoke(raycastHit, transform.eulerAngles.z);
+            ReturnToPool();
         }
     }
 }

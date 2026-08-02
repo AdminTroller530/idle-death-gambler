@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   Id: 1
   Name: Cherries
-  Type: single
   MaxHealth: 20
   MoveSpeed: 4
   CollisionDamage: 2
@@ -22,8 +21,8 @@ MonoBehaviour:
   BulletDamage: 1
   BulletLifetime: 3
   BulletStartOffset: 1
-  BulletHitboxOffset: {x: 0.03, y: 0.03}
-  BulletHitboxSize: {x: 0.25, y: 0.7}
+  BulletHitboxOffset: {x: 0.06, y: 0.03}
+  BulletHitboxSize: {x: 0.35, y: 0.8}
   ShootCooldown: 1.1
   ShootCooldownOffsetMax: 0.2
   ShootInaccuracy: 3

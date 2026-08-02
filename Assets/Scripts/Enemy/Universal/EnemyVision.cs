@@ -15,7 +15,7 @@ public class EnemyVision : MonoBehaviour
     private void Update()
     {
         Debug.DrawRay(transform.position, _playerTransform.position - transform.position, Color.red);
-        _ray = Physics2D.CircleCast(transform.position, 0.3f, _playerTransform.position - transform.position, Vector2.Distance(transform.position, _playerTransform.position), _wallMask);
+        _ray = Physics2D.CircleCast(transform.position, 0.5f, _playerTransform.position - transform.position, Vector2.Distance(transform.position, _playerTransform.position), _wallMask);
         CanSeePlayer = !_ray.collider;
     }
 }

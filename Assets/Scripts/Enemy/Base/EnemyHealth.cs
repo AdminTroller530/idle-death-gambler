@@ -12,7 +12,7 @@ public abstract class EnemyHealth : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private Material _defaultMaterial;
     private Material _damageFlashMaterial;
-    private const float DAMAGE_FLASH_TIME = 0.075f;
+    private const float DAMAGE_FLASH_TIME = 0.05f;
 
     protected virtual void Awake()
     {
