@@ -30,6 +30,9 @@ public class PlayerShoot : MonoBehaviour
     private float _reloadTimer = 0;
     [SerializeField] private TextMeshProUGUI _ammoText;
 
+    private int _initialChipsAmount = 100;
+    private int _chipsPerShot = 5;
+
     private PlayerGunVisual _playerGunVisual;
     [SerializeField] private Transform _shootPoint;
 
@@ -50,6 +53,7 @@ public class PlayerShoot : MonoBehaviour
     private void Start()
     {
         TempStart();
+        ChipsManager.SetChipsAmount(_initialChipsAmount);
         EquipGun(0);
         // _gunsAmmo[0] = _magSize;
         // UpdateAmmoText();
@@ -144,12 +148,13 @@ public class PlayerShoot : MonoBehaviour
     void Update()
     {
         if (_shootCooldown > 0) _shootCooldown -= Time.deltaTime;
-        if (_currentGun && _gunsAmmo[_gunSlot] > 0 && _isHoldingShoot && _shootCooldown <= 0 && !_isReloading && !PlayerParry.IsParrying)
+        if (_currentGun && ChipsManager.GetChipsAmount() >= _chipsPerShot && _isHoldingShoot && _shootCooldown <= 0 && !_isReloading && !PlayerParry.IsParrying)
         {
             ShootBullet();
             
             _shootCooldown = _shootCooldownMax;
             _gunsAmmo[_gunSlot] -= 1;
+            ChipsManager.DecreaseChips(_chipsPerShot);
             UpdateAmmoText();
         }
 
@@ -158,6 +163,7 @@ public class PlayerShoot : MonoBehaviour
         {
             _isReloading = false;
             _gunsAmmo[_gunSlot] = _magSize;
+            ChipsManager.SetChipsAmount(_initialChipsAmount);
             UpdateAmmoText();
         }
     }
