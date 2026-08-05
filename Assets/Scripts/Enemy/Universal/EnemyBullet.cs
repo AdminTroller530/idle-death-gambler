@@ -22,7 +22,8 @@ public class EnemyBullet : MonoBehaviour
     private ObjectPool<EnemyBullet> _bulletPool;
     private bool _isReturned = false;
 
-    private const float WALL_COLLISION_COOLDOWN = 0.04f;
+    private float _wallCollisionCooldown;
+
     [SerializeField] private LayerMask _wallMask;
 
     public event Action<RaycastHit2D, float> OnTouchWall; // <RaycastHit, angle>
@@ -36,6 +37,7 @@ public class EnemyBullet : MonoBehaviour
         _sprites = stats.BulletSprites;
         _collider.offset = stats.BulletHitboxOffset;
         _collider.size = stats.BulletHitboxSize;
+        _wallCollisionCooldown = stats.BulletWallCollisionCooldown;
         _playerHealth = PlayerManager.Instance.Health;
 
         transform.Translate(Vector2.right * stats.BulletStartOffset);
@@ -92,7 +94,7 @@ public class EnemyBullet : MonoBehaviour
                 _maxLifetime *= 3;
                 _lifetime = _maxLifetime;
                 _speed *= 1.5f;
-                _damage *= 2;
+                _damage *= 4;
                 PlayerParry.WasParrySuccessful = true;
                 _isParried = true;
             }
@@ -106,9 +108,9 @@ public class EnemyBullet : MonoBehaviour
             other.GetComponent<EnemyHealth>().TakeDamage(_damage);
             ReturnToPool();
         }
-        else if (other.gameObject.tag == "Wall" && _maxLifetime - _lifetime > WALL_COLLISION_COOLDOWN)
+        else if (other.gameObject.tag == "Wall" && _maxLifetime - _lifetime >= _wallCollisionCooldown)
         {
-            RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, transform.rotation * Vector2.right, 1f, _wallMask);
+            RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, transform.rotation * Vector2.right, 1.2f, _wallMask);
             OnTouchWall?.Invoke(raycastHit, transform.eulerAngles.z);
             ReturnToPool();
         }

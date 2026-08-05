@@ -16,13 +16,13 @@ MonoBehaviour:
   Name: Cherries Split Bullet
   MaxHealth: 0
   MoveSpeed: 0
-  CollisionDamage: 0
   BulletSpeed: 10
   BulletDamage: 1
   BulletLifetime: 0.4
   BulletStartOffset: 0
   BulletHitboxOffset: {x: 0, y: 0}
   BulletHitboxSize: {x: 0.25, y: 0.25}
+  BulletWallCollisionCooldown: 0.04
   ShootCooldown: 0
   ShootCooldownOffsetMax: 0
   ShootInaccuracy: 0
