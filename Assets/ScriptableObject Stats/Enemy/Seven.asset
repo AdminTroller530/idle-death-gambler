@@ -16,12 +16,14 @@ MonoBehaviour:
   Name: Seven
   MaxHealth: 7
   MoveSpeed: 7
+  ChipsDropped: 7
   BulletSpeed: 7
   BulletDamage: 1
   BulletLifetime: 7
   BulletStartOffset: 1
   BulletHitboxOffset: {x: 0, y: 0}
   BulletHitboxSize: {x: 0.4, y: 0.4}
+  BulletWallCollisionCooldown: 0
   ShootCooldown: 2
   ShootCooldownOffsetMax: 0.2
   ShootInaccuracy: 0

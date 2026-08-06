@@ -31,7 +31,7 @@ public class PlayerShoot : MonoBehaviour
 
     private void Start()
     {
-        ChipsManager.SetChipsAmount(_initialChipsAmount);
+        ChipsManager.Instance.SetChipsAmount(_initialChipsAmount);
         SetStats(PlayerManager.Instance.BaseStats);
     }
 
@@ -76,12 +76,12 @@ public class PlayerShoot : MonoBehaviour
     private void Update()
     {
         if (_shootCooldown > 0) _shootCooldown -= Time.deltaTime;
-        if (ChipsManager.GetChipsAmount() >= _chipsPerShot && _isHoldingShoot && _shootCooldown <= 0 && !PlayerParry.IsParrying)
+        if (ChipsManager.Instance.GetChipsAmount() >= _chipsPerShot && _isHoldingShoot && _shootCooldown <= 0 && !PlayerParry.IsParrying)
         {
             ShootBullet();
             
             _shootCooldown = _shootCooldownMax;
-            ChipsManager.DecreaseChips(_chipsPerShot);
+            ChipsManager.Instance.DecreaseChips(_chipsPerShot);
         }
     }
 }

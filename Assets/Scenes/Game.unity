@@ -528,7 +528,7 @@ Transform:
   m_GameObject: {fileID: 574987578}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6, y: 0.25, z: 0}
+  m_LocalPosition: {x: 0.6, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -617,7 +617,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 000000002fb1675ba3f5866d0f5b271df718ab90d39705db
+  m_ApplyToSortingLayers: 000000002fb1675ba3f5866d0f5b271df718ab90d39705dbb9361d38
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -694,6 +694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _chipsText: {fileID: 1793412923}
+  _chipPrefab: {fileID: -6108967133854300871, guid: 4bc48280165b21b44ab6e0df77cb0a30, type: 3}
 --- !u!4 &677053472
 Transform:
   m_ObjectHideFlags: 0
@@ -772,7 +773,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1533522223
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 8efec0ade9c61444bb1a691a29f80a51, type: 3}
@@ -970,7 +971,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1533522223
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: f8bdbd5ea66615242afa37504cf2511b, type: 3}
@@ -1124,7 +1125,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1867835145
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -1724770994067823944, guid: 5b31926c6d753794f87ab8a4763c38df, type: 3}
@@ -2321,10 +2322,10 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1867835145
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: -1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 6c65bd173baddaf43beb1a1f1b386a7c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e85454bbf2e61d246b279acf50989e36, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2346,7 +2347,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6f3d5dc9aada1d4aa0bbdfc1c9342a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _spriteRendererUI: {fileID: 0}
 --- !u!1 &1940447685
 GameObject:
   m_ObjectHideFlags: 0
@@ -2646,7 +2646,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1533522223
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 7b744d5c8f3747c4c8fbabd182ca53cd, type: 3}

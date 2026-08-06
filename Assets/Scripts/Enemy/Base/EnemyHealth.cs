@@ -48,6 +48,10 @@ public abstract class EnemyHealth : MonoBehaviour
 
     protected virtual void Death()
     {
+        for (int i = 0; i < _stats.ChipsDropped; i++)
+        {
+            ChipsManager.Instance.SpawnChip(transform.position, 1);
+        }
         Destroy(gameObject);
     }
 }

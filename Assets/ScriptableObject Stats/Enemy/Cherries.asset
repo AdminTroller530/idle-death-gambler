@@ -16,13 +16,14 @@ MonoBehaviour:
   Name: Cherries
   MaxHealth: 20
   MoveSpeed: 4
-  CollisionDamage: 2
+  ChipsDropped: 24
   BulletSpeed: 10
   BulletDamage: 1
   BulletLifetime: 3
   BulletStartOffset: 1
   BulletHitboxOffset: {x: 0.06, y: 0.03}
   BulletHitboxSize: {x: 0.35, y: 0.8}
+  BulletWallCollisionCooldown: 0
   ShootCooldown: 1.1
   ShootCooldownOffsetMax: 0.2
   ShootInaccuracy: 3

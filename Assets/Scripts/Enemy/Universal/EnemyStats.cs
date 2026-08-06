@@ -10,6 +10,7 @@ public class EnemyStats : ScriptableObject
     [Header("Base Stats")]
     public float MaxHealth;
     public float MoveSpeed;
+    public float ChipsDropped;
 
     [Header("Shooting Stats")]
     public float BulletSpeed;
