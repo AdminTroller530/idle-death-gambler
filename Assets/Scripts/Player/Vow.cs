@@ -12,17 +12,17 @@ public abstract class Vow
     public virtual void OnTakeEnemyDamage(GameObject enemy, PlayerManager playerManager) {}
 }
 
-public class HurtReloadVow : Vow
-{
-    public override string GetName() {return "Blood Ammo";}
-    public override string GetDescriptionGood() {return "Upon taking damage, instantly reload half your gun's ammo";}
-    public override string GetDescriptionBad() {return "Manual reload time +50%";} // NOT IMPLEMENTED
+// public class HurtReloadVow : Vow
+// {
+//     public override string GetName() {return "Blood Ammo";}
+//     public override string GetDescriptionGood() {return "Upon taking damage, instantly reload half your gun's ammo";}
+//     public override string GetDescriptionBad() {return "Manual reload time +50%";} // NOT IMPLEMENTED
 
-    public override void OnTakeEnemyDamage(GameObject enemy, PlayerManager playerManager)
-    {
-        playerManager.Shoot.InstantReload(0.5f);
-    }
-}
+//     public override void OnTakeEnemyDamage(GameObject enemy, PlayerManager playerManager)
+//     {
+//         playerManager.Shoot.InstantReload(0.5f);
+//     }
+// }
 
 public class TestVow : Vow
 {

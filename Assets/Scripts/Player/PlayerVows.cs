@@ -17,8 +17,8 @@ public class PlayerVows : MonoBehaviour
     {
         PlayerHealth.OnPlayerTakeEnemyDamage += CallOnTakeEnemyDamage;
 
-        HurtReloadVow vow = new HurtReloadVow();
-        Vows.Add(new VowsList(vow, vow.GetName(), vow.GetDescriptionGood(), vow.GetDescriptionBad()));
+        // HurtReloadVow vow = new HurtReloadVow();
+        // Vows.Add(new VowsList(vow, vow.GetName(), vow.GetDescriptionGood(), vow.GetDescriptionBad()));
 
         StartCoroutine(CallUpdate());
     }

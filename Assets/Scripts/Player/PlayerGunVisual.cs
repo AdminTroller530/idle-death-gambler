@@ -7,8 +7,6 @@ public class PlayerGunVisual : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private float _shootAngle;
     private Direction _gunOrientation = Right;
-
-    [SerializeField] private SpriteRenderer _spriteRendererUI;
     
     private const float GUN_ORIENTATION_DEADZONE = 10f;
     private const float SPRITE_OFFSET = 0.6f;
@@ -34,11 +32,5 @@ public class PlayerGunVisual : MonoBehaviour
             _gunOrientation = Left;
         }
         transform.rotation = Quaternion.Euler(0, 0, _shootAngle);
-    }
-
-    public void SetSprite(Sprite gunSprite)
-    {
-        _spriteRenderer.sprite = gunSprite;
-        _spriteRendererUI.sprite = gunSprite;
     }
 }

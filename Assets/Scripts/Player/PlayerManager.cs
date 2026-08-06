@@ -6,6 +6,8 @@ public class PlayerManager : Singleton<PlayerManager>
     public PlayerShoot Shoot {get; private set;}
     public Transform Transform {get; private set;}
 
+    [SerializeField] public PlayerBaseStats BaseStats;
+
     protected override void Awake()
     {
         base.Awake();

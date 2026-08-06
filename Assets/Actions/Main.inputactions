@@ -25,45 +25,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Reload",
-                    "type": "Button",
-                    "id": "bdf2043b-99ca-42a6-8bbf-f670f9595230",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Parry",
                     "type": "Button",
                     "id": "37e55048-5620-4683-a47b-b50ee76f84bc",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Weapon Slot 1",
-                    "type": "Button",
-                    "id": "8294e6fb-7433-43bb-8fee-7f4cc2016e78",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Weapon Slot 2",
-                    "type": "Button",
-                    "id": "c79c6131-3d32-4a9c-8286-d7a2bc079df9",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Weapon Slot 3",
-                    "type": "Button",
-                    "id": "9fcc2ea4-33cb-4778-80a5-3e98db5c0eb0",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -266,50 +230,6 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Parry",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6fa211e5-1b9e-4c2c-b12b-c7b84f1c5a40",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Reload",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0531e03c-fec6-4f42-bf5a-a127a30f75ed",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Weapon Slot 1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "bc670fc5-8162-444a-9537-b032b7d77726",
-                    "path": "<Keyboard>/2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Weapon Slot 2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1340a1a2-0f68-4df4-83cd-0b60934bd929",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Weapon Slot 3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
