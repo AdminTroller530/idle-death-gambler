@@ -8,7 +8,6 @@ public class ChipsManager : Singleton<ChipsManager>
     private const float CHIPS_DISPLAY_UPDATE_SPEED = 7f;
     [SerializeField] private TextMeshProUGUI _chipsText;
 
-    private const float CHIPS_DROP_OFFSET_MAX = 1f;
     [SerializeField] private ChipPrefab _chipPrefab;
 
     protected override void Awake()
@@ -42,8 +41,7 @@ public class ChipsManager : Singleton<ChipsManager>
 
     public void SpawnChip(Vector2 pos, int value)
     {
-        Vector2 spawnPos = pos + new Vector2(Random.Range(-CHIPS_DROP_OFFSET_MAX, CHIPS_DROP_OFFSET_MAX), Random.Range(-CHIPS_DROP_OFFSET_MAX, CHIPS_DROP_OFFSET_MAX));
-        ChipPrefab chip = Instantiate(_chipPrefab, spawnPos, transform.rotation);
+        ChipPrefab chip = Instantiate(_chipPrefab, pos, transform.rotation);
         chip.Initialize(value);
     }
 }
