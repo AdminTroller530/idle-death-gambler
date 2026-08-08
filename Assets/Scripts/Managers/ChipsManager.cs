@@ -41,7 +41,9 @@ public class ChipsManager : Singleton<ChipsManager>
 
     public void SpawnChip(Vector2 pos, int value)
     {
-        ChipPrefab chip = Instantiate(_chipPrefab, pos, transform.rotation);
+        // ChipPrefab chip = Instantiate(_chipPrefab, pos, Quaternion.identity);
+        ChipPrefab chip = ChipsPool.Instance.ChipPool.Get();
+        chip.transform.position = pos;
         chip.Initialize(value);
     }
 }

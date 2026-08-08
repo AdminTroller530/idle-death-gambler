@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class ChipPrefab : MonoBehaviour
 {
@@ -10,12 +11,17 @@ public class ChipPrefab : MonoBehaviour
     private const float GRAVITY = 0.4f;
     private const int FIXED_UPDATE_CALLS_MAX = 20;
     private int _fixedUpdateCalls;
+
     private Rigidbody2D _rigidbody;
     private Vector2 _velocity;
     private Transform _playerTransform;
+
     private const float PLAYER_MAGNET_DISTANCE = 3f;
     private float _playerMagnetSpeed;
     private const float PLAYER_MAGNET_ACCELERATION = 35f;
+
+    private ObjectPool<ChipPrefab> _chipPool;
+    private bool _isReturned = false;
 
     private void Awake()
     {
@@ -25,14 +31,22 @@ public class ChipPrefab : MonoBehaviour
     private void Start()
     {
         _playerTransform = PlayerManager.Instance.Transform;
+        _chipPool = ChipsPool.Instance.ChipPool;
     }
 
     private void OnEnable()
     {
+        _isReturned = false;
         _fixedUpdateCalls = 0;
         _isCollected = false;
         _playerMagnetSpeed = 0f;
         _velocity = new Vector2((Random.value > 0.5f ? 1 : -1) * Random.Range(VELOCITY_OFFSET_MAX_X/4, VELOCITY_OFFSET_MAX_X), Random.Range(VELOCITY_OFFSET_MAX_Y/2, VELOCITY_OFFSET_MAX_Y));
+    }
+
+    private void ReturnToPool()
+    {
+        _isReturned = true;
+        _chipPool.Release(this);
     }
 
     public void Initialize(int value)
@@ -65,11 +79,13 @@ public class ChipPrefab : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (_isReturned) return;
+
         if (other.gameObject.tag == "Player" && !_isCollected)
         {
             ChipsManager.Instance.IncreaseChips(_value);
             _isCollected = true;
-            Destroy(gameObject);
+            ReturnToPool();
         }
     }
 }
