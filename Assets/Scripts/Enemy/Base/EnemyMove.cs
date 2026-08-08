@@ -3,6 +3,7 @@ using Pathfinding;
 
 public abstract class EnemyMove : MonoBehaviour
 {
+    protected EnemyBase _enemyBase;
     protected EnemyStats _stats;
     protected Rigidbody2D _rigidbody;
     protected bool _hasSeenPlayer = false;
@@ -16,18 +17,33 @@ public abstract class EnemyMove : MonoBehaviour
 
     protected AIPath _path;
 
+    protected bool _isDead = false;
+
     protected virtual void Awake()
     {
+        _enemyBase = GetComponent<EnemyBase>();
         _enemyVision = GetComponent<EnemyVision>();
         _playerTransform = PlayerManager.Instance.Transform;
         _rigidbody = gameObject.GetComponent<Rigidbody2D>();
         _path = GetComponent<AIPath>();
     }
 
+    protected virtual void OnEnable()
+    {
+        _enemyBase.OnDeath += BecomeDead;
+    }
+
+    protected virtual void OnDisable()
+    {
+        _enemyBase.OnDeath -= BecomeDead;
+    }
+
     protected virtual void Start()
     {
-        _stats = GetComponent<EnemyBase>().Stats;
+        _stats = _enemyBase.Stats;
     }
+
+    private void BecomeDead() {_isDead = true;}
 
     private void ManageKnockbackStun()
     {
@@ -50,12 +66,21 @@ public abstract class EnemyMove : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (_isDead)
+        {
+            _rigidbody.linearVelocity = Vector2.zero;
+            _path.canMove = false;
+            return;
+        }
+
         ControlMovement();
         ManageKnockbackStun();
     }
 
     protected virtual void FixedUpdate()
     {
+        if (_isDead) return;
+
         // damp knockback velocity over time
         if (_currentKnockback.magnitude > 0.1f) _currentKnockback *= 0.85f;
         else _currentKnockback = Vector2.zero;

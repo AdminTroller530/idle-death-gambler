@@ -5,6 +5,7 @@ using System.Collections;
 public abstract class EnemyHealth : MonoBehaviour
 {
     protected EnemyStats _stats;
+    protected EnemyBase _enemyBase;
 
     protected float _health;
     [SerializeField] protected TextMeshProUGUI _healthText; //temp
@@ -14,16 +15,32 @@ public abstract class EnemyHealth : MonoBehaviour
     private Material _damageFlashMaterial;
     private const float DAMAGE_FLASH_TIME = 0.05f;
 
+    private Animator _animator;
+
+    protected bool _isDead = false;
+
     protected virtual void Awake()
     {
+        _enemyBase = GetComponent<EnemyBase>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
+    }
+
+    protected virtual void OnEnable()
+    {
+        _enemyBase.OnDeath += BecomeDead;
+    }
+
+    protected virtual void OnDisable()
+    {
+        _enemyBase.OnDeath -= BecomeDead;
     }
 
     protected virtual void Start()
     {
-        _stats = GetComponent<EnemyBase>().Stats;
-        _defaultMaterial = GetComponent<EnemyBase>().DefaultMaterial;
-        _damageFlashMaterial = GetComponent<EnemyBase>().DamageFlashMaterial;
+        _stats = _enemyBase.Stats;
+        _defaultMaterial = _enemyBase.DefaultMaterial;
+        _damageFlashMaterial = _enemyBase.DamageFlashMaterial;
         _health = _stats.MaxHealth;
     }
 
@@ -41,17 +58,26 @@ public abstract class EnemyHealth : MonoBehaviour
 
     public virtual void TakeDamage(float damage)
     {
+        if (_isDead) return;
+
         _health -= damage;
         StartCoroutine(DamageFlash());
-        if (_health <= 0) Death();
+        if (_health <= 0) StartCoroutine(Death());
     }
 
-    protected virtual void Death()
+    private void BecomeDead() {_isDead = true;}
+
+    protected virtual IEnumerator Death()
     {
+        GetComponent<EnemyBase>().TriggerOnDeath();
+
+        if (_animator.runtimeAnimatorController) _animator.SetTrigger("Die");
         for (int i = 0; i < _stats.ChipsDropped; i++)
         {
             ChipsManager.Instance.SpawnChip(transform.position, 1);
         }
+
+        yield return new WaitForSeconds(3);
         Destroy(gameObject);
     }
 }

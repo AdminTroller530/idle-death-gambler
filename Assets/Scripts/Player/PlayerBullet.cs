@@ -50,7 +50,7 @@ public class PlayerBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" && !other.gameObject.GetComponent<EnemyBase>().IsDead)
         {
             other.gameObject.GetComponent<EnemyHealth>().TakeDamage(_damage);
             other.gameObject.GetComponent<EnemyMove>().TakeKnockback(transform.rotation * Vector2.right, _knockback);
