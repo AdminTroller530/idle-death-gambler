@@ -1,5 +1,14 @@
+using System;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+
+public enum ChipValue
+{
+    White = 1,
+    Red = 5,
+    Blue = 10
+}
 
 public class ChipsManager : Singleton<ChipsManager>
 {
@@ -10,9 +19,15 @@ public class ChipsManager : Singleton<ChipsManager>
 
     [SerializeField] private ChipPrefab _chipPrefab;
 
+    private ChipValue[] _chipValues; // stores chip values in descending order
+
     protected override void Awake()
     {
         base.Awake();
+
+        _chipValues = (ChipValue[]) Enum.GetValues(typeof(ChipValue));
+        _chipValues = _chipValues.Reverse().ToArray();
+        SpawnChips(Vector2.zero, 0);
     }
 
     private void Update()
@@ -39,9 +54,20 @@ public class ChipsManager : Singleton<ChipsManager>
         _chipsAmount += amount;
     }
 
-    public void SpawnChip(Vector2 pos, int value)
+    public void SpawnChips(Vector2 pos, int totalValue)
     {
-        // ChipPrefab chip = Instantiate(_chipPrefab, pos, Quaternion.identity);
+        foreach (ChipValue chipValue in _chipValues)
+        {
+            while (totalValue >= (int)chipValue)
+            {
+                SpawnChip(pos, chipValue);
+                totalValue -= (int)chipValue;
+            }
+        }
+    }
+
+    private void SpawnChip(Vector2 pos, ChipValue value)
+    {
         ChipPrefab chip = ChipsPool.Instance.ChipPool.Get();
         chip.transform.position = pos;
         chip.Initialize(value);

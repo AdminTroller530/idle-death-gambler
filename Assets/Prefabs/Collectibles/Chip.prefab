@@ -106,6 +106,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2173a19d3635c43478231e42a87acac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  _chipSpriteMappings:
+  - ChipValue: 1
+    Sprite: {fileID: 21300000, guid: 3e1ce6c2866aa834a87e99af1d223f44, type: 3}
+  - ChipValue: 5
+    Sprite: {fileID: 21300000, guid: af2976e3e13567c4885cda88bab8f974, type: 3}
+  - ChipValue: 10
+    Sprite: {fileID: 21300000, guid: 87b52f34e7da8bf4698d445156f1249a, type: 3}
 --- !u!61 &1426837831997690432
 BoxCollider2D:
   m_ObjectHideFlags: 0

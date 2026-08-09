@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   Id: -1
   Name: Test Enemy
-  Type: single
   MaxHealth: 20
   MoveSpeed: 4
-  CollisionDamage: 2
+  ChipsDropped: 0
   BulletSpeed: 10
   BulletDamage: 1
   BulletLifetime: 3
   BulletStartOffset: 1
   BulletHitboxOffset: {x: 0, y: 0}
   BulletHitboxSize: {x: 0.8, y: 0.25}
+  BulletWallCollisionCooldown: 0
   ShootCooldown: 1.1
   ShootCooldownOffsetMax: 0.2
   ShootInaccuracy: 3

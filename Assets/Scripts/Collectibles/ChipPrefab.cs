@@ -12,6 +12,7 @@ public class ChipPrefab : MonoBehaviour
     private const int FIXED_UPDATE_CALLS_MAX = 20;
     private int _fixedUpdateCalls;
 
+    private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody;
     private Vector2 _velocity;
     private Transform _playerTransform;
@@ -23,8 +24,18 @@ public class ChipPrefab : MonoBehaviour
     private ObjectPool<ChipPrefab> _chipPool;
     private bool _isReturned = false;
 
+    [System.Serializable]
+    public struct ChipSpriteMapping
+    {
+        public ChipValue ChipValue;
+        public Sprite Sprite;
+    }
+
+    [SerializeField] private ChipSpriteMapping[] _chipSpriteMappings;
+
     private void Awake()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -49,9 +60,19 @@ public class ChipPrefab : MonoBehaviour
         _chipPool.Release(this);
     }
 
-    public void Initialize(int value)
+    public void Initialize(ChipValue value)
     {
-        _value = value;
+        _value = (int)value;
+
+        foreach (ChipSpriteMapping chipSpriteMapping in _chipSpriteMappings)
+        {
+            if (chipSpriteMapping.ChipValue == value)
+            {
+                _spriteRenderer.sprite = chipSpriteMapping.Sprite;
+                return;
+            }
+            _spriteRenderer.sprite = _chipSpriteMappings[0].Sprite; // fallback
+        }
     }
 
     private void FixedUpdate()
