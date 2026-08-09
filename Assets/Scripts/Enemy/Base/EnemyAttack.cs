@@ -11,22 +11,10 @@ public abstract class EnemyAttack : MonoBehaviour
     protected Transform _playerTransform;
     protected PlayerHealth _playerHealth;
 
-    protected bool _isDead = false;
-
     protected virtual void Awake()
     {
         _enemyBase = GetComponent<EnemyBase>();
         _enemyVision = GetComponent<EnemyVision>();
-    }
-
-    protected virtual void OnEnable()
-    {
-        _enemyBase.OnDeath += BecomeDead;
-    }
-
-    protected virtual void OnDisable()
-    {
-        _enemyBase.OnDeath -= BecomeDead;
     }
 
     protected virtual void Start()
@@ -35,8 +23,6 @@ public abstract class EnemyAttack : MonoBehaviour
         _playerHealth = PlayerManager.Instance.Health;
         _stats = _enemyBase.Stats;
     }
-
-    private void BecomeDead() {_isDead = true;}
 
     protected float GetAngleToPlayer() => Mathf.Atan2(_playerTransform.position.y - transform.position.y, _playerTransform.position.x - transform.position.x) * Mathf.Rad2Deg;
 
@@ -62,7 +48,7 @@ public abstract class EnemyAttack : MonoBehaviour
     
     protected virtual void Update()
     {
-        if (_isDead) return;
+        if (_enemyBase.IsDead) return;
 
         if (_shootCooldown > 0) _shootCooldown -= Time.deltaTime;
         else _shootCooldown = 0;

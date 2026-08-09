@@ -17,8 +17,6 @@ public abstract class EnemyMove : MonoBehaviour
 
     protected AIPath _path;
 
-    protected bool _isDead = false;
-
     protected virtual void Awake()
     {
         _enemyBase = GetComponent<EnemyBase>();
@@ -28,22 +26,10 @@ public abstract class EnemyMove : MonoBehaviour
         _path = GetComponent<AIPath>();
     }
 
-    protected virtual void OnEnable()
-    {
-        _enemyBase.OnDeath += BecomeDead;
-    }
-
-    protected virtual void OnDisable()
-    {
-        _enemyBase.OnDeath -= BecomeDead;
-    }
-
     protected virtual void Start()
     {
         _stats = _enemyBase.Stats;
     }
-
-    private void BecomeDead() {_isDead = true;}
 
     private void ManageKnockbackStun()
     {
@@ -66,7 +52,7 @@ public abstract class EnemyMove : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (_isDead)
+        if (_enemyBase.IsDead)
         {
             _rigidbody.linearVelocity = Vector2.zero;
             _path.canMove = false;
@@ -79,7 +65,7 @@ public abstract class EnemyMove : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if (_isDead) return;
+        if (_enemyBase.IsDead) return;
 
         // damp knockback velocity over time
         if (_currentKnockback.magnitude > 0.1f) _currentKnockback *= 0.85f;

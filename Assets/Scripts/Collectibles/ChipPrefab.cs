@@ -16,7 +16,7 @@ public class ChipPrefab : MonoBehaviour
     private Vector2 _velocity;
     private Transform _playerTransform;
 
-    private const float PLAYER_MAGNET_DISTANCE = 3f;
+    private const float PLAYER_MAGNET_DISTANCE = 3.5f;
     private float _playerMagnetSpeed;
     private const float PLAYER_MAGNET_ACCELERATION = 35f;
 

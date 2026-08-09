@@ -59,9 +59,9 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if (_waveSpawnDone && _currentEnemies.TrueForAll(e => !e))
+        if (_waveSpawnDone && _currentEnemies.TrueForAll(e => !e || e.GetComponent<EnemyBase>().IsDead))
         {
-
+            _currentEnemies.Clear();
             if (_currentWave < _waves.Count - 1) // prepare to spawn next wave
             {
                 if (_waveTimer > 0) _waveTimer -= Time.deltaTime;

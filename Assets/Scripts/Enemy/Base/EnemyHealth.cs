@@ -17,23 +17,11 @@ public abstract class EnemyHealth : MonoBehaviour
 
     private Animator _animator;
 
-    protected bool _isDead = false;
-
     protected virtual void Awake()
     {
         _enemyBase = GetComponent<EnemyBase>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
-    }
-
-    protected virtual void OnEnable()
-    {
-        _enemyBase.OnDeath += BecomeDead;
-    }
-
-    protected virtual void OnDisable()
-    {
-        _enemyBase.OnDeath -= BecomeDead;
     }
 
     protected virtual void Start()
@@ -58,18 +46,16 @@ public abstract class EnemyHealth : MonoBehaviour
 
     public virtual void TakeDamage(float damage)
     {
-        if (_isDead) return;
+        if (_enemyBase.IsDead) return;
 
         _health -= damage;
         StartCoroutine(DamageFlash());
         if (_health <= 0) StartCoroutine(Death());
     }
 
-    private void BecomeDead() {_isDead = true;}
-
     protected virtual IEnumerator Death()
     {
-        GetComponent<EnemyBase>().TriggerOnDeath();
+        _enemyBase.IsDead = true;
 
         if (_animator.runtimeAnimatorController) _animator.SetTrigger("Die");
         for (int i = 0; i < _stats.ChipsDropped; i++)
