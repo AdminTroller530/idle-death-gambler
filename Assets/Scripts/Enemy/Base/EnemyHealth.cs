@@ -15,6 +15,8 @@ public abstract class EnemyHealth : MonoBehaviour
     private Material _damageFlashMaterial;
     private const float DAMAGE_FLASH_TIME = 0.05f;
 
+    private float _fadeOutValue = 10;
+    private const float FADE_OUT_SPEED = 12;
     private Animator _animator;
 
     protected virtual void Awake()
@@ -62,8 +64,15 @@ public abstract class EnemyHealth : MonoBehaviour
         {
             ChipsManager.Instance.SpawnChip(transform.position, 1);
         }
+        yield return new WaitForSeconds(1.5f);
 
-        yield return new WaitForSeconds(3);
+        while (_fadeOutValue > 1)
+        {
+            _fadeOutValue -= FADE_OUT_SPEED * Time.deltaTime;
+            _spriteRenderer.color = new Color(1, 1, 1, Mathf.Log10(_fadeOutValue));
+            yield return null;
+        }
+
         Destroy(gameObject);
     }
 }

@@ -5,6 +5,7 @@ public abstract class EnemyMove : MonoBehaviour
 {
     protected EnemyBase _enemyBase;
     protected EnemyStats _stats;
+    protected BoxCollider2D _boxCollider;
     protected Rigidbody2D _rigidbody;
     protected bool _hasSeenPlayer = false;
 
@@ -22,6 +23,7 @@ public abstract class EnemyMove : MonoBehaviour
         _enemyBase = GetComponent<EnemyBase>();
         _enemyVision = GetComponent<EnemyVision>();
         _playerTransform = PlayerManager.Instance.Transform;
+        _boxCollider = gameObject.GetComponent<BoxCollider2D>();
         _rigidbody = gameObject.GetComponent<Rigidbody2D>();
         _path = GetComponent<AIPath>();
     }
@@ -54,6 +56,7 @@ public abstract class EnemyMove : MonoBehaviour
     {
         if (_enemyBase.IsDead)
         {
+            _boxCollider.enabled = false;
             _rigidbody.linearVelocity = Vector2.zero;
             _path.canMove = false;
             return;
