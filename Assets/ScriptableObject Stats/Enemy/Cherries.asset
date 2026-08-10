@@ -16,6 +16,7 @@ MonoBehaviour:
   Name: Cherries
   MaxHealth: 20
   MoveSpeed: 4
+  PreferredDistanceFromPlayer: 10
   ChipsDropped: 24
   BulletSpeed: 10
   BulletDamage: 1

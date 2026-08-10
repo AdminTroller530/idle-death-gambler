@@ -7,6 +7,7 @@ public abstract class EnemyMove : MonoBehaviour
     protected EnemyStats _stats;
     protected BoxCollider2D _boxCollider;
     protected Rigidbody2D _rigidbody;
+    protected Animator _animator;
     protected bool _hasSeenPlayer = false;
 
     protected Transform _playerTransform;
@@ -22,6 +23,7 @@ public abstract class EnemyMove : MonoBehaviour
     {
         _enemyBase = GetComponent<EnemyBase>();
         _enemyVision = GetComponent<EnemyVision>();
+        _animator = GetComponent<Animator>();
         _playerTransform = PlayerManager.Instance.Transform;
         _boxCollider = gameObject.GetComponent<BoxCollider2D>();
         _rigidbody = gameObject.GetComponent<Rigidbody2D>();
@@ -48,8 +50,10 @@ public abstract class EnemyMove : MonoBehaviour
         }
 
         _path.destination = _playerTransform.position;
-        if (_enemyVision.CanSeePlayer) _path.endReachedDistance = 10;
+        if (_enemyVision.CanSeePlayer) _path.endReachedDistance = _stats.PreferredDistanceFromPlayer;
         else _path.endReachedDistance = 0;
+        
+        if (_animator.runtimeAnimatorController) _animator.SetBool("IsWalking", !_path.reachedEndOfPath);
     }
 
     protected virtual void Update()

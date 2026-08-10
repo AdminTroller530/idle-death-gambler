@@ -16,6 +16,7 @@ MonoBehaviour:
   Name: Seven
   MaxHealth: 7
   MoveSpeed: 7
+  PreferredDistanceFromPlayer: 7
   ChipsDropped: 7
   BulletSpeed: 7
   BulletDamage: 1
@@ -30,4 +31,4 @@ MonoBehaviour:
   EnemySprites: {fileID: 21300000, guid: 491577c536ba0294482e5b4eb1074da0, type: 3}
   BulletSprites:
   - {fileID: 21300000, guid: 269d103d92f1dff47a592b1c114bfbd5, type: 3}
-  - {fileID: 21300000, guid: 269d103d92f1dff47a592b1c114bfbd5, type: 3}
+  - {fileID: 21300000, guid: 543915dfbae34e44ba506cc0b782431e, type: 3}
