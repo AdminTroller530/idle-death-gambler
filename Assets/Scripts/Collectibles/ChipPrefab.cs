@@ -63,6 +63,7 @@ public class ChipPrefab : MonoBehaviour
     public void Initialize(ChipValue value)
     {
         _value = (int)value;
+        _spriteRenderer.sortingOrder = (int)value;
 
         foreach (ChipSpriteMapping chipSpriteMapping in _chipSpriteMappings)
         {
