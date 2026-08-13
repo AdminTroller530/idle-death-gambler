@@ -110,8 +110,11 @@ public class EnemyBullet : MonoBehaviour
         }
         else if (other.gameObject.tag == "Wall" && _maxLifetime - _lifetime >= _wallCollisionCooldown)
         {
-            RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, transform.rotation * Vector2.right, 1.2f, _wallMask);
-            OnTouchWall?.Invoke(raycastHit, transform.eulerAngles.z);
+            if (!_isParried)
+            {
+                RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, transform.rotation * Vector2.right, 1.2f, _wallMask);
+                OnTouchWall?.Invoke(raycastHit, transform.eulerAngles.z);
+            }
             ReturnToPool();
         }
     }
