@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private BoxCollider2D _enterTrigger;
     [SerializeField] private GameObject _doors;
     private bool _wavesStarted = false;
+
+    public static event Action OnEnemyWaveCompleted;
 
     private void SpawnEnemy(int id, Vector2 pos)
     {
@@ -76,6 +79,7 @@ public class EnemySpawner : MonoBehaviour
                 // Debug.Log("waves defeated");
                 AudioController.Instance.UpdateLowPass(0);
                 _doors.SetActive(false);
+                OnEnemyWaveCompleted?.Invoke();
                 _waveSpawnDone = false;
                 PlayerMovement.InCombat = false;
             }

@@ -22,7 +22,7 @@ MonoBehaviour:
   BulletSpeed: 7
   BulletDamage: 1
   BulletLifetime: 7
-  BulletStartOffset: 1
+  BulletStartOffset: 0.7
   BulletHitboxOffset: {x: 0, y: 0}
   BulletHitboxSize: {x: 0.4, y: 0.4}
   BulletWallCollisionCooldown: 0

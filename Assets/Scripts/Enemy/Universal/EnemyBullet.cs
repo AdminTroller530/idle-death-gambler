@@ -61,10 +61,18 @@ public class EnemyBullet : MonoBehaviour
     {
         _isParried = false;
         _isReturned = false;
+        EnemySpawner.OnEnemyWaveCompleted += ReturnToPool;
+    }
+
+    private void OnDisable()
+    {
+        EnemySpawner.OnEnemyWaveCompleted -= ReturnToPool;
     }
 
     private void ReturnToPool()
     {
+        if (_isReturned) return;
+
         _isReturned = true;
         OnTouchWall = null;
         _bulletPool.Release(this);
@@ -83,8 +91,6 @@ public class EnemyBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (_isReturned) return;
-
         if (!_isParried && other.gameObject.tag == "Player")
         {
             if (PlayerParry.IsParrying)
