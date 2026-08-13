@@ -16,11 +16,13 @@ public class EnemyBullet : MonoBehaviour
 
     private BoxCollider2D _collider;
     private SpriteRenderer _spriteRenderer;
+    private ParticleSystem _destroyParticles;
 
     private Vector2 _mousePos;
     private bool _isParried = false;
 
     private ObjectPool<EnemyBullet> _bulletPool;
+    private bool _isDestroyed = false; // USE THIS TO IMPLEMENT DESTROY PARTICLES
     private bool _isReturned = false;
 
     private float _wallCollisionCooldown;
@@ -49,6 +51,7 @@ public class EnemyBullet : MonoBehaviour
     {
         _collider = GetComponent<BoxCollider2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _destroyParticles = GetComponent<ParticleSystem>();
     }
 
     private void Start()
@@ -60,6 +63,7 @@ public class EnemyBullet : MonoBehaviour
     private void OnEnable()
     {
         _isParried = false;
+        _isDestroyed = false;
         _isReturned = false;
         EnemySpawner.OnEnemyWaveCompleted += ReturnToPool;
     }
@@ -75,6 +79,7 @@ public class EnemyBullet : MonoBehaviour
 
         _isReturned = true;
         OnTouchWall = null;
+        _destroyParticles.Play();
         _bulletPool.Release(this);
     }
 
@@ -105,6 +110,7 @@ public class EnemyBullet : MonoBehaviour
                 _damage *= 4;
                 PlayerParry.WasParrySuccessful = true;
                 _isParried = true;
+                _destroyParticles.Play();
             }
             else {
                 _playerHealth.TakeEnemyDamage(_originEnemy, (int)_damage);
