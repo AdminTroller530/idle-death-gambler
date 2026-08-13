@@ -16,7 +16,9 @@ MonoBehaviour:
   Name: Test Enemy
   MaxHealth: 20
   MoveSpeed: 4
+  PreferredDistanceFromPlayer: 0
   ChipsDropped: 0
+  CollisionDamage: 1
   BulletSpeed: 10
   BulletDamage: 1
   BulletLifetime: 3

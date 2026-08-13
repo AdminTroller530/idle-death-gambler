@@ -12,6 +12,7 @@ public class EnemyStats : ScriptableObject
     public float MoveSpeed;
     public float PreferredDistanceFromPlayer;
     public int ChipsDropped;
+    public int CollisionDamage;
 
     [Header("Shooting Stats")]
     public float BulletSpeed;

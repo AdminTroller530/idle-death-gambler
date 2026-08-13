@@ -6,6 +6,7 @@ using UnityEngine.Pool;
 public class EnemyBullet : MonoBehaviour
 {
     private PlayerHealth _playerHealth;
+    private GameObject _originEnemy;
 
     private float _speed;
     private int _damage;
@@ -28,8 +29,9 @@ public class EnemyBullet : MonoBehaviour
 
     public event Action<RaycastHit2D, float> OnTouchWall; // <RaycastHit, angle>
 
-    public void Initialize(EnemyStats stats)
+    public void Initialize(EnemyStats stats, GameObject originEnemy)
     {
+        _originEnemy = originEnemy;
         _speed = stats.BulletSpeed;
         _damage = stats.BulletDamage;
         _lifetime = stats.BulletLifetime;
@@ -99,7 +101,7 @@ public class EnemyBullet : MonoBehaviour
                 _isParried = true;
             }
             else {
-                _playerHealth.TakeEnemyDamage(gameObject, (int)_damage);
+                _playerHealth.TakeEnemyDamage(_originEnemy, (int)_damage);
                 ReturnToPool();
             }
         }

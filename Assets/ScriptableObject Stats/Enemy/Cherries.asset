@@ -18,6 +18,7 @@ MonoBehaviour:
   MoveSpeed: 4
   PreferredDistanceFromPlayer: 10
   ChipsDropped: 24
+  CollisionDamage: 1
   BulletSpeed: 10
   BulletDamage: 1
   BulletLifetime: 3

@@ -37,7 +37,7 @@ public abstract class EnemyAttack : MonoBehaviour
         EnemyBullet bullet = EnemyBulletPool.Instance.BulletPool.Get();
         bullet.transform.position = position;
         bullet.transform.rotation = rotation;
-        bullet.Initialize(stats);
+        bullet.Initialize(stats, gameObject);
 
         return bullet;
     }

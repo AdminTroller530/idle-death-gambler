@@ -87,4 +87,12 @@ public abstract class EnemyMove : MonoBehaviour
         _knockbackStunTimer = _knockbackStunTimerMax;
         _path.canMove = false;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            PlayerManager.Instance.Health.TakeEnemyDamage(gameObject, _stats.CollisionDamage);
+        }
+    }
 }
