@@ -6,17 +6,20 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _move, _moveAnim;
     private string _dirPriority = "hor";
     private Vector2 _dir = Vector2.right;
+
     private float _speed = 8f;
+    private float _baseSpeed = 8f;
+
     private Rigidbody2D _rigidbody;
     public static bool InCombat = false;
 
-    private Animator _anim;
+    private Animator _animator;
     private SpriteRenderer _sr;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _anim = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
         _sr = GetComponent<SpriteRenderer>();
     }
 
@@ -37,11 +40,11 @@ public class PlayerMovement : MonoBehaviour
         if (_moveAnim != Vector2.zero) _dir = _moveAnim;
         _sr.flipX = _dir.x < 0;
 
-        _anim.SetFloat("MoveX", _moveAnim.x);
-        _anim.SetFloat("MoveY", _moveAnim.y);
-        _anim.SetFloat("IdleX", _dir.x);
-        _anim.SetFloat("IdleY", _dir.y);
-        _anim.SetFloat("Velocity", _move.magnitude);
+        _animator.SetFloat("MoveX", _moveAnim.x);
+        _animator.SetFloat("MoveY", _moveAnim.y);
+        _animator.SetFloat("IdleX", _dir.x);
+        _animator.SetFloat("IdleY", _dir.y);
+        _animator.SetFloat("Velocity", _move.magnitude);
     }
 
     private void FixedUpdate()
@@ -53,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        _speed = InCombat ? 8f : 13f;
+        _speed = InCombat ? _baseSpeed : _baseSpeed * 1.5f;
+        if (PlayerParry.IsParrying) _speed /= 8;
     }
 }

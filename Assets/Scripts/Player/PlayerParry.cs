@@ -3,8 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerParry : MonoBehaviour
 {
-    [SerializeField] private Sprite[] _sprites;
-    private SpriteRenderer _spriteRenderer;
+    private Animator _animator;
     
     private float _parryTimerMax = 0.25f;
     private float _parryTimer = 0;
@@ -16,7 +15,7 @@ public class PlayerParry : MonoBehaviour
 
     void Awake()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -33,8 +32,7 @@ public class PlayerParry : MonoBehaviour
             IsParrying = false;
         }
 
-        if (IsParrying) _spriteRenderer.sprite = _sprites[1];
-        else _spriteRenderer.sprite = _sprites[0];
+        _animator.SetBool("IsParrying", IsParrying);
     }
 
     public void Parry(InputAction.CallbackContext context)
