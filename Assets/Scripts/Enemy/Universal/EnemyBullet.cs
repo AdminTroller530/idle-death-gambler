@@ -76,12 +76,12 @@ public class EnemyBullet : MonoBehaviour
         var destroyParticlesColor = _destroyParticles.main;
         destroyParticlesColor.startColor = new ParticleSystem.MinMaxGradient(new Color(255, 0, 0), new Color(128, 0, 0));
 
-        EnemySpawner.OnEnemyWaveCompleted += StartDestroyBulletCoroutine;
+        EnemySpawner.OnEnemyWaveCompleted += DestroyBulletFlip;
     }
 
     private void OnDisable()
     {
-        EnemySpawner.OnEnemyWaveCompleted -= StartDestroyBulletCoroutine;
+        EnemySpawner.OnEnemyWaveCompleted -= DestroyBulletFlip;
     }
 
     private void ReturnToPool()
@@ -100,13 +100,21 @@ public class EnemyBullet : MonoBehaviour
         transform.Translate(Vector2.right * _speed * Time.deltaTime);
 
         _lifetime -= Time.deltaTime;
-        if (_lifetime < 0) StartDestroyBulletCoroutine();
+        if (_lifetime < 0) DestroyBulletFlip();
 
         if (_isParried) _spriteRenderer.sprite = _sprites[1];
         else _spriteRenderer.sprite = _sprites[0];
     }
 
-    private void StartDestroyBulletCoroutine() {StartCoroutine(DestroyBullet());}
+    private void FlipRotationAngle()
+    {
+        transform.rotation = Quaternion.Euler(0, 0, transform.eulerAngles.z + 180);
+    }
+
+    private void DestroyBulletFlip() {
+        FlipRotationAngle();
+        StartCoroutine(DestroyBullet());
+    }
 
     private IEnumerator DestroyBullet()
     {
@@ -145,13 +153,13 @@ public class EnemyBullet : MonoBehaviour
             }
             else {
                 _playerHealth.TakeEnemyDamage(_originEnemy, (int)_damage);
-                StartDestroyBulletCoroutine();
+                StartCoroutine(DestroyBullet());
             }
         }
         if (_isParried && other.gameObject.tag == "Enemy")
         {
             other.GetComponent<EnemyHealth>().TakeDamage(_damage);
-            StartDestroyBulletCoroutine();
+            StartCoroutine(DestroyBullet());
         }
         else if (other.gameObject.tag == "Wall" && _maxLifetime - _lifetime >= _wallCollisionCooldown)
         {
@@ -161,7 +169,7 @@ public class EnemyBullet : MonoBehaviour
                 OnTouchWall?.Invoke(raycastHit, transform.eulerAngles.z);
             }
 
-            if (_hasWallDestroyParticles || _isParried) StartDestroyBulletCoroutine();
+            if (_hasWallDestroyParticles || _isParried) StartCoroutine(DestroyBullet());
             else ReturnToPool();
         }
     }
