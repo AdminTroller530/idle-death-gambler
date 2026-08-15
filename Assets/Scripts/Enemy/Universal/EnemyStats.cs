@@ -12,19 +12,20 @@ public class EnemyStats : ScriptableObject
     public float MoveSpeed;
     public float PreferredDistanceFromPlayer;
     public int ChipsDropped;
-    public int CollisionDamage;
+    public int CollisionDamage = 1;
 
     [Header("Shooting Stats")]
     public float BulletSpeed;
-    public int BulletDamage;
+    public int BulletDamage = 1;
     public float BulletLifetime;
     public float BulletStartOffset;
     public Vector2 BulletHitboxOffset;
     public Vector2 BulletHitboxSize;
-    public float BulletWallCollisionCooldown;
+    public float BulletWallCollisionCooldown = 0;
+    public bool BulletHasWallDestroyParticles = true;
     public float ShootCooldown;
     public float ShootCooldownOffsetMax;
-    public float ShootInaccuracy;
+    public float ShootInaccuracy = 0;
 
     [Header("Sprites")]
     public Sprite EnemySprites;
