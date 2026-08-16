@@ -124,7 +124,7 @@ public class EnemyBullet : MonoBehaviour
         _light.enabled = false;
         _spriteRenderer.enabled = false;
         _destroyParticles.Play();
-        while (_destroyParticles.isPlaying) yield return null;
+        yield return new WaitUntil(() => _destroyParticles.isStopped);
         
         ReturnToPool();
     }
