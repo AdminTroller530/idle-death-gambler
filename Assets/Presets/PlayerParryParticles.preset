@@ -6,7 +6,7 @@ Preset:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EnemyBulletDestroyParticle
+  m_Name: PlayerParryParticles
   m_TargetType:
     m_NativeTypeID: 198
     m_ManagedTypePPtr: {fileID: 0}
@@ -434,11 +434,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: InitialModule.startSpeed.scalar
-    value: 1.5
+    value: 9
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: InitialModule.startSpeed.minScalar
-    value: 1
+    value: 8
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: InitialModule.startSpeed.maxCurve.m_Curve.Array.size
@@ -610,7 +610,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: InitialModule.startColor.minColor.g
-    value: 0
+    value: 0.5019608
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: InitialModule.startColor.minColor.b
@@ -626,7 +626,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: InitialModule.startColor.maxColor.g
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: InitialModule.startColor.maxColor.b
@@ -2118,15 +2118,15 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: InitialModule.gravityModifier.minMaxState
-    value: 3
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: InitialModule.gravityModifier.scalar
-    value: 2
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: InitialModule.gravityModifier.minScalar
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: InitialModule.gravityModifier.maxCurve.m_Curve.Array.size
@@ -2294,7 +2294,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: ShapeModule.type
-    value: 10
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: ShapeModule.angle
@@ -2346,7 +2346,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: ShapeModule.m_Rotation.z
-    value: 80
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: ShapeModule.m_Scale.x
@@ -2810,7 +2810,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: ShapeModule.arc.value
-    value: 200
+    value: 360
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: ShapeModule.arc.mode
@@ -3358,7 +3358,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
-    value: 8
+    value: 10
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
@@ -3566,15 +3566,15 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].inSlope
-    value: -1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].outSlope
-    value: -1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].tangentMode
-    value: 34
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].weightedMode
@@ -3598,15 +3598,15 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].inSlope
-    value: -1
+    value: -2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].outSlope
-    value: -1
+    value: -2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].tangentMode
-    value: 34
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].weightedMode
@@ -8434,7 +8434,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: ClampVelocityModule.enabled
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: ClampVelocityModule.x.minMaxState
@@ -9142,7 +9142,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: ClampVelocityModule.dampen
-    value: 0
+    value: 0.2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: ClampVelocityModule.drag.minMaxState
@@ -17428,15 +17428,15 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_SortingLayerID
-    value: -620390445
+    value: -1788175063
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_SortingLayer
-    value: 4
+    value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_SortingOrder
-    value: -6
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_MaskInteraction

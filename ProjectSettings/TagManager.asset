@@ -51,6 +51,9 @@ TagManager:
   - name: Tiles
     uniqueID: 1837561251
     locked: 0
+  - name: Particles
+    uniqueID: 2506792233
+    locked: 0
   - name: Collectibles
     uniqueID: 941438649
     locked: 0

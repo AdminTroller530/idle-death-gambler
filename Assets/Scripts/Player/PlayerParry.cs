@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerParry : MonoBehaviour
 {
     private Animator _animator;
+    private ParticleSystem _parryParticles;
     
     private float _parryTimerMax = 0.25f;
     private float _parryTimer = 0;
@@ -16,6 +17,7 @@ public class PlayerParry : MonoBehaviour
     void Awake()
     {
         _animator = GetComponent<Animator>();
+        _parryParticles = GetComponent<ParticleSystem>();
     }
 
     void Update()
@@ -43,6 +45,7 @@ public class PlayerParry : MonoBehaviour
             WasParrySuccessful = false;
             _parryTimer = _parryTimerMax;
             _parryCooldown = _parryCooldownMax;
+            _parryParticles.Play();
         }
     }
 }
