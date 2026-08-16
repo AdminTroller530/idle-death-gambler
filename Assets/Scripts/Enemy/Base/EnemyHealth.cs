@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.Rendering.Universal;
 
 public abstract class EnemyHealth : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public abstract class EnemyHealth : MonoBehaviour
     [SerializeField] protected TextMeshProUGUI _healthText; //temp
 
     private SpriteRenderer _spriteRenderer;
+    private Light2D _light;
+    private const float DEFAULT_LIGHT_INTENSITY = 0.5f;
+    private const float LIGHT_INTENSITY_DROP_SPEED = 0.5f;
     private Material _defaultMaterial;
     private Material _damageFlashMaterial;
     private const float DAMAGE_FLASH_TIME = 0.05f;
@@ -23,20 +27,28 @@ public abstract class EnemyHealth : MonoBehaviour
     {
         _enemyBase = GetComponent<EnemyBase>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _light = GetComponent<Light2D>();
         _animator = GetComponent<Animator>();
+    }
+
+    protected virtual void OnEnable()
+    {
+        _light.intensity = DEFAULT_LIGHT_INTENSITY;
     }
 
     protected virtual void Start()
     {
         _stats = _enemyBase.Stats;
+        _health = _stats.MaxHealth;
         _defaultMaterial = _enemyBase.DefaultMaterial;
         _damageFlashMaterial = _enemyBase.DamageFlashMaterial;
-        _health = _stats.MaxHealth;
     }
 
     protected virtual void Update()
     {
         _healthText.text = ((int)_health).ToString();
+
+        if (_enemyBase.IsDead && _light.intensity > 0) _light.intensity -= LIGHT_INTENSITY_DROP_SPEED * Time.deltaTime;
     }
 
     protected virtual IEnumerator DamageFlash()
