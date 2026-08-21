@@ -10,16 +10,10 @@ public class PlayerShoot : MonoBehaviour
     private PlayerBullet _bulletPrefab;
     private bool _isHoldingShoot;
 
+    private PlayerBaseStats _stats;
     private float _shootCooldown = 0;
-    private float _shootCooldownMax;
-    private float _shootInaccuracyMax; // in DEGREES
-
-    private float _bulletSpeed;
-    private float _bulletLifetime;
-    private float _bulletKnockback;
 
     private int _initialChipsAmount = 100;
-    private int _chipsPerShot = 5;
 
     private PlayerGunVisual _playerGunVisual;
     [SerializeField] private Transform _shootPoint;
@@ -31,18 +25,8 @@ public class PlayerShoot : MonoBehaviour
 
     private void Start()
     {
+        _stats = PlayerManager.Instance.BaseStats;
         ChipsManager.Instance.SetChipsAmount(_initialChipsAmount);
-        SetStats(PlayerManager.Instance.BaseStats);
-    }
-
-    private void SetStats(PlayerBaseStats stats)
-    {
-        _chipsPerShot = stats.ChipsPerShot;
-        _bulletSpeed = stats.BulletSpeed;
-        _bulletLifetime = stats.BulletLifetime;
-        _bulletKnockback = stats.BulletKnockback;
-        _shootCooldownMax = stats.ShootCooldown;
-        _shootInaccuracyMax = stats.ShootInaccuracy;
     }
     
     public void Shoot(InputAction.CallbackContext context)
@@ -60,7 +44,7 @@ public class PlayerShoot : MonoBehaviour
     private Quaternion GetFinalShootAngle()
     {
         float angle = GetShootAngle();
-        angle += Random.Range(-_shootInaccuracyMax, _shootInaccuracyMax);
+        angle += Random.Range(-_stats.ShootInaccuracy, _stats.ShootInaccuracy);
         return Quaternion.Euler(0, 0, angle);
     }
 
@@ -70,18 +54,18 @@ public class PlayerShoot : MonoBehaviour
 
         bullet.transform.position = _shootPoint.position;
         bullet.transform.rotation = GetFinalShootAngle();
-        bullet.Initialize(_bulletSpeed, _bulletLifetime, _bulletKnockback, _chipsPerShot, 0f);
+        bullet.Initialize(_stats);
     }
 
     private void Update()
     {
         if (_shootCooldown > 0) _shootCooldown -= Time.deltaTime;
-        if (ChipsManager.Instance.GetChipsAmount() >= _chipsPerShot && _isHoldingShoot && _shootCooldown <= 0 && !PlayerParry.IsParrying)
+        if (_isHoldingShoot && _shootCooldown <= 0 && ChipsManager.Instance.GetChipsAmount() >= _stats.ChipsPerShot && !PlayerParry.IsParrying)
         {
             ShootBullet();
             
-            _shootCooldown = _shootCooldownMax;
-            ChipsManager.Instance.DecreaseChips(_chipsPerShot);
+            _shootCooldown = _stats.ShootCooldown;
+            ChipsManager.Instance.DecreaseChips(_stats.ChipsPerShot);
         }
     }
 }
