@@ -25,7 +25,7 @@ public class PlayerShoot : MonoBehaviour
 
     private void Start()
     {
-        _stats = PlayerManager.Instance.BaseStats;
+        _stats = Instantiate(PlayerManager.Instance.BaseStats);
         ChipsManager.Instance.SetChipsAmount(_initialChipsAmount);
     }
     
