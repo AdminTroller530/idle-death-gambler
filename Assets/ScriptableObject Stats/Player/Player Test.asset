@@ -15,6 +15,9 @@ MonoBehaviour:
   MaxHealth: 6
   MovementSpeed: 8
   ParryCooldown: 0.2
+  MeleeDamage: 5
+  MeleeCooldown: 0.4
+  MeleeKnockback: 15
   ChipsPerShot: 4
   BulletSpeed: 16
   BulletLifetime: 3

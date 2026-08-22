@@ -49,6 +49,8 @@ public abstract class EnemyHealth : MonoBehaviour
         _healthText.text = ((int)_health).ToString();
 
         if (_enemyBase.IsDead && _light.intensity > 0) _light.intensity -= LIGHT_INTENSITY_DROP_SPEED * Time.deltaTime;
+
+        if (_enemyBase.JustTookMeleeDamage && !PlayerMelee.IsMeleeing) _enemyBase.JustTookMeleeDamage = false;
     }
 
     protected virtual IEnumerator DamageFlash()
@@ -58,11 +60,12 @@ public abstract class EnemyHealth : MonoBehaviour
         _spriteRenderer.material = _defaultMaterial;
     }
 
-    public virtual void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage, bool isMelee = false)
     {
         if (_enemyBase.IsDead) return;
 
         _health -= damage;
+        if (isMelee) _enemyBase.JustTookMeleeDamage = true;
         StartCoroutine(DamageFlash());
         if (_health <= 0) StartCoroutine(Death());
     }

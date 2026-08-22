@@ -6,9 +6,9 @@ public class PlayerParry : MonoBehaviour
     private Animator _animator;
     private ParticleSystem _parryParticles;
     
-    private float _parryTimerMax = 0.25f;
+    private float _parryTimerMax = 0.25f; // how long the parry state stays effective
     private float _parryTimer = 0;
-    private float _parryCooldownMax = 0.2f;
+    private float _parryCooldownMax; // how long before player can parry again after a parry ends
     private float _parryCooldown = 0;
 
     public static bool IsParrying = false;
@@ -18,6 +18,11 @@ public class PlayerParry : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _parryParticles = GetComponent<ParticleSystem>();
+    }
+
+    void Start()
+    {
+        _parryCooldownMax = PlayerManager.Instance.BaseStats.ParryCooldown;
     }
 
     void Update()

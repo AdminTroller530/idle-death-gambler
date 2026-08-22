@@ -9,4 +9,5 @@ public class EnemyBase : MonoBehaviour // maybe could make this parent class of 
     [SerializeField] public Material DamageFlashMaterial;
 
     public bool IsDead = false;
+    public bool JustTookMeleeDamage = false;
 }

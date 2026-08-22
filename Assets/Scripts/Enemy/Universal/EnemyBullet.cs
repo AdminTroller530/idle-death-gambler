@@ -129,6 +129,16 @@ public class EnemyBullet : MonoBehaviour
         ReturnToPool();
     }
 
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        // if (_isDestroyed) return;
+
+        if (PlayerMelee.IsMeleeing && !_isParried && other.gameObject.tag == "PlayerMelee")
+        {
+            DestroyBulletFlip();
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (_isDestroyed) return;
@@ -156,6 +166,7 @@ public class EnemyBullet : MonoBehaviour
                 StartCoroutine(DestroyBullet());
             }
         }
+
         if (_isParried && other.gameObject.tag == "Enemy")
         {
             other.GetComponent<EnemyHealth>().TakeDamage(_damage);

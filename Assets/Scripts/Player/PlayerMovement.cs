@@ -57,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         _speed = InCombat ? _baseSpeed : _baseSpeed * 1.5f;
+        if (PlayerMelee.IsMeleeing) _speed /= 2;
         if (PlayerParry.IsParrying) _speed /= 16;
     }
 }

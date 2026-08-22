@@ -8,6 +8,11 @@ public class PlayerBaseStats : ScriptableObject
     public float MovementSpeed;
     public float ParryCooldown;
 
+    [Header("Melee Stats")]
+    public float MeleeDamage;
+    public float MeleeCooldown;
+    public float MeleeKnockback;
+
     [Header("Shooting Stats")]
     public int ChipsPerShot;
     public float BulletSpeed;
