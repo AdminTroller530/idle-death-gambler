@@ -49,7 +49,10 @@ TagManager:
   - name: Background
     uniqueID: 489118479
     locked: 0
-  - name: Tiles
+  - name: Ground
+    uniqueID: 3916112283
+    locked: 0
+  - name: Tiles Behind
     uniqueID: 1837561251
     locked: 0
   - name: Particles
@@ -63,6 +66,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2427132151
+    locked: 0
+  - name: Tiles In Front
+    uniqueID: 2637624671
     locked: 0
   - name: UI
     uniqueID: 1533522223

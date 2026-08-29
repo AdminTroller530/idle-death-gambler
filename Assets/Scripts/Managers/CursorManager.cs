@@ -7,7 +7,7 @@ public class CursorManager : MonoBehaviour
 
     [SerializeField] private Transform _followPointer;
     private Vector2 _mousePos;
-    private float _deadzone = 12f;
+    // private float _deadzone = 12f;
 
     private Transform _playerTransform;
 
@@ -26,7 +26,7 @@ public class CursorManager : MonoBehaviour
     {
         _mousePos = CursorTracker.Pos;
         Vector2 relPos = _mousePos - (Vector2)_playerTransform.position;
-        if (relPos.magnitude < _deadzone) relPos *= relPos.magnitude / _deadzone;
+        // if (relPos.magnitude < _deadzone) relPos *= relPos.magnitude / _deadzone;
 
         _followPointer.position = relPos + (Vector2)_playerTransform.position;
     }
