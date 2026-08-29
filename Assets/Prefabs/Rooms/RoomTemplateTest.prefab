@@ -716,8 +716,8 @@ MonoBehaviour:
   m_ShadowMesh:
     m_Mesh: {fileID: 0}
     m_LocalBounds:
-      m_Center: {x: -0.000015258789, y: 9.5, z: 0}
-      m_Extent: {x: 8.999985, y: 0.5, z: 0}
+      m_Center: {x: -0.000015258789, y: -0.5, z: 0}
+      m_Extent: {x: 9.999985, y: 10.5, z: 0}
     m_EdgeProcessing: 1
     m_TrimEdge: 0
     m_FlipX: 0
@@ -2354,6 +2354,7 @@ GameObject:
   - component: {fileID: 4188154207835110419}
   - component: {fileID: 8020487227473745448}
   - component: {fileID: 1771086775563378038}
+  - component: {fileID: 5698987772152460496}
   m_Layer: 7
   m_Name: Non-Collidable Tiles (Behind)
   m_TagString: Wall
@@ -2874,6 +2875,59 @@ TilemapRenderer:
   m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
+--- !u!114 &5698987772152460496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5637174465514787185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.2D.Runtime::UnityEngine.Rendering.Universal.ShadowCaster2D
+  m_ShadowGroup: 0
+  m_Priority: 0
+  m_ComponentVersion: 5
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_AlphaCutoff: 0.1
+  m_ApplyToSortingLayers: 000000000f5b271da3f5866db9361d38d39705dbf718ab902fb1675b
+  m_ShapePath:
+  - {x: -25, y: -16, z: 0}
+  - {x: -25, y: 16, z: 0}
+  - {x: 25, y: 16, z: 0}
+  - {x: 25, y: -16, z: 0}
+  m_ShapePathHash: 0
+  m_InstanceId: 0
+  m_ShadowShape2DComponent: {fileID: 2005757769832765255}
+  m_ShadowShape2DProvider:
+    rid: 3225568295442186327
+  m_ShadowCastingSource: 2
+  m_ShadowMesh:
+    m_Mesh: {fileID: 0}
+    m_LocalBounds:
+      m_Center: {x: -0.000015258789, y: -0.5, z: 0}
+      m_Extent: {x: 9.999985, y: 10.5, z: 0}
+    m_EdgeProcessing: 1
+    m_TrimEdge: 0
+    m_FlipX: 0
+    m_FlipY: 0
+    m_InitialTrim: 0
+  m_CastingOption: 1
+  m_PreviousTrimEdge: 0
+  m_PreviousEdgeProcessing: 1
+  m_PreviousShadowCastingSource: 2
+  m_PreviousShadowShape2DSource: {fileID: 2005757769832765255}
+  references:
+    version: 2
+    RefIds:
+    - rid: 3225568295442186327
+      type: {class: ShadowShape2DProvider_Collider2D, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
+      data: 
 --- !u!1 &6436298141898674711
 GameObject:
   m_ObjectHideFlags: 0
@@ -3104,6 +3158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9001087091145248653}
   - component: {fileID: 2718981161802395062}
+  - component: {fileID: 1011540244199030989}
   m_Layer: 0
   m_Name: Enter Trigger
   m_TagString: Wall
@@ -3172,6 +3227,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 18, y: 18}
   m_EdgeRadius: 0
+--- !u!114 &1011540244199030989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6805305255971993937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 263ae43fb1033184e81d14df59366ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &8320922964425232203
 GameObject:
   m_ObjectHideFlags: 0

@@ -49,15 +49,11 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(SpawnWave(_waves[_currentWave]));
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    public void OnEnterRoom()
     {
-        if (!_wavesStarted && _waves.Count > 0 && other.gameObject.tag == "Player")
+        if (!_wavesStarted && _waves.Count > 0)
         {
-            Debug.Log("enter");
-            if (_enterTrigger.bounds.Contains(other.bounds.min) && _enterTrigger.bounds.Contains(other.bounds.max))
-            {
-                StartWaves();
-            }
+            StartWaves();
         }
     }
 
