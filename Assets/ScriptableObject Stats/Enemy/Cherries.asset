@@ -24,7 +24,7 @@ MonoBehaviour:
   BulletLifetime: 3
   BulletStartOffset: 0.7
   BulletHitboxOffset: {x: 0.06, y: 0.03}
-  BulletHitboxSize: {x: 0.35, y: 0.8}
+  BulletHitboxSize: {x: 0.15, y: 0.3}
   BulletWallCollisionCooldown: 0
   BulletHasWallDestroyParticles: 0
   ShootCooldown: 1.1
