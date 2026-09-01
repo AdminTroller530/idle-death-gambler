@@ -5,4 +5,6 @@ public class RoomData : ScriptableObject
 {
     public string Name;
     public GameObject RoomPrefab;
+    public Direction EntranceDirection;
+    public Direction ExitDirection;
 }
