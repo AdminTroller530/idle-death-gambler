@@ -40,6 +40,11 @@ public class RoomGenerator : MonoBehaviour
         }
     }
 
+    public void GenerateLevelFromRoomsDeck(List<RoomCardData> deck)
+    {
+        // TODO
+    }
+
     private void AddRoomGraph(Vector2 center, int width, int depth)
     {
         GridGraph graph = AstarPath.active.data.AddGraph(typeof(GridGraph)) as GridGraph;
