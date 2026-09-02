@@ -8,8 +8,10 @@ public class RNGController : MonoBehaviour
     private static bool _useRandomSeed = true;
     private static Random _mapRNG;
     private static Random _itemRNG;
+    private static Random _roomCardRNG;
     private static int _mapRNGCount;
-    private static int _itemRNGcount;
+    private static int _itemRNGCount;
+    private static int _roomCardRNGCount;
 
     private void Awake()
     {
@@ -17,12 +19,19 @@ public class RNGController : MonoBehaviour
         
         _mapRNG = new Random(seed);
         _itemRNG = new Random(seed + 1);
+        _roomCardRNG = new Random(seed + 2);
     }
 
     public static int GetMapRNG(int min, int max) // min inclusive, max exclusive
     {
         _mapRNGCount++;
         return _mapRNG.Next(min, max);
+    }
+
+    public static int GetRoomCardRNG(int min, int max) // min inclusive, max exclusive
+    {
+        _roomCardRNGCount++;
+        return _roomCardRNG.Next(min, max);
     }
 
     private void LoadState() // implement with file i/o in the future
