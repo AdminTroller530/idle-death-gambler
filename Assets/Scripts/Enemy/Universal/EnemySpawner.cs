@@ -34,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
         for (int i=0; i<spawns.Count; i++)
         {
             yield return new WaitForSeconds(_timeBetweenSpawns);
-            SpawnEnemy(spawns[i].Id, spawns[i].Pos);
+            SpawnEnemy(spawns[i].Id, spawns[i].SpawnPointTransform.localPosition);
         }
         _waveSpawnDone = true;
     }

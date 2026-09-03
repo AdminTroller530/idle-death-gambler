@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawn
 {
     public int Id;
-    public Vector2 Pos;
+    public Transform SpawnPointTransform;
 }
 
 [System.Serializable]
