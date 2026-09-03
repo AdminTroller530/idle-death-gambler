@@ -11,13 +11,22 @@ public class RoomsDeckManager : MonoBehaviour
 
     [SerializeField] private RoomGenerator _roomGenerator;
 
-    private void InitializeRoomExitTransforms()
+    private void InitializeRoomReferences()
     {
         for (int i = 0; i < _allRoomCards.Count; i++)
         {
-            foreach (RoomData room in _allRoomCards[i].RoomPoolUp) room.ExitTransform = room.RoomPrefab.transform.Find("Doors").Find("Exit");
-            foreach (RoomData room in _allRoomCards[i].RoomPoolDown) room.ExitTransform = room.RoomPrefab.transform.Find("Doors").Find("Exit");
-            foreach (RoomData room in _allRoomCards[i].RoomPoolLeft) room.ExitTransform = room.RoomPrefab.transform.Find("Doors").Find("Exit");
+            foreach (RoomData room in _allRoomCards[i].RoomPoolUp) {
+                room.ExitTransform = room.RoomPrefab.transform.Find("Doors").Find("Exit");
+                room.EnterTrigger = room.RoomPrefab.transform.Find("Enter Trigger").GetComponent<BoxCollider2D>();
+            }
+            foreach (RoomData room in _allRoomCards[i].RoomPoolDown) {
+                room.ExitTransform = room.RoomPrefab.transform.Find("Doors").Find("Exit");
+                room.EnterTrigger = room.RoomPrefab.transform.Find("Enter Trigger").GetComponent<BoxCollider2D>();
+            }
+            foreach (RoomData room in _allRoomCards[i].RoomPoolLeft) {
+                room.ExitTransform = room.RoomPrefab.transform.Find("Doors").Find("Exit");
+                room.EnterTrigger = room.RoomPrefab.transform.Find("Enter Trigger").GetComponent<BoxCollider2D>();
+            }
         }
     }
 
@@ -43,22 +52,29 @@ public class RoomsDeckManager : MonoBehaviour
         }
     }
 
-    private void GenerateRoomFromCard(RoomCardData roomCard)
+    private void GenerateNextRoom()
     {
+        if (_roomsDeckCurrentIndex >= _roomsDeckShuffled.Count) return;
+
         _roomGenerator.GenerateRoom(_roomsDeckShuffled[_roomsDeckCurrentIndex]);
         _roomsDeckCurrentIndex++;
     }
 
+    private void AddCardToDeck(RoomCardData card)
+    {
+        _roomsDeck.Add(Instantiate(card));
+    }
+
     private void Awake()
     {
-        InitializeRoomExitTransforms();
-        _roomsDeck.Add(Instantiate(_allRoomCards[0]));
-        _roomsDeck.Add(Instantiate(_allRoomCards[1]));
-        _roomsDeck.Add(Instantiate(_allRoomCards[2]));
-        // Debug.Log(_roomsDeck[0].RoomPoolLeft[0].ExitTransform);
+        InitializeRoomReferences();
+        AddCardToDeck(_allRoomCards[0]);
+        AddCardToDeck(_allRoomCards[0]);
+        AddCardToDeck(_allRoomCards[0]);
 
         _roomsDeckShuffled = ShuffleRoomsDeck(_roomsDeck);
-        // PrintDeck(_roomsDeckShuffled);
-        // GenerateRoomFromCard(_roomsDeckShuffled[0]);
+        GenerateNextRoom();
+        GenerateNextRoom();
+        GenerateNextRoom();
     }
 }

@@ -8,4 +8,5 @@ public class RoomData : ScriptableObject
     public Direction EntranceDirection;
     public Direction ExitDirection;
     public Transform ExitTransform;
+    public BoxCollider2D EnterTrigger;
 }

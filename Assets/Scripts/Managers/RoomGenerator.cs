@@ -25,7 +25,7 @@ public class RoomGenerator : MonoBehaviour
     public static int RoomsSpawned = 0;
     private Vector2 _roomDimensions = new Vector2(20, 20);
     private int _hallLength = 10; // in unity units
-    private Vector2 _currentRoomPos = new Vector2(0, 0);
+    private Vector2 _currentRoomPos = new Vector2(10, 0);
 
     [SerializeField] private LayerMask _wallMask;
 
@@ -36,7 +36,7 @@ public class RoomGenerator : MonoBehaviour
         // spawning a few rooms for debug
         for (int i = 0; i < 12; i++)
         {
-            SpawnNextRoom();
+            // SpawnNextRoom();
         }
     }
 
@@ -45,18 +45,43 @@ public class RoomGenerator : MonoBehaviour
         List<RoomData> currentRoomPool;
         Direction entranceDir = _previousExitDir.Flip();
 
+        // choose correct room pool
         if (entranceDir == Up) currentRoomPool = roomCard.RoomPoolUp;
         else if (entranceDir == Down) currentRoomPool = roomCard.RoomPoolDown;
         else if (entranceDir == Left) currentRoomPool = roomCard.RoomPoolLeft;
         else return; // fallback
 
+        // randomly select room from pool and instantiate it
         RoomData room = currentRoomPool[RNGController.GetMapRNG(0, currentRoomPool.Count)];
         Instantiate(room.RoomPrefab, _currentRoomPos, Quaternion.identity, _tileGrid);
+
+        // add room to A* pathfinding grid
+        AddRoomGraph(_currentRoomPos + room.EnterTrigger.offset, (int)room.EnterTrigger.size.x, (int)room.EnterTrigger.size.y);
         
+        // update current room pos for next room
         _currentRoomPos += (Vector2)room.ExitTransform.localPosition;
+        _currentRoomPos += room.ExitDirection.ToDirectionVector();
+
+        GenerateNextHallway();
 
         _previousExitDir = room.ExitDirection;
         RoomsSpawned++;
+    }
+
+    private void GenerateNextHallway()
+    {
+        if (_previousExitDir == Up) {
+            Instantiate(_hallsUpDown[0], _currentRoomPos + _hallLength*0.5f * Vector2.up, transform.rotation, _tileGrid);
+            _currentRoomPos += Vector2.up * _hallLength;
+        }
+        else if (_previousExitDir == Down) {
+            Instantiate(_hallsUpDown[0], _currentRoomPos - _hallLength*0.5f * Vector2.up, transform.rotation, _tileGrid);
+            _currentRoomPos -= Vector2.up * _hallLength;
+        }
+        else { // (_previousExitDir == Right)
+            Instantiate(_hallsLeftRight[0], _currentRoomPos + _hallLength*0.5f * Vector2.right, transform.rotation, _tileGrid);
+            _currentRoomPos += Vector2.right * _hallLength;
+        }
     }
 
     private void AddRoomGraph(Vector2 center, int width, int depth)
