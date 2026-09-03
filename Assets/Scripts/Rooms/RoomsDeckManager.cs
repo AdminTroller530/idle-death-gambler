@@ -69,11 +69,10 @@ public class RoomsDeckManager : MonoBehaviour
     {
         InitializeRoomReferences();
         AddCardToDeck(_allRoomCards[0]);
-        AddCardToDeck(_allRoomCards[0]);
-        AddCardToDeck(_allRoomCards[0]);
+        AddCardToDeck(_allRoomCards[1]);
 
-        _roomsDeckShuffled = ShuffleRoomsDeck(_roomsDeck);
-        GenerateNextRoom();
+        _roomsDeckShuffled = _roomsDeck;
+        // _roomsDeckShuffled = ShuffleRoomsDeck(_roomsDeck);
         GenerateNextRoom();
         GenerateNextRoom();
     }

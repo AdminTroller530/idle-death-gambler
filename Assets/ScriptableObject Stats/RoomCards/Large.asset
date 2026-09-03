@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 482cc0acff8b7804db68aee04e690521, type: 3}
-  m_Name: Test1
+  m_Name: Large
   m_EditorClassIdentifier: Assembly-CSharp::RoomCardData
-  Name: TEST1
-  Description: Normal sized room with enemies
+  Name: Large Room
+  Description: Large sized room with enemies
   Sprite: {fileID: 0}
   RoomPoolUp: []
   RoomPoolDown: []
-  RoomPoolLeft: []
+  RoomPoolLeft:
+  - {fileID: 11400000, guid: 56cf8077cc181b04cbe4712bef901e70, type: 2}

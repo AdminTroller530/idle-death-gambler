@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a596be7904b64f47a923b47282e4c57, type: 3}
-  m_Name: Normal_TwoPillars
+  m_Name: Large_Zigzag
   m_EditorClassIdentifier: Assembly-CSharp::RoomData
-  Name: (Normal) Two Pillars
-  RoomPrefab: {fileID: 5326250155589425202, guid: d4be662a500a5f94dbbc8428cc43dca4, type: 3}
+  Name: (Large) Zigzag
+  RoomPrefab: {fileID: 5326250155589425202, guid: ae7fbd672292fe14092275ff708b3056, type: 3}
   EntranceDirection: 2
-  ExitDirection: 3
-  ExitTransform: {fileID: 3090176874956808022, guid: d4be662a500a5f94dbbc8428cc43dca4, type: 3}
-  EnterTrigger: {fileID: 1599470677561239742, guid: d4be662a500a5f94dbbc8428cc43dca4, type: 3}
+  ExitDirection: 1
+  ExitTransform: {fileID: 0}
+  EnterTrigger: {fileID: 0}

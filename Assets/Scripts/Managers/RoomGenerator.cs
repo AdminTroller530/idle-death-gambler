@@ -27,6 +27,8 @@ public class RoomGenerator : MonoBehaviour
     private int _hallLength = 10; // in unity units
     private Vector2 _currentRoomPos = new Vector2(10, 0);
 
+    private Vector2 WEIRD_UPDOWN_HALLWAY_OFFSET = new Vector2(0.5f, 0.5f);
+
     [SerializeField] private LayerMask _wallMask;
 
     private void Awake()
@@ -62,23 +64,23 @@ public class RoomGenerator : MonoBehaviour
         _currentRoomPos += (Vector2)room.ExitTransform.localPosition;
         _currentRoomPos += room.ExitDirection.ToDirectionVector();
 
-        GenerateNextHallway();
+        GenerateNextHallway(room.ExitDirection);
 
         _previousExitDir = room.ExitDirection;
         RoomsSpawned++;
     }
 
-    private void GenerateNextHallway()
+    private void GenerateNextHallway(Direction exitDirection)
     {
-        if (_previousExitDir == Up) {
-            Instantiate(_hallsUpDown[0], _currentRoomPos + _hallLength*0.5f * Vector2.up, transform.rotation, _tileGrid);
+        if (exitDirection == Up) {
+            Instantiate(_hallsUpDown[0], _currentRoomPos + _hallLength*0.5f * Vector2.up + WEIRD_UPDOWN_HALLWAY_OFFSET, transform.rotation, _tileGrid);
             _currentRoomPos += Vector2.up * _hallLength;
         }
-        else if (_previousExitDir == Down) {
-            Instantiate(_hallsUpDown[0], _currentRoomPos - _hallLength*0.5f * Vector2.up, transform.rotation, _tileGrid);
+        else if (exitDirection == Down) {
+            Instantiate(_hallsUpDown[0], _currentRoomPos - _hallLength*0.5f * Vector2.up + WEIRD_UPDOWN_HALLWAY_OFFSET, transform.rotation, _tileGrid);
             _currentRoomPos -= Vector2.up * _hallLength;
         }
-        else { // (_previousExitDir == Right)
+        else { // (exitDirection == Right)
             Instantiate(_hallsLeftRight[0], _currentRoomPos + _hallLength*0.5f * Vector2.right, transform.rotation, _tileGrid);
             _currentRoomPos += Vector2.right * _hallLength;
         }
@@ -96,6 +98,7 @@ public class RoomGenerator : MonoBehaviour
         graph.SetDimensions(width * 2, depth * 2, 0.5f);
     }
 
+    // OBSOLETE
     public void SpawnNextRoom()
     {
         // spawn hallway + update currentRoomPos
