@@ -7,8 +7,8 @@ public class PlayerMovement : MonoBehaviour
     private string _dirPriority = "hor";
     private Vector2 _dir = Vector2.right;
 
-    private float _speed = 8f;
-    private float _baseSpeed = 8f;
+    private float _speed;
+    private float _baseSpeed = 7f;
 
     private Rigidbody2D _rigidbody;
     public static bool InCombat = false;
@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        _speed = InCombat ? _baseSpeed : _baseSpeed * 1.5f;
+        _speed = InCombat ? _baseSpeed : _baseSpeed * 1.75f;
         if (PlayerMelee.IsMeleeing) _speed /= 2;
         if (PlayerParry.IsParrying) _speed /= 16;
     }
