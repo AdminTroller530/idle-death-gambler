@@ -7,4 +7,5 @@ public class RoomData : ScriptableObject
     public GameObject RoomPrefab;
     public Direction EntranceDirection;
     public Direction ExitDirection;
+    public Transform ExitTransform;
 }

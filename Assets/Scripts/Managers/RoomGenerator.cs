@@ -23,9 +23,9 @@ public class RoomGenerator : MonoBehaviour
     };
 
     public static int RoomsSpawned = 0;
-    private Vector2Int _roomDimensions = new Vector2Int(20, 20);
+    private Vector2 _roomDimensions = new Vector2(20, 20);
     private int _hallLength = 10; // in unity units
-    private Vector2Int _currentRoomPos = new Vector2Int(0, 0);
+    private Vector2 _currentRoomPos = new Vector2(0, 0);
 
     [SerializeField] private LayerMask _wallMask;
 
@@ -40,9 +40,23 @@ public class RoomGenerator : MonoBehaviour
         }
     }
 
-    public void GenerateLevelFromRoomsDeck(List<RoomCardData> deck)
+    public void GenerateRoom(RoomCardData roomCard)
     {
-        // TODO
+        List<RoomData> currentRoomPool;
+        Direction entranceDir = _previousExitDir.Flip();
+
+        if (entranceDir == Up) currentRoomPool = roomCard.RoomPoolUp;
+        else if (entranceDir == Down) currentRoomPool = roomCard.RoomPoolDown;
+        else if (entranceDir == Left) currentRoomPool = roomCard.RoomPoolLeft;
+        else return; // fallback
+
+        RoomData room = currentRoomPool[RNGController.GetMapRNG(0, currentRoomPool.Count)];
+        Instantiate(room.RoomPrefab, _currentRoomPos, Quaternion.identity, _tileGrid);
+        
+        _currentRoomPos += (Vector2)room.ExitTransform.localPosition;
+
+        _previousExitDir = room.ExitDirection;
+        RoomsSpawned++;
     }
 
     private void AddRoomGraph(Vector2 center, int width, int depth)
@@ -62,15 +76,15 @@ public class RoomGenerator : MonoBehaviour
         // spawn hallway + update currentRoomPos
         if (_previousExitDir == Up) {
             Instantiate(_hallsUpDown[0], _currentRoomPos + (_roomDimensions.y + _hallLength)*0.5f * Vector2.up, transform.rotation, _tileGrid);
-            _currentRoomPos += Vector2Int.up * (_roomDimensions.y + _hallLength);
+            _currentRoomPos += Vector2.up * (_roomDimensions.y + _hallLength);
         }
         else if (_previousExitDir == Down) {
             Instantiate(_hallsUpDown[0], _currentRoomPos - (_roomDimensions.y + _hallLength)*0.5f * Vector2.up, transform.rotation, _tileGrid);
-            _currentRoomPos -= Vector2Int.up * (_roomDimensions.y + _hallLength);
+            _currentRoomPos -= Vector2.up * (_roomDimensions.y + _hallLength);
         }
         else { // (_previousExitDir == Right)
             Instantiate(_hallsLeftRight[0], _currentRoomPos + (_roomDimensions.x + _hallLength)*0.5f * Vector2.right, transform.rotation, _tileGrid);
-            _currentRoomPos += Vector2Int.right * (_roomDimensions.x + _hallLength);
+            _currentRoomPos += Vector2.right * (_roomDimensions.x + _hallLength);
         }
         
         // spawn room of a randome type from all possible continuations
@@ -79,7 +93,7 @@ public class RoomGenerator : MonoBehaviour
         Instantiate(room, (Vector2)_currentRoomPos, transform.rotation, _tileGrid);
 
         // add new A* pathfinding graph at new room
-        AddRoomGraph(_currentRoomPos, _roomDimensions.x, _roomDimensions.y);
+        AddRoomGraph(_currentRoomPos, (int)_roomDimensions.x, (int)_roomDimensions.y);
 
         // set new previousExit for next iteration
         if (type == 0) _previousExitDir = _previousExitDir == Up ? Up : Down; // for _roomsUpDown

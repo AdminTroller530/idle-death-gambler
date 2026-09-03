@@ -7,8 +7,19 @@ public class RoomsDeckManager : MonoBehaviour
     [SerializeField] private List<RoomCardData> _allRoomCards;
     private List<RoomCardData> _roomsDeck = new List<RoomCardData>();
     private List<RoomCardData> _roomsDeckShuffled = new List<RoomCardData>();
+    private int _roomsDeckCurrentIndex = 0;
 
     [SerializeField] private RoomGenerator _roomGenerator;
+
+    private void InitializeRoomExitTransforms()
+    {
+        for (int i = 0; i < _allRoomCards.Count; i++)
+        {
+            foreach (RoomData room in _allRoomCards[i].RoomPoolUp) room.ExitTransform = room.RoomPrefab.transform.Find("Doors").Find("Exit");
+            foreach (RoomData room in _allRoomCards[i].RoomPoolDown) room.ExitTransform = room.RoomPrefab.transform.Find("Doors").Find("Exit");
+            foreach (RoomData room in _allRoomCards[i].RoomPoolLeft) room.ExitTransform = room.RoomPrefab.transform.Find("Doors").Find("Exit");
+        }
+    }
 
     private List<RoomCardData> ShuffleRoomsDeck(List<RoomCardData> deck)
     {
@@ -32,15 +43,22 @@ public class RoomsDeckManager : MonoBehaviour
         }
     }
 
+    private void GenerateRoomFromCard(RoomCardData roomCard)
+    {
+        _roomGenerator.GenerateRoom(_roomsDeckShuffled[_roomsDeckCurrentIndex]);
+        _roomsDeckCurrentIndex++;
+    }
 
     private void Awake()
     {
-        _roomsDeck.Add(_allRoomCards[0]);
-        _roomsDeck.Add(_allRoomCards[1]);
-        _roomsDeck.Add(_allRoomCards[2]);
+        InitializeRoomExitTransforms();
+        _roomsDeck.Add(Instantiate(_allRoomCards[0]));
+        _roomsDeck.Add(Instantiate(_allRoomCards[1]));
+        _roomsDeck.Add(Instantiate(_allRoomCards[2]));
+        // Debug.Log(_roomsDeck[0].RoomPoolLeft[0].ExitTransform);
 
         _roomsDeckShuffled = ShuffleRoomsDeck(_roomsDeck);
         // PrintDeck(_roomsDeckShuffled);
-        _roomGenerator.GenerateLevelFromRoomsDeck(_roomsDeckShuffled);
+        // GenerateRoomFromCard(_roomsDeckShuffled[0]);
     }
 }
