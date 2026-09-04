@@ -7824,3 +7824,4 @@ MonoBehaviour:
   _timeBetweenWaves: 1.5
   _enterTrigger: {fileID: 2718981161802395062}
   _doors: {fileID: 444625963527866310}
+  _enemySpawnIndicatorPrefab: {fileID: 4496604034116181824, guid: 0a29cd07efcb73b41b047f80071f35aa, type: 3}

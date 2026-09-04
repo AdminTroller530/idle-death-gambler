@@ -18,10 +18,19 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject _doors;
     private bool _wavesStarted = false;
 
+    [SerializeField] private GameObject _enemySpawnIndicatorPrefab;
+    private const float ENEMY_SPAWN_INDICATOR_TIME = 1.25f;
+
     public static event Action OnEnemyWaveCompleted;
 
-    private void SpawnEnemy(int id, Vector2 pos)
+    private IEnumerator SpawnEnemy(int id, Vector2 pos)
     {
+        GameObject spawnIndicator = Instantiate(_enemySpawnIndicatorPrefab, transform);
+        spawnIndicator.transform.localPosition = pos;
+
+        yield return new WaitForSeconds(ENEMY_SPAWN_INDICATOR_TIME);
+        Destroy(spawnIndicator);
+
         GameObject enemy = Instantiate(_enemyPrefabs[id], transform);
         enemy.transform.localPosition = pos;
         _currentEnemies.Add(enemy);
@@ -31,11 +40,16 @@ public class EnemySpawner : MonoBehaviour
     {
         _waveSpawnDone = false;
         List<EnemySpawn> spawns = wave.Spawns;
-        for (int i=0; i<spawns.Count; i++)
+        for (int i=0; i<spawns.Count - 1; i++)
         {
             yield return new WaitForSeconds(_timeBetweenSpawns);
-            SpawnEnemy(spawns[i].Id, spawns[i].SpawnPointTransform.localPosition);
+            StartCoroutine(SpawnEnemy(spawns[i].Id, spawns[i].SpawnPointTransform.localPosition));
         }
+
+        // spawn last enemy in wave and wait till said enemy appears
+        yield return new WaitForSeconds(_timeBetweenSpawns);
+        yield return StartCoroutine(SpawnEnemy(spawns[spawns.Count-1].Id, spawns[spawns.Count-1].SpawnPointTransform.localPosition));
+
         _waveSpawnDone = true;
     }
 
