@@ -4,7 +4,7 @@ public class HealthCard : MonoBehaviour
 {
     private int _id;
     private float _bobSpeed = 3f;
-    private float _bobAmplitude = 2f;
+    private float _bobAmplitude = 3f;
     private float _bobStartOffset;
     private bool _isActive = true;
     private const float START_Y = 150;
@@ -48,6 +48,6 @@ public class HealthCard : MonoBehaviour
 
     private void Update()
     {
-        transform.localPosition = new Vector2(transform.localPosition.x, START_Y + (_bobAmplitude * Mathf.Sin((Time.time + _bobStartOffset) * _bobSpeed)));
+        transform.localPosition = new Vector2(transform.localPosition.x, (int)(START_Y + (_bobAmplitude * Mathf.Sin((Time.time + _bobStartOffset) * _bobSpeed))));
     }
 }

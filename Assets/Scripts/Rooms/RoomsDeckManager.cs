@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Direction;
@@ -11,6 +12,8 @@ public class RoomsDeckManager : MonoBehaviour
     private int _roomsDeckCurrentIndex = 0;
 
     [SerializeField] private RoomGenerator _roomGenerator;
+
+    private RoomDeckAnimation _roomDeckAnimation;
 
     private void InitializeRoomReferences()
     {
@@ -29,6 +32,21 @@ public class RoomsDeckManager : MonoBehaviour
                 room.EnterTrigger = room.RoomPrefab.transform.Find("Enter Trigger").GetComponent<BoxCollider2D>();
             }
         }
+    }
+
+    private void Awake()
+    {
+        _roomDeckAnimation = GetComponent<RoomDeckAnimation>();
+
+        InitializeRoomReferences();
+        AddCardToDeck(_allRoomCards[0]);
+        AddCardToDeck(_allRoomCards[1]);
+
+        _roomsDeckShuffled = _roomsDeck;
+        _roomsDeckShuffled = ShuffleRoomsDeck(_roomsDeck);
+
+        StartCoroutine(GenerateNextRoom());
+        // StartCoroutine(GenerateNextRoom());
     }
 
     private List<RoomCardData> ShuffleRoomsDeck(List<RoomCardData> originalDeck)
@@ -62,29 +80,23 @@ public class RoomsDeckManager : MonoBehaviour
         }
     }
 
-    private void GenerateNextRoom()
+    private IEnumerator GenerateNextRoom()
     {
-        if (_roomsDeckCurrentIndex >= _roomsDeckShuffled.Count) return;
+        if (_roomsDeckCurrentIndex >= _roomsDeckShuffled.Count) yield break;
 
-        _roomGenerator.GenerateRoom(_roomsDeckShuffled[_roomsDeckCurrentIndex]);
+        RoomCardData card = _roomsDeckShuffled[_roomsDeckCurrentIndex];
+
+        yield return StartCoroutine(_roomDeckAnimation.DeckEnterAnimation(card));
+
+        _roomGenerator.GenerateRoomFromCard(card);
         _roomsDeckCurrentIndex++;
+
+        yield return StartCoroutine(_roomDeckAnimation.DeckExitAnimation());
+
     }
 
     private void AddCardToDeck(RoomCardData card)
     {
         _roomsDeck.Add(Instantiate(card));
-    }
-
-    private void Awake()
-    {
-        InitializeRoomReferences();
-        AddCardToDeck(_allRoomCards[0]);
-        AddCardToDeck(_allRoomCards[1]);
-
-        _roomsDeckShuffled = _roomsDeck;
-        _roomsDeckShuffled = ShuffleRoomsDeck(_roomsDeck);
-
-        GenerateNextRoom();
-        GenerateNextRoom();
     }
 }

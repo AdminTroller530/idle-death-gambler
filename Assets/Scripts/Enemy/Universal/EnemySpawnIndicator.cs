@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemySpawnIndicator : MonoBehaviour
 {
     private SpriteRenderer _spriteRenderer;
-    private const float BLINK_TIME = 0.15f;
+    private const float BLINK_TIME = 0.22f;
 
     private void Awake()
     {

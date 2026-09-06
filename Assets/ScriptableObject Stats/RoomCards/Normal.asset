@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomCardData
   Name: Normal Room
   Description: Normal sized room with enemies
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: cac51b3003535d6498e7f5bbdbe42aba, type: 3}
   RoomPoolUp: []
   RoomPoolDown: []
   RoomPoolLeft:

@@ -18,7 +18,7 @@ public class RoomGenerator : MonoBehaviour
 
     [SerializeField] private LayerMask _wallMask;
 
-    public void GenerateRoom(RoomCardData roomCard)
+    public void GenerateRoomFromCard(RoomCardData roomCard)
     {
         List<RoomData> currentRoomPool;
         Direction entranceDir = _previousExitDir.Flip();
@@ -38,7 +38,7 @@ public class RoomGenerator : MonoBehaviour
 
         // add room to A* pathfinding grid
         AddRoomGraph(_currentRoomPos + room.EnterTrigger.offset, (int)room.EnterTrigger.size.x, (int)room.EnterTrigger.size.y);
-        
+
         // update current room pos for next room
         _currentRoomPos += (Vector2)room.ExitTransform.localPosition;
         _currentRoomPos += room.ExitDirection.ToDirectionVector();
@@ -75,5 +75,7 @@ public class RoomGenerator : MonoBehaviour
         graph.collision.mask = _wallMask;
         graph.center = center;
         graph.SetDimensions(width * 2, depth * 2, 0.5f);
+
+        AstarPath.active.Scan(graph);
     }
 }
