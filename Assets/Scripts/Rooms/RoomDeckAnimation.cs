@@ -12,7 +12,7 @@ public class RoomDeckAnimation : MonoBehaviour
     private const int CARD_DECK_TARGET_Y = 100;
     private const float INITIAL_MOVE_SPEED = 600f;
     private const float MOVE_DECELERATION = 1400f;
-    private const float FLIP_SPEED = 450f;
+    private const float FLIP_SPEED = 600f;
 
     private float _currentMoveSpeed;
 
@@ -39,7 +39,7 @@ public class RoomDeckAnimation : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.1f);
 
         // flip card
         while (_currentCardTransform.localEulerAngles.y < 90)
