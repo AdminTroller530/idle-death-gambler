@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Direction;
 
-public class RoomsDeckManager : MonoBehaviour
+public class RoomsDeckManager : Singleton<RoomsDeckManager>
 {
     [SerializeField] private List<RoomCardData> _allRoomCards;
     private List<RoomCardData> _roomsDeck = new List<RoomCardData>();
@@ -34,8 +34,10 @@ public class RoomsDeckManager : MonoBehaviour
         }
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         _roomDeckAnimation = GetComponent<RoomDeckAnimation>();
 
         InitializeRoomReferences();
@@ -45,7 +47,6 @@ public class RoomsDeckManager : MonoBehaviour
         _roomsDeckShuffled = _roomsDeck;
         _roomsDeckShuffled = ShuffleRoomsDeck(_roomsDeck);
 
-        StartCoroutine(GenerateNextRoom());
         // StartCoroutine(GenerateNextRoom());
     }
 
@@ -80,7 +81,7 @@ public class RoomsDeckManager : MonoBehaviour
         }
     }
 
-    private IEnumerator GenerateNextRoom()
+    public IEnumerator InitializeNextRoom()
     {
         if (_roomsDeckCurrentIndex >= _roomsDeckShuffled.Count) yield break;
 
@@ -91,8 +92,14 @@ public class RoomsDeckManager : MonoBehaviour
         _roomGenerator.GenerateRoomFromCard(card);
         _roomsDeckCurrentIndex++;
 
-        yield return StartCoroutine(_roomDeckAnimation.DeckExitAnimation());
+        // yield return new WaitForSeconds(0.5f);
+        // yield return StartCoroutine(_roomDeckAnimation.DeckExitAnimation());
 
+    }
+
+    public void RoomDeckExitAnimation()
+    {
+        StartCoroutine(_roomDeckAnimation.DeckExitAnimation());
     }
 
     private void AddCardToDeck(RoomCardData card)
