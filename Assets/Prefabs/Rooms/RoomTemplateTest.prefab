@@ -7775,6 +7775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3618418612746692790}
   - component: {fileID: 8085946379406432888}
+  - component: {fileID: 1409242442140902488}
   m_Layer: 7
   m_Name: RoomTemplateTest
   m_TagString: Wall
@@ -7825,3 +7826,20 @@ MonoBehaviour:
   _enterTrigger: {fileID: 2718981161802395062}
   _doors: {fileID: 444625963527866310}
   _enemySpawnIndicatorPrefab: {fileID: 4496604034116181824, guid: 0a29cd07efcb73b41b047f80071f35aa, type: 3}
+--- !u!114 &1409242442140902488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8818910797725162810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bdc1d146ec7c2d448826a53b645945f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  _tilemaps:
+  - {fileID: 5981624345354824730}
+  - {fileID: 4547460637795787689}
+  - {fileID: 5048862982331646672}
+  - {fileID: 8020487227473745448}

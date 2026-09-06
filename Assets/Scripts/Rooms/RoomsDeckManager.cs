@@ -91,10 +91,6 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
 
         _roomGenerator.GenerateRoomFromCard(card);
         _roomsDeckCurrentIndex++;
-
-        // yield return new WaitForSeconds(0.5f);
-        // yield return StartCoroutine(_roomDeckAnimation.DeckExitAnimation());
-
     }
 
     public void RoomDeckExitAnimation()
