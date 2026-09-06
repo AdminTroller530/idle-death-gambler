@@ -39,7 +39,7 @@ public class RoomDeckAnimation : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.25f);
 
         // flip card
         while (_currentCardTransform.localEulerAngles.y < 90)

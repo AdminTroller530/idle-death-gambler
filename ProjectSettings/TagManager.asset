@@ -52,6 +52,9 @@ TagManager:
   - name: Ground
     uniqueID: 3916112283
     locked: 0
+  - name: Shadows
+    uniqueID: 193761911
+    locked: 0
   - name: Tiles Behind
     uniqueID: 1837561251
     locked: 0
