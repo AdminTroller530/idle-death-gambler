@@ -87,10 +87,10 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
 
         RoomCardData card = _roomsDeckShuffled[_roomsDeckCurrentIndex];
 
-        yield return StartCoroutine(_roomDeckAnimation.DeckEnterAnimation(card));
-
         _roomGenerator.GenerateRoomFromCard(card);
         _roomsDeckCurrentIndex++;
+
+        yield return StartCoroutine(_roomDeckAnimation.DeckEnterAnimation(card));
     }
 
     public void RoomDeckExitAnimation()

@@ -23,6 +23,13 @@ public class EnemySpawner : MonoBehaviour
 
     public static event Action OnEnemyWaveCompleted;
 
+    private RoomFadeIn _roomFadeIn;
+
+    private void Awake()
+    {
+        _roomFadeIn = GetComponent<RoomFadeIn>();
+    }
+
     private IEnumerator SpawnEnemy(int id, Vector2 pos)
     {
         GameObject spawnIndicator = Instantiate(_enemySpawnIndicatorPrefab, transform);
@@ -69,6 +76,7 @@ public class EnemySpawner : MonoBehaviour
         {
             StartWaves();
             RoomsDeckManager.Instance.RoomDeckExitAnimation();
+            StartCoroutine(_roomFadeIn.FadeIn());
         }
     }
 
