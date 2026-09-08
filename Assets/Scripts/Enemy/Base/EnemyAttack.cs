@@ -53,7 +53,7 @@ public abstract class EnemyAttack : MonoBehaviour
         if (_shootCooldown > 0) _shootCooldown -= Time.deltaTime;
         else _shootCooldown = 0;
 
-        if (_shootCooldown == 0 && _enemyVision.CanSeePlayer)
+        if (_shootCooldown == 0 && _enemyVision.CanShootPlayer)
         {
             ShootBulletPattern();
             _shootCooldown = _stats.ShootCooldown + Random.Range(-_stats.ShootCooldownOffsetMax, _stats.ShootCooldownOffsetMax);
