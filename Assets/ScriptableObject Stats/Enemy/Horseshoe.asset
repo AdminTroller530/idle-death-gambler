@@ -10,27 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9eef55e8fd538a4f85a164100e54ab3, type: 3}
-  m_Name: Seven
+  m_Name: Horseshoe
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
-  Id: 7
+  Id: 2
   Name: Seven
-  MaxHealth: 7
-  MoveSpeed: 7
-  PreferredDistanceFromPlayer: 7
-  ChipsDropped: 7
+  MaxHealth: 25
+  MoveSpeed: 6
+  PreferredDistanceFromPlayer: 0
+  ChipsDropped: 30
   CollisionDamage: 1
-  BulletSpeed: 7
-  BulletDamage: 1
-  BulletLifetime: 7
-  BulletStartOffset: 0.7
+  BulletSpeed: 0
+  BulletDamage: 0
+  BulletLifetime: 0
+  BulletStartOffset: 0
   BulletHitboxOffset: {x: 0, y: 0}
-  BulletHitboxSize: {x: 0.2, y: 0.2}
+  BulletHitboxSize: {x: 0, y: 0}
   BulletWallCollisionCooldown: 0
-  BulletHasWallDestroyParticles: 1
+  BulletHasWallDestroyParticles: 0
   ShootCooldown: 2
   ShootCooldownOffsetMax: 0.1
   ShootInaccuracy: 0
-  EnemySprites: {fileID: 21300000, guid: 491577c536ba0294482e5b4eb1074da0, type: 3}
-  BulletSprites:
-  - {fileID: 21300000, guid: 269d103d92f1dff47a592b1c114bfbd5, type: 3}
-  - {fileID: 21300000, guid: 543915dfbae34e44ba506cc0b782431e, type: 3}
+  EnemySprites: {fileID: -1724770994067823944, guid: 5b91fd262bda7cc429ff13d406362bdf, type: 3}
+  BulletSprites: []
