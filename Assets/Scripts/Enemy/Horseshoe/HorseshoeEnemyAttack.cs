@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HorseshoeEnemyAttack : EnemyAttack
 {
-    private bool _isCharging = false;
+    private bool _isLunging = false;
     private float _chargeCooldown;
     private const float CHARGE_COOLDOWN_MAX = 1.5f;
 
@@ -11,11 +11,6 @@ public class HorseshoeEnemyAttack : EnemyAttack
     protected override void Awake()
     {
         base.Awake();
-    }
-
-    protected override void Start()
-    {
-        base.Start();
         _move = GetComponent<HorseshoeEnemyMove>();
     }
 
@@ -28,13 +23,14 @@ public class HorseshoeEnemyAttack : EnemyAttack
     {
         if (_enemyBase.IsDead) return;
 
-        if (!_isCharging)
+        if (!_isLunging)
         {
-            if (_chargeCooldown > 0) _chargeCooldown -= CHARGE_COOLDOWN_MAX;
+            if (_chargeCooldown > 0) _chargeCooldown -= Time.deltaTime;
             if (_chargeCooldown <= 0 && _enemyVision.CanSeePlayer)
             {
-                // run charge method in HorseshoeEnemyMove
-                _isCharging = true;
+                // LUNGE DIRECTION MESSED UP SOMEHOW
+                _move.Lunge(Vector2.MoveTowards(transform.position, _playerTransform.position, 1));
+                _isLunging = true;
             }
         }
         

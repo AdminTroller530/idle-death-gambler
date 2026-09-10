@@ -107,5 +107,67 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3876923123970243237, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1055821145471300315}
+    - targetCorrespondingSourceObject: {fileID: 3876923123970243237, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8626501925489475974}
+    - targetCorrespondingSourceObject: {fileID: 3876923123970243237, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5686148941233528633}
   m_SourcePrefab: {fileID: 100100000, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+--- !u!114 &506129587010082860 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7770595380947407706, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+  m_PrefabInstance: {fileID: 7840926902723562358}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &6421297936987730387 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3876923123970243237, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+  m_PrefabInstance: {fileID: 7840926902723562358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-1055821145471300315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6421297936987730387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c97b0e06808071449adf8a8bda039c24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HorseshoeEnemyAttack
+--- !u!114 &8626501925489475974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6421297936987730387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 108e07297d4c44a418b09ed637c3a8af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HorseshoeEnemyHealth
+  _healthText: {fileID: 506129587010082860}
+--- !u!114 &5686148941233528633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6421297936987730387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0fece57bc5303b4aa6a0f9d15aca800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HorseshoeEnemyMove
