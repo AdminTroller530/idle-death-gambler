@@ -35,7 +35,7 @@ public abstract class EnemyMove : MonoBehaviour
         _stats = _enemyBase.Stats;
     }
 
-    private void ManageKnockbackStun()
+    protected virtual void ManageKnockbackStun()
     {
         if (_knockbackStunTimer > 0) _knockbackStunTimer -= Time.deltaTime;
         else _path.canMove = true; // allow pathfinding to continue once knockback stun done
