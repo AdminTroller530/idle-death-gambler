@@ -9,6 +9,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -5399909951234745360, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      propertyPath: m_Size.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: -5399909951234745360, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
+      propertyPath: m_Size.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: -5399909951234745360, guid: 2c0aac7da5977d94182960bc757686b0, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.y
       value: 0.5
       objectReference: {fileID: 0}
@@ -171,3 +179,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0fece57bc5303b4aa6a0f9d15aca800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HorseshoeEnemyMove
+  IsLunging: 0

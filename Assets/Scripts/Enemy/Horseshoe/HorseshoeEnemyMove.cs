@@ -7,7 +7,7 @@ public class HorseshoeEnemyMove : EnemyMove
     private const float LUNGE_INITIAL_SPEED = 0f;
     private const float LUNGE_ACCELERATION = 0.7f;
     private const float LUNGE_TERMINAL_SPEED = 28f;
-    private const float LUNGE_RECHARGE_MOVE_SPEED_MULTIPLIER = 0.2f;
+    private const float LUNGE_RECHARGE_MOVE_SPEED_MULTIPLIER = 0.1f;
     private Vector2 _lungeVector;
     private float _moveSpeedMultiplier;
 
