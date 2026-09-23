@@ -13,6 +13,8 @@ public class EnemyStats : ScriptableObject
     public float PreferredDistanceFromPlayer;
     public int ChipsDropped;
     public int CollisionDamage = 1;
+    [Tooltip("Additional radius for CircleCast2D ray used to determine whether enemy can fully see player")]
+    public float VisionRadiusExtra = 0;
 
     [Header("Shooting Stats")]
     public float BulletSpeed;

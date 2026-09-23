@@ -19,6 +19,7 @@ MonoBehaviour:
   PreferredDistanceFromPlayer: 0
   ChipsDropped: 30
   CollisionDamage: 1
+  VisionRadiusExtra: 0.25
   BulletSpeed: 0
   BulletDamage: 0
   BulletLifetime: 0
