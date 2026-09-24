@@ -41,11 +41,15 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
         _roomDeckAnimation = GetComponent<RoomDeckAnimation>();
 
         InitializeRoomReferences();
-        // AddCardToDeck(_allRoomCards[0]);
+        AddCardToDeck(_allRoomCards[0]);
         AddCardToDeck(_allRoomCards[1]);
 
-        _roomsDeckShuffled = _roomsDeck;
         _roomsDeckShuffled = ShuffleRoomsDeck(_roomsDeck);
+    }
+
+    private void Start()
+    {
+        GenerateFloorFromDeck();
     }
 
     private List<RoomCardData> ShuffleRoomsDeck(List<RoomCardData> originalDeck)
@@ -79,16 +83,23 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
         }
     }
 
-    public IEnumerator InitializeNextRoom()
+    public void GenerateFloorFromDeck()
     {
-        if (_roomsDeckCurrentIndex >= _roomsDeckShuffled.Count) yield break;
+        for (int i = 0; i < _roomsDeckShuffled.Count; i++)
+        {
+            RoomCardData card = _roomsDeckShuffled[i];
+            _roomGenerator.GenerateRoomFromCard(card);
+        }
+    }
+
+    public void RoomDeckEnterAnimation()
+    {
+        if (_roomsDeckCurrentIndex >= _roomsDeckShuffled.Count) return;
 
         RoomCardData card = _roomsDeckShuffled[_roomsDeckCurrentIndex];
-
-        _roomGenerator.GenerateRoomFromCard(card);
         _roomsDeckCurrentIndex++;
 
-        yield return StartCoroutine(_roomDeckAnimation.DeckEnterAnimation(card));
+        StartCoroutine(_roomDeckAnimation.DeckEnterAnimation(card));
     }
 
     public void RoomDeckExitAnimation()

@@ -36,8 +36,7 @@ public class RoomGenerator : MonoBehaviour
         RoomData room = currentRoomPool[RNGController.GetMapRNG(0, currentRoomPool.Count)];
         Instantiate(room.RoomPrefab, _currentRoomPos, Quaternion.identity, _tileGrid);
 
-        // add room to A* pathfinding grid
-        AddRoomGraph(_currentRoomPos + room.EnterTrigger.offset, (int)room.EnterTrigger.size.x, (int)room.EnterTrigger.size.y);
+        AddAStarGraph(_currentRoomPos + room.EnterTrigger.offset, (int)room.EnterTrigger.size.x, (int)room.EnterTrigger.size.y);
 
         // update current room pos for next room
         _currentRoomPos += (Vector2)room.ExitTransform.localPosition;
@@ -65,7 +64,7 @@ public class RoomGenerator : MonoBehaviour
         }
     }
 
-    private void AddRoomGraph(Vector2 center, int width, int depth)
+    private void AddAStarGraph(Vector2 center, int width, int depth)
     {
         GridGraph graph = AstarPath.active.data.AddGraph(typeof(GridGraph)) as GridGraph;
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Horseshoe
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   Id: 2
-  Name: Seven
+  Name: Horseshoe
   MaxHealth: 25
   MoveSpeed: 6
   PreferredDistanceFromPlayer: 0
