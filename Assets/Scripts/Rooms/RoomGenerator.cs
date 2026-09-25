@@ -10,6 +10,8 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private GameObject[] _hallsUpDown, _hallsLeftRight;
     private Direction _previousExitDir = Right; // exit direction of previous room (start room by default)
 
+    [SerializeField] private GameObject _warpRoom;
+
     public static int RoomsSpawned = 0;
     private int _hallLength = 10; // in unity units
     private Vector2 _currentRoomPos = new Vector2(20, 0);
@@ -46,6 +48,13 @@ public class RoomGenerator : MonoBehaviour
 
         _previousExitDir = room.ExitDirection;
         RoomsSpawned++;
+    }
+
+    public void GenerateWarpRoom()
+    {
+        _currentRoomPos += _previousExitDir.ToDirectionVector() * _hallLength;
+        if (_previousExitDir == Up || _previousExitDir == Down) _currentRoomPos += WEIRD_UPDOWN_HALLWAY_OFFSET;
+        Instantiate(_warpRoom, _currentRoomPos, Quaternion.identity, _tileGrid);
     }
 
     private void GenerateNextHallway(Direction exitDirection)

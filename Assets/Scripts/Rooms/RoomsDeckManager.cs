@@ -41,7 +41,7 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
         _roomDeckAnimation = GetComponent<RoomDeckAnimation>();
 
         InitializeRoomReferences();
-        AddCardToDeck(_allRoomCards[0]);
+        // AddCardToDeck(_allRoomCards[0]);
         AddCardToDeck(_allRoomCards[1]);
 
         _roomsDeckShuffled = ShuffleRoomsDeck(_roomsDeck);
@@ -90,6 +90,7 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
             RoomCardData card = _roomsDeckShuffled[i];
             _roomGenerator.GenerateRoomFromCard(card);
         }
+        _roomGenerator.GenerateWarpRoom();
     }
 
     public void RoomDeckEnterAnimation()
