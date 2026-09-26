@@ -11,8 +11,6 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
     private List<int> _roomsDeckShuffledIndexMapping = new List<int>(); // maps shuffled indexes back to original deck indexes
     private int _roomsDeckCurrentIndex = 0;
 
-    [SerializeField] private RoomGenerator _roomGenerator;
-
     private RoomDeckAnimation _roomDeckAnimation;
 
     private void InitializeRoomReferences()
@@ -88,9 +86,9 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
         for (int i = 0; i < _roomsDeckShuffled.Count; i++)
         {
             RoomCardData card = _roomsDeckShuffled[i];
-            _roomGenerator.GenerateRoomFromCard(card);
+            RoomGenerator.Instance.GenerateRoomFromCard(card);
         }
-        _roomGenerator.GenerateWarpRoom();
+        RoomGenerator.Instance.GenerateWarpRoom();
     }
 
     public void RoomDeckEnterAnimation()

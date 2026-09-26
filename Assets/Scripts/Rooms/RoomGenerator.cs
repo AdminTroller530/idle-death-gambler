@@ -3,7 +3,7 @@ using Pathfinding;
 using UnityEngine;
 using static Direction;
 
-public class RoomGenerator : MonoBehaviour
+public class RoomGenerator : Singleton<RoomGenerator>
 {
     [SerializeField] private Transform _tileGrid;
 
@@ -19,6 +19,8 @@ public class RoomGenerator : MonoBehaviour
     private Vector2 WEIRD_UPDOWN_HALLWAY_OFFSET = new Vector2(0.5f, 0.5f);
 
     [SerializeField] private LayerMask _wallMask;
+
+    private List<GameObject> _activeRooms = new List<GameObject>();
 
     public void GenerateRoomFromCard(RoomCardData roomCard)
     {
@@ -36,7 +38,7 @@ public class RoomGenerator : MonoBehaviour
 
         // randomly select room from pool and instantiate it
         RoomData room = currentRoomPool[RNGController.GetMapRNG(0, currentRoomPool.Count)];
-        Instantiate(room.RoomPrefab, _currentRoomPos, Quaternion.identity, _tileGrid);
+        _activeRooms.Add(Instantiate(room.RoomPrefab, _currentRoomPos, Quaternion.identity, _tileGrid));
 
         AddAStarGraph(_currentRoomPos + room.EnterTrigger.offset, (int)room.EnterTrigger.size.x, (int)room.EnterTrigger.size.y);
 
@@ -54,21 +56,21 @@ public class RoomGenerator : MonoBehaviour
     {
         _currentRoomPos += _previousExitDir.ToDirectionVector() * _hallLength;
         if (_previousExitDir == Up || _previousExitDir == Down) _currentRoomPos += WEIRD_UPDOWN_HALLWAY_OFFSET;
-        Instantiate(_warpRoom, _currentRoomPos, Quaternion.identity, _tileGrid);
+        _activeRooms.Add(Instantiate(_warpRoom, _currentRoomPos, Quaternion.identity, _tileGrid));
     }
 
     private void GenerateNextHallway(Direction exitDirection)
     {
         if (exitDirection == Up) {
-            Instantiate(_hallsUpDown[0], _currentRoomPos + _hallLength*0.5f * Vector2.up + WEIRD_UPDOWN_HALLWAY_OFFSET, transform.rotation, _tileGrid);
+            _activeRooms.Add(Instantiate(_hallsUpDown[0], _currentRoomPos + _hallLength*0.5f * Vector2.up + WEIRD_UPDOWN_HALLWAY_OFFSET, transform.rotation, _tileGrid));
             _currentRoomPos += Vector2.up * _hallLength;
         }
         else if (exitDirection == Down) {
-            Instantiate(_hallsUpDown[0], _currentRoomPos - _hallLength*0.5f * Vector2.up + WEIRD_UPDOWN_HALLWAY_OFFSET, transform.rotation, _tileGrid);
+            _activeRooms.Add(Instantiate(_hallsUpDown[0], _currentRoomPos - _hallLength*0.5f * Vector2.up + WEIRD_UPDOWN_HALLWAY_OFFSET, transform.rotation, _tileGrid));
             _currentRoomPos -= Vector2.up * _hallLength;
         }
         else { // (exitDirection == Right)
-            Instantiate(_hallsLeftRight[0], _currentRoomPos + _hallLength*0.5f * Vector2.right, transform.rotation, _tileGrid);
+            _activeRooms.Add(Instantiate(_hallsLeftRight[0], _currentRoomPos + _hallLength*0.5f * Vector2.right, transform.rotation, _tileGrid));
             _currentRoomPos += Vector2.right * _hallLength;
         }
     }
@@ -85,5 +87,13 @@ public class RoomGenerator : MonoBehaviour
         graph.SetDimensions(width * 2, depth * 2, 0.5f);
 
         AstarPath.active.Scan(graph);
+    }
+
+    public void DeleteActiveRooms()
+    {
+        foreach (GameObject room in _activeRooms)
+        {
+            Destroy(room);
+        }
     }
 }
