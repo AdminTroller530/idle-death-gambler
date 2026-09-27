@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerManager : Singleton<PlayerManager>
 {
     public PlayerHealth Health {get; private set;}
+    public PlayerMovement Movement {get; private set;}
     public PlayerShoot Shoot {get; private set;}
     public Transform Transform {get; private set;}
 
@@ -13,6 +14,7 @@ public class PlayerManager : Singleton<PlayerManager>
         base.Awake();
 
         Health = GetComponent<PlayerHealth>();
+        Movement = GetComponent<PlayerMovement>();
         Shoot = GetComponent<PlayerShoot>();
         Transform = transform;
     }

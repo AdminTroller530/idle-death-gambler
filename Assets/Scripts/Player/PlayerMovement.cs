@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         _move = context.ReadValue<Vector2>().normalized;
+
+        if (WarpPortal.IsWarping) _move = Vector2.zero;
     }
 
     private void Animate()

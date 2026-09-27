@@ -40,7 +40,7 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
 
         InitializeRoomReferences();
         // AddCardToDeck(_allRoomCards[0]);
-        AddCardToDeck(_allRoomCards[1]);
+        // AddCardToDeck(_allRoomCards[1]);
 
         _roomsDeckShuffled = ShuffleRoomsDeck(_roomsDeck);
     }

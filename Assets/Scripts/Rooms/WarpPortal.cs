@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class WarpPortal : MonoBehaviour
 {
-    private bool isUsed = false;
+    public static bool IsWarping {private set; get;} = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (isUsed) return;
+        if (IsWarping) return;
 
         if (other.tag == "Player")
         {
             StartCoroutine(WarpSequence());
-            isUsed = true;
+            IsWarping = true;
         }
     }
 
@@ -22,7 +22,8 @@ public class WarpPortal : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         RoomGenerator.Instance.DeleteActiveRooms();
-        
+        IsWarping = false;
+
         BlackScreen.Instance.StartFadeOut();
     }
 }
