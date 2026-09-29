@@ -6,6 +6,7 @@ public class ChipsPool : Singleton<ChipsPool>
     private const int CHIP_POOL_SIZE = 100;
     public ObjectPool<ChipPrefab> ChipPool;
 
+    private ChipPrefab[] initializedChips = new ChipPrefab[CHIP_POOL_SIZE];
     [SerializeField] private ChipPrefab _chipPrefab;
 
     protected override void Awake()
@@ -15,9 +16,19 @@ public class ChipsPool : Singleton<ChipsPool>
 
     private void InitializeBulletPool()
     {
-        ChipPrefab[] initializedChips = new ChipPrefab[CHIP_POOL_SIZE];
+        initializedChips = new ChipPrefab[CHIP_POOL_SIZE];
         for (int i = 0; i < CHIP_POOL_SIZE; i++) initializedChips[i] = ChipPool.Get();
         for (int i = 0; i < CHIP_POOL_SIZE; i++) ChipPool.Release(initializedChips[i]);
+    }
+
+    private void OnEnable()
+    {
+        WarpPortal.OnWarpToNextFloor += ReleaseAllChips;
+    }
+
+    private void OnDisable()
+    {
+        WarpPortal.OnWarpToNextFloor -= ReleaseAllChips;
     }
 
     private void Start()
@@ -45,5 +56,13 @@ public class ChipsPool : Singleton<ChipsPool>
     private void OnDestroyChip(ChipPrefab chip)
     {
         Destroy(chip);
+    }
+
+    private void ReleaseAllChips()
+    {
+        foreach (ChipPrefab chip in initializedChips)
+        {
+           if (chip.gameObject.activeInHierarchy) ChipPool.Release(chip);
+        }
     }
 }

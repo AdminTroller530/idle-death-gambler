@@ -21,12 +21,12 @@ public class WarpPortal : MonoBehaviour
     private IEnumerator WarpSequence()
     {
         yield return StartCoroutine(BlackScreen.Instance.FadeIn());
+        yield return new WaitForSeconds(0.5f);
 
         RoomGenerator.Instance.DeleteActiveRooms();
         OnWarpToNextFloor?.Invoke();
 
-        yield return new WaitForSeconds(0.5f);
-        IsWarping = false;
         BlackScreen.Instance.StartFadeOut();
+        IsWarping = false;
     }
 }

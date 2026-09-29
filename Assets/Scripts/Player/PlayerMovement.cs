@@ -23,6 +23,18 @@ public class PlayerMovement : MonoBehaviour
         _sr = GetComponent<SpriteRenderer>();
     }
 
+    private void OnEnable()
+    {
+        WarpPortal.OnWarpToNextFloor += MoveToSpawn;
+    }
+
+    private void OnDisable()
+    {
+        WarpPortal.OnWarpToNextFloor -= MoveToSpawn;
+    }
+
+    private void MoveToSpawn() {transform.position = Vector2.zero;}
+
     public void Move(InputAction.CallbackContext context)
     {
         _move = context.ReadValue<Vector2>().normalized;
