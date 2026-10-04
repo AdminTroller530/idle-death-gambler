@@ -83,6 +83,7 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
 
     public void GenerateFloorFromDeck()
     {
+        RoomGenerator.Instance.GenerateEntranceRoom();
         for (int i = 0; i < _roomsDeckShuffled.Count; i++)
         {
             RoomCardData card = _roomsDeckShuffled[i];

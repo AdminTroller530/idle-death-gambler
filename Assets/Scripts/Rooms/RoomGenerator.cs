@@ -10,17 +10,42 @@ public class RoomGenerator : Singleton<RoomGenerator>
     [SerializeField] private GameObject[] _hallsUpDown, _hallsLeftRight;
     private Direction _previousExitDir = Right; // exit direction of previous room (start room by default)
 
+    [SerializeField] private GameObject _entranceRoom;
     [SerializeField] private GameObject _warpRoom;
 
     public static int RoomsSpawned = 0;
     private int _hallLength = 10; // in unity units
-    private Vector2 _currentRoomPos = new Vector2(20, 0);
+    private Vector2 _currentRoomPos = new Vector2(0, 0);
+    private const int ENTRANCE_ROOM_LENGTH = 20;
 
     private Vector2 WEIRD_UPDOWN_HALLWAY_OFFSET = new Vector2(0.5f, 0.5f);
 
     [SerializeField] private LayerMask _wallMask;
 
     private List<GameObject> _activeRooms = new List<GameObject>();
+
+    private void OnEnable()
+    {
+        WarpPortal.OnWarpToNextFloor += ResetCurrentRoomPos;        
+    }
+
+    private void OnDisable()
+    {
+        WarpPortal.OnWarpToNextFloor -= ResetCurrentRoomPos;        
+    }
+
+    private void ResetCurrentRoomPos() {_currentRoomPos = Vector2.zero;}
+
+    public void GenerateEntranceRoom()
+    {
+        _activeRooms.Add(Instantiate(_entranceRoom, _currentRoomPos, Quaternion.identity, _tileGrid));
+        
+        AddAStarGraph(_currentRoomPos, ENTRANCE_ROOM_LENGTH, ENTRANCE_ROOM_LENGTH);
+        _currentRoomPos += Vector2.right * ENTRANCE_ROOM_LENGTH/2;
+
+        GenerateNextHallway(Right);
+        _previousExitDir = Right;
+    }
 
     public void GenerateRoomFromCard(RoomCardData roomCard)
     {
@@ -43,8 +68,7 @@ public class RoomGenerator : Singleton<RoomGenerator>
         AddAStarGraph(_currentRoomPos + room.EnterTrigger.offset, (int)room.EnterTrigger.size.x, (int)room.EnterTrigger.size.y);
 
         // update current room pos for next room
-        _currentRoomPos += (Vector2)room.ExitTransform.localPosition;
-        _currentRoomPos += room.ExitDirection.ToDirectionVector();
+        _currentRoomPos += (Vector2)room.ExitTransform.localPosition + room.ExitDirection.ToDirectionVector();
 
         GenerateNextHallway(room.ExitDirection);
 
@@ -91,9 +115,7 @@ public class RoomGenerator : Singleton<RoomGenerator>
 
     public void DeleteActiveRooms()
     {
-        foreach (GameObject room in _activeRooms)
-        {
-            Destroy(room);
-        }
+        foreach (GameObject room in _activeRooms) {Destroy(room);}
+        foreach (NavGraph graph in AstarPath.active.data.graphs) {AstarPath.active.data.RemoveGraph(graph);}
     }
 }
