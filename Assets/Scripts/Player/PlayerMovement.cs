@@ -38,8 +38,6 @@ public class PlayerMovement : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         _move = context.ReadValue<Vector2>().normalized;
-
-        if (WarpPortal.IsWarping) _move = Vector2.zero;
     }
 
     private void Animate()
@@ -63,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (WarpPortal.IsWarping) _move = Vector2.zero;
         _rigidbody.linearVelocity = _move * _speed;
 
         Animate();
