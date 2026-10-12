@@ -18,8 +18,6 @@ public class RoomGenerator : Singleton<RoomGenerator>
     private Vector2 _currentRoomPos = new Vector2(0, 0);
     private const int ENTRANCE_ROOM_LENGTH = 20;
 
-    private Vector2 WEIRD_UPDOWN_HALLWAY_OFFSET = new Vector2(0.5f, 0.5f);
-
     [SerializeField] private LayerMask _wallMask;
 
     private List<GameObject> _activeRooms = new List<GameObject>();
@@ -79,7 +77,6 @@ public class RoomGenerator : Singleton<RoomGenerator>
     public void GenerateWarpRoom()
     {
         _currentRoomPos += _previousExitDir.ToDirectionVector() * _hallLength;
-        if (_previousExitDir == Up || _previousExitDir == Down) _currentRoomPos += WEIRD_UPDOWN_HALLWAY_OFFSET;
         _activeRooms.Add(Instantiate(_warpRoom, _currentRoomPos, Quaternion.identity, _tileGrid));
     }
 
