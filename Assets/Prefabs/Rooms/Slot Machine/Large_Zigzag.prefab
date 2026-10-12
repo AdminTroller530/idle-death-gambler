@@ -49,7 +49,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1831618766889835102, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 44.5
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 1831618766889835102, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2165,7 +2165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2981887758979996032, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3618418612746692790, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12171,6 +12171,10 @@ PrefabInstance:
       propertyPath: m_PreviousShadowCastingSource
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5339041638847097740, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
+      propertyPath: m_PreviousShadowShape2DSource
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5448274754325265758, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11
@@ -12185,19 +12189,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5698987772152460496, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_ShadowMesh.m_LocalBounds.m_Center.x
-      value: 26.499985
+      value: 41.999985
       objectReference: {fileID: 0}
     - target: {fileID: 5698987772152460496, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_ShadowMesh.m_LocalBounds.m_Center.y
-      value: -18.5
+      value: -42.5
       objectReference: {fileID: 0}
     - target: {fileID: 5698987772152460496, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_ShadowMesh.m_LocalBounds.m_Extent.x
-      value: 26.499985
+      value: 11.999985
       objectReference: {fileID: 0}
     - target: {fileID: 5698987772152460496, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_ShadowMesh.m_LocalBounds.m_Extent.y
-      value: 15.5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 5981624345354824730, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_Size.x
@@ -49193,7 +49197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6949526421693857707, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6949526421693857707, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -65991,25 +65995,29 @@ PrefabInstance:
       propertyPath: m_PreviousShadowCastingSource
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8789329681070173253, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
+      propertyPath: m_PreviousShadowShape2DSource
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8818910797725162810, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_Name
       value: Large_Zigzag
       objectReference: {fileID: 0}
     - target: {fileID: 9182997439653796226, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_ShadowMesh.m_LocalBounds.m_Center.x
-      value: 26.499985
+      value: 41.999985
       objectReference: {fileID: 0}
     - target: {fileID: 9182997439653796226, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_ShadowMesh.m_LocalBounds.m_Center.y
-      value: -18.5
+      value: -42.5
       objectReference: {fileID: 0}
     - target: {fileID: 9182997439653796226, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_ShadowMesh.m_LocalBounds.m_Extent.x
-      value: 26.499985
+      value: 11.999985
       objectReference: {fileID: 0}
     - target: {fileID: 9182997439653796226, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_ShadowMesh.m_LocalBounds.m_Extent.y
-      value: 15.5
+      value: 3.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

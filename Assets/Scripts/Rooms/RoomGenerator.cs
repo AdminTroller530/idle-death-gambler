@@ -68,7 +68,7 @@ public class RoomGenerator : Singleton<RoomGenerator>
         AddAStarGraph(_currentRoomPos + room.EnterTrigger.offset, (int)room.EnterTrigger.size.x, (int)room.EnterTrigger.size.y);
 
         // update current room pos for next room
-        _currentRoomPos += (Vector2)room.ExitTransform.localPosition + room.ExitDirection.ToDirectionVector();
+        _currentRoomPos += (Vector2)room.ExitTransform.localPosition + room.ExitDirection.ToDirectionVector()*0.5f;
 
         GenerateNextHallway(room.ExitDirection);
 
@@ -86,11 +86,11 @@ public class RoomGenerator : Singleton<RoomGenerator>
     private void GenerateNextHallway(Direction exitDirection)
     {
         if (exitDirection == Up) {
-            _activeRooms.Add(Instantiate(_hallsUpDown[0], _currentRoomPos + _hallLength*0.5f * Vector2.up + WEIRD_UPDOWN_HALLWAY_OFFSET, transform.rotation, _tileGrid));
+            _activeRooms.Add(Instantiate(_hallsUpDown[0], _currentRoomPos + (_hallLength*0.5f * Vector2.up), transform.rotation, _tileGrid));
             _currentRoomPos += Vector2.up * _hallLength;
         }
         else if (exitDirection == Down) {
-            _activeRooms.Add(Instantiate(_hallsUpDown[0], _currentRoomPos - _hallLength*0.5f * Vector2.up + WEIRD_UPDOWN_HALLWAY_OFFSET, transform.rotation, _tileGrid));
+            _activeRooms.Add(Instantiate(_hallsUpDown[0], _currentRoomPos - (_hallLength*0.5f * Vector2.up), transform.rotation, _tileGrid));
             _currentRoomPos -= Vector2.up * _hallLength;
         }
         else { // (exitDirection == Right)

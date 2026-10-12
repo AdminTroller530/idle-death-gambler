@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a596be7904b64f47a923b47282e4c57, type: 3}
+  m_Name: Normal_Divisions
+  m_EditorClassIdentifier: Assembly-CSharp::RoomData
+  Name: Normal_Divisions
+  RoomPrefab: {fileID: 7482054541270028732, guid: 0206cefaf8325e74c852df0639e665a7, type: 3}
+  EntranceDirection: 2
+  ExitDirection: 3
+  ExitTransform: {fileID: 3090176874956808022, guid: d4be662a500a5f94dbbc8428cc43dca4, type: 3}
+  EnterTrigger: {fileID: 1599470677561239742, guid: d4be662a500a5f94dbbc8428cc43dca4, type: 3}

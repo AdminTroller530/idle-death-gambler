@@ -7,6 +7,7 @@ public enum FloorType {Normal, Shop, Boss};
 public class FloorManager : Singleton<FloorManager>
 {
     [SerializeField] private FloorType[] _floorsTypes;
+    private int _currentFloorActualIndex = 0;
     public static int CurrentFloor = 0;
 
     [SerializeField] private TextMeshProUGUI _floorNumberText;
@@ -28,16 +29,17 @@ public class FloorManager : Singleton<FloorManager>
 
     private void GenerateNextFloor()
     {
-        if (CurrentFloor >= _floorsTypes.Length) return;
+        if (_currentFloorActualIndex >= _floorsTypes.Length) return;
 
-        FloorType type = _floorsTypes[CurrentFloor];
+        FloorType type = _floorsTypes[_currentFloorActualIndex];
         if (type == Normal)
         {
+            CurrentFloor++;
             RoomsDeckManager.Instance.GenerateFloorFromDeck();
         }
 
-        _floorNumberText.text = (CurrentFloor + 1) + "/F";
+        _floorNumberText.text = CurrentFloor + "/F";
 
-        CurrentFloor++;
+        _currentFloorActualIndex++;
     }
 }
