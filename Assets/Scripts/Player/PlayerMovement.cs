@@ -73,4 +73,13 @@ public class PlayerMovement : MonoBehaviour
         if (PlayerMelee.IsMeleeing) _speed /= 2;
         if (PlayerParry.IsParrying) _speed /= 16;
     }
+
+    // DEBUG ONLY
+    public void Debug(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            _baseSpeed = 15f;
+        }
+    }
 }

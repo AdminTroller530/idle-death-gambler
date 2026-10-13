@@ -34,6 +34,15 @@ public class PlayerShoot : MonoBehaviour
         _isHoldingShoot = context.ReadValueAsButton();
     }
 
+    // DEBUG ONLY
+    public void Debug(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            _stats.BulletDamageMultiplier = 100;
+        }
+    }
+
     public float GetShootAngle()
     {
         _mousePos = CursorTracker.Pos;

@@ -26,7 +26,7 @@ public class PlayerBullet : MonoBehaviour
         _lifetime = stats.BulletLifetime;
         _maxLifetime = stats.BulletLifetime;
         _knockback = stats.BulletKnockback;
-        _damage = stats.ChipsPerShot;
+        _damage = stats.ChipsPerShot * stats.BulletDamageMultiplier;
         // transform.Translate(Vector2.right * startOffset);
     }
 
