@@ -8,6 +8,7 @@ public class RoomGenerator : Singleton<RoomGenerator>
     [SerializeField] private Transform _tileGrid;
 
     [SerializeField] private GameObject[] _hallsUpDown, _hallsLeftRight;
+    [SerializeField] private List<GameObject> _shops;
     private Direction _previousExitDir = Right; // exit direction of previous room (start room by default)
 
     [SerializeField] private GameObject _entranceRoom;
@@ -41,8 +42,15 @@ public class RoomGenerator : Singleton<RoomGenerator>
         AddAStarGraph(_currentRoomPos, ENTRANCE_ROOM_LENGTH, ENTRANCE_ROOM_LENGTH);
         _currentRoomPos += Vector2.right * ENTRANCE_ROOM_LENGTH/2;
 
-        GenerateNextHallway(Right);
-        _previousExitDir = Right;
+        Direction _exitDirection = Right; // change based on chosen entrance room
+        GenerateNextHallway(_exitDirection);
+        _previousExitDir = _exitDirection;
+    }
+
+    public void GenerateShop()
+    {
+        GameObject shop = _shops[RNGController.GetMapRNG(0, _shops.Count)];
+        _activeRooms.Add(Instantiate(shop, Vector2.zero, Quaternion.identity, _tileGrid));
     }
 
     public void GenerateRoomFromCard(RoomCardData roomCard)

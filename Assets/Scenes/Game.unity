@@ -8863,6 +8863,8 @@ MonoBehaviour:
   - {fileID: 7258101672076318361, guid: 213e6a3956c031e4f8d49b7033898dc9, type: 3}
   _hallsLeftRight:
   - {fileID: 7258101672076318361, guid: e5105e83dc8b13e44b44b54951f478a5, type: 3}
+  _shops:
+  - {fileID: 3406380466156753955, guid: 2036a50b88194274d96ae7f28c9bd51a, type: 3}
   _entranceRoom: {fileID: 7258101672076318361, guid: 4370e53f811d2d2469169a361b31a6db, type: 3}
   _warpRoom: {fileID: 5085373502365240647, guid: caad2c106896df6448b3ee4e5230336e, type: 3}
   _wallMask:
@@ -9349,7 +9351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a3bd90ac3686947b97c541974b2923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloorManager
-  _floorsTypes: 000000000000000000000000
+  _floorsTypes: 000000000100000000000000
   _floorNumberText: {fileID: 1081461846}
 --- !u!4 &2018833578
 Transform:

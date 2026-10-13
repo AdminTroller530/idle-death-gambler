@@ -37,6 +37,10 @@ public class FloorManager : Singleton<FloorManager>
             CurrentFloor++;
             RoomsDeckManager.Instance.GenerateFloorFromDeck();
         }
+        else if (type == Shop)
+        {
+            RoomGenerator.Instance.GenerateShop();
+        }
 
         _floorNumberText.text = CurrentFloor + "/F";
 
