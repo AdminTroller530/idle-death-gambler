@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
     private bool _wavesStarted = false;
 
     [SerializeField] private GameObject _enemySpawnIndicatorPrefab;
-    private const float ENEMY_SPAWN_INDICATOR_TIME = 1f;
+    private const float ENEMY_SPAWN_INDICATOR_TIME = 0.7f;
 
     public static event Action OnEnemyWaveCompleted;
 

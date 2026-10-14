@@ -2688,7 +2688,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8818910797725162810, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_Name
-      value: Warp Room
+      value: WarpRoom
       objectReference: {fileID: 0}
     - target: {fileID: 9182997439653796226, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_ShadowMesh.m_LocalBounds.m_Center.x

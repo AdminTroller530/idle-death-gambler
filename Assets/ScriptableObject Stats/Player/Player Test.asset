@@ -24,4 +24,4 @@ MonoBehaviour:
   BulletLifetime: 3
   BulletKnockback: 4
   ShootCooldown: 0.35
-  ShootInaccuracy: 3
+  ShootInaccuracy: 2

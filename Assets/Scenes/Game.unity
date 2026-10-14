@@ -9478,7 +9478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a3bd90ac3686947b97c541974b2923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloorManager
-  _floorsTypes: 000000000100000000000000
+  _floorsTypes: 0000000001000000000000000100000000000000
   _floorNumberText: {fileID: 1081461846}
 --- !u!4 &2018833578
 Transform:

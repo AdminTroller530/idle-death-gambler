@@ -3995,7 +3995,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8818910797725162810, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_Name
-      value: Hall LR Test
+      value: Hall_LR
       objectReference: {fileID: 0}
     - target: {fileID: 8818910797725162810, guid: 8fdedde6542cf4d40807e5efae861d7a, type: 3}
       propertyPath: m_IsActive
