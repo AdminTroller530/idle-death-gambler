@@ -19,6 +19,7 @@ MonoBehaviour:
   MeleeCooldown: 0.4
   MeleeKnockback: 15
   ChipsPerShot: 4
+  BulletDamageMultiplier: 1
   BulletSpeed: 16
   BulletLifetime: 3
   BulletKnockback: 4

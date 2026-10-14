@@ -75,7 +75,6 @@ public class EnemySpawner : MonoBehaviour
         if (!_wavesStarted && _waves.Count > 0)
         {
             StartWaves();
-            RoomsDeckManager.Instance.RoomDeckExitAnimation();
             StartCoroutine(_roomFadeIn.FadeIn());
         }
     }

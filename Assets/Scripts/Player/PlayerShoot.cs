@@ -25,7 +25,7 @@ public class PlayerShoot : MonoBehaviour
 
     private void Start()
     {
-        _stats = Instantiate(PlayerManager.Instance.BaseStats);
+        _stats = PlayerManager.Instance.Stats;
         ChipsManager.Instance.SetChipsAmount(_initialChipsAmount);
     }
     
@@ -40,6 +40,7 @@ public class PlayerShoot : MonoBehaviour
         if (context.started)
         {
             _stats.BulletDamageMultiplier = 100;
+            _stats.BulletSpeed = 40;
         }
     }
 

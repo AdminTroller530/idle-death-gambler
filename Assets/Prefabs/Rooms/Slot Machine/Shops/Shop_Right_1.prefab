@@ -13232,6 +13232,10 @@ PrefabInstance:
       propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[0].Array.data[14].Y
       value: -100000000
       objectReference: {fileID: 0}
+    - target: {fileID: 8762011623259769150, guid: 529e03b9aed36cb4389624d9263fa1e9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 37
+      objectReference: {fileID: 0}
     - target: {fileID: 8818910797725162810, guid: 529e03b9aed36cb4389624d9263fa1e9, type: 3}
       propertyPath: m_Name
       value: Shop_Right_1

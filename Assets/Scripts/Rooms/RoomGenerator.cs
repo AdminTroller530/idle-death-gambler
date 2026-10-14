@@ -121,6 +121,8 @@ public class RoomGenerator : Singleton<RoomGenerator>
     public void DeleteActiveRooms()
     {
         foreach (GameObject room in _activeRooms) {Destroy(room);}
-        foreach (NavGraph graph in AstarPath.active.data.graphs) {AstarPath.active.data.RemoveGraph(graph);}
+        _activeRooms.Clear();
+        
+        foreach (NavGraph graph in AstarPath.active.data.graphs) {if (graph != null) AstarPath.active.data.RemoveGraph(graph);}
     }
 }

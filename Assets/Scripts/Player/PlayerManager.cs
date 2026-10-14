@@ -8,6 +8,7 @@ public class PlayerManager : Singleton<PlayerManager>
     public Transform Transform {get; private set;}
 
     [SerializeField] public PlayerBaseStats BaseStats;
+    public PlayerBaseStats Stats;
 
     protected override void Awake()
     {
@@ -17,6 +18,7 @@ public class PlayerManager : Singleton<PlayerManager>
         Movement = GetComponent<PlayerMovement>();
         Shoot = GetComponent<PlayerShoot>();
         Transform = transform;
+        Stats = Instantiate(BaseStats);
     }
 
     public Vector2 GetPos() => transform.position;

@@ -12,6 +12,7 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
     private int _roomsDeckCurrentIndex = 0;
 
     private RoomDeckAnimation _roomDeckAnimation;
+    private Coroutine _enterAnimationCoroutine;
 
     private void InitializeRoomReferences()
     {
@@ -103,11 +104,12 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
         RoomCardData card = _roomsDeckShuffled[_roomsDeckCurrentIndex];
         _roomsDeckCurrentIndex++;
 
-        StartCoroutine(_roomDeckAnimation.DeckEnterAnimation(card));
+        _enterAnimationCoroutine = StartCoroutine(_roomDeckAnimation.DeckEnterAnimation(card));
     }
 
     public void RoomDeckExitAnimation()
     {
+        StopCoroutine(_enterAnimationCoroutine);
         StartCoroutine(_roomDeckAnimation.DeckExitAnimation());
     }
 

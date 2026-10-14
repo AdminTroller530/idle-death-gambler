@@ -15,7 +15,7 @@ public class PlayerBaseStats : ScriptableObject
 
     [Header("Shooting Stats")]
     public int ChipsPerShot;
-    public float BulletDamageMultiplier;
+    public float BulletDamageMultiplier = 1;
     public float BulletSpeed;
     public float BulletLifetime;
     public float BulletKnockback;

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class BlackScreen : Singleton<BlackScreen>
 {
     private Image _blackScreen;
-    private float _fadeSpeed = 15f;
+    private float _fadeSpeed = 25f;
     private float _fadeValue = 1f; // from 1 - 10
 
     protected override void Awake()

@@ -22,7 +22,7 @@ public class PlayerMelee : MonoBehaviour
 
     private void Start()
     {
-        _stats = Instantiate(PlayerManager.Instance.BaseStats);
+        _stats = PlayerManager.Instance.Stats;
     }
 
     private void Update()

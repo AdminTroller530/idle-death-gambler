@@ -21,7 +21,7 @@ public class WarpPortal : MonoBehaviour
     private IEnumerator WarpSequence()
     {
         yield return StartCoroutine(BlackScreen.Instance.FadeIn());
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         RoomGenerator.Instance.DeleteActiveRooms();
         OnWarpToNextFloor?.Invoke();
