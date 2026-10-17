@@ -1,9 +1,11 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
     private IInteractable _selectedInteractable = null;
+    [SerializeField] private TextMeshProUGUI _interactableText;
 
     public void OnInteract(InputAction.CallbackContext context)
     {
@@ -13,12 +15,20 @@ public class PlayerInteract : MonoBehaviour
         }
     }
 
+    public void SetInteractableText(string text)
+    {
+        _interactableText.text = text;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent(out IInteractable interactable) && interactable.CanInteract())
         {
             interactable.SetIsSelected(true);
             _selectedInteractable = interactable;
+
+            _interactableText.text = interactable.GetInteractableText();
+            _interactableText.gameObject.SetActive(true);
         }
     }
 
@@ -28,7 +38,10 @@ public class PlayerInteract : MonoBehaviour
         {
             interactable.SetIsSelected(false);
 
-            if (interactable == _selectedInteractable) _selectedInteractable = null;
+            if (interactable == _selectedInteractable) {
+                _selectedInteractable = null;
+                _interactableText.gameObject.SetActive(false);
+            }
         }
     }
 }

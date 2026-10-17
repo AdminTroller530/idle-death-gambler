@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _dir = Vector2.right;
 
     private float _speed;
-    private float _baseSpeed = 7f;
+    private float _baseSpeed = 8f;
 
     private Rigidbody2D _rigidbody;
     public static bool InCombat = false;

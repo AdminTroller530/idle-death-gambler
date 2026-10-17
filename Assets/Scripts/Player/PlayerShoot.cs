@@ -70,7 +70,7 @@ public class PlayerShoot : MonoBehaviour
     private void Update()
     {
         if (_shootCooldown > 0) _shootCooldown -= Time.deltaTime;
-        if (_isHoldingShoot && _shootCooldown <= 0 && ChipsManager.Instance.GetChipsAmount() >= _stats.ChipsPerShot && !PlayerMelee.IsMeleeing && !PlayerParry.IsParrying)
+        if (_isHoldingShoot && _shootCooldown <= 0 && ChipsManager.Instance.GetChipsAmount() >= _stats.ChipsPerShot && !PlayerMelee.IsMeleeing && !PlayerParry.IsParrying && FloorManager.Instance.CurrentFloorType != FloorType.Shop)
         {
             ShootBullet();
             

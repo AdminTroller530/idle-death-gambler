@@ -8,7 +8,8 @@ public class FloorManager : Singleton<FloorManager>
 {
     [SerializeField] private FloorType[] _floorsTypes;
     private int _currentFloorActualIndex = 0;
-    public static int CurrentFloor = 0;
+    public int CurrentFloor {private set; get;} = 0;
+    public FloorType CurrentFloorType {private set; get;}
 
     [SerializeField] private TextMeshProUGUI _floorNumberText;
 
@@ -32,6 +33,8 @@ public class FloorManager : Singleton<FloorManager>
         if (_currentFloorActualIndex >= _floorsTypes.Length) return;
 
         FloorType type = _floorsTypes[_currentFloorActualIndex];
+        CurrentFloorType = type;
+        
         if (type == Normal)
         {
             CurrentFloor++;
