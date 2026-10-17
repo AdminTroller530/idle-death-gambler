@@ -21,9 +21,10 @@ public class IncreaseChipsPerShotButton : MonoBehaviour, IInteractable
         else {
             _stats.ChipsPerShot++;
             ChipsManager.Instance.DecreaseChips(_cost);
+            UpdateCost();
+            ChipsManager.Instance.UpdateChipsPerShotText();
         }
 
-        UpdateCost();
         PlayerManager.Instance.Interact.SetInteractableText(GetInteractableText());
     }
 

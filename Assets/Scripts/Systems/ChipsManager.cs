@@ -12,10 +12,12 @@ public enum ChipValue
 
 public class ChipsManager : Singleton<ChipsManager>
 {
+    private PlayerBaseStats _playerStats;
     private int _chipsAmount;
     private float _chipsDisplayAmount = 0;
     private const float CHIPS_DISPLAY_UPDATE_SPEED = 7f;
     [SerializeField] private TextMeshProUGUI _chipsText;
+    [SerializeField] private TextMeshProUGUI _chipsPerShotText;
 
     [SerializeField] private ChipPrefab _chipPrefab;
 
@@ -30,12 +32,24 @@ public class ChipsManager : Singleton<ChipsManager>
         SpawnChips(Vector2.zero, 0);
     }
 
+    private void Start()
+    {
+        _playerStats = PlayerManager.Instance.Stats;
+        UpdateChipsPerShotText();
+    }
+
     private void Update()
     {
         _chipsDisplayAmount = Mathf.Lerp(_chipsDisplayAmount, _chipsAmount, CHIPS_DISPLAY_UPDATE_SPEED * Time.deltaTime);
         if (Mathf.Abs(_chipsAmount - _chipsDisplayAmount) < 0.4f) _chipsDisplayAmount = _chipsAmount;
 
         _chipsText.text = ((int)_chipsDisplayAmount).ToString();
+
+    }
+
+    public void UpdateChipsPerShotText()
+    {
+        _chipsPerShotText.text = _playerStats.ChipsPerShot + "/shot";
     }
 
     public int GetChipsAmount() => _chipsAmount;
