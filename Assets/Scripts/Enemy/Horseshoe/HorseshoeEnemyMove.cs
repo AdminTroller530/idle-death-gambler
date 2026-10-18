@@ -69,6 +69,15 @@ public class HorseshoeEnemyMove : EnemyMove
             EndLunge();
             Screenshake.Instance.Shake(_lungeSpeed / 25f);
         }
+        else if (other.gameObject.tag == "Enemy")
+        {
+            if (IsLunging)
+            {
+                Vector2 knockbackVector = other.transform.position - transform.position;
+                other.gameObject.GetComponent<EnemyMove>().TakeKnockback(knockbackVector, Mathf.Min(15, _lungeSpeed * 5));
+                if (_lungeSpeed > 5) other.gameObject.GetComponent<EnemyHealth>().TakeDamage(_lungeSpeed / 4f);
+            }
+        }
     }
 
     protected override void OnTriggerEnter2D(Collider2D other)
