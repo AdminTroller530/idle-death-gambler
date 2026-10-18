@@ -1,28 +1,25 @@
 using UnityEngine;
 using FMODUnity;
+using FMOD.Studio;
 
 public class AudioController : Singleton<AudioController>
 {
-    public StudioEventEmitter _emitter;
-    // public static float targetLowPass = 1f;
+    [SerializeField] private EventReference _musicReference;
+    private EventInstance _musicEventInstance;
 
     protected override void Awake()
     {
         base.Awake();
+        _musicEventInstance = RuntimeManager.CreateInstance(_musicReference);
     }
 
     private void Start()
     {
-        _emitter = GetComponent<StudioEventEmitter>();
+        _musicEventInstance.start();
     }
 
     public void UpdateLowPass(float target)
     {
-        _emitter.SetParameter("Low Pass", target);
+        RuntimeManager.StudioSystem.setParameterByName("Low Pass", target);
     }
-
-    // private void Update()
-    // {
-    //     _emitter.SetParameter("Low Pass", targetLowPass);
-    // }
 }

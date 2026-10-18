@@ -822,8 +822,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 979081776}
-  - component: {fileID: 979081775}
-  - component: {fileID: 979081774}
   - component: {fileID: 979081773}
   m_Layer: 0
   m_Name: Audio Controller
@@ -844,59 +842,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43dd5faaafe24de41a2cb02351fca245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _emitter: {fileID: 0}
---- !u!114 &979081774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 979081772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 744a208c85da6d04c861d81b992e4ead, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioParameterTrigger
-  CollisionTag: 
-  Emitters:
-  - Target: {fileID: 979081775}
-    Params:
-    - Name: Low Pass
-      Value: 0
-  TriggerEvent: 1
---- !u!114 &979081775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 979081772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
-  CollisionTag: 
-  EventReference:
+  _musicReference:
     Guid:
-      Data1: 1215983677
-      Data2: 1090392672
-      Data3: -427659133
-      Data4: 830069811
-    Path: event:/going down
-  Event: 
-  EventPlayTrigger: 1
-  EventStopTrigger: 2
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params:
-  - Name: Low Pass
-    Value: 1
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
+      Data1: -369959161
+      Data2: 1132455258
+      Data3: -201391170
+      Data4: 1857090873
+    Path: event:/slots
 --- !u!4 &979081776
 Transform:
   m_ObjectHideFlags: 0
@@ -1080,7 +1032,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1533522223
-  m_SortingLayer: 9
+  m_SortingLayer: 10
   m_SortingOrder: 20
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 8efec0ade9c61444bb1a691a29f80a51, type: 3}
