@@ -64,7 +64,7 @@ public class HorseshoeEnemyMove : EnemyMove
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Wall")
+        if (other.gameObject.tag == "Wall" && IsLunging)
         {
             EndLunge();
             Screenshake.Instance.Shake(_lungeSpeed / 25f);
