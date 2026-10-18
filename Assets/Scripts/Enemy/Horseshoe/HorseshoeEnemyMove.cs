@@ -49,20 +49,38 @@ public class HorseshoeEnemyMove : EnemyMove
         }
     }
 
-    public void Lunge(Vector2 direction)
+    public void StartLunge(Vector2 direction)
     {
         IsLunging = true;
         _lungeVector = direction.normalized;
         _lungeSpeed = LUNGE_INITIAL_SPEED;
     }
 
+    private void EndLunge()
+    {
+        IsLunging = false;
+        _moveSpeedMultiplier = LUNGE_RECHARGE_MOVE_SPEED_MULTIPLIER;
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Wall")
         {
-            IsLunging = false;
-            _lungeVector = Vector2.zero;
-            _moveSpeedMultiplier = LUNGE_RECHARGE_MOVE_SPEED_MULTIPLIER;
+            EndLunge();
+            Screenshake.Instance.Shake(_lungeSpeed / 25f);
+        }
+    }
+
+    protected override void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            if (PlayerParry.IsParrying && IsLunging)
+            {
+                EndLunge();
+                TakeKnockback(-_lungeVector, _lungeSpeed);
+            }
+            else PlayerManager.Instance.Health.TakeEnemyDamage(gameObject, _stats.CollisionDamage);
         }
     }
 

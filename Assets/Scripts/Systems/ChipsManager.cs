@@ -15,7 +15,7 @@ public class ChipsManager : Singleton<ChipsManager>
     private PlayerBaseStats _playerStats;
     private int _chipsAmount;
     private float _chipsDisplayAmount = 0;
-    private const float CHIPS_DISPLAY_UPDATE_SPEED = 7f;
+    private const float CHIPS_DISPLAY_UPDATE_SPEED = 10f;
     [SerializeField] private TextMeshProUGUI _chipsText;
     [SerializeField] private TextMeshProUGUI _chipsPerShotText;
 

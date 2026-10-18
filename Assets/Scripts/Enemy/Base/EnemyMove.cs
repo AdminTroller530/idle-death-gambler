@@ -88,7 +88,7 @@ public abstract class EnemyMove : MonoBehaviour
         _path.canMove = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {

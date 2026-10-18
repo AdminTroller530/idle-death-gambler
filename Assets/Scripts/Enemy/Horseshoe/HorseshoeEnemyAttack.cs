@@ -27,7 +27,7 @@ public class HorseshoeEnemyAttack : EnemyAttack
             if (_chargeCooldown > 0) _chargeCooldown -= Time.deltaTime;
             if (_chargeCooldown <= 0 && _enemyVision.CanSeePlayer)
             {
-                _move.Lunge(_playerTransform.position - transform.position);
+                _move.StartLunge(_playerTransform.position - transform.position);
                 _chargeCooldown = CHARGE_COOLDOWN_MAX;
             }
         }

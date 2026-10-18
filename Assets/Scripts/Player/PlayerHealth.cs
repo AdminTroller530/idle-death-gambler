@@ -15,14 +15,11 @@ public class PlayerHealth : MonoBehaviour
     public static event Action<int> OnPlayerChangeHealth;
     public static event Action<GameObject> OnPlayerTakeEnemyDamage;
 
-    private CinemachineImpulseSource _screenshake;
-
     private PlayerVows _playerVows;
 
     private void Awake()
     {    
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _screenshake = GetComponent<CinemachineImpulseSource>();
         _playerVows = GetComponent<PlayerVows>();
     }
 
@@ -66,7 +63,7 @@ public class PlayerHealth : MonoBehaviour
         OnPlayerTakeEnemyDamage?.Invoke(enemy);
         OnPlayerChangeHealth?.Invoke(_health);
         
-        _screenshake?.GenerateImpulse();
+        Screenshake.Instance.Shake(1);
 
         if (_health <= 0)
         {
