@@ -62,9 +62,11 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         _rigidbody.linearVelocity = _move * _speed;
-        if (WarpPortal.IsWarping) _rigidbody.linearVelocity = Vector2.zero;
-
-        Animate();
+        if (WarpPortal.IsWarping || DealerShopManager.Instance.IsOpen) {
+            _rigidbody.linearVelocity = Vector2.zero;
+            _animator.SetFloat("Velocity", 0);
+        }
+        else Animate();
     }
 
     private void Update()
