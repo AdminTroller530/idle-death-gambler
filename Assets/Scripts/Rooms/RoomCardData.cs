@@ -7,6 +7,7 @@ public class RoomCardData : ScriptableObject
     public string Name;
     public string Description;
     public Sprite Sprite;
+    public Rarity Rarity;
 
     [Header("Room Pools (by entrance direction)")]
     public List<RoomData> RoomPoolUp;

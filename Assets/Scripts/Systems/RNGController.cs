@@ -9,9 +9,11 @@ public class RNGController : MonoBehaviour
     private static Random _mapRNG;
     private static Random _itemRNG;
     private static Random _roomCardRNG;
+    private static Random _dealerRNG;
     private static int _mapRNGCount;
     private static int _itemRNGCount;
     private static int _roomCardRNGCount;
+    private static int _dealerRNGCount;
 
     private void Awake()
     {
@@ -20,6 +22,7 @@ public class RNGController : MonoBehaviour
         _mapRNG = new Random(seed);
         _itemRNG = new Random(seed + 1);
         _roomCardRNG = new Random(seed + 2);
+        _dealerRNG = new Random(seed + 3);
     }
 
     public static int GetMapRNG(int min, int max) // min inclusive, max exclusive
@@ -34,11 +37,19 @@ public class RNGController : MonoBehaviour
         return _roomCardRNG.Next(min, max);
     }
 
+    public static int GetDealerRNG(int min, int max) // min inclusive, max exclusive
+    {
+        _dealerRNGCount++;
+        return _dealerRNG.Next(min, max);
+    }
+
     private void LoadState() // implement with file i/o in the future
     {
         for (int i=0; i<_mapRNGCount; i++)
         {
             _mapRNG.Next();
+            _roomCardRNG.Next();
+            _dealerRNG.Next();
         }
     }
 
