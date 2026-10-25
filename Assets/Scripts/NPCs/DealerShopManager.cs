@@ -6,6 +6,8 @@ public class DealerShopManager : Singleton<DealerShopManager>
 {
     public bool IsOpen {private set; get;} = false;
     [SerializeField] private GameObject _canvas;
+    [SerializeField] private GameObject _mainMenu;
+    [SerializeField] private GameObject _addCardMenu;
 
     private DealerShopAddCard _addCard;
     
@@ -18,13 +20,24 @@ public class DealerShopManager : Singleton<DealerShopManager>
     public void Open()
     {
         _canvas.gameObject.SetActive(true);
-        IsOpen = true;
+        _mainMenu.SetActive(true);
+
         _addCard.RollShopCards();
+
+        IsOpen = true;
     }
 
     public void Close()
     {
         _canvas.SetActive(false);
+        _addCardMenu.SetActive(false);
+
         IsOpen = false;
+    }
+
+    public void OpenAddCardMenu()
+    {
+        _mainMenu.SetActive(false);
+        _addCard.OpenMenu();
     }
 }

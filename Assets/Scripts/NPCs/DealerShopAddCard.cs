@@ -65,12 +65,17 @@ public class DealerShopAddCard : MonoBehaviour
 
     public void RollShopCards()
     {
-        _uiObject.SetActive(true);
         RoomCardData[] cardOptions = GenerateCardChoices(GenerateCardRarities());
         for (int i = 0; i < _cardOptionsSprites.Length; i++)
         {
             if (cardOptions[i] != null) _cardOptionsSprites[i].sprite = cardOptions[i].Sprite;
         }
+    }
+
+    public void OpenMenu()
+    {
+        RollShopCards();
+        _uiObject.SetActive(true);
     }
 
     private void Awake()
