@@ -1,0 +1,1 @@
+public enum RoomCardEnchantment {Deadly, Rich, Speedster}

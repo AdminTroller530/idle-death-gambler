@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using static Rarity;
 
 public class DealerShopManager : Singleton<DealerShopManager>
 {
@@ -6,7 +8,7 @@ public class DealerShopManager : Singleton<DealerShopManager>
     [SerializeField] private GameObject _canvas;
 
     private DealerShopAddCard _addCard;
-
+    
     protected override void Awake()
     {
         base.Awake();
@@ -17,7 +19,7 @@ public class DealerShopManager : Singleton<DealerShopManager>
     {
         _canvas.gameObject.SetActive(true);
         IsOpen = true;
-        _addCard.RollCards();
+        _addCard.RollShopCards();
     }
 
     public void Close()

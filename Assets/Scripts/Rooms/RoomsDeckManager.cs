@@ -40,8 +40,8 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
         _roomDeckAnimation = GetComponent<RoomDeckAnimation>();
 
         InitializeRoomReferences();
-        AddCardToDeck(_allRoomCards[0]);
-        AddCardToDeck(_allRoomCards[1]);
+        AddCardToDeck(Instantiate(_allRoomCards[0]));
+        AddCardToDeck(Instantiate(_allRoomCards[1]));
 
         // _roomsDeckShuffled = ShuffleRoomsDeck(_roomsDeck);
     }
