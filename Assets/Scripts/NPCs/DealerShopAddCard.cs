@@ -6,7 +6,8 @@ using static Rarity;
 
 public class DealerShopAddCard : MonoBehaviour
 {
-    private Dictionary<Rarity, int> _rarityWeights = new Dictionary<Rarity, int>{{Common, 30}, {Uncommon, 20}, {Rare, 7}, {Epic, 3}, {Legendary, 1}};
+    private Dictionary<Rarity, int> _rarityWeights = new Dictionary<Rarity, int>{{Common, 30}, {Uncommon, 20}, {Rare, 0}, {Epic, 0}, {Legendary, 0}};
+    // private Dictionary<Rarity, int> _rarityWeights = new Dictionary<Rarity, int>{{Common, 30}, {Uncommon, 20}, {Rare, 7}, {Epic, 3}, {Legendary, 1}};
 
     [SerializeField] private List<RoomCardData> _allCards;
     private Dictionary<Rarity, List<RoomCardData>> _cardsPool = new Dictionary<Rarity, List<RoomCardData>>{};
@@ -74,7 +75,6 @@ public class DealerShopAddCard : MonoBehaviour
 
     public void OpenMenu()
     {
-        RollShopCards();
         _uiObject.SetActive(true);
     }
 

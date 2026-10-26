@@ -15,14 +15,17 @@ public class DealerShopManager : Singleton<DealerShopManager>
     {
         base.Awake();
         _addCard = GetComponent<DealerShopAddCard>();
+
+        _mainMenu.SetActive(true);
+        _addCardMenu.SetActive(false);
+        _canvas.gameObject.SetActive(false);
+
     }
 
     public void Open()
     {
         _canvas.gameObject.SetActive(true);
         _mainMenu.SetActive(true);
-
-        _addCard.RollShopCards();
 
         IsOpen = true;
     }
