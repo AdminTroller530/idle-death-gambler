@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static Rarity;
 
 public class DealerShopManager : Singleton<DealerShopManager>
@@ -8,6 +9,8 @@ public class DealerShopManager : Singleton<DealerShopManager>
     [SerializeField] private GameObject _canvas;
     [SerializeField] private GameObject _mainMenu;
     [SerializeField] private GameObject _addCardMenu;
+    
+    [SerializeField] private Button _addCardMenuButton;
 
     private DealerShopAddCard _addCard;
     
@@ -24,6 +27,8 @@ public class DealerShopManager : Singleton<DealerShopManager>
 
     public void Open()
     {
+        _addCardMenuButton.interactable = !_addCard.HasChosenCard;
+
         _canvas.gameObject.SetActive(true);
         _mainMenu.SetActive(true);
 

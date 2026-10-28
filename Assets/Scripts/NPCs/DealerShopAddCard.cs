@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using static Rarity;
 
 public class DealerShopAddCard : MonoBehaviour
@@ -12,8 +13,28 @@ public class DealerShopAddCard : MonoBehaviour
     [SerializeField] private List<RoomCardData> _allCards;
     private Dictionary<Rarity, List<RoomCardData>> _cardsPool = new Dictionary<Rarity, List<RoomCardData>>{};
 
+    private RoomCardData[] _cardOptions = new RoomCardData[3];
+
+    private bool _hasRolledCards;
+    public bool HasChosenCard {private set; get;}
+
     [SerializeField] private GameObject _uiObject;
-    [SerializeField] private SpriteRenderer[] _cardOptionsSprites;
+    [SerializeField] private GameObject _rollCardsButton;
+    [SerializeField] private Image[] _cardOptionsSprites;
+    [SerializeField] private Sprite _cardBackSprite;
+
+    private void OnEnable() {WarpPortal.OnWarpToNextFloor += ResetCardRolls;}
+    private void OnDisable() {WarpPortal.OnWarpToNextFloor -= ResetCardRolls;}
+
+    private void ResetCardRolls() {
+        for (int i = 0; i < _cardOptions.Length; i++)
+        {
+            _cardOptions[i] = null;
+            _cardOptionsSprites[i].sprite = _cardBackSprite;
+        }
+        _hasRolledCards = false;
+        HasChosenCard = false;
+    }
 
     private Rarity[] GenerateCardRarities()
     {
@@ -66,20 +87,33 @@ public class DealerShopAddCard : MonoBehaviour
 
     public void RollShopCards()
     {
-        RoomCardData[] cardOptions = GenerateCardChoices(GenerateCardRarities());
+        _cardOptions = GenerateCardChoices(GenerateCardRarities());
         for (int i = 0; i < _cardOptionsSprites.Length; i++)
         {
-            if (cardOptions[i] != null) _cardOptionsSprites[i].sprite = cardOptions[i].Sprite;
+            if (_cardOptions[i] != null) _cardOptionsSprites[i].sprite = _cardOptions[i].Sprite;
         }
+
+        _hasRolledCards = true;
+        _rollCardsButton.SetActive(false);
+    }
+
+    public void SelectCard(int index)
+    {
+        if (!_hasRolledCards) return;
+        HasChosenCard = true;
+        RoomsDeckManager.Instance.AddCardToDeck(_cardOptions[index]);
+        DealerShopManager.Instance.Close();
     }
 
     public void OpenMenu()
     {
         _uiObject.SetActive(true);
+        _rollCardsButton.SetActive(!_hasRolledCards);
     }
 
     private void Awake()
     {
         InitializeAllCardRarities();
+        ResetCardRolls();
     }
 }

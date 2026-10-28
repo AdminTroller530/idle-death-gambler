@@ -113,7 +113,7 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
         StartCoroutine(_roomDeckAnimation.DeckExitAnimation());
     }
 
-    private void AddCardToDeck(RoomCardData card)
+    public void AddCardToDeck(RoomCardData card)
     {
         _roomsDeck.Add(Instantiate(card));
     }
