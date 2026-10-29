@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class RoomEnterTrigger : MonoBehaviour
@@ -5,6 +6,8 @@ public class RoomEnterTrigger : MonoBehaviour
     private EnemySpawner _enemySpawner;
     private BoxCollider2D _collider;
     private bool _roomIsEntered = false;
+
+    public static event Action OnEnterNewRoom;
 
     private void Awake()
     {
@@ -20,6 +23,7 @@ public class RoomEnterTrigger : MonoBehaviour
         if (_collider.bounds.Contains(other.bounds.min) && _collider.bounds.Contains(other.bounds.max))
         {
             _roomIsEntered = true;
+            OnEnterNewRoom?.Invoke();
             RoomsDeckManager.Instance.RoomDeckExitAnimation();
             _enemySpawner.OnEnterRoom();
         }

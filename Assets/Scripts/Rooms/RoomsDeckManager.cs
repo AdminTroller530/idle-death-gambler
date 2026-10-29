@@ -100,18 +100,23 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
         RoomGenerator.Instance.GenerateWarpRoom();
     }
 
+    public int GetCurrentIndexShuffled()
+    {
+        return _roomsDeckShuffledIndexMapping[_roomsDeckCurrentIndex];
+    }
+
     public void RoomDeckEnterAnimation()
     {
         if (_roomsDeckCurrentIndex >= _roomsDeckShuffled.Count) return;
 
         RoomCardData card = _roomsDeckShuffled[_roomsDeckCurrentIndex];
-        _roomsDeckCurrentIndex++;
 
         _enterAnimationCoroutine = StartCoroutine(_roomDeckAnimation.DeckEnterAnimation(card));
     }
 
     public void RoomDeckExitAnimation()
     {
+        _roomsDeckCurrentIndex++;
         StopCoroutine(_enterAnimationCoroutine);
         StartCoroutine(_roomDeckAnimation.DeckExitAnimation());
     }
