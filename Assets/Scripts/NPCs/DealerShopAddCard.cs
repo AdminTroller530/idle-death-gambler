@@ -100,8 +100,11 @@ public class DealerShopAddCard : MonoBehaviour
     public void SelectCard(int index)
     {
         if (!_hasRolledCards) return;
+        
+        RoomCardData card = _cardOptions[index];
+        RoomsDeckManager.Instance.AddCardToDeck(card);
+        
         HasChosenCard = true;
-        RoomsDeckManager.Instance.AddCardToDeck(_cardOptions[index]);
         DealerShopManager.Instance.Close();
     }
 

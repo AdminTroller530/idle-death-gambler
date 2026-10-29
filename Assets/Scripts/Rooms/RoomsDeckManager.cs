@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
 
     private RoomDeckAnimation _roomDeckAnimation;
     private Coroutine _enterAnimationCoroutine;
+
+    public static event Action<RoomCardData> OnAddCardToDeck;
 
     private void InitializeRoomReferences()
     {
@@ -116,5 +119,8 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
     public void AddCardToDeck(RoomCardData card)
     {
         _roomsDeck.Add(Instantiate(card));
+        OnAddCardToDeck?.Invoke(card);
     }
+
+    public int GetDeckSize() {return _roomsDeck.Count;}
 }
