@@ -46,8 +46,8 @@ public class DealerShopAddCard : MonoBehaviour
 
         for (int i = 0; i < offeredRarities.Length; i++)
         {
-
-            int roll = RNGController.GetDealerRNG(1, _rarityWeights.Values.Sum() + 1);
+            int luckBoost = PlayerManager.Instance.Stats.LuckLevel * 5;
+            int roll = RNGController.GetDealerRNG(Mathf.Max(1, luckBoost), _rarityWeights.Values.Sum() + 1);
             int sum = 0;
 
             foreach (Rarity rarity in _rarityWeights.Keys)
@@ -74,7 +74,9 @@ public class DealerShopAddCard : MonoBehaviour
             Rarity rarity = generatedRarities[i];
             
             if (!_cardsPool.ContainsKey(rarity)) continue;
-            cardOptions[i] = _cardsPool[rarity][RNGController.GetDealerRNG(0, _cardsPool[rarity].Count)];
+
+            RoomCardData card = Instantiate(_cardsPool[rarity][RNGController.GetDealerRNG(0, _cardsPool[rarity].Count)]);
+            cardOptions[i] = card;
         }
         return cardOptions;
     }
