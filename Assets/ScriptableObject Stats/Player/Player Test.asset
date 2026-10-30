@@ -17,7 +17,7 @@ MonoBehaviour:
   ParryCooldown: 0.2
   AttackLevel: 1
   SpeedLevel: 1
-  LuckLevel: 6
+  LuckLevel: 1
   MeleeDamage: 5
   MeleeCooldown: 0.4
   MeleeKnockback: 15

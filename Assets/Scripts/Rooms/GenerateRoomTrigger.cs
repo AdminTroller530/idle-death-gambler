@@ -19,9 +19,11 @@ public class GenerateRoomTrigger : MonoBehaviour
         if (_isTriggered) return;
         if (other.tag == "Player")
         {
+            _isTriggered = true;
+            if (RoomsDeckManager.Instance.GetCurrentDeckIndex() >= RoomsDeckManager.Instance.GetDeckSize()) return;
+            
             RoomsDeckManager.Instance.RoomDeckEnterAnimation();
             OnGenerateNewRoom?.Invoke();
-            _isTriggered = true;
         }
     }
 }

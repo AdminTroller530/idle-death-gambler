@@ -128,4 +128,5 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
     }
 
     public int GetDeckSize() {return _roomsDeck.Count;}
+    public int GetCurrentDeckIndex() {return _roomsDeckCurrentIndex;}
 }

@@ -5,7 +5,7 @@ public class RoomCardDisplayPrefab : MonoBehaviour
     [SerializeField] private SpriteRenderer _spriteRenderer;
     private Color NORMAL_COLOR = new Color(1, 1, 1);
     private Color DISCARDED_COLOR = new Color(0.5f, 0.5f, 0.5f);
-    private Color ACTIVE_COLOR = new Color(0.2f, 0.7f, 0.2f);
+    private Color ACTIVE_COLOR = new Color(0.2f, 0.6f, 0.2f);
 
     public void SetSprite(RoomCardData card)
     {
