@@ -79,6 +79,15 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    private void WavesDefeated()
+    {
+        AudioController.Instance.UpdateLowPass(0);
+        _doors.SetActive(false);
+        OnEnemyWaveCompleted?.Invoke();
+        _waveSpawnDone = false;
+        PlayerMovement.InCombat = false;
+    }
+
     private void Update()
     {
         if (_waveSpawnDone && _currentEnemies.TrueForAll(e => !e || e.GetComponent<EnemyBase>().IsDead))
@@ -93,14 +102,9 @@ public class EnemySpawner : MonoBehaviour
                     StartCoroutine(SpawnWave(_waves[_currentWave]));
                 }
             }
-            else // all waves defeated
+            else
             {
-                // Debug.Log("waves defeated");
-                AudioController.Instance.UpdateLowPass(0);
-                _doors.SetActive(false);
-                OnEnemyWaveCompleted?.Invoke();
-                _waveSpawnDone = false;
-                PlayerMovement.InCombat = false;
+                WavesDefeated();
             }
 
         }

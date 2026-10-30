@@ -102,21 +102,21 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
 
     public int GetCurrentIndexShuffled()
     {
-        return _roomsDeckShuffledIndexMapping[_roomsDeckCurrentIndex];
+        return _roomsDeckShuffledIndexMapping[_roomsDeckCurrentIndex - 1];
     }
 
     public void RoomDeckEnterAnimation()
     {
-        if (_roomsDeckCurrentIndex >= _roomsDeckShuffled.Count) return;
+        _roomsDeckCurrentIndex++;
+        if (_roomsDeckCurrentIndex > _roomsDeckShuffled.Count) return;
 
-        RoomCardData card = _roomsDeckShuffled[_roomsDeckCurrentIndex];
+        RoomCardData card = _roomsDeckShuffled[_roomsDeckCurrentIndex - 1];
 
         _enterAnimationCoroutine = StartCoroutine(_roomDeckAnimation.DeckEnterAnimation(card));
     }
 
     public void RoomDeckExitAnimation()
     {
-        _roomsDeckCurrentIndex++;
         StopCoroutine(_enterAnimationCoroutine);
         StartCoroutine(_roomDeckAnimation.DeckExitAnimation());
     }

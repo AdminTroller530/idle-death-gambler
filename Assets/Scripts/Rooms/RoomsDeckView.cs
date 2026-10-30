@@ -18,12 +18,14 @@ public class RoomsDeckView : MonoBehaviour
     private void OnEnable() {
         RoomsDeckManager.OnAddCardToDeck += AddCard;
         WarpPortal.OnWarpToNextFloor += ResetCardStates;
-        RoomEnterTrigger.OnEnterNewRoom += DiscardNextCard;
+        GenerateRoomTrigger.OnGenerateNewRoom += ActiveNextCard;
+        EnemySpawner.OnEnemyWaveCompleted += DiscardNextCard;
     }
     private void OnDisable() {
         RoomsDeckManager.OnAddCardToDeck -= AddCard;
         WarpPortal.OnWarpToNextFloor -= ResetCardStates;
-        RoomEnterTrigger.OnEnterNewRoom -= DiscardNextCard;
+        GenerateRoomTrigger.OnGenerateNewRoom -= ActiveNextCard;
+        EnemySpawner.OnEnemyWaveCompleted -= DiscardNextCard;
     }
 
     public void ButtonValuePressed(InputAction.CallbackContext context)
@@ -44,12 +46,17 @@ public class RoomsDeckView : MonoBehaviour
 
     private void DiscardNextCard()
     {
-        _roomCardPrefabs[RoomsDeckManager.Instance.GetCurrentIndexShuffled()].SetDiscardedState(true);
+        _roomCardPrefabs[RoomsDeckManager.Instance.GetCurrentIndexShuffled()].SetState("discarded");
+    }
+
+    private void ActiveNextCard()
+    {
+        _roomCardPrefabs[RoomsDeckManager.Instance.GetCurrentIndexShuffled()].SetState("active");
     }
 
     private void ResetCardStates()
     {
-        foreach (RoomCardDisplayPrefab prefab in _roomCardPrefabs) {prefab.SetDiscardedState(false);}
+        foreach (RoomCardDisplayPrefab prefab in _roomCardPrefabs) {prefab.SetState("normal");}
     }
 
     private void AddCard(RoomCardData card)
@@ -62,7 +69,7 @@ public class RoomsDeckView : MonoBehaviour
 
         cardPrefab.transform.localPosition = pos;
         cardPrefab.SetSprite(card);
-        cardPrefab.SetDiscardedState(false);
+        cardPrefab.SetState("normal");
 
         if (currentX == HORIZONTAL_SPACING*3) currentX = -currentX;
         else currentX += HORIZONTAL_SPACING;

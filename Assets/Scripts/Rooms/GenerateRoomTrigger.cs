@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
@@ -5,6 +6,8 @@ public class GenerateRoomTrigger : MonoBehaviour
 {
     private BoxCollider2D _triggerZone;
     private bool _isTriggered = false;
+
+    public static event Action OnGenerateNewRoom;
 
     private void Awake()
     {
@@ -17,6 +20,7 @@ public class GenerateRoomTrigger : MonoBehaviour
         if (other.tag == "Player")
         {
             RoomsDeckManager.Instance.RoomDeckEnterAnimation();
+            OnGenerateNewRoom?.Invoke();
             _isTriggered = true;
         }
     }
