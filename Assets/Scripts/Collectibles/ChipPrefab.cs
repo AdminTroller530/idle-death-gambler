@@ -89,7 +89,7 @@ public class ChipPrefab : MonoBehaviour
 
     private void Update()
     {
-        if (_fixedUpdateCalls < FIXED_UPDATE_CALLS_MAX) return;
+        // if (_fixedUpdateCalls < FIXED_UPDATE_CALLS_MAX) return;
 
         if (Vector2.Distance(_playerTransform.position, transform.position) < PLAYER_MAGNET_DISTANCE)
         {

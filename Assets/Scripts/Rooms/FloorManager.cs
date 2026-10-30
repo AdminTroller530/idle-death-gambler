@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using static FloorType;
@@ -13,6 +14,8 @@ public class FloorManager : Singleton<FloorManager>
 
     [SerializeField] private TextMeshProUGUI _floorNumberText;
 
+    [NonSerialized] public FloorTimer Timer;
+
     private void OnEnable()
     {
         WarpPortal.OnWarpToNextFloor += GenerateNextFloor;
@@ -21,6 +24,12 @@ public class FloorManager : Singleton<FloorManager>
     private void OnDisable()
     {
         WarpPortal.OnWarpToNextFloor -= GenerateNextFloor;
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        Timer = GetComponent<FloorTimer>();
     }
 
     private void Start()
@@ -38,11 +47,13 @@ public class FloorManager : Singleton<FloorManager>
         if (type == Normal)
         {
             CurrentFloor++;
+            Timer.StartFloorTimer();
             RoomsDeckManager.Instance.GenerateFloorFromDeck();
         }
         else if (type == Shop)
         {
             RoomGenerator.Instance.GenerateShop();
+            Timer.StopTimer();
         }
 
         _floorNumberText.text = CurrentFloor + "/F";
