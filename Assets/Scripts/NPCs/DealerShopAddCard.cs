@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static Rarity;
@@ -18,8 +18,12 @@ public class DealerShopAddCard : MonoBehaviour
     private bool _hasRolledCards;
     public bool HasChosenCard {private set; get;}
 
+    private int _cost;
+    private const int BASE_COST = 15;
+
     [SerializeField] private GameObject _uiObject;
     [SerializeField] private GameObject _rollCardsButton;
+    [SerializeField] private TextMeshProUGUI _rollCardsCostText;
     [SerializeField] private Image[] _cardOptionsSprites;
     [SerializeField] private Sprite _cardBackSprite;
 
@@ -87,6 +91,8 @@ public class DealerShopAddCard : MonoBehaviour
 
     public void RollShopCards()
     {
+        if (!ChipsManager.Instance.DecreaseChips(_cost)) return;
+
         _cardOptions = GenerateCardChoices(GenerateCardRarities());
         for (int i = 0; i < _cardOptionsSprites.Length; i++)
         {
@@ -108,8 +114,16 @@ public class DealerShopAddCard : MonoBehaviour
         DealerShopManager.Instance.Close();
     }
 
+    private void SetCost()
+    {
+        _cost = BASE_COST * FloorManager.Instance.CurrentFloor;
+        _rollCardsCostText.text = $"<color=#FFFF00>Cost: {_cost}</color>";
+    }
+
     public void OpenMenu()
     {
+        SetCost();
+
         _uiObject.SetActive(true);
         _rollCardsButton.SetActive(!_hasRolledCards);
     }

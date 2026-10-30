@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomData
   Name: Normal_TwoPillars
   RoomPrefab: {fileID: 5326250155589425202, guid: d4be662a500a5f94dbbc8428cc43dca4, type: 3}
-  EntranceDirection: 0
+  EntranceDirection: 2
   ExitDirection: 3
   ExitTransform: {fileID: 3090176874956808022, guid: d4be662a500a5f94dbbc8428cc43dca4, type: 3}
   EnterTrigger: {fileID: 1599470677561239742, guid: d4be662a500a5f94dbbc8428cc43dca4, type: 3}

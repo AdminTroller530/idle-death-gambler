@@ -20,6 +20,8 @@ public class WarpPortal : MonoBehaviour
 
     private IEnumerator WarpSequence()
     {
+        RoomsDeckManager.Instance.RoomDeckExitAnimation(); // fallback
+        
         yield return StartCoroutine(BlackScreen.Instance.FadeIn());
         yield return new WaitForSeconds(0.2f);
 

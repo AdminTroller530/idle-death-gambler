@@ -95,7 +95,7 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
         for (int i = 0; i < _roomsDeckShuffled.Count; i++)
         {
             RoomCardData card = _roomsDeckShuffled[i];
-            RoomGenerator.Instance.GenerateRoomFromCard(card);
+            if (!RoomGenerator.Instance.GenerateRoomFromCard(card)) break;
         }
         RoomGenerator.Instance.GenerateWarpRoom();
     }

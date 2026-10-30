@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomData
   Name: Normal_Divisions
   RoomPrefab: {fileID: 7482054541270028732, guid: 0206cefaf8325e74c852df0639e665a7, type: 3}
-  EntranceDirection: 2
+  EntranceDirection: 0
   ExitDirection: 3
-  ExitTransform: {fileID: 3090176874956808022, guid: d4be662a500a5f94dbbc8428cc43dca4, type: 3}
-  EnterTrigger: {fileID: 1599470677561239742, guid: d4be662a500a5f94dbbc8428cc43dca4, type: 3}
+  ExitTransform: {fileID: 5413934193313632885, guid: 0206cefaf8325e74c852df0639e665a7, type: 3}
+  EnterTrigger: {fileID: 4038966517948850480, guid: 0206cefaf8325e74c852df0639e665a7, type: 3}

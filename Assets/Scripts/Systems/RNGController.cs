@@ -39,6 +39,8 @@ public class RNGController : MonoBehaviour
 
     public static int GetDealerRNG(int min, int max) // min inclusive, max exclusive
     {
+        if (min >= max) return max - 1;
+        
         _dealerRNGCount++;
         return _dealerRNG.Next(min, max);
     }

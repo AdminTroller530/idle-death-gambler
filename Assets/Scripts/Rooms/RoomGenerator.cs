@@ -53,7 +53,7 @@ public class RoomGenerator : Singleton<RoomGenerator>
         _activeRooms.Add(Instantiate(shop, Vector2.zero, Quaternion.identity, _tileGrid));
     }
 
-    public void GenerateRoomFromCard(RoomCardData roomCard)
+    public bool GenerateRoomFromCard(RoomCardData roomCard)
     {
         List<RoomData> currentRoomPool;
         Direction entranceDir = _previousExitDir.Flip();
@@ -62,10 +62,10 @@ public class RoomGenerator : Singleton<RoomGenerator>
         if (entranceDir == Up) currentRoomPool = roomCard.RoomPoolUp;
         else if (entranceDir == Down) currentRoomPool = roomCard.RoomPoolDown;
         else if (entranceDir == Left) currentRoomPool = roomCard.RoomPoolLeft;
-        else return; // fallback
+        else return false; // fallback
 
         // if there are no rooms to choose from 
-        if (currentRoomPool.Count == 0) return;
+        if (currentRoomPool.Count == 0) return false;
 
         // randomly select room from pool and instantiate it
         RoomData room = currentRoomPool[RNGController.GetMapRNG(0, currentRoomPool.Count)];
@@ -80,6 +80,7 @@ public class RoomGenerator : Singleton<RoomGenerator>
 
         _previousExitDir = room.ExitDirection;
         RoomsSpawned++;
+        return true;
     }
 
     public void GenerateWarpRoom()
