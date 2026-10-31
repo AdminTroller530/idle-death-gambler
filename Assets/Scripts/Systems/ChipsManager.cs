@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public enum ChipValue
 {
@@ -85,5 +86,14 @@ public class ChipsManager : Singleton<ChipsManager>
         ChipPrefab chip = ChipsPool.Instance.ChipPool.Get();
         chip.transform.position = pos;
         chip.Initialize(value);
+    }
+
+    // DEBUG ONLY
+    public void Debug(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            SetChipsAmount(777777);
+        }
     }
 }

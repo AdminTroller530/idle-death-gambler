@@ -3943,6 +3943,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 677053471}
+        m_TargetAssemblyTypeName: ChipsManager, Assembly-CSharp
+        m_MethodName: Debug
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: a31299a2-0505-4483-a97f-73ae4c4cd53c
     m_ActionName: 'Player/Debug[/Keyboard/g]'
   - m_PersistentCalls:
