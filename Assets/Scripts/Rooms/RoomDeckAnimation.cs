@@ -7,6 +7,7 @@ public class RoomDeckAnimation : MonoBehaviour
     [SerializeField] private Transform _currentCardTransform;
     [SerializeField] private SpriteRenderer _currentCardSpriteRenderer;
     [SerializeField] private Sprite _cardBackSprite;
+    [SerializeField] private GameObject _cardEnchantmentIconPrefab;
 
     private Vector2 CARD_ORIGINAL_POSITION = new Vector2(0, 230);
     private const int CARD_DECK_TARGET_Y = 100;
@@ -16,12 +17,20 @@ public class RoomDeckAnimation : MonoBehaviour
 
     private float _currentMoveSpeed;
 
+    private GameObject _currentCardEnchantmentIcon;
+
     public IEnumerator DeckEnterAnimation(RoomCardData card)
     {
         _cardDeckTransform.localPosition = CARD_ORIGINAL_POSITION;
         _currentCardTransform.rotation = Quaternion.identity;
         _currentCardSpriteRenderer.sprite = _cardBackSprite;
         _currentMoveSpeed = INITIAL_MOVE_SPEED;
+
+        if (_currentCardEnchantmentIcon != null)
+        {
+            Destroy(_currentCardEnchantmentIcon);
+            _currentCardEnchantmentIcon = null;
+        }
 
         // deck comes in
         while (_cardDeckTransform.localPosition.y > CARD_DECK_TARGET_Y)
@@ -50,6 +59,11 @@ public class RoomDeckAnimation : MonoBehaviour
 
         _currentCardTransform.localEulerAngles += Vector3.down * 180;
         _currentCardSpriteRenderer.sprite = card.Sprite;
+
+        if (card.Enchantments.Count >= 1 && card.Enchantments[0] == RoomCardEnchantment.Greedy)
+        {
+            _currentCardEnchantmentIcon = Instantiate(_cardEnchantmentIconPrefab, _currentCardTransform);
+        }
 
         while (_currentCardTransform.localEulerAngles.y > 270)
         {

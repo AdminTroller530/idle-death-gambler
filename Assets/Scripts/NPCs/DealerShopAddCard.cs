@@ -110,6 +110,10 @@ public class DealerShopAddCard : MonoBehaviour
         if (!_hasRolledCards) return;
         
         RoomCardData card = _cardOptions[index];
+
+        // TEMP DEBUG
+        card.Enchantments.Add(RoomCardEnchantment.Greedy);
+
         RoomsDeckManager.Instance.AddCardToDeck(card);
         
         HasChosenCard = true;

@@ -1,1 +1,1 @@
-public enum RoomCardEnchantment {Deadly, Rich, Speedster}
+public enum RoomCardEnchantment {Greedy, Experienced, Glass, ThinkFast, Deadly, Hurry, Jammed}

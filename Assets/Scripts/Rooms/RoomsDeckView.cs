@@ -13,6 +13,8 @@ public class RoomsDeckView : MonoBehaviour
     [SerializeField] GameObject _roomsDeckViewObject;
     [SerializeField] private RoomCardDisplayPrefab _roomCardDisplayPrefab;
 
+    [SerializeField] private GameObject _cardEnchantmentIconPrefab;
+
     private List<RoomCardDisplayPrefab> _roomCardPrefabs = new List<RoomCardDisplayPrefab>();
 
     private void OnEnable() {
@@ -66,6 +68,11 @@ public class RoomsDeckView : MonoBehaviour
 
         RoomCardDisplayPrefab cardPrefab = Instantiate(_roomCardDisplayPrefab, _roomsDeckViewObject.transform);
         _roomCardPrefabs.Add(cardPrefab);
+
+        if (card.Enchantments.Count >= 1 && card.Enchantments[0] == RoomCardEnchantment.Greedy)
+        {
+            Instantiate(_cardEnchantmentIconPrefab, cardPrefab.transform);
+        }
 
         cardPrefab.transform.localPosition = pos;
         cardPrefab.SetSprite(card);

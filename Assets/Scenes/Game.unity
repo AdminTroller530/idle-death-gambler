@@ -1356,10 +1356,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.112590805
-    y: 0.07943925
-    width: 0.7748184
-    height: 0.8411215
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -1979,7 +1979,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1895062454873212009, guid: b80331b32e7dea24cbf5978f329f88c8, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4276325145726124091, guid: b80331b32e7dea24cbf5978f329f88c8, type: 3}
       propertyPath: m_Name
@@ -2133,7 +2133,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1895062454873212009, guid: b80331b32e7dea24cbf5978f329f88c8, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4276325145726124091, guid: b80331b32e7dea24cbf5978f329f88c8, type: 3}
       propertyPath: m_Name
@@ -2826,7 +2826,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1895062454873212009, guid: b80331b32e7dea24cbf5978f329f88c8, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4276325145726124091, guid: b80331b32e7dea24cbf5978f329f88c8, type: 3}
       propertyPath: m_Name
@@ -3529,6 +3529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   _roomsDeckViewObject: {fileID: 187117398}
   _roomCardDisplayPrefab: {fileID: -565613434520545111, guid: b80331b32e7dea24cbf5978f329f88c8, type: 3}
+  _cardEnchantmentIconPrefab: {fileID: 7909153285783922674, guid: 2eb13dff0c6cf9c4081fbdc80dc92e5f, type: 3}
 --- !u!114 &1171884822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10245,6 +10246,7 @@ MonoBehaviour:
   _currentCardTransform: {fileID: 790638543}
   _currentCardSpriteRenderer: {fileID: 790638544}
   _cardBackSprite: {fileID: 7505552766145501336, guid: 91141c4ca661021408c75fa3efb37648, type: 3}
+  _cardEnchantmentIconPrefab: {fileID: 7909153285783922674, guid: 2eb13dff0c6cf9c4081fbdc80dc92e5f, type: 3}
 --- !u!1 &1674426134
 GameObject:
   m_ObjectHideFlags: 0
@@ -11839,7 +11841,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1895062454873212009, guid: b80331b32e7dea24cbf5978f329f88c8, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4276325145726124091, guid: b80331b32e7dea24cbf5978f329f88c8, type: 3}
       propertyPath: m_Name
@@ -12563,7 +12565,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1895062454873212009, guid: b80331b32e7dea24cbf5978f329f88c8, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4276325145726124091, guid: b80331b32e7dea24cbf5978f329f88c8, type: 3}
       propertyPath: m_Name
