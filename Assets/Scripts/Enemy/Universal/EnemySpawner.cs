@@ -3,16 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using static RoomCardEnchantment;
+
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] _enemyPrefabs;
-    private List<GameObject> _currentEnemies = new List<GameObject>();
+    private List<EnemyBase> _currentEnemies = new List<EnemyBase>();
     [SerializeField] private List<EnemyWave> _waves;
     [SerializeField] private float _timeBetweenSpawns;
     [SerializeField] private float _timeBetweenWaves;
     private float _waveTimer;
     private bool _waveSpawnDone = false;
     private int _currentWave = 0;
+
+    private List<RoomCardEnchantment> _enchantments;
 
     [SerializeField] private BoxCollider2D _enterTrigger;
     [SerializeField] private GameObject _doors;
@@ -30,6 +34,8 @@ public class EnemySpawner : MonoBehaviour
         _roomFadeIn = GetComponent<RoomFadeIn>();
     }
 
+    public void SetEnchantments(List<RoomCardEnchantment> enchantments) {_enchantments = enchantments;}
+
     private IEnumerator SpawnEnemy(int id, Vector2 pos)
     {
         GameObject spawnIndicator = Instantiate(_enemySpawnIndicatorPrefab, transform);
@@ -38,9 +44,20 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(ENEMY_SPAWN_INDICATOR_TIME);
         Destroy(spawnIndicator);
 
-        GameObject enemy = Instantiate(_enemyPrefabs[id], transform);
+        EnemyBase enemy = Instantiate(_enemyPrefabs[id], transform).GetComponent<EnemyBase>();
         enemy.transform.localPosition = pos;
         _currentEnemies.Add(enemy);
+        ApplyEnchantmentsOnEnemy(enemy);
+    }
+
+    private void ApplyEnchantmentsOnEnemy(EnemyBase enemy)
+    {
+        for (int i = 0; i < _enchantments.Count; i++)
+        {
+            RoomCardEnchantment enchantment = _enchantments[i];
+            
+            if (enchantment == Greedy) enemy.Stats.ChipsDroppedMultiplier = 2;
+        }
     }
 
     private IEnumerator SpawnWave(EnemyWave wave)

@@ -327,7 +327,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -620390445
-  m_SortingLayer: 4
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 9a14505efe2685149abea86328eb4346, type: 3}
@@ -425,10 +425,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e669447229d92747b8b2d8972de1ab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  BaseStats: {fileID: 11400000, guid: fbf1ac92b36114748a07e19e35378652, type: 2}
   Stats: {fileID: 11400000, guid: fbf1ac92b36114748a07e19e35378652, type: 2}
   DefaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   DamageFlashMaterial: {fileID: 2100000, guid: 9fe79f6f704da9f4c963f519ebe7588b, type: 2}
-  IsDead: 0
 --- !u!114 &-537347571265845924
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -75,11 +75,8 @@ public abstract class EnemyHealth : MonoBehaviour
         _enemyBase.IsDead = true;
 
         if (_animator.runtimeAnimatorController) _animator.SetTrigger("Die");
-        // for (int i = 0; i < _stats.ChipsDropped; i++)
-        // {
-        //     ChipsManager.Instance.SpawnChip(transform.position, ChipValue.White);
-        // }
-        ChipsManager.Instance.SpawnChips(transform.position, _stats.ChipsDropped);
+
+        ChipsManager.Instance.SpawnChips(transform.position, (int)(_stats.ChipsDropped * _stats.ChipsDroppedMultiplier));
         yield return new WaitForSeconds(1);
 
         while (_fadeOutValue > 1)

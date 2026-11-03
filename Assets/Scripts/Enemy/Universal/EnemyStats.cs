@@ -29,6 +29,9 @@ public class EnemyStats : ScriptableObject
     public float ShootCooldownOffsetMax;
     public float ShootInaccuracy = 0;
 
+    [Header("Modifiers")]
+    public float ChipsDroppedMultiplier = 1;
+
     [Header("Sprites")]
     public Sprite EnemySprites;
     public Sprite[] BulletSprites;

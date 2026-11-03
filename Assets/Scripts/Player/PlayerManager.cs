@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerManager : Singleton<PlayerManager>
@@ -9,7 +10,7 @@ public class PlayerManager : Singleton<PlayerManager>
     public Transform Transform {get; private set;}
 
     [SerializeField] public PlayerBaseStats BaseStats;
-    public PlayerBaseStats Stats;
+    [NonSerialized] public PlayerBaseStats Stats;
 
     protected override void Awake()
     {
