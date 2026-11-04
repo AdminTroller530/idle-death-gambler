@@ -4137,7 +4137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   BaseStats: {fileID: 11400000, guid: fa0836f5d5e67bc43bb66c51cafb45ab, type: 2}
-  Stats: {fileID: 0}
 --- !u!114 &1180599065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10958,6 +10957,7 @@ MonoBehaviour:
   _allCards:
   - {fileID: 11400000, guid: 7c2a52265777d7d469aed7af167b59d4, type: 2}
   - {fileID: 11400000, guid: 3efe21b80992b5e46b6e3bcc61b79274, type: 2}
+  _cardEnchantmentIconPrefab: {fileID: 7909153285783922674, guid: 2eb13dff0c6cf9c4081fbdc80dc92e5f, type: 3}
   _uiObject: {fileID: 182084441}
   _rollCardsButton: {fileID: 1190545408}
   _rollCardsCostText: {fileID: 2138852161}

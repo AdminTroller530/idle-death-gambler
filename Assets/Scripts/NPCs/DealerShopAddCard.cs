@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static Rarity;
+using static RoomCardEnchantment;
 
 public class DealerShopAddCard : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class DealerShopAddCard : MonoBehaviour
 
     [SerializeField] private List<RoomCardData> _allCards;
     private Dictionary<Rarity, List<RoomCardData>> _cardsPool = new Dictionary<Rarity, List<RoomCardData>>{};
+
+    [SerializeField] private GameObject _cardEnchantmentIconPrefab;
+    private List<GameObject> _cardEnchantmentIcons = new List<GameObject>();
+    private RoomCardEnchantment[] _possibleEnchantments = {Greedy};
 
     private RoomCardData[] _cardOptions = new RoomCardData[3];
 
@@ -30,12 +35,17 @@ public class DealerShopAddCard : MonoBehaviour
     private void OnEnable() {WarpPortal.OnWarpToNextFloor += ResetCardRolls;}
     private void OnDisable() {WarpPortal.OnWarpToNextFloor -= ResetCardRolls;}
 
-    private void ResetCardRolls() {
+    private void ResetCardRolls()
+    {
         for (int i = 0; i < _cardOptions.Length; i++)
         {
             _cardOptions[i] = null;
             _cardOptionsSprites[i].sprite = _cardBackSprite;
         }
+
+        for (int i = 0; i < _cardEnchantmentIcons.Count; i++) {Destroy(_cardEnchantmentIcons[i]);}
+        _cardEnchantmentIcons.Clear();
+
         _hasRolledCards = false;
         HasChosenCard = false;
     }
@@ -76,9 +86,21 @@ public class DealerShopAddCard : MonoBehaviour
             if (!_cardsPool.ContainsKey(rarity)) continue;
 
             RoomCardData card = Instantiate(_cardsPool[rarity][RNGController.GetDealerRNG(0, _cardsPool[rarity].Count)]);
+            RollCardForEnchantments(card);
+            
             cardOptions[i] = card;
         }
         return cardOptions;
+    }
+
+    private void RollCardForEnchantments(RoomCardData card)
+    {
+        int luckScore = RNGController.GetDealerRNG(PlayerManager.Instance.Stats.LuckLevel * 5, 101);
+        if (luckScore >= 70)
+        {
+            RoomCardEnchantment enchantment = _possibleEnchantments[RNGController.GetDealerRNG(0, _possibleEnchantments.Length)];
+            card.Enchantments.Add(enchantment);
+        }
     }
 
     private void InitializeAllCardRarities()
@@ -98,7 +120,16 @@ public class DealerShopAddCard : MonoBehaviour
         _cardOptions = GenerateCardChoices(GenerateCardRarities());
         for (int i = 0; i < _cardOptionsSprites.Length; i++)
         {
-            if (_cardOptions[i] != null) _cardOptionsSprites[i].sprite = _cardOptions[i].Sprite;
+            if (_cardOptions[i] == null) continue;
+
+            _cardOptionsSprites[i].sprite = _cardOptions[i].Sprite;
+            if (_cardOptions[i].Enchantments.Count > 0 && _cardOptions[i].Enchantments[0] == Greedy)
+            {
+                GameObject enchantIcon = Instantiate(_cardEnchantmentIconPrefab, _cardOptionsSprites[i].gameObject.transform);
+                enchantIcon.transform.localScale = new Vector2(16,16);
+                enchantIcon.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                _cardEnchantmentIcons.Add(enchantIcon);
+            }
         }
 
         _hasRolledCards = true;
@@ -110,9 +141,6 @@ public class DealerShopAddCard : MonoBehaviour
         if (!_hasRolledCards) return;
         
         RoomCardData card = _cardOptions[index];
-
-        // TEMP DEBUG
-        card.Enchantments.Add(RoomCardEnchantment.Greedy);
 
         RoomsDeckManager.Instance.AddCardToDeck(card);
         
