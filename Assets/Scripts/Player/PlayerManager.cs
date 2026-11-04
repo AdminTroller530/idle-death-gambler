@@ -7,6 +7,7 @@ public class PlayerManager : Singleton<PlayerManager>
     public PlayerMovement Movement {get; private set;}
     public PlayerShoot Shoot {get; private set;}
     public PlayerInteract Interact {get; private set;}
+    public PlayerLeveling Leveling {get; private set;}
     public Transform Transform {get; private set;}
 
     [SerializeField] public PlayerBaseStats BaseStats;
@@ -20,6 +21,7 @@ public class PlayerManager : Singleton<PlayerManager>
         Movement = GetComponent<PlayerMovement>();
         Shoot = GetComponent<PlayerShoot>();
         Interact = GetComponentInChildren<PlayerInteract>();
+        Leveling = GetComponentInChildren<PlayerLeveling>();
         Transform = transform;
         Stats = Instantiate(BaseStats);
     }

@@ -9,6 +9,7 @@ public class PlayerBaseStats : ScriptableObject
     public float ParryCooldown;
 
     [Header("Skill Stats")]
+    public int CurrentLevel = 1;
     public int AttackLevel = 1;
     public int SpeedLevel = 1;
     public int LuckLevel = 1;

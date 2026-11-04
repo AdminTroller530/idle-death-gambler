@@ -16,6 +16,8 @@ public class EnemySpawner : MonoBehaviour
     private bool _waveSpawnDone = false;
     private int _currentWave = 0;
 
+    private RoomCardData _roomCard;
+
     private List<RoomCardEnchantment> _enchantments;
 
     [SerializeField] private BoxCollider2D _enterTrigger;
@@ -33,6 +35,8 @@ public class EnemySpawner : MonoBehaviour
     {
         _roomFadeIn = GetComponent<RoomFadeIn>();
     }
+
+    public void SetRoomCard(RoomCardData roomCard) {_roomCard = roomCard;}
 
     public void SetEnchantments(List<RoomCardEnchantment> enchantments) {_enchantments = enchantments;}
 
@@ -100,7 +104,9 @@ public class EnemySpawner : MonoBehaviour
     {
         AudioController.Instance.UpdateLowPass(0);
         _doors.SetActive(false);
+        PlayerManager.Instance.Leveling.IncreaseXP(_roomCard.XPYield);
         OnEnemyWaveCompleted?.Invoke();
+
         _waveSpawnDone = false;
         PlayerMovement.InCombat = false;
     }

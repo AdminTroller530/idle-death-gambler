@@ -71,7 +71,10 @@ public class RoomGenerator : Singleton<RoomGenerator>
         RoomData room = currentRoomPool[RNGController.GetMapRNG(0, currentRoomPool.Count)];
         GameObject roomObject = Instantiate(room.RoomPrefab, _currentRoomPos, Quaternion.identity, _tileGrid);
         _activeRooms.Add(roomObject);
-        roomObject.GetComponent<EnemySpawner>().SetEnchantments(roomCard.Enchantments);
+
+        EnemySpawner roomEnemySpawner = roomObject.GetComponent<EnemySpawner>();
+        roomEnemySpawner.SetEnchantments(roomCard.Enchantments);
+        roomEnemySpawner.SetRoomCard(roomCard);
 
         AddAStarGraph(_currentRoomPos + room.EnterTrigger.offset, (int)room.EnterTrigger.size.x, (int)room.EnterTrigger.size.y);
 

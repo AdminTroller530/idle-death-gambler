@@ -8,6 +8,7 @@ public class RoomCardData : ScriptableObject
     public string Description;
     public Sprite Sprite;
     public Rarity Rarity;
+    public int XPYield;
     public List<RoomCardEnchantment> Enchantments;
 
     [Header("Room Pools (by entrance direction)")]
