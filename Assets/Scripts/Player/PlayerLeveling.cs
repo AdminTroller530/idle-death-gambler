@@ -8,6 +8,7 @@ public class PlayerLeveling : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _currentLevelText;
     [SerializeField] private TextMeshProUGUI _currentXPText;
     [SerializeField] private Slider _XPSlider;
+    [SerializeField] private TextMeshProUGUI _skillLevelsText;
 
     private float _currentXP = 0;
     private float _currentXPDisplayAmount = 0;
@@ -16,15 +17,22 @@ public class PlayerLeveling : MonoBehaviour
 
     public static event Action OnPlayerLevelUp;
 
+    private PlayerBaseStats _stats;
+
     private void Awake()
     {
         _XPSlider.maxValue = 10;
     }
 
+    private void Start()
+    {
+        _stats = PlayerManager.Instance.Stats;
+        UpdateSkillLevelsText();
+    }
+
     public void IncreaseXP(int amount)
     {
         _currentXP += amount;
-
     }
 
     private void ManageXP()
@@ -61,5 +69,10 @@ public class PlayerLeveling : MonoBehaviour
         _currentLevelText.text = $"LV{PlayerManager.Instance.Stats.CurrentLevel}";
         _currentXPText.text = $"XP: {(int)_currentXPDisplayAmount}/{_nextLevelXP}";
         _XPSlider.value = _currentXPDisplayAmount;
+    }
+
+    private void UpdateSkillLevelsText()
+    {
+        _skillLevelsText.text = $"<color=#ea4f36>{_stats.AttackLevel}</color> <color=#30e1b9>{_stats.SpeedLevel}</color> <color=#1ebc73>{_stats.LuckLevel}</color>";
     }
 }
