@@ -1,39 +1,65 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerLeveling : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _currentLevelText;
     [SerializeField] private TextMeshProUGUI _currentXPText;
+    [SerializeField] private Slider _XPSlider;
 
     private float _currentXP = 0;
-    private float _nextLevelXP = 10;
+    private float _currentXPDisplayAmount = 0;
+    private int _nextLevelXP = 10;
+    private const float XP_DISPLAY_UPDATE_SPEED = 7f;
 
     public static event Action OnPlayerLevelUp;
 
     private void Awake()
     {
-        UpdateUI();
+        _XPSlider.maxValue = 10;
     }
 
     public void IncreaseXP(int amount)
     {
         _currentXP += amount;
 
-        while (_currentXP >= _nextLevelXP)
-        {
-            PlayerManager.Instance.Stats.CurrentLevel++;
-            _currentXP -= _nextLevelXP;
-            OnPlayerLevelUp?.Invoke();
-        }
+    }
 
+    private void ManageXP()
+    {
+        _currentXPDisplayAmount = Mathf.Lerp(_currentXPDisplayAmount, _currentXP, XP_DISPLAY_UPDATE_SPEED * Time.deltaTime);
+        if (Mathf.Abs(_currentXP - _currentXPDisplayAmount) < 0.05f) _currentXPDisplayAmount = _currentXP;
+
+        if (_currentXPDisplayAmount >= _nextLevelXP)
+        {
+            LevelUp();
+        }
+    }
+
+    private void LevelUp()
+    {
+        PlayerManager.Instance.Stats.CurrentLevel++;
+        _currentXP -= _nextLevelXP;
+        _currentXPDisplayAmount = 0;
+        _XPSlider.maxValue = 10; // SET UPDATED MAX VALUE LATER
+
+        OnPlayerLevelUp?.Invoke();
+        
+        // PauseManager.SetPaused(true);
+    }
+
+    private void Update()
+    {
+        ManageXP();
         UpdateUI();
     }
 
     private void UpdateUI()
     {
         _currentLevelText.text = $"LV{PlayerManager.Instance.Stats.CurrentLevel}";
-        _currentXPText.text = $"XP: {_currentXP}/{_nextLevelXP}";
+        _currentXPText.text = $"XP: {(int)_currentXPDisplayAmount}/{_nextLevelXP}";
+        _XPSlider.value = _currentXPDisplayAmount;
     }
 }
