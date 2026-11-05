@@ -117,8 +117,7 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
 
     public void RoomDeckExitAnimation()
     {
-        StopCoroutine(_enterAnimationCoroutine);
-        StartCoroutine(_roomDeckAnimation.DeckExitAnimation());
+        StartCoroutine(_roomDeckAnimation.DeckExitAnimation(_enterAnimationCoroutine));
     }
 
     public void AddCardToDeck(RoomCardData card)

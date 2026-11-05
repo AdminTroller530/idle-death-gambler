@@ -72,9 +72,12 @@ public class RoomDeckAnimation : MonoBehaviour
         }
     }
 
-    public IEnumerator DeckExitAnimation()
+    public IEnumerator DeckExitAnimation(Coroutine enterAnimationCoroutine = null)
     {
         _currentMoveSpeed = INITIAL_MOVE_SPEED;
+
+        yield return new WaitForSeconds(0.4f);
+        if (enterAnimationCoroutine != null) StopCoroutine(enterAnimationCoroutine);
 
         // deck goes away
         while (_cardDeckTransform.localPosition.y < CARD_ORIGINAL_POSITION.y)
