@@ -19,6 +19,8 @@ public class PlayerGunVisual : MonoBehaviour
 
     private void Update()
     {
+        if (PauseManager.IsPaused) return;
+
         _shootAngle = _playerShoot.GetShootAngle();
 
         if (_shootAngle <= 90 - GUN_ORIENTATION_DEADZONE && _shootAngle >= -(90 - GUN_ORIENTATION_DEADZONE) && _gunOrientation == Left) {

@@ -6,9 +6,10 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _move, _moveAnim;
     private string _dirPriority = "hor";
     private Vector2 _dir = Vector2.right;
+    
+    private PlayerBaseStats _stats;
 
     private float _speed;
-    private float _baseSpeed = 8f;
 
     private Rigidbody2D _rigidbody;
     public static bool InCombat = false;
@@ -21,6 +22,11 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _sr = GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
+        _stats = PlayerManager.Instance.Stats;
     }
 
     private void OnEnable()
@@ -71,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        _speed = InCombat ? _baseSpeed : _baseSpeed * 1.75f;
+        _speed = InCombat ? _stats.MovementSpeed : _stats.MovementSpeed * 1.75f;
         if (PlayerMelee.IsMeleeing) _speed /= 2;
         if (PlayerParry.IsParrying) _speed /= 16;
     }
@@ -81,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.started)
         {
-            _baseSpeed = 15f;
+            _stats.MovementSpeed = 15f;
         }
     }
 }

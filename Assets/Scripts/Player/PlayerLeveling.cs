@@ -9,6 +9,7 @@ public class PlayerLeveling : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _currentXPText;
     [SerializeField] private Slider _XPSlider;
     [SerializeField] private TextMeshProUGUI _skillLevelsText;
+    [SerializeField] private SkillLevelSelection _skillLevelSelection;
 
     private float _currentXP = 0;
     private float _currentXPDisplayAmount = 0;
@@ -18,6 +19,7 @@ public class PlayerLeveling : MonoBehaviour
     public static event Action OnPlayerLevelUp;
 
     private PlayerBaseStats _stats;
+    private const float BASE_MOVEMENT_SPEED = 8f;
 
     private void Awake()
     {
@@ -55,7 +57,25 @@ public class PlayerLeveling : MonoBehaviour
 
         OnPlayerLevelUp?.Invoke();
         
-        // PauseManager.SetPaused(true);
+        _skillLevelSelection.Open();
+    }
+
+    public void LevelUpSkill(int attackIncrement = 0, int speedIncrement = 0, int luckIncrement = 0)
+    {
+        _stats.AttackLevel += attackIncrement;
+        _stats.SpeedLevel += speedIncrement;
+        _stats.LuckLevel += luckIncrement;
+        UpdateStatsFromSkills();
+        UpdateSkillLevelsText();
+    }
+
+    private void UpdateStatsFromSkills()
+    {
+        if (_stats.BulletDamageMultiplier > 99) return; // IF DEBUG MODE IS ON, NO CHANGES
+        
+        _stats.BulletDamageMultiplier = 1 + (_stats.AttackLevel - 1) * 0.25f;
+        _stats.MovementSpeed = BASE_MOVEMENT_SPEED + _stats.SpeedLevel;
+        // luck modifications too in the future
     }
 
     private void Update()
