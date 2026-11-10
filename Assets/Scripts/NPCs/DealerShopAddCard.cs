@@ -53,11 +53,13 @@ public class DealerShopAddCard : MonoBehaviour
     private Rarity[] GenerateCardRarities()
     {
         Rarity[] offeredRarities = new Rarity[3];
+        int weightsSum = _rarityWeights.Values.Sum();
+        // luckBoost is a percentage of total sum of rarityweights; percentage scaled with luck level
+        int luckBoost = Mathf.CeilToInt(weightsSum * (PlayerManager.Instance.Leveling.CalculateLuckPercent(PlayerManager.Instance.Stats.LuckLevel) / 100f) );
 
         for (int i = 0; i < offeredRarities.Length; i++)
         {
-            int luckBoost = PlayerManager.Instance.Stats.LuckLevel * 5;
-            int roll = RNGController.GetDealerRNG(Mathf.Max(1, luckBoost), _rarityWeights.Values.Sum() + 1);
+            int roll = RNGController.GetDealerRNG(luckBoost, weightsSum + 1);
             int sum = 0;
 
             foreach (Rarity rarity in _rarityWeights.Keys)
