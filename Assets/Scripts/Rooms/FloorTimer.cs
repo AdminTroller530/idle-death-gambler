@@ -10,8 +10,10 @@ public class FloorTimer : MonoBehaviour
     private string _secondsDisplay;
     private bool _isRunning = false;
 
-    private const int MINUTES_DEFAULT = 2;
-    private const int SECONDS_DEFAULT = 0;
+    private const int MINUTES_DEFAULT = 0;
+    private const int SECONDS_DEFAULT = 5;
+
+    [SerializeField] private KillerChip _killerChipPrefab;
 
     public void StartFloorTimer()
     {
@@ -34,6 +36,15 @@ public class FloorTimer : MonoBehaviour
         _isRunning = false;
     }
 
+    private void TimerRunOut()
+    {
+        _secondsReal = 0;
+        _minutes = 0;
+        _isRunning = false;
+
+        Instantiate(_killerChipPrefab, (Vector2)PlayerManager.Instance.Transform.position + new Vector2(-30, Random.Range(-10, 10)), Quaternion.identity);
+    }
+
     private void IncrementTimer()
     {
         _secondsReal -= Time.deltaTime;
@@ -41,12 +52,7 @@ public class FloorTimer : MonoBehaviour
         if (_secondsReal < 0) {
             _secondsReal += 60;
             if (_minutes > 0) _minutes--;
-            else
-            {
-                // timer end
-                _secondsReal = 0;
-                _isRunning = false;
-            }
+            else TimerRunOut();
         }
 
         _secondsDisplay = ((int)_secondsReal).ToString();

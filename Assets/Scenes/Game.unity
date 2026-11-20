@@ -14368,6 +14368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _floorTimerText: {fileID: 436925393}
+  _killerChipPrefab: {fileID: 7379636722065658874, guid: ce4e8aef87dde974783aea14abf704dc, type: 3}
 --- !u!1 &2042212122
 GameObject:
   m_ObjectHideFlags: 0
