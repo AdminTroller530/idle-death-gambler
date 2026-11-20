@@ -6,7 +6,8 @@ using Unity.Cinemachine;
 public class PlayerHealth : MonoBehaviour
 {
     private int _maxHealth = 6;
-    private int _health = 6;
+    private int _health;
+
     private float _maxInvincibleTimer = 1.1f, _invincibleTimer = 0; // I-frames
 
     private SpriteRenderer _spriteRenderer;
@@ -21,6 +22,8 @@ public class PlayerHealth : MonoBehaviour
     {    
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _playerVows = GetComponent<PlayerVows>();
+
+        _health = _maxHealth;
     }
 
     private void Start()
@@ -46,10 +49,16 @@ public class PlayerHealth : MonoBehaviour
         else _spriteRenderer.color = new Color(1,1,1,1);
     }
 
-    public void Heal(int heal)
+    public void Heal(int healAmount)
     {
-        _health += heal;
-        _health = Mathf.Min(_health, _maxHealth);
+        ChangeHealth(healAmount);
+        OnPlayerChangeHealth?.Invoke(_health);
+    }
+
+    private void ChangeHealth(int change) // positive change for heal, negative change for damage
+    {
+        _health += change;
+        _health = Mathf.Clamp(_health, 0, _maxHealth);
     }
 
     public void TakeEnemyDamage(GameObject enemy, int damage)
@@ -57,7 +66,8 @@ public class PlayerHealth : MonoBehaviour
         if (_invincibleTimer > 0) return;
 
         // Debug.Log("Took " + damage + " damage! Health Left: " + health);
-        _health -= damage;
+        ChangeHealth(-damage);
+
         _invincibleTimer = _maxInvincibleTimer;
         
         OnPlayerTakeEnemyDamage?.Invoke(enemy);

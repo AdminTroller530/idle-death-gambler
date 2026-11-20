@@ -11,7 +11,7 @@ public class FloorTimer : MonoBehaviour
     private bool _isRunning = false;
 
     private const int MINUTES_DEFAULT = 0;
-    private const int SECONDS_DEFAULT = 5;
+    private const int SECONDS_DEFAULT = 20;
 
     [SerializeField] private KillerChip _killerChipPrefab;
 
@@ -42,7 +42,7 @@ public class FloorTimer : MonoBehaviour
         _minutes = 0;
         _isRunning = false;
 
-        Instantiate(_killerChipPrefab, (Vector2)PlayerManager.Instance.Transform.position + new Vector2(-30, Random.Range(-10, 10)), Quaternion.identity);
+        Instantiate(_killerChipPrefab, (Vector2)PlayerManager.Instance.Transform.position + new Vector2(-25, Random.Range(-10, 10)), Quaternion.identity);
     }
 
     private void IncrementTimer()
