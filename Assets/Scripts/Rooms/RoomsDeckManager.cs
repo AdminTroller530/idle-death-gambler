@@ -17,32 +17,12 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
 
     public static event Action<RoomCardData> OnAddCardToDeck;
 
-    private void InitializeRoomReferences()
-    {
-        for (int i = 0; i < _allRoomCards.Count; i++)
-        {
-            foreach (RoomData room in _allRoomCards[i].RoomPoolUp) {
-                room.ExitTransform = room.RoomPrefab.transform.Find("Doors").Find("Exit");
-                room.EnterTrigger = room.RoomPrefab.transform.Find("Enter Trigger").GetComponent<BoxCollider2D>();
-            }
-            foreach (RoomData room in _allRoomCards[i].RoomPoolDown) {
-                room.ExitTransform = room.RoomPrefab.transform.Find("Doors").Find("Exit");
-                room.EnterTrigger = room.RoomPrefab.transform.Find("Enter Trigger").GetComponent<BoxCollider2D>();
-            }
-            foreach (RoomData room in _allRoomCards[i].RoomPoolLeft) {
-                room.ExitTransform = room.RoomPrefab.transform.Find("Doors").Find("Exit");
-                room.EnterTrigger = room.RoomPrefab.transform.Find("Enter Trigger").GetComponent<BoxCollider2D>();
-            }
-        }
-    }
-
     protected override void Awake()
     {
         base.Awake();
 
         _roomDeckAnimation = GetComponent<RoomDeckAnimation>();
 
-        InitializeRoomReferences();
         AddCardToDeck(Instantiate(_allRoomCards[0]));
         AddCardToDeck(Instantiate(_allRoomCards[1]));
 
