@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _speed = InCombat ? _stats.MovementSpeed : _stats.MovementSpeed * 1.75f;
         if (PlayerMelee.IsMeleeing) _speed /= 2;
-        if (PlayerParry.IsParrying) _speed /= 16;
+        if (PlayerParry.IsParrying) _speed *= 0.6f;
     }
 
     // DEBUG ONLY
