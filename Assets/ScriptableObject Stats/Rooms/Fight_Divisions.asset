@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a596be7904b64f47a923b47282e4c57, type: 3}
-  m_Name: Normal_Divisions
+  m_Name: Fight_Divisions
   m_EditorClassIdentifier: Assembly-CSharp::RoomData
-  Name: Normal_Divisions
+  Name: Fight_Divisions
   RoomPrefab: {fileID: 7482054541270028732, guid: 0206cefaf8325e74c852df0639e665a7, type: 3}
   EntranceDirection: 0
   ExitDirection: 3

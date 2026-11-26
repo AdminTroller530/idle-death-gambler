@@ -10,8 +10,8 @@ public class FloorTimer : MonoBehaviour
     private string _secondsDisplay;
     private bool _isRunning = false;
 
-    private const int MINUTES_DEFAULT = 0;
-    private const int SECONDS_DEFAULT = 20;
+    private const int MINUTES_DEFAULT = 2;
+    private const int SECONDS_DEFAULT = 0;
 
     [SerializeField] private KillerChip _killerChipPrefab;
 
