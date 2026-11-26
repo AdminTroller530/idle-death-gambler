@@ -80,7 +80,7 @@ public class PlayerLeveling : MonoBehaviour
 
     public float CalculateDamageMultiplier(int attackLevel) {return 1 + (attackLevel - 1) * 0.25f;}
     public float CalculateMovementSpeed(int speedLevel) {return BASE_MOVEMENT_SPEED + (speedLevel-1) * 0.5f;}
-    public int CalculateLuckPercent(int luckLevel) {return 1 + (luckLevel-1) * 4;}
+    public int CalculateLuckPercent(int luckLevel) {return (luckLevel-1) * 4;}
 
     private void Update()
     {

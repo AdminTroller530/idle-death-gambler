@@ -55,7 +55,7 @@ public class DealerShopAddCard : MonoBehaviour
         Rarity[] offeredRarities = new Rarity[3];
         int weightsSum = _rarityWeights.Values.Sum();
         // luckBoost is a percentage of total sum of rarityweights; percentage scaled with luck level
-        int luckBoost = Mathf.CeilToInt(weightsSum * (PlayerManager.Instance.Leveling.CalculateLuckPercent(PlayerManager.Instance.Stats.LuckLevel) / 100f) );
+        int luckBoost = Mathf.CeilToInt(weightsSum * (PlayerManager.Instance.Leveling.CalculateLuckPercent(PlayerManager.Instance.Stats.LuckLevel) / 100f));
 
         for (int i = 0; i < offeredRarities.Length; i++)
         {
@@ -97,7 +97,7 @@ public class DealerShopAddCard : MonoBehaviour
 
     private void RollCardForEnchantments(RoomCardData card)
     {
-        int luckScore = RNGController.GetDealerRNG(PlayerManager.Instance.Stats.LuckLevel * 5, 101);
+        int luckScore = RNGController.GetDealerRNG(PlayerManager.Instance.Leveling.CalculateLuckPercent(PlayerManager.Instance.Stats.LuckLevel), 101);
         if (luckScore >= 70)
         {
             RoomCardEnchantment enchantment = _possibleEnchantments[RNGController.GetDealerRNG(0, _possibleEnchantments.Length)];

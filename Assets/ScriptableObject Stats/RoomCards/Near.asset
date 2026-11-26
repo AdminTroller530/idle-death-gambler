@@ -15,6 +15,6 @@ MonoBehaviour:
   Name: Near
   Description: Enemies in your face
   Sprite: {fileID: 21300000, guid: b2a337e0caeb0dc45a747394c1fb0a1b, type: 3}
-  Rarity: 0
+  Rarity: 1
   XPYield: 6
   Enchantments: 
