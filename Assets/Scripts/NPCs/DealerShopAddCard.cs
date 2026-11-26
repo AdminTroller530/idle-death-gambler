@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using static Rarity;
 using static RoomCardEnchantment;
@@ -30,7 +31,14 @@ public class DealerShopAddCard : MonoBehaviour
     [SerializeField] private GameObject _rollCardsButton;
     [SerializeField] private TextMeshProUGUI _rollCardsCostText;
     [SerializeField] private Image[] _cardOptionsSprites;
+    [SerializeField] private Light2D[] _cardOptionsGlows;
     [SerializeField] private Sprite _cardBackSprite;
+
+    private Dictionary<Rarity, Color> _rarityGlowColors = new Dictionary<Rarity, Color>
+    {
+        {Common, new Color(0.7f, 0.7f, 0.7f)},
+        {Uncommon, new Color(0.5f, 0.9f, 0.5f)}
+    };
 
     private void OnEnable() {WarpPortal.OnWarpToNextFloor += ResetCardRolls;}
     private void OnDisable() {WarpPortal.OnWarpToNextFloor -= ResetCardRolls;}
@@ -45,6 +53,8 @@ public class DealerShopAddCard : MonoBehaviour
 
         for (int i = 0; i < _cardEnchantmentIcons.Count; i++) {Destroy(_cardEnchantmentIcons[i]);}
         _cardEnchantmentIcons.Clear();
+
+        foreach (Light2D light in _cardOptionsGlows) {light.enabled = false;}
 
         _hasRolledCards = false;
         HasChosenCard = false;
@@ -115,11 +125,23 @@ public class DealerShopAddCard : MonoBehaviour
         }
     }
 
+    private void SetCardRarityGlowColors(Rarity[] generatedRarities)
+    {
+        for (int i = 0; i < _cardOptionsGlows.Length; i++)
+        {
+            _cardOptionsGlows[i].color = _rarityGlowColors[generatedRarities[i]];
+            // _cardOptionsGlows[i].enabled = true; // TEMP TURNED OFF
+        }
+    }
+
     public void RollShopCards()
     {
         if (!ChipsManager.Instance.DecreaseChips(_cost)) return;
 
-        _cardOptions = GenerateCardChoices(GenerateCardRarities());
+        Rarity[] generatedRarities = GenerateCardRarities();
+        _cardOptions = GenerateCardChoices(generatedRarities);
+        SetCardRarityGlowColors(generatedRarities);
+
         for (int i = 0; i < _cardOptionsSprites.Length; i++)
         {
             if (_cardOptions[i] == null) continue;
