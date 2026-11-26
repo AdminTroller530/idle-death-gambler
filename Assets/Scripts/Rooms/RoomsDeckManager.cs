@@ -34,6 +34,8 @@ public class RoomsDeckManager : Singleton<RoomsDeckManager>
         // GenerateFloorFromDeck();
     }
 
+    public List<RoomCardData> GetListOfAllCards() {return _allRoomCards;}
+
     private List<RoomCardData> ShuffleRoomsDeck(List<RoomCardData> originalDeck)
     {
         List<RoomCardData> deck = new List<RoomCardData>(originalDeck);
