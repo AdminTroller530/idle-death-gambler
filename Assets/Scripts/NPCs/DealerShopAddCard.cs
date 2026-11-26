@@ -11,7 +11,7 @@ public class DealerShopAddCard : MonoBehaviour
     private Dictionary<Rarity, int> _rarityWeights = new Dictionary<Rarity, int>{{Common, 30}, {Uncommon, 20}, {Rare, 0}};
     // private Dictionary<Rarity, int> _rarityWeights = new Dictionary<Rarity, int>{{Common, 30}, {Uncommon, 20}, {Rare, 7}};
 
-    [SerializeField] private List<RoomCardData> _allCards;
+    private List<RoomCardData> _allCards;
     private Dictionary<Rarity, List<RoomCardData>> _cardsPool = new Dictionary<Rarity, List<RoomCardData>>{};
 
     [SerializeField] private GameObject _cardEnchantmentIconPrefab;
@@ -166,6 +166,7 @@ public class DealerShopAddCard : MonoBehaviour
 
     private void Awake()
     {
+        _allCards = RoomsDeckManager.Instance.GetListOfAllCards();
         InitializeAllCardRarities();
         ResetCardRolls();
     }
