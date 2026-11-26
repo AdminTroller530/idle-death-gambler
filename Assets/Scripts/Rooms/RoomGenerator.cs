@@ -7,6 +7,7 @@ public class RoomGenerator : Singleton<RoomGenerator>
 {
     [SerializeField] private Transform _tileGrid;
 
+    [SerializeField] private List<RoomData> _roomPoolUp, _roomPoolDown, _roomPoolLeft; // by entrance direction
     [SerializeField] private GameObject[] _hallsUpDown, _hallsLeftRight;
     [SerializeField] private List<GameObject> _shops;
     private Direction _previousExitDir = Right; // exit direction of previous room (start room by default)
@@ -31,6 +32,28 @@ public class RoomGenerator : Singleton<RoomGenerator>
     private void OnDisable()
     {
         WarpPortal.OnWarpToNextFloor -= ResetCurrentRoomPos;        
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        InitializeAllRoomReferences();
+    }
+
+    private void InitializeAllRoomReferences()
+    {
+        foreach (RoomData room in _roomPoolUp) {
+            room.ExitTransform = room.RoomPrefab.transform.Find("Doors").Find("Exit");
+            room.EnterTrigger = room.RoomPrefab.transform.Find("Enter Trigger").GetComponent<BoxCollider2D>();
+        }
+        foreach (RoomData room in _roomPoolLeft) {
+            room.ExitTransform = room.RoomPrefab.transform.Find("Doors").Find("Exit");
+            room.EnterTrigger = room.RoomPrefab.transform.Find("Enter Trigger").GetComponent<BoxCollider2D>();
+        }
+        foreach (RoomData room in _roomPoolDown) {
+            room.ExitTransform = room.RoomPrefab.transform.Find("Doors").Find("Exit");
+            room.EnterTrigger = room.RoomPrefab.transform.Find("Enter Trigger").GetComponent<BoxCollider2D>();
+        }
     }
 
     private void ResetCurrentRoomPos() {_currentRoomPos = Vector2.zero;}
@@ -59,9 +82,9 @@ public class RoomGenerator : Singleton<RoomGenerator>
         Direction entranceDir = _previousExitDir.Flip();
 
         // choose correct room pool
-        if (entranceDir == Up) currentRoomPool = roomCard.RoomPoolUp;
-        else if (entranceDir == Down) currentRoomPool = roomCard.RoomPoolDown;
-        else if (entranceDir == Left) currentRoomPool = roomCard.RoomPoolLeft;
+        if (entranceDir == Up) currentRoomPool = _roomPoolUp;
+        else if (entranceDir == Down) currentRoomPool = _roomPoolDown;
+        else if (entranceDir == Left) currentRoomPool = _roomPoolLeft;
         else return false; // fallback
 
         // if there are no rooms to choose from 

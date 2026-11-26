@@ -9,7 +9,8 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] _enemyPrefabs;
     private List<EnemyBase> _currentEnemies = new List<EnemyBase>();
-    [SerializeField] private List<EnemyWave> _waves;
+    private List<EnemyWave> _waves;
+    [SerializeField] private List<EnemyWaves> _allWaves;
     [SerializeField] private float _timeBetweenSpawns;
     [SerializeField] private float _timeBetweenWaves;
     private float _waveTimer;
@@ -36,7 +37,13 @@ public class EnemySpawner : MonoBehaviour
         _roomFadeIn = GetComponent<RoomFadeIn>();
     }
 
-    public void SetRoomCard(RoomCardData roomCard) {_roomCard = roomCard;}
+    public void SetRoomCard(RoomCardData roomCard) {
+        _roomCard = roomCard;
+        foreach (EnemyWaves waves in _allWaves)
+        {
+            if (waves.RoomCardName == _roomCard.Name) _waves = waves.Waves;
+        }
+    }
 
     public void SetEnchantments(List<RoomCardEnchantment> enchantments) {_enchantments = enchantments;}
 

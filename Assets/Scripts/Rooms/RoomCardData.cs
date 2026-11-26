@@ -11,8 +11,8 @@ public class RoomCardData : ScriptableObject
     public int XPYield;
     public List<RoomCardEnchantment> Enchantments;
 
-    [Header("Room Pools (by entrance direction)")]
-    public List<RoomData> RoomPoolUp;
-    public List<RoomData> RoomPoolDown;
-    public List<RoomData> RoomPoolLeft;
+    // [Header("Room Pools (by entrance direction)")]
+    // public List<RoomData> RoomPoolUp;
+    // public List<RoomData> RoomPoolDown;
+    // public List<RoomData> RoomPoolLeft;
 }

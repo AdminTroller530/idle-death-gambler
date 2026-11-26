@@ -13,3 +13,10 @@ public class EnemyWave
 {
     public List<EnemySpawn> Spawns;
 }
+
+[System.Serializable]
+public class EnemyWaves
+{
+    public string RoomCardName;
+    public List<EnemyWave> Waves;
+}

@@ -11854,6 +11854,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomCardsManager
   _allRoomCards:
   - {fileID: 11400000, guid: 7c2a52265777d7d469aed7af167b59d4, type: 2}
+  - {fileID: 11400000, guid: c694a49084112b34d97f6889b4693853, type: 2}
   - {fileID: 11400000, guid: 3efe21b80992b5e46b6e3bcc61b79274, type: 2}
 --- !u!4 &1554579794
 Transform:
@@ -12773,9 +12774,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47f03af5fd3e84b4a9d311d3b23eb38b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _allCards:
-  - {fileID: 11400000, guid: 7c2a52265777d7d469aed7af167b59d4, type: 2}
-  - {fileID: 11400000, guid: 3efe21b80992b5e46b6e3bcc61b79274, type: 2}
   _cardEnchantmentIconPrefab: {fileID: 7909153285783922674, guid: 2eb13dff0c6cf9c4081fbdc80dc92e5f, type: 3}
   _uiObject: {fileID: 182084441}
   _rollCardsButton: {fileID: 1190545408}
@@ -13050,6 +13048,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _tileGrid: {fileID: 821963701}
+  _roomPoolUp:
+  - {fileID: 11400000, guid: 5d54417074044804cb319a36d132829c, type: 2}
+  _roomPoolDown: []
+  _roomPoolLeft:
+  - {fileID: 11400000, guid: 8c67cbc195df2d2488ddfdd4f76b499d, type: 2}
+  - {fileID: 11400000, guid: 56cf8077cc181b04cbe4712bef901e70, type: 2}
   _hallsUpDown:
   - {fileID: 7258101672076318361, guid: 213e6a3956c031e4f8d49b7033898dc9, type: 3}
   _hallsLeftRight:
